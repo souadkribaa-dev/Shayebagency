@@ -1,12 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
-
-<meta charset="utf-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>انضم إلى وكالة الشايب</title>
 
@@ -21,11 +18,12 @@ margin:0;
 font-family:Arial,Tahoma,sans-serif;
 background:#f7f7f9;
 color:#222;
+padding-bottom:30px;
 }
 
 .header{
 background:linear-gradient(135deg,#ff3b81,#ff5a5f);
-color:#fff;
+color:white;
 padding:30px 18px 35px;
 border-radius:0 0 30px 30px;
 text-align:center;
@@ -39,7 +37,6 @@ font-size:30px;
 .header p{
 margin:0;
 font-size:15px;
-opacity:.95;
 }
 
 .container{
@@ -61,6 +58,25 @@ margin-top:0;
 font-size:21px;
 }
 
+.note{
+font-size:14px;
+color:#777;
+line-height:1.8;
+}
+
+.videoLink{
+display:block;
+background:#ff3b81;
+color:white;
+text-decoration:none;
+padding:16px;
+border-radius:14px;
+font-weight:bold;
+font-size:17px;
+text-align:center;
+margin-top:15px;
+}
+
 .step{
 display:flex;
 gap:12px;
@@ -80,41 +96,25 @@ justify-content:center;
 font-weight:bold;
 }
 
-.videoLink{
-display:block;
-background:#ff3b81;
-color:white;
-text-decoration:none;
-padding:16px;
-border-radius:14px;
-font-weight:bold;
-font-size:17px;
-text-align:center;
-margin-top:15px;
-}
-
-.whatsapp{
-display:block;
-text-align:center;
-background:#25D366;
-color:white;
-text-decoration:none;
-padding:15px;
-border-radius:14px;
-font-weight:bold;
-font-size:17px;
+.info{
+background:#fff5f8;
+border-right:4px solid #ff3b81;
+padding:12px;
+border-radius:10px;
+line-height:1.8;
+font-size:14px;
 }
 
 label{
 display:block;
 font-weight:bold;
 font-size:14px;
-margin:13px 0 6px;
+margin:15px 0 7px;
 }
 
 input{
 width:100%;
-padding:13px;
+padding:14px;
 border:1px solid #ddd;
 border-radius:12px;
 font-size:15px;
@@ -132,6 +132,7 @@ border-radius:15px;
 padding:18px;
 background:#fafafa;
 text-align:center;
+margin-top:8px;
 }
 
 .filebox input{
@@ -139,35 +140,42 @@ border:0;
 padding:5px;
 }
 
-.submit{
+.preview{
 width:100%;
-border:0;
+max-height:300px;
+object-fit:contain;
+border-radius:14px;
+margin-top:15px;
+display:none;
+background:#111;
+}
+
+.submit{
+display:block;
+width:100%;
+border:none;
 background:#ff3b81;
 color:white;
-padding:15px;
-border-radius:13px;
-font-size:17px;
+padding:18px;
+border-radius:15px;
+font-size:19px;
 font-weight:bold;
 cursor:pointer;
-margin-top:18px;
+margin-top:20px;
+box-shadow:0 5px 15px #ff3b8140;
 }
 
 .submit:disabled{
 opacity:.6;
 }
 
-.note{
-font-size:13px;
-color:#777;
-line-height:1.7;
-}
-
 .status{
 margin-top:15px;
-padding:12px;
+padding:14px;
 border-radius:12px;
 display:none;
-line-height:1.6;
+line-height:1.7;
+font-weight:bold;
 }
 
 .success{
@@ -182,6 +190,18 @@ background:#ffe9ed;
 color:#b42345;
 }
 
+.whatsapp{
+display:block;
+text-align:center;
+background:#25D366;
+color:white;
+text-decoration:none;
+padding:16px;
+border-radius:14px;
+font-weight:bold;
+font-size:17px;
+}
+
 .back{
 display:block;
 text-align:center;
@@ -191,32 +211,10 @@ text-decoration:none;
 font-weight:bold;
 }
 
-.preview{
-width:100%;
-max-height:260px;
-object-fit:contain;
-border-radius:14px;
-margin-top:10px;
-display:none;
-background:#111;
-}
-
-.info{
-background:#fff5f8;
-border-right:4px solid #ff3b81;
-padding:12px;
-border-radius:10px;
-line-height:1.8;
-font-size:14px;
-}
-
 </style>
-
 </head>
 
-
 <body>
-
 
 <header class="header">
 
@@ -228,224 +226,18 @@ font-size:14px;
 
 </header>
 
-
-
 <main class="container">
 
-
-<!-- فيديو الأوديشن -->
+<!-- فيديو المثال -->
 
 <div class="card">
 
 <h2>🎬 شاهد مثال الأوديشن</h2>
 
 <p class="note">
-
 قبل إرسال طلبك، شاهد فيديو الأوديشن لمعرفة الطريقة والشكل المطلوب.
-
 </p>
-
 
 <a
 class="videoLink"
-href="https://l.likee.video/v/5WHaLU"
-target="_blank">
-
-▶️ مشاهدة فيديو الأوديشن
-
-</a>
-
-</div>
-
-
-
-<!-- خطوات الأوديشن -->
-
-<div class="card">
-
-<h2>📋 كيفية عمل الأوديشن</h2>
-
-
-<div class="step">
-
-<div class="number">
-1
-</div>
-
-<div>
-
-<strong>شاهد الفيديو</strong>
-
-<br>
-
-<span class="note">
-
-شاهد مثال الأوديشن قبل التسجيل.
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="number">
-2
-</div>
-
-<div>
-
-<strong>جهز مكانًا مناسبًا</strong>
-
-<br>
-
-<span class="note">
-
-اختَر مكانًا هادئًا وإضاءة جيدة وتأكد من وضوح الصوت والصورة.
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="number">
-3
-</div>
-
-<div>
-
-<strong>سجل الأوديشن</strong>
-
-<br>
-
-<span class="note">
-
-عرّف بنفسك وقدم محتوى قصيرًا وواضحًا.
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="number">
-4
-</div>
-
-<div>
-
-<strong>ارفع الفيديو وأرسل الطلب</strong>
-
-<br>
-
-<span class="note">
-
-اختر فيديو الأوديشن من هاتفك ثم اضغط إرسال.
-
-</span>
-
-</div>
-
-</div>
-
-
-<div class="info">
-
-💡 <strong>نصيحة:</strong>
-
-اجعل الفيديو واضحًا، وتحدث بثقة وابتسامة، واختر مكانًا هادئًا أثناء التسجيل.
-
-</div>
-
-
-</div>
-
-
-
-<!-- نموذج الأوديشن -->
-
-<div class="card">
-
-<h2>📹 إرسال الأوديشن</h2>
-
-
-<label>
-الاسم الكامل
-</label>
-
-<input
-id="name"
-type="text"
-placeholder="اكتب اسمك الكامل">
-
-
-
-<label>
-رقم الهاتف
-</label>
-
-<input
-id="phone"
-type="tel"
-placeholder="مثال: 0673860283">
-
-
-
-<label>
-اسم المستخدم في Likee
-</label>
-
-<input
-id="likeeName"
-type="text"
-placeholder="اسم حسابك في Likee">
-
-
-
-<label>
-رابط حساب Likee
-</label>
-
-<input
-id="likeeUrl"
-type="url"
-placeholder="ضع رابط حسابك في Likee">
-
-
-
-<label>
-فيديو الأوديشن
-</label>
-
-
-<div class="filebox">
-
-<input
-id="auditionFile"
-type="file"
-accept="video/*">
-
-<p class="note">
-
-اختر فيديو الأوديشن من هاتفك.
-
-</p>
-
-
-<video
-id="preview"
-class="preview"
-controls>
-</video
+href="
