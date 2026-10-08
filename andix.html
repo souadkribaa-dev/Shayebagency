@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مذيعو وكالة الشايب | Shayeb Agency</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background: linear-gradient(135deg, #fff5f8, #fce4ec);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* الهيدر */
+    header {
+      background: linear-gradient(135deg, #d81b60, #880e4f);
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    /* الحاوية */
+    .container {
+      width: 92%;
+      max-width: 1100px;
+      margin: 40px auto;
+    }
+
+    /* العنوان */
+    .page-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .page-title h2 {
+      color: #ad1457;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .page-title p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    /* شبكة المذيعين */
+    #broadcasters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    /* البطاقة */
+    .card {
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+    }
+
+    /* الصورة */
+    .card-image {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      background: #f8bbd0;
+    }
+
+    /* محتوى البطاقة */
+    .card-content {
+      padding: 22px;
+      text-align: center;
+    }
+
+    .card-content h3 {
+      color: #ad1457;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .info {
+      background: #fff5f8;
+      border-radius: 12px;
+      padding: 10px;
+      margin: 8px 0;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .info strong {
+      color: #880e4f;
+    }
+
+    /* زر Likee */
+    .likee-btn {
+      display: block;
+      text-decoration: none;
+      background: linear-gradient(135deg, #e91e63, #ad1457);
+      color: white;
+      padding: 12px;
+      border-radius: 25px;
+      margin-top: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .likee-btn:hover {
+      transform: scale(1.03);
+    }
+
+    /* رسالة التحميل */
+    .loading {
+      text-align: center;
+      padding: 50px 20px;
+      color: #ad1457;
+      font-size: 20px;
+    }
+
+    /* في حالة عدم وجود مذيعين */
+    .empty {
+      text-align: center;
+      background: white;
+      padding: 40px 20px;
+      border-radius: 20px;
+      color: #777;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .empty-icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    /* زر الرجوع */
+    .back-section {
+      text-align: center;
+      margin: 45px 0;
+    }
+
+    .back-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #4a1230;
+      color: white;
+      padding: 13px 28px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* الفوتر */
+    footer {
+      background: #4a1230;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin: 5px;
+      font-size: 14px;
+    }
+
+    /* الهاتف */
+    @media (max-width: 600px) {
+
+      header h1 {
+        font-size: 27px;
+      }
+
+      .page-title h2 {
+        font-size: 25px;
+      }
+
+      #broadcasters {
+        grid-template-columns: 1fr;
+      }
+
+      .card-image {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- الهيدر -->
+  <header>
+
+    <h1>🎤 وكالة الشايب</h1>
+
+    <p>
+      مذيعو وكالة الشايب على Likee
+    </p>
+
+  </header>
+
+
+  <main>
+
+    <div class="container">
+
+      <!-- عنوان الصفحة -->
+      <div class="page-title">
+
+        <h2>
+          ⭐ مذيعو الوكالة
+        </h2>
+
+        <p>
+          تعرف على مذيعي وكالة الشايب
+        </p>
+
+      </div>
+
+
+      <!-- المذيعون -->
+      <div id="broadcasters">
+
+        <div class="loading">
+          ⏳ جاري تحميل المذيعين...
+        </div>
+
+      </div>
+
+
+      <!-- العودة -->
+      <div class="back-section">
+
+        <a
+          href="index.html"
+          class="back-btn">
+          🏠 العودة إلى الصفحة الرئيسية
+        </a>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- الفوتر -->
+  <footer>
+
+    <p>
+      🎤 وكالة الشايب | Shayeb Agency
+    </p>
+
+    <p>
+      جميع الحقوق محفوظة © 2026
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    /* بيانات Supabase */
+
+    const SUPABASE_URL =
+      "https://hzcnkywuabugjebtwzmv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    /* تحميل المذيعين */
+
+    async function loadBroadcasters() {
+
+      const container =
+        document.getElementById("broadcasters");
+
+      try {
+
+        const { data, error } =
+          await supabaseClient
+            .from("Shayeb agency")
+            .select("*")
+            .order("id", { ascending: false });
+
+
+        if (error) {
+
+          console.error(error);
+
+          container.innerHTML = `
+            <div class="empty">
+
+              <div class="empty-icon">
+                ⚠️
+              </div>
+
+              <h3>
+                حدث خطأ أثناء تحميل المذيعين
+              </h3>
+
+              <p>
+                يرجى المحاولة مرة أخرى لاحقًا.
+              </p>
+
+            </div>
+          `;
+
+          return;
+        }
+
+
+        /* لا يوجد مذيعون */
+
+        if (!data || data.length === 0) {
+
+          container.innerHTML = `
+            <div class="empty">
+
+              <div class="empty-icon">
+                🎤
+              </div>
+
+              <h3>
+                لا يوجد مذيعون حاليًا
+              </h3>
+
+              <p>
+                سيتم عرض المذيعين هنا عند إضافتهم إلى الوكالة.
+              </p>
+
+            </div>
+          `;
+
+          return;
+        }
+
+
+        /* إنشاء البطاقات */
+
+        container.innerHTML = "";
+
+
+        data.forEach(function (broadcaster) {
+
+          const card =
+            document.createElement("div");
+
+          card.className = "card";
+
+
+          /* البيانات */
+
+          const name =
+            broadcaster.name || "مذيع الوكالة";
+
+
+          const target =
+            broadcaster.target || "غير محدد";
+
+
+          const hours =
+            broadcaster.hours || "غير محدد";
+
+
+          const image =
+            broadcaster.image ||
+            "https://via.placeholder.com/600x500?text=Shayeb+Agency";
+
+
+          const likeeUrl =
+            broadcaster.likee_url || "#";
+
+
+          card.innerHTML = `
+
+            <img
+              class="card-image"
+              src="${image}"
+              alt="${name}"
+              onerror="this.src='https://via.placeholder.com/600x500?text=Shayeb+Agency'"
+            >
+
+
+            <div class="card-content">
+
+              <h3>
+                🎤 ${name}
+              </h3>
+
+
+              <div class="info">
+
+                🎯
+                <strong>
+                  الهدف:
+                </strong>
+
+                ${target}
+
+              </div>
+
+
+              <div class="info">
+
+                ⏰
+                <strong>
+                  ساعات البث:
+                </strong>
+
+                ${hours}
+
+              </div>
+
+
+              ${
+                likeeUrl !== "#"
+                ?
+                `
+                <a
+                  class="likee-btn"
+                  href="${likeeUrl}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+
+                  🎬 مشاهدة صفحة Likee
+
+                </a>
+                `
+                :
+                ""
+              }
+
+            </div>
+
+          `;
+
+
+          container.appendChild(card);
+
+        });
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              ⚠️
+            </div>
+
+            <h3>
+              حدث خطأ
+            </h3>
+
+            <p>
+              تعذر تحميل البيانات.
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* تشغيل الصفحة */
+
+    loadBroadcasters();
+
+  </script>
+
+</body>
+
+</html>
