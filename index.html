@@ -8,7 +8,9 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Shayeb Agency | وكالة الشايب</title>
+<title>مذيعي وكالة الشايب | Shayeb Agency</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -35,22 +37,22 @@ body{
 
     color:white;
 
+    min-height:100vh;
+
     background:
     radial-gradient(
         circle at top right,
         #4b1680 0%,
-        transparent 30%
+        transparent 32%
     ),
 
     radial-gradient(
         circle at bottom left,
         #102f63 0%,
-        transparent 30%
+        transparent 32%
     ),
 
     #080812;
-
-    min-height:100vh;
 }
 
 
@@ -66,19 +68,20 @@ header{
 
     z-index:1000;
 
-    padding:18px 15px;
-
     text-align:center;
 
+    padding:18px 12px;
+
     background:
-    rgba(8,8,18,.88);
+    rgba(8,8,18,.90);
 
     backdrop-filter:blur(15px);
 
     border-bottom:
     1px solid
-    rgba(255,255,255,.1);
+    rgba(255,255,255,.10);
 }
+
 
 .logo{
 
@@ -99,13 +102,14 @@ header{
     -webkit-text-fill-color:transparent;
 }
 
-.tagline{
 
-    color:#cfcfe0;
+.subtitle{
+
+    color:#c9c9dc;
 
     font-size:13px;
 
-    margin-top:6px;
+    margin-top:7px;
 }
 
 
@@ -126,28 +130,30 @@ nav{
     margin-top:15px;
 }
 
+
 nav a{
+
+    color:white;
 
     text-decoration:none;
 
-    color:white;
+    padding:
+    9px 15px;
+
+    border-radius:30px;
 
     background:
     rgba(255,255,255,.07);
 
     border:
     1px solid
-    rgba(255,255,255,.1);
-
-    padding:
-    9px 14px;
-
-    border-radius:30px;
+    rgba(255,255,255,.10);
 
     font-size:13px;
 
     transition:.3s;
 }
+
 
 nav a:hover{
 
@@ -164,29 +170,21 @@ nav a:hover{
 
 
 /* =========================
-   الواجهة الرئيسية
+   مقدمة الصفحة
 ========================= */
 
 .hero{
 
-    min-height:
-    620px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
     text-align:center;
 
     padding:
-    70px 20px;
+    65px 20px 40px;
 
     position:relative;
 
     overflow:hidden;
 }
+
 
 .hero::before{
 
@@ -194,33 +192,33 @@ nav a:hover{
 
     position:absolute;
 
-    width:350px;
+    width:300px;
 
-    height:350px;
+    height:300px;
 
-    background:
-    #8b5cf6;
+    border-radius:50%;
 
-    filter:
-    blur(130px);
+    background:#7c3aed;
 
-    opacity:.18;
+    filter:blur(120px);
+
+    opacity:.20;
 
     top:-100px;
 
     right:-80px;
 }
 
+
 .hero-content{
 
     position:relative;
 
-    max-width:850px;
-
     z-index:2;
 }
 
-.hero-badge{
+
+.badge{
 
     display:inline-block;
 
@@ -230,34 +228,33 @@ nav a:hover{
     border-radius:30px;
 
     background:
-    rgba(255,215,0,.1);
+    rgba(255,215,0,.08);
 
     border:
     1px solid
-    rgba(255,215,0,.3);
+    rgba(255,215,0,.30);
 
-    color:#ffd95a;
-
-    margin-bottom:22px;
+    color:#ffd75a;
 
     font-size:14px;
+
+    margin-bottom:18px;
 }
+
 
 .hero h1{
 
     font-size:
-    clamp(38px,7vw,70px);
+    clamp(35px,7vw,55px);
 
-    line-height:1.15;
-
-    margin-bottom:20px;
+    margin-bottom:15px;
 
     background:
     linear-gradient(
         90deg,
         #ffffff,
-        #d7b4ff,
-        #ffd45a
+        #d6aaff,
+        #ffd75a
     );
 
     -webkit-background-clip:text;
@@ -265,57 +262,308 @@ nav a:hover{
     -webkit-text-fill-color:transparent;
 }
 
+
 .hero p{
 
-    color:#c8c8d8;
+    color:#bfc0d1;
 
-    font-size:
-    clamp(16px,3vw,20px);
+    font-size:16px;
 
-    line-height:1.9;
+    line-height:1.8;
+
+    max-width:650px;
 
     margin:auto;
-
-    max-width:700px;
 }
 
 
 /* =========================
-   أزرار الواجهة
+   المحتوى
 ========================= */
 
-.hero-buttons{
+.container{
+
+    width:94%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:
+    20px 0 70px;
+}
+
+
+/* =========================
+   التحميل
+========================= */
+
+#loading{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:#c9c9d8;
+
+    font-size:18px;
+}
+
+
+/* =========================
+   شبكة البطاقات
+========================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(270px,1fr)
+    );
+
+    gap:25px;
+}
+
+
+/* =========================
+   بطاقة المذيع
+========================= */
+
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.10),
+        rgba(255,255,255,.035)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.12);
+
+    box-shadow:
+    0 18px 45px
+    rgba(0,0,0,.35);
+
+    backdrop-filter:blur(12px);
+
+    transition:
+    transform .35s,
+    box-shadow .35s,
+    border-color .35s;
+}
+
+
+.card:hover{
+
+    transform:
+    translateY(-8px);
+
+    border-color:
+    rgba(255,215,0,.35);
+
+    box-shadow:
+    0 20px 55px
+    rgba(124,58,237,.25);
+}
+
+
+/* =========================
+   منطقة الصورة
+========================= */
+
+.image-box{
+
+    width:100%;
+
+    height:360px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        135deg,
+        #17102b,
+        #101827
+    );
+}
+
+
+.image-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:100px;
+
+    background:
+    linear-gradient(
+        transparent,
+        rgba(5,5,12,.85)
+    );
+
+    pointer-events:none;
+}
+
+
+.card-image{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:
+    transform .5s;
+}
+
+
+.card:hover .card-image{
+
+    transform:
+    scale(1.06);
+}
+
+
+/* =========================
+   شارة المذيع
+========================= */
+
+.live-badge{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    z-index:5;
+
+    padding:
+    7px 12px;
+
+    border-radius:20px;
+
+    background:
+    rgba(10,10,20,.75);
+
+    border:
+    1px solid
+    rgba(255,255,255,.15);
+
+    color:#ffd75a;
+
+    font-size:12px;
+
+    backdrop-filter:blur(8px);
+}
+
+
+/* =========================
+   بيانات البطاقة
+========================= */
+
+.card-content{
+
+    padding:
+    20px;
+}
+
+
+.name{
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    margin-bottom:17px;
+
+    color:white;
+}
+
+
+.info{
+
+    display:grid;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+
+.info-item{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:space-between;
 
-    flex-wrap:wrap;
+    align-items:center;
 
-    gap:14px;
+    padding:
+    11px 13px;
 
-    margin-top:32px;
+    border-radius:13px;
+
+    background:
+    rgba(255,255,255,.055);
+
+    color:#cfcfdd;
+
+    font-size:14px;
 }
 
-.btn{
 
-    display:inline-block;
+.info-item strong{
+
+    color:#ffd75a;
+}
+
+
+/* =========================
+   زر Likee
+========================= */
+
+.likee-btn{
+
+    display:block;
+
+    width:100%;
+
+    text-align:center;
 
     text-decoration:none;
 
     color:white;
 
-    padding:
-    14px 25px;
-
-    border-radius:15px;
-
     font-weight:bold;
 
-    transition:.3s;
-}
+    padding:
+    13px;
 
-.btn-main{
+    border-radius:15px;
 
     background:
     linear-gradient(
@@ -325,353 +573,127 @@ nav a:hover{
     );
 
     box-shadow:
-    0 10px 30px
-    rgba(217,70,239,.25);
+    0 8px 25px
+    rgba(124,58,237,.18);
+
+    transition:.3s;
 }
 
-.btn-gold{
 
-    background:
-    linear-gradient(
-        90deg,
-        #d89b00,
-        #ffd84d
-    );
+.likee-btn:hover{
 
-    color:#17120a;
+    transform:
+    translateY(-2px);
 
     box-shadow:
     0 10px 30px
-    rgba(255,215,0,.2);
-}
-
-.btn:hover{
-
-    transform:
-    translateY(-4px);
-
-    box-shadow:
-    0 12px 30px
-    rgba(255,255,255,.15);
+    rgba(217,70,239,.30);
 }
 
 
 /* =========================
-   الأقسام
+   عدم وجود مذيعين
 ========================= */
 
-.section{
+.empty{
 
-    width:94%;
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:
-    70px 0;
-}
-
-.section-title{
-
-    text-align:center;
-
-    margin-bottom:40px;
-}
-
-.section-title h2{
-
-    font-size:
-    clamp(28px,5vw,40px);
-
-    margin-bottom:10px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #ffffff,
-        #d6aaff,
-        #ffd95b
-    );
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-}
-
-.section-title p{
-
-    color:#aaaabd;
-
-    font-size:15px;
-}
-
-
-/* =========================
-   العروض
-========================= */
-
-.offers{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(240px,1fr)
-    );
-
-    gap:20px;
-}
-
-.offer{
-
-    position:relative;
-
-    padding:27px 20px;
-
-    border-radius:22px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.09),
-        rgba(255,255,255,.035)
-    );
-
-    border:
-    1px solid
-    rgba(255,255,255,.12);
-
-    box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.25);
-
-    overflow:hidden;
-
-    transition:.35s;
-}
-
-.offer::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-
-    height:100px;
-
-    background:#8b5cf6;
-
-    filter:blur(60px);
-
-    opacity:.25;
-
-    top:-30px;
-
-    right:-30px;
-}
-
-.offer:hover{
-
-    transform:
-    translateY(-7px);
-
-    border-color:
-    rgba(255,215,0,.35);
-}
-
-.offer-icon{
-
-    font-size:35px;
-
-    margin-bottom:14px;
-}
-
-.offer h3{
-
-    color:#ffd75a;
-
-    font-size:20px;
-
-    margin-bottom:10px;
-}
-
-.offer p{
-
-    color:#d4d4df;
-
-    line-height:1.8;
-
-    font-size:15px;
-}
-
-.offer strong{
-
-    color:white;
-
-    font-size:18px;
-}
-
-
-/* العرض المميز */
-
-.offer.featured{
-
-    border:
-    1px solid
-    rgba(255,215,0,.4);
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,215,0,.12),
-        rgba(124,58,237,.1)
-    );
-}
-
-
-/* =========================
-   مذيعي الوكالة
-========================= */
-
-.broadcaster-box{
-
-    text-align:center;
-
-    padding:
-    50px 25px;
-
-    border-radius:28px;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(124,58,237,.15),
-        rgba(255,215,0,.06)
-    );
-
-    border:
-    1px solid
-    rgba(255,255,255,.1);
-}
-
-.broadcaster-box .icon{
-
-    font-size:60px;
-
-    margin-bottom:15px;
-}
-
-.broadcaster-box h3{
-
-    font-size:28px;
-
-    margin-bottom:12px;
-}
-
-.broadcaster-box p{
-
-    color:#c6c6d5;
-
-    margin-bottom:25px;
-
-    line-height:1.8;
-}
-
-
-/* =========================
-   لماذا نحن
-========================= */
-
-.features{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(220px,1fr)
-    );
-
-    gap:18px;
-}
-
-.feature{
-
-    text-align:center;
-
-    padding:28px 18px;
-
-    border-radius:20px;
-
-    background:
-    rgba(255,255,255,.055);
-
-    border:
-    1px solid
-    rgba(255,255,255,.08);
-}
-
-.feature-icon{
-
-    font-size:38px;
-
-    margin-bottom:15px;
-}
-
-.feature h3{
-
-    margin-bottom:10px;
-
-    color:#ffd75b;
-}
-
-.feature p{
-
-    color:#bcbccc;
-
-    line-height:1.7;
-
-    font-size:14px;
-}
-
-
-/* =========================
-   الانضمام
-========================= */
-
-.join{
+    grid-column:1/-1;
 
     text-align:center;
 
     padding:
     70px 20px;
 
+    border-radius:25px;
+
     background:
-    radial-gradient(
-        circle at center,
-        rgba(124,58,237,.2),
-        transparent 60%
-    );
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid
+    rgba(255,255,255,.08);
+
+    color:#aaaabc;
 }
 
-.join h2{
 
-    font-size:
-    clamp(30px,5vw,45px);
+.empty-icon{
+
+    font-size:55px;
 
     margin-bottom:15px;
 }
 
-.join p{
 
-    color:#c8c8d8;
+/* =========================
+   الخطأ
+========================= */
 
-    margin-bottom:28px;
+.error{
+
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    border-radius:25px;
+
+    background:
+    rgba(255,0,0,.06);
+
+    border:
+    1px solid
+    rgba(255,80,80,.15);
+
+    color:#ffaaaa;
 
     line-height:1.8;
+}
+
+
+/* =========================
+   أسفل الصفحة
+========================= */
+
+.bottom-action{
+
+    text-align:center;
+
+    margin-top:45px;
+}
+
+
+.back-btn{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:
+    13px 25px;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #7c3aed,
+        #d946ef
+    );
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+
+.back-btn:hover{
+
+    transform:
+    translateY(-3px);
 }
 
 
@@ -689,10 +711,11 @@ footer{
     1px solid
     rgba(255,255,255,.08);
 
-    color:#88889d;
+    color:#89899e;
 
     font-size:13px;
 }
+
 
 .footer-logo{
 
@@ -710,15 +733,11 @@ footer{
 
 @media(max-width:600px){
 
-    header{
-
-        padding:15px 10px;
-    }
-
     .logo{
 
         font-size:22px;
     }
+
 
     nav a{
 
@@ -728,46 +747,41 @@ footer{
         8px 11px;
     }
 
+
     .hero{
 
-        min-height:
-        580px;
-
         padding:
-        60px 15px;
+        50px 15px 30px;
     }
+
 
     .hero h1{
 
-        font-size:40px;
+        font-size:38px;
     }
+
 
     .hero p{
 
-        font-size:15px;
+        font-size:14px;
     }
 
-    .hero-buttons{
 
-        flex-direction:column;
-
-        align-items:stretch;
-    }
-
-    .btn{
-
-        text-align:center;
-    }
-
-    .section{
-
-        padding:
-        50px 0;
-    }
-
-    .offers{
+    .cards{
 
         grid-template-columns:1fr;
+    }
+
+
+    .image-box{
+
+        height:390px;
+    }
+
+
+    .card-content{
+
+        padding:18px;
     }
 
 }
@@ -788,12 +802,12 @@ footer{
 
     <div class="logo">
 
-        ✨ Shayeb Agency
-        | وكالة الشايب
+        ✨ Shayeb Agency | وكالة الشايب
 
     </div>
 
-    <div class="tagline">
+
+    <div class="subtitle">
 
         وكالة لدعم وتطوير مذيعي Likee
 
@@ -802,17 +816,26 @@ footer{
 
     <nav>
 
-        <a href="#offers">
-            💎 العروض
+        <a href="index.html">
+
+            🏠 الرئيسية
+
         </a>
+
 
         <a href="andix.html">
+
             👤 مذيعي الوكالة
+
         </a>
 
+
         <a href="join.html">
-            🎤 تقديم الأوديشن
+
+            🎤 انضم إلينا
+
         </a>
+
 
         <a
           href="https://wa.me/213673860283"
@@ -829,520 +852,73 @@ footer{
 
 
 <!-- =========================
-     الواجهة
+     مقدمة
 ========================= -->
 
 <section class="hero">
 
     <div class="hero-content">
 
-        <div class="hero-badge">
+        <div class="badge">
 
-            ✨ مرحباً بكم في وكالة الشايب
+            ⭐ مواهب وكالة الشايب
 
         </div>
 
 
         <h1>
 
-            اصنع حضورك...
-            <br>
-            ونحن ندعم نجاحك ⭐
+            مذيعي وكالة الشايب
 
         </h1>
 
 
         <p>
 
-            وكالة الشايب لدعم مذيعي Likee
-            ومساعدتهم على تطوير أدائهم
-            وتحقيق أهدافهم والوصول إلى
-            مستويات أفضل.
-
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a
-              href="join.html"
-              class="btn btn-main">
-
-                🎤 انضم إلى الوكالة
-
-            </a>
-
-
-            <a
-              href="#offers"
-              class="btn btn-gold">
-
-                💎 اكتشف عروضنا
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     العروض
-========================= -->
-
-<section
-    class="section"
-    id="offers">
-
-
-    <div class="section-title">
-
-        <h2>
-
-            💎 عروض وكالة الشايب
-
-        </h2>
-
-        <p>
-
-            دعم ومساعدة مذيعينا للوصول إلى أهدافهم
-
-        </p>
-
-    </div>
-
-
-
-    <div class="offers">
-
-
-        <!-- العرض 1 -->
-
-        <div class="offer">
-
-            <div class="offer-icon">
-                🎯
-            </div>
-
-            <h3>
-                المساعدة في التقفيل
-            </h3>
-
-            <p>
-
-                نساعد المذيعين في
-                <strong>
-                تقفيل التارجت
-                </strong>
-                وتحقيق أهدافهم.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- العرض 2 -->
-
-        <div class="offer featured">
-
-            <div class="offer-icon">
-                ⭐
-            </div>
-
-            <h3>
-                في حال عدم القدرة على التقفيل
-            </h3>
-
-            <p>
-
-                نوفر الدعم حسب مستوى
-                التارجت لمساعدة المذيع
-                على الوصول إلى هدفه.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 4500 -->
-
-        <div class="offer">
-
-            <div class="offer-icon">
-                💎
-            </div>
-
-            <h3>
-                تارجت 4,500
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    1,000 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 11000 -->
-
-        <div class="offer">
-
-            <div class="offer-icon">
-                💎
-            </div>
-
-            <h3>
-                تارجت 11,000
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    1,500 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 25500 -->
-
-        <div class="offer">
-
-            <div class="offer-icon">
-                💎
-            </div>
-
-            <h3>
-                تارجت 25,500
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    3,000 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 50000 -->
-
-        <div class="offer">
-
-            <div class="offer-icon">
-                💎
-            </div>
-
-            <h3>
-                تارجت 50,000
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    5,000 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 80000 -->
-
-        <div class="offer featured">
-
-            <div class="offer-icon">
-                👑
-            </div>
-
-            <h3>
-                تارجت 80,000
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    15,000 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 100000 -->
-
-        <div class="offer">
-
-            <div class="offer-icon">
-                🔥
-            </div>
-
-            <h3>
-                تارجت 100,000
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    20,000 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-
-        <!-- 120000 -->
-
-        <div class="offer featured">
-
-            <div class="offer-icon">
-                👑
-            </div>
-
-            <h3>
-                تارجت 120,000
-            </h3>
-
-            <p>
-
-                الحد الأقصى:
-                <br>
-
-                <strong>
-                    25,000 ماسة
-                </strong>
-
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     مذيعي الوكالة
-========================= -->
-
-<section class="section">
-
-    <div class="section-title">
-
-        <h2>
-            👤 مذيعي وكالة الشايب
-        </h2>
-
-        <p>
-            اكتشفوا مذيعي وكالتنا ومواهبنا
-        </p>
-
-    </div>
-
-
-    <div class="broadcaster-box">
-
-        <div class="icon">
-            🎥
-        </div>
-
-        <h3>
-            تعرف على مذيعي الوكالة
-        </h3>
-
-        <p>
-
-            شاهد صفحات مذيعينا
-            وتعرف على مواهبهم
+            اكتشفوا مذيعي وكالتنا
+            وتعرفوا على مواهبهم
             وحساباتهم على Likee.
 
         </p>
 
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     المذيعون
+========================= -->
+
+<div class="container">
+
+    <div id="loading">
+
+        ⏳ جارٍ تحميل مذيعي الوكالة...
+
+    </div>
+
+
+    <div
+      id="cards"
+      class="cards">
+    </div>
+
+
+    <div class="bottom-action">
 
         <a
-          href="andix.html"
-          class="btn btn-main">
+          href="index.html"
+          class="back-btn">
 
-            👤 مشاهدة مذيعي الوكالة
+            🏠 العودة إلى الصفحة الرئيسية
 
         </a>
 
     </div>
 
-</section>
-
-
-
-<!-- =========================
-     لماذا وكالة الشايب
-========================= -->
-
-<section class="section">
-
-    <div class="section-title">
-
-        <h2>
-            ⭐ لماذا وكالة الشايب؟
-        </h2>
-
-        <p>
-            هدفنا أن نكون داعماً حقيقياً للمذيع
-        </p>
-
-    </div>
-
-
-    <div class="features">
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🎯
-            </div>
-
-            <h3>
-                دعم التارجت
-            </h3>
-
-            <p>
-                مساعدة المذيعين
-                على تحقيق أهدافهم.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                💎
-            </div>
-
-            <h3>
-                عروض متنوعة
-            </h3>
-
-            <p>
-                مستويات مختلفة
-                تناسب أهداف المذيعين.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🤝
-            </div>
-
-            <h3>
-                دعم مستمر
-            </h3>
-
-            <p>
-                نرافق المذيع
-                وندعمه في مسيرته.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🚀
-            </div>
-
-            <h3>
-                التطور
-            </h3>
-
-            <p>
-                نطمح إلى تطوير
-                المواهب والوصول للأفضل.
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     الانضمام
-========================= -->
-
-<section class="join">
-
-    <h2>
-        🎤 هل تريد الانضمام إلينا؟
-    </h2>
-
-    <p>
-
-        إذا كنت مذيع Likee
-        وترغب في الانضمام إلى وكالة الشايب،
-        قدم الأوديشن الخاص بك الآن.
-
-    </p>
-
-
-    <a
-      href="join.html"
-      class="btn btn-main">
-
-        🎤 تقديم الأوديشن الآن
-
-    </a>
-
-</section>
+</div>
 
 
 
@@ -1358,13 +934,16 @@ footer{
 
     </div>
 
+
     <p>
 
         وكالة الشايب لدعم مذيعي Likee
 
     </p>
 
+
     <br>
+
 
     <a
       href="https://wa.me/213673860283"
@@ -1378,15 +957,406 @@ footer{
 
     </a>
 
+
     <br><br>
 
+
     © 2026 Shayeb Agency
-    <br>
-    جميع الحقوق محفوظة
 
 </footer>
 
 
+
+<script>
+
+/* =========================
+   Supabase
+========================= */
+
+const SUPABASE_URL =
+"https://hzcnkywuabugjebtwzmv.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================
+   صورة احتياطية
+========================= */
+
+const placeholder =
+"https://via.placeholder.com/700x800/151525/ffffff?text=Shayeb+Agency";
+
+
+/* =========================
+   تحميل المذيعين
+========================= */
+
+async function loadBroadcasters(){
+
+    const loading =
+    document.getElementById("loading");
+
+
+    const cards =
+    document.getElementById("cards");
+
+
+    try{
+
+        const { data, error } =
+        await supabaseClient
+
+        .from("Shayeb agency")
+
+        .select("*")
+
+        .order(
+            "id",
+            {
+                ascending:false
+            }
+        );
+
+
+        if(error){
+
+            console.error(error);
+
+            loading.style.display="none";
+
+
+            cards.innerHTML=`
+
+                <div class="error">
+
+                    ❌ حدث خطأ أثناء تحميل المذيعين
+
+                    <br><br>
+
+                    ${error.message}
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+        loading.style.display="none";
+
+
+        if(!data || data.length===0){
+
+            cards.innerHTML=`
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        لا يوجد مذيعون حالياً
+                    </h3>
+
+                    <br>
+
+                    <p>
+                        سيتم عرض المذيعين هنا
+                        بعد إضافتهم من لوحة الإدارة.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+        cards.innerHTML="";
+
+
+        data.forEach(
+            broadcaster => {
+
+
+            /* الاسم */
+
+            const name =
+            broadcaster.name ||
+            "مذيع وكالة الشايب";
+
+
+            /* التارجت */
+
+            const target =
+            broadcaster.target ||
+            "غير محدد";
+
+
+            /* الساعات */
+
+            const hours =
+            broadcaster.hours ||
+            "غير محدد";
+
+
+            /*
+              ⭐ مهم جداً ⭐
+
+              اسم عمود الصورة هو:
+              image_url
+            */
+
+            let image =
+            broadcaster.image_url ||
+            "";
+
+
+            /*
+              إذا كانت الصورة
+              مجرد اسم ملف أو مسار
+            */
+
+            if(
+                image &&
+                !image.startsWith("http")
+            ){
+
+                const {
+                    data:publicData
+                } =
+                supabaseClient
+
+                .storage
+
+                .from(
+                    "broadcaster-images"
+                )
+
+                .getPublicUrl(image);
+
+
+                if(
+                    publicData &&
+                    publicData.publicUrl
+                ){
+
+                    image =
+                    publicData.publicUrl;
+
+                }
+
+            }
+
+
+            /*
+              إذا لم توجد صورة
+            */
+
+            if(!image){
+
+                image =
+                placeholder;
+
+            }
+
+
+            /* رابط Likee */
+
+            const likeeUrl =
+            broadcaster.likee_url ||
+            "#";
+
+
+            /* إنشاء البطاقة */
+
+            const card =
+            document.createElement("div");
+
+
+            card.className="card";
+
+
+            card.innerHTML=`
+
+                <div class="image-box">
+
+
+                    <div class="live-badge">
+
+                        ✨ مذيع الوكالة
+
+                    </div>
+
+
+                    <img
+
+                        class="card-image"
+
+                        src="${image}"
+
+                        alt="${name}"
+
+                        loading="lazy"
+
+                        onerror="
+                        this.onerror=null;
+                        this.src='${placeholder}'
+                        "
+
+                    >
+
+                </div>
+
+
+                <div class="card-content">
+
+
+                    <div class="name">
+
+                        ${name}
+
+                    </div>
+
+
+                    <div class="info">
+
+
+                        <div class="info-item">
+
+                            <span>
+                                🎯 التارجت
+                            </span>
+
+                            <strong>
+                                ${target}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <span>
+                                ⏰ الساعات
+                            </span>
+
+                            <strong>
+                                ${hours}
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    ${
+                        likeeUrl !== "#"
+
+                        ?
+
+                        `
+
+                        <a
+
+                            class="likee-btn"
+
+                            href="${likeeUrl}"
+
+                            target="_blank"
+
+                            rel="noopener"
+
+                        >
+
+                            🎥 مشاهدة على Likee
+
+                        </a>
+
+                        `
+
+                        :
+
+                        `
+
+                        <div
+
+                            class="likee-btn"
+
+                            style="opacity:.5;"
+
+                        >
+
+                            🎥 رابط Likee غير متوفر
+
+                        </div>
+
+                        `
+                    }
+
+
+                </div>
+
+            `;
+
+
+            cards.appendChild(card);
+
+
+        });
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        loading.style.display="none";
+
+
+        cards.innerHTML=`
+
+            <div class="error">
+
+                ❌ حدث خطأ غير متوقع
+
+                <br><br>
+
+                يرجى تحديث الصفحة والمحاولة مرة أخرى.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   تشغيل الصفحة
+========================= */
+
+loadBroadcasters();
+
+</script>
+
+
 </body>
 
-</html>
+      </html>
