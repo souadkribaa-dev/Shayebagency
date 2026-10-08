@@ -1,0 +1,92 @@
+doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إدارة وكالة الشايب</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#f6f6f8;
+  font-family:Arial,Tahoma,sans-serif;
+  color:#222
+}
+
+.header{
+  background:linear-gradient(135deg,#ff3b81,#ff5a5f);
+  color:#fff;
+  padding:22px 16px 28px;
+  border-radius:0 0 26px 26px
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:16px
+}
+
+.header h1{
+  margin:0 0 7px;
+  font-size:27px
+}
+
+.header p{
+  margin:0;
+  opacity:.92
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 3px 15px #0001
+}
+
+.photo{
+  display:block;
+  position:relative;
+  aspect-ratio:1/1;
+  background:#ddd
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block
+}
+
+.like{
+  position:absolute;
+  bottom:9px;
+  left:9px;
+  background:#ff3b81;
+  color:#fff;
+  border-radius:20px;
+  padding:6px 10px;
+  font-size:12px
+}
+
+.info{
+  padding:11px 12px 13px
+}
+
+.name{
+  font-size:17px;
+  font-weight:800;
+  margin-bottom:8px
+}
+
+.stats{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap
