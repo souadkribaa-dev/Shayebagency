@@ -1,552 +1,439 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>وكالة الشايب | Shayeb Agency</title>
+<title>وكالة الشايب | Shayeb Agency</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+body{
+  font-family:Arial,Tahoma,sans-serif;
+  background:#fff7fa;
+  color:#333;
+  line-height:1.7;
+}
 
-    body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: #fff7fa;
-      color: #333;
-      line-height: 1.8;
-    }
+/* الهيدر */
+header{
+  background:linear-gradient(135deg,#d81b60,#880e4f);
+  color:white;
+  text-align:center;
+  padding:18px 15px;
+  box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
 
-    /* الهيدر */
-    header {
-      background: linear-gradient(135deg, #d81b60, #ad1457);
-      color: white;
-      padding: 18px 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.15);
-    }
+header h1{
+  font-size:24px;
+}
 
-    header h1 {
-      font-size: 25px;
-      margin-bottom: 4px;
-    }
+header p{
+  font-size:14px;
+}
 
-    header p {
-      font-size: 14px;
-      opacity: 0.95;
-    }
+/* القسم الرئيسي */
+.hero{
+  text-align:center;
+  padding:35px 15px 30px;
+  background:
+  radial-gradient(circle at top right,#ffd6e5,transparent 40%),
+  #fff7fa;
+}
 
-    /* القسم الرئيسي */
-    .hero {
-      min-height: 620px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 50px 20px;
-      background:
-        radial-gradient(circle at top right, #ffd6e5, transparent 35%),
-        radial-gradient(circle at bottom left, #f8bbd0, transparent 35%),
-        #fff7fa;
-    }
+.likee-logo{
+  width:82px;
+  height:82px;
+  margin:auto;
+  border-radius:22px;
+  background:linear-gradient(135deg,#ff2d55,#ff006e);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:43px;
+  color:white;
+  box-shadow:0 8px 22px rgba(216,27,96,.25);
+}
 
-    .hero-content {
-      max-width: 850px;
-    }
+.hero h2{
+  color:#ad1457;
+  font-size:30px;
+  margin-top:15px;
+}
 
-    .logo {
-      width: 105px;
-      height: 105px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #d81b60, #880e4f);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      box-shadow: 0 10px 30px rgba(173,20,87,0.25);
-    }
+.hero p{
+  color:#666;
+  font-size:16px;
+}
 
-    .hero h2 {
-      font-size: 42px;
-      color: #ad1457;
-      margin-bottom: 12px;
-    }
+/* الأزرار */
+.buttons{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin:25px auto 0;
+  max-width:380px;
+}
 
-    .hero .subtitle {
-      font-size: 20px;
-      color: #555;
-      margin-bottom: 30px;
-    }
+.btn{
+  display:block;
+  text-decoration:none;
+  color:white;
+  padding:14px 18px;
+  border-radius:30px;
+  font-weight:bold;
+  font-size:16px;
+  box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
 
-    /* الأزرار */
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 25px;
-    }
+.btn:hover{
+  transform:translateY(-2px);
+}
 
-    .main-btn {
-      display: inline-block;
-      text-decoration: none;
-      color: white;
-      padding: 15px 28px;
-      border-radius: 35px;
-      font-size: 17px;
-      font-weight: bold;
-      transition: 0.3s;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    }
+.broadcasters{
+  background:linear-gradient(135deg,#8e24aa,#6a1b9a);
+}
 
-    .main-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-    }
+.audition{
+  background:linear-gradient(135deg,#e91e63,#c2185b);
+}
 
-    .broadcasters {
-      background: linear-gradient(135deg, #8e24aa, #6a1b9a);
-    }
+.whatsapp{
+  background:linear-gradient(135deg,#25d366,#128c7e);
+}
 
-    .audition {
-      background: linear-gradient(135deg, #e91e63, #c2185b);
-    }
+/* العروض */
+.offers{
+  padding:35px 14px;
+}
 
-    .whatsapp {
-      background: linear-gradient(135deg, #25d366, #128c7e);
-    }
+.section-title{
+  text-align:center;
+  color:#ad1457;
+  font-size:27px;
+  margin-bottom:10px;
+}
 
-    /* الأقسام */
-    section {
-      padding: 70px 20px;
-    }
+.section-subtitle{
+  text-align:center;
+  color:#777;
+  font-size:15px;
+  margin-bottom:25px;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-    }
+/* بطاقات العروض */
+.offer-list{
+  max-width:500px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-    .section-title {
-      text-align: center;
-      color: #ad1457;
-      font-size: 30px;
-      margin-bottom: 40px;
-    }
+.offer{
+  background:white;
+  border-radius:17px;
+  padding:15px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  border-right:5px solid #d81b60;
+}
 
-    /* البطاقات */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 22px;
-    }
+.offer-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
 
-    .card {
-      background: white;
-      padding: 30px 22px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
+.target{
+  font-weight:bold;
+  color:#880e4f;
+  font-size:17px;
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-    }
+.diamonds{
+  background:#fff0f5;
+  color:#d81b60;
+  padding:6px 10px;
+  border-radius:20px;
+  font-weight:bold;
+  font-size:14px;
+  white-space:nowrap;
+}
 
-    .card .icon {
-      font-size: 45px;
-      margin-bottom: 12px;
-    }
+.offer-note{
+  color:#777;
+  font-size:13px;
+  margin-top:5px;
+}
 
-    .card h3 {
-      color: #ad1457;
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
+/* المذيعون */
+.broadcaster-section{
+  background:white;
+  padding:40px 15px;
+  text-align:center;
+}
 
-    .card p {
-      color: #666;
-      font-size: 15px;
-    }
+.broadcaster-section p{
+  color:#666;
+  margin-bottom:20px;
+}
 
-    /* من نحن */
-    .about {
-      background: white;
-    }
+/* من نحن */
+.about{
+  padding:40px 15px;
+}
 
-    .about-box {
-      max-width: 850px;
-      margin: auto;
-      background: #fff7fa;
-      padding: 35px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-    }
+.about-box{
+  max-width:650px;
+  margin:auto;
+  background:white;
+  padding:25px 20px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.07);
+}
 
-    .about-box p {
-      font-size: 17px;
-      color: #555;
-    }
+/* الفوتر */
+footer{
+  background:#4a1230;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+  font-size:13px;
+}
 
-    /* خطوات الانضمام */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 20px;
-    }
+/* الهاتف */
+@media(max-width:600px){
 
-    .step {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-    }
+  .hero h2{
+    font-size:27px;
+  }
 
-    .number {
-      width: 50px;
-      height: 50px;
-      margin: 0 auto 15px;
-      border-radius: 50%;
-      background: #d81b60;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
+  .section-title{
+    font-size:24px;
+  }
 
-    .step h3 {
-      color: #ad1457;
-      margin-bottom: 8px;
-    }
+  .offer{
+    padding:13px;
+  }
 
-    /* الدعوة */
-    .join-box {
-      background: linear-gradient(135deg, #ad1457, #d81b60);
-      color: white;
-      border-radius: 30px;
-      padding: 50px 25px;
-      text-align: center;
-      max-width: 950px;
-      margin: auto;
-      box-shadow: 0 10px 30px rgba(173,20,87,0.2);
-    }
+  .target{
+    font-size:15px;
+  }
 
-    .join-box h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
-
-    .join-box p {
-      font-size: 17px;
-      margin-bottom: 25px;
-    }
-
-    .white-btn {
-      display: inline-block;
-      background: white;
-      color: #ad1457;
-      padding: 14px 30px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .white-btn:hover {
-      transform: translateY(-3px);
-    }
-
-    /* الفوتر */
-    footer {
-      background: #4a1230;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    footer p {
-      margin: 5px 0;
-      font-size: 14px;
-    }
-
-    /* الهاتف */
-    @media (max-width: 600px) {
-
-      .hero {
-        min-height: 580px;
-        padding: 40px 15px;
-      }
-
-      .hero h2 {
-        font-size: 31px;
-      }
-
-      .hero .subtitle {
-        font-size: 17px;
-      }
-
-      .main-btn {
-        width: 100%;
-        max-width: 330px;
-        padding: 14px 20px;
-      }
-
-      section {
-        padding: 50px 15px;
-      }
-
-      .section-title {
-        font-size: 26px;
-      }
-
-      .about-box {
-        padding: 25px 18px;
-      }
-    }
-  </style>
+  .diamonds{
+    font-size:13px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- الهيدر -->
-  <header>
-    <h1>🎤 وكالة الشايب</h1>
-    <p>Shayeb Agency</p>
-  </header>
+<!-- الهيدر -->
+<header>
+  <h1>🎤 وكالة الشايب</h1>
+  <p>Shayeb Agency • Likee</p>
+</header>
 
-  <!-- الصفحة الرئيسية -->
-  <main>
 
-    <section class="hero">
+<!-- الصفحة الرئيسية -->
+<section class="hero">
 
-      <div class="hero-content">
+  <div class="likee-logo">
+    ♥
+  </div>
 
-        <div class="logo">
-          🎤
-        </div>
+  <h2>وكالة الشايب</h2>
 
-        <h2>وكالة الشايب</h2>
+  <p>
+    وكالة لدعم وتطوير مذيعي Likee
+  </p>
 
-        <p class="subtitle">
-          وكالة متخصصة في دعم وتطوير المذيعين على منصة Likee
-        </p>
+  <div class="buttons">
 
-        <div class="buttons">
+    <a href="andix.html" class="btn broadcasters">
+      👤 مذيعي وكالة الشايب
+    </a>
 
-          <!-- رابط صفحة المذيعين -->
-          <a
-            class="main-btn broadcasters"
-            href="andix.html">
-            👤 المذيعون
-          </a>
+    <a href="join.html" class="btn audition">
+      🎤 تقديم الأوديشن
+    </a>
 
-          <!-- رابط صفحة الأوديشن -->
-          <a
-            class="main-btn audition"
-            href="join.html">
-            🎤 تقديم الأوديشن
-          </a>
+    <a
+      href="https://wa.me/213673860283"
+      target="_blank"
+      class="btn whatsapp">
+      💬 تواصل معنا عبر WhatsApp
+    </a>
 
-          <!-- واتساب -->
-          <a
-            class="main-btn whatsapp"
-            href="https://wa.me/213673860283"
-            target="_blank"
-            rel="noopener">
-            💬 تواصل معنا عبر WhatsApp
-          </a>
+  </div>
 
-        </div>
+</section>
 
+
+<!-- العروض -->
+<section class="offers">
+
+  <h2 class="section-title">
+    🎁 عروض وكالة الشايب
+  </h2>
+
+  <p class="section-subtitle">
+    المساعدة في تقفيل التارجت في حال عدم القدرة على التقفيل
+  </p>
+
+
+  <div class="offer-list">
+
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 4,500
+        </span>
+
+        <span class="diamonds">
+          💎 1,000 ماسة كحد أقصى
+        </span>
       </div>
+    </div>
 
-    </section>
 
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 11,000
+        </span>
 
-    <!-- خدمات الوكالة -->
-    <section>
-
-      <div class="container">
-
-        <h2 class="section-title">
-          ✨ ماذا نقدم؟
-        </h2>
-
-        <div class="cards">
-
-          <div class="card">
-            <div class="icon">🎤</div>
-            <h3>دعم المذيعين</h3>
-            <p>
-              نساعد المذيعين على تطوير حضورهم ونشاطهم على Likee.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">📊</div>
-            <h3>متابعة النشاط</h3>
-            <p>
-              متابعة أهداف ونشاط المذيعين داخل الوكالة.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🚀</div>
-            <h3>تطوير الأداء</h3>
-            <p>
-              نساعدك على تحسين أدائك وبناء جمهورك.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🤝</div>
-            <h3>بيئة داعمة</h3>
-            <p>
-              فريق ووكالة لمساعدتك على الاستمرار والتطور.
-            </p>
-          </div>
-
-        </div>
-
+        <span class="diamonds">
+          💎 1,500 ماسة كحد أقصى
+        </span>
       </div>
+    </div>
 
-    </section>
 
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 25,500
+        </span>
 
-    <!-- من نحن -->
-    <section class="about">
-
-      <div class="container">
-
-        <h2 class="section-title">
-          💗 عن وكالة الشايب
-        </h2>
-
-        <div class="about-box">
-
-          <p>
-            وكالة الشايب هي وكالة تهدف إلى اكتشاف المذيعين
-            المميزين ودعمهم وتطوير نشاطهم على منصة Likee.
-          </p>
-
-          <br>
-
-          <p>
-            إذا كنت ترغب في الانضمام إلى الوكالة،
-            يمكنك مشاهدة مثال الأوديشن ثم إرسال طلبك بسهولة.
-          </p>
-
-        </div>
-
+        <span class="diamonds">
+          💎 3,000 ماسة كحد أقصى
+        </span>
       </div>
+    </div>
 
-    </section>
 
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 50,000
+        </span>
 
-    <!-- خطوات الانضمام -->
-    <section>
-
-      <div class="container">
-
-        <h2 class="section-title">
-          🎯 كيف تنضم إلينا؟
-        </h2>
-
-        <div class="steps">
-
-          <div class="step">
-            <div class="number">1</div>
-            <h3>شاهد المثال</h3>
-            <p>
-              شاهد فيديو الأوديشن لمعرفة المطلوب.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="number">2</div>
-            <h3>سجل الأوديشن</h3>
-            <p>
-              قم بتسجيل فيديو الأوديشن الخاص بك.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="number">3</div>
-            <h3>أرسل الطلب</h3>
-            <p>
-              أدخل معلوماتك وارفع فيديو الأوديشن.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="number">4</div>
-            <h3>انتظر التواصل</h3>
-            <p>
-              ستتم مراجعة طلبك والتواصل معك.
-            </p>
-          </div>
-
-        </div>
-
+        <span class="diamonds">
+          💎 5,000 ماسة كحد أقصى
+        </span>
       </div>
+    </div>
 
-    </section>
 
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 80,000
+        </span>
 
-    <!-- دعوة للانضمام -->
-    <section>
-
-      <div class="join-box">
-
-        <h2>
-          🎤 هل تريد الانضمام إلى وكالة الشايب؟
-        </h2>
-
-        <p>
-          ابدأ الآن وأرسل أوديشن الخاص بك.
-        </p>
-
-        <a
-          class="white-btn"
-          href="join.html">
-          تقديم الأوديشن الآن
-        </a>
-
+        <span class="diamonds">
+          💎 15,000 ماسة كحد أقصى
+        </span>
       </div>
-
-    </section>
-
-  </main>
+    </div>
 
 
-  <!-- الفوتر -->
-  <footer>
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 100,000
+        </span>
+
+        <span class="diamonds">
+          💎 20,000 ماسة
+        </span>
+      </div>
+    </div>
+
+
+    <div class="offer">
+      <div class="offer-top">
+        <span class="target">
+          🎯 تارجت 120,000
+        </span>
+
+        <span class="diamonds">
+          💎 25,000 ماسة كحد أقصى
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- المذيعون -->
+<section class="broadcaster-section">
+
+  <h2 class="section-title">
+    👤 مذيعي وكالة الشايب
+  </h2>
+
+  <p>
+    تعرف على مذيعي الوكالة وحساباتهم على Likee
+  </p>
+
+  <a href="andix.html" class="btn broadcasters"
+     style="max-width:330px;margin:auto;">
+    مشاهدة المذيعين
+  </a>
+
+</section>
+
+
+<!-- من نحن -->
+<section class="about">
+
+  <div class="about-box">
+
+    <h2 class="section-title">
+      💗 عن وكالة الشايب
+    </h2>
 
     <p>
-      🎤 وكالة الشايب | Shayeb Agency
+      وكالة الشايب تهدف إلى دعم مذيعي Likee
+      ومساعدتهم على تطوير نشاطهم وتحقيق أهدافهم.
     </p>
 
-    <p>
-      جميع الحقوق محفوظة © 2026
-    </p>
+  </div>
 
-  </footer>
+</section>
+
+
+<!-- الفوتر -->
+<footer>
+
+  <p>🎤 وكالة الشايب | Shayeb Agency</p>
+
+  <p>جميع الحقوق محفوظة © 2026</p>
+
+</footer>
 
 </body>
 </html>
