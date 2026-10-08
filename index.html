@@ -1,439 +1,584 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>وكالة الشايب | Shayeb Agency</title>
+  <title>مذيعو وكالة الشايب | Shayeb Agency</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-body{
-  font-family:Arial,Tahoma,sans-serif;
-  background:#fff7fa;
-  color:#333;
-  line-height:1.7;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* الهيدر */
-header{
-  background:linear-gradient(135deg,#d81b60,#880e4f);
-  color:white;
-  text-align:center;
-  padding:18px 15px;
-  box-shadow:0 3px 15px rgba(0,0,0,.15);
-}
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at top right, #3b176e 0%, transparent 35%),
+        radial-gradient(circle at bottom left, #102a56 0%, transparent 35%),
+        #080812;
+      color: white;
+      min-height: 100vh;
+    }
 
-header h1{
-  font-size:24px;
-}
+    /* الهيدر */
+    header {
+      padding: 25px 15px;
+      text-align: center;
+      background: rgba(10, 10, 25, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-header p{
-  font-size:14px;
-}
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ffd700, #ff7bff, #8b7cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-/* القسم الرئيسي */
-.hero{
-  text-align:center;
-  padding:35px 15px 30px;
-  background:
-  radial-gradient(circle at top right,#ffd6e5,transparent 40%),
-  #fff7fa;
-}
+    .subtitle {
+      margin-top: 8px;
+      color: #cfcfe8;
+      font-size: 14px;
+    }
 
-.likee-logo{
-  width:82px;
-  height:82px;
-  margin:auto;
-  border-radius:22px;
-  background:linear-gradient(135deg,#ff2d55,#ff006e);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:43px;
-  color:white;
-  box-shadow:0 8px 22px rgba(216,27,96,.25);
-}
+    /* الأزرار */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
 
-.hero h2{
-  color:#ad1457;
-  font-size:30px;
-  margin-top:15px;
-}
+    .nav a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 17px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: 0.3s;
+      font-size: 14px;
+    }
 
-.hero p{
-  color:#666;
-  font-size:16px;
-}
+    .nav a:hover {
+      background: linear-gradient(90deg, #7c3cff, #d946ef);
+      transform: translateY(-2px);
+    }
 
-/* الأزرار */
-.buttons{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin:25px auto 0;
-  max-width:380px;
-}
+    /* العنوان */
+    .page-title {
+      text-align: center;
+      padding: 45px 15px 25px;
+    }
 
-.btn{
-  display:block;
-  text-decoration:none;
-  color:white;
-  padding:14px 18px;
-  border-radius:30px;
-  font-weight:bold;
-  font-size:16px;
-  box-shadow:0 5px 15px rgba(0,0,0,.12);
-}
+    .page-title h1 {
+      font-size: 34px;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #ffffff, #d7a8ff, #ffd76a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.btn:hover{
-  transform:translateY(-2px);
-}
+    .page-title p {
+      color: #bdbdd0;
+      font-size: 16px;
+    }
 
-.broadcasters{
-  background:linear-gradient(135deg,#8e24aa,#6a1b9a);
-}
+    /* حالة التحميل */
+    #loading {
+      text-align: center;
+      padding: 50px 20px;
+      color: #cfcfe8;
+      font-size: 18px;
+    }
 
-.audition{
-  background:linear-gradient(135deg,#e91e63,#c2185b);
-}
+    /* شبكة المذيعين */
+    .container {
+      width: 94%;
+      max-width: 1200px;
+      margin: auto;
+      padding-bottom: 50px;
+    }
 
-.whatsapp{
-  background:linear-gradient(135deg,#25d366,#128c7e);
-}
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
 
-/* العروض */
-.offers{
-  padding:35px 14px;
-}
+    /* بطاقة المذيع */
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+      backdrop-filter: blur(12px);
+      transition: 0.35s;
+    }
 
-.section-title{
-  text-align:center;
-  color:#ad1457;
-  font-size:27px;
-  margin-bottom:10px;
-}
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 20px 50px rgba(120,60,255,0.25),
+        0 0 25px rgba(255,215,0,0.08);
+    }
 
-.section-subtitle{
-  text-align:center;
-  color:#777;
-  font-size:15px;
-  margin-bottom:25px;
-}
+    /* صورة المذيع */
+    .image-wrapper {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1d1535, #101526);
+    }
 
-/* بطاقات العروض */
-.offer-list{
-  max-width:500px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
 
-.offer{
-  background:white;
-  border-radius:17px;
-  padding:15px;
-  box-shadow:0 5px 18px rgba(0,0,0,.08);
-  border-right:5px solid #d81b60;
-}
+    .card:hover .card-image {
+      transform: scale(1.05);
+    }
 
-.offer-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
+    .card-content {
+      padding: 20px;
+    }
 
-.target{
-  font-weight:bold;
-  color:#880e4f;
-  font-size:17px;
-}
+    .name {
+      font-size: 23px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
 
-.diamonds{
-  background:#fff0f5;
-  color:#d81b60;
-  padding:6px 10px;
-  border-radius:20px;
-  font-weight:bold;
-  font-size:14px;
-  white-space:nowrap;
-}
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
 
-.offer-note{
-  color:#777;
-  font-size:13px;
-  margin-top:5px;
-}
+    .info div {
+      background: rgba(255,255,255,0.06);
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: #ddd;
+      font-size: 14px;
+    }
 
-/* المذيعون */
-.broadcaster-section{
-  background:white;
-  padding:40px 15px;
-  text-align:center;
-}
+    .info strong {
+      color: #ffd45c;
+    }
 
-.broadcaster-section p{
-  color:#666;
-  margin-bottom:20px;
-}
+    .likee-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 13px;
+      border-radius: 15px;
+      background: linear-gradient(90deg, #7c3aed, #d946ef);
+      transition: 0.3s;
+    }
 
-/* من نحن */
-.about{
-  padding:40px 15px;
-}
+    .likee-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(217,70,239,0.35);
+    }
 
-.about-box{
-  max-width:650px;
-  margin:auto;
-  background:white;
-  padding:25px 20px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 5px 18px rgba(0,0,0,.07);
-}
+    /* عدم وجود بيانات */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: #aaa;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+    }
 
-/* الفوتر */
-footer{
-  background:#4a1230;
-  color:white;
-  text-align:center;
-  padding:25px 15px;
-  font-size:13px;
-}
+    /* خطأ */
+    .error {
+      text-align: center;
+      padding: 40px 20px;
+      color: #ff9b9b;
+      background: rgba(255,0,0,0.07);
+      border: 1px solid rgba(255,0,0,0.15);
+      border-radius: 20px;
+    }
 
-/* الهاتف */
-@media(max-width:600px){
+    /* الفوتر */
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #9292a7;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 30px;
+    }
 
-  .hero h2{
-    font-size:27px;
-  }
+    /* الهاتف */
+    @media (max-width: 600px) {
 
-  .section-title{
-    font-size:24px;
-  }
+      .logo {
+        font-size: 23px;
+      }
 
-  .offer{
-    padding:13px;
-  }
+      .page-title {
+        padding-top: 35px;
+      }
 
-  .target{
-    font-size:15px;
-  }
+      .page-title h1 {
+        font-size: 27px;
+      }
 
-  .diamonds{
-    font-size:13px;
-  }
-}
-</style>
+      .page-title p {
+        font-size: 14px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .image-wrapper {
+        height: 360px;
+      }
+
+      .nav a {
+        font-size: 13px;
+        padding: 9px 13px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- الهيدر -->
 <header>
-  <h1>🎤 وكالة الشايب</h1>
-  <p>Shayeb Agency • Likee</p>
+
+  <div class="logo">
+    ✨ Shayeb Agency | وكالة الشايب
+  </div>
+
+  <div class="subtitle">
+    وكالة لدعم وتطوير المذيعين على Likee
+  </div>
+
+  <div class="nav">
+
+    <a href="index.html">
+      🏠 الرئيسية
+    </a>
+
+    <a href="join.html">
+      🎤 انضم إلينا
+    </a>
+
+    <a href="https://wa.me/213673860283" target="_blank">
+      💬 تواصل معنا
+    </a>
+
+  </div>
+
 </header>
 
 
-<!-- الصفحة الرئيسية -->
-<section class="hero">
+<section class="page-title">
 
-  <div class="likee-logo">
-    ♥
-  </div>
-
-  <h2>وكالة الشايب</h2>
+  <h1>
+    ⭐ مذيعو وكالة الشايب ⭐
+  </h1>
 
   <p>
-    وكالة لدعم وتطوير مذيعي Likee
+    تعرفوا على مذيعي وكالتنا واكتشفوا المواهب المميزة
   </p>
 
-  <div class="buttons">
+</section>
 
-    <a href="andix.html" class="btn broadcasters">
-      👤 مذيعي وكالة الشايب
-    </a>
 
-    <a href="join.html" class="btn audition">
-      🎤 تقديم الأوديشن
-    </a>
+<div class="container">
 
-    <a
-      href="https://wa.me/213673860283"
-      target="_blank"
-      class="btn whatsapp">
-      💬 تواصل معنا عبر WhatsApp
-    </a>
-
+  <div id="loading">
+    ⏳ جارٍ تحميل المذيعين...
   </div>
 
-</section>
+  <div id="cards" class="cards"></div>
+
+</div>
 
 
-<!-- العروض -->
-<section class="offers">
-
-  <h2 class="section-title">
-    🎁 عروض وكالة الشايب
-  </h2>
-
-  <p class="section-subtitle">
-    المساعدة في تقفيل التارجت في حال عدم القدرة على التقفيل
-  </p>
-
-
-  <div class="offer-list">
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 4,500
-        </span>
-
-        <span class="diamonds">
-          💎 1,000 ماسة كحد أقصى
-        </span>
-      </div>
-    </div>
-
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 11,000
-        </span>
-
-        <span class="diamonds">
-          💎 1,500 ماسة كحد أقصى
-        </span>
-      </div>
-    </div>
-
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 25,500
-        </span>
-
-        <span class="diamonds">
-          💎 3,000 ماسة كحد أقصى
-        </span>
-      </div>
-    </div>
-
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 50,000
-        </span>
-
-        <span class="diamonds">
-          💎 5,000 ماسة كحد أقصى
-        </span>
-      </div>
-    </div>
-
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 80,000
-        </span>
-
-        <span class="diamonds">
-          💎 15,000 ماسة كحد أقصى
-        </span>
-      </div>
-    </div>
-
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 100,000
-        </span>
-
-        <span class="diamonds">
-          💎 20,000 ماسة
-        </span>
-      </div>
-    </div>
-
-
-    <div class="offer">
-      <div class="offer-top">
-        <span class="target">
-          🎯 تارجت 120,000
-        </span>
-
-        <span class="diamonds">
-          💎 25,000 ماسة كحد أقصى
-        </span>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- المذيعون -->
-<section class="broadcaster-section">
-
-  <h2 class="section-title">
-    👤 مذيعي وكالة الشايب
-  </h2>
-
-  <p>
-    تعرف على مذيعي الوكالة وحساباتهم على Likee
-  </p>
-
-  <a href="andix.html" class="btn broadcasters"
-     style="max-width:330px;margin:auto;">
-    مشاهدة المذيعين
-  </a>
-
-</section>
-
-
-<!-- من نحن -->
-<section class="about">
-
-  <div class="about-box">
-
-    <h2 class="section-title">
-      💗 عن وكالة الشايب
-    </h2>
-
-    <p>
-      وكالة الشايب تهدف إلى دعم مذيعي Likee
-      ومساعدتهم على تطوير نشاطهم وتحقيق أهدافهم.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- الفوتر -->
 <footer>
 
-  <p>🎤 وكالة الشايب | Shayeb Agency</p>
-
-  <p>جميع الحقوق محفوظة © 2026</p>
+  © 2026 Shayeb Agency  
+  <br>
+  جميع الحقوق محفوظة
 
 </footer>
+
+
+<script>
+
+  /* بيانات Supabase */
+
+  const SUPABASE_URL =
+    "https://hzcnkywuabugjebtwzmv.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  /* الصورة الافتراضية */
+
+  const placeholder =
+    "https://via.placeholder.com/600x700/151525/ffffff?text=Shayeb+Agency";
+
+
+  /* تحميل المذيعين */
+
+  async function loadBroadcasters() {
+
+    const loading =
+      document.getElementById("loading");
+
+    const cards =
+      document.getElementById("cards");
+
+    try {
+
+      const { data, error } =
+        await supabaseClient
+          .from("Shayeb agency")
+          .select("*")
+          .order("id", {
+            ascending: false
+          });
+
+
+      if (error) {
+
+        console.error(error);
+
+        loading.style.display = "none";
+
+        cards.innerHTML = `
+          <div class="error">
+            ❌ حدث خطأ أثناء تحميل بيانات المذيعين
+            <br><br>
+            ${error.message}
+          </div>
+        `;
+
+        return;
+      }
+
+
+      loading.style.display = "none";
+
+
+      if (!data || data.length === 0) {
+
+        cards.innerHTML = `
+          <div class="empty">
+            👤 لا يوجد مذيعون مضافون حالياً
+          </div>
+        `;
+
+        return;
+      }
+
+
+      cards.innerHTML = "";
+
+
+      data.forEach(broadcaster => {
+
+        const name =
+          broadcaster.name ||
+          "مذيع وكالة الشايب";
+
+
+        const target =
+          broadcaster.target ||
+          "غير محدد";
+
+
+        const hours =
+          broadcaster.hours ||
+          "غير محدد";
+
+
+        /*
+          مهم جداً:
+          اسم العمود الصحيح هو image_url
+        */
+
+        let image =
+          broadcaster.image_url || "";
+
+
+        /*
+          إذا كان image_url رابطاً كاملاً
+          نستخدمه مباشرة.
+
+          وإذا كان مجرد اسم ملف داخل Storage
+          نقوم بإنشاء الرابط تلقائياً.
+        */
+
+        if (
+          image &&
+          !image.startsWith("http")
+        ) {
+
+          const { data: publicData } =
+            supabaseClient.storage
+              .from("broadcaster-images")
+              .getPublicUrl(image);
+
+          if (publicData &&
+              publicData.publicUrl) {
+
+            image =
+              publicData.publicUrl;
+          }
+        }
+
+
+        if (!image) {
+          image = placeholder;
+        }
+
+
+        const likeeUrl =
+          broadcaster.likee_url ||
+          "#";
+
+
+        const card =
+          document.createElement("div");
+
+        card.className = "card";
+
+
+        card.innerHTML = `
+
+          <div class="image-wrapper">
+
+            <img
+              class="card-image"
+              src="${image}"
+              alt="${name}"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='${placeholder}'"
+            >
+
+          </div>
+
+
+          <div class="card-content">
+
+            <div class="name">
+              ${name}
+            </div>
+
+
+            <div class="info">
+
+              <div>
+                🎯
+                <strong>التارجت:</strong>
+                ${target}
+              </div>
+
+
+              <div>
+                ⏰
+                <strong>الساعات:</strong>
+                ${hours}
+              </div>
+
+            </div>
+
+
+            ${
+              likeeUrl !== "#"
+              ?
+              `
+              <a
+                class="likee-btn"
+                href="${likeeUrl}"
+                target="_blank"
+                rel="noopener"
+              >
+                🎥 مشاهدة على Likee
+              </a>
+              `
+              :
+              `
+              <div
+                class="likee-btn"
+                style="opacity:.5;"
+              >
+                🎥 رابط Likee غير متوفر
+              </div>
+              `
+            }
+
+          </div>
+
+        `;
+
+
+        cards.appendChild(card);
+
+      });
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      loading.style.display = "none";
+
+      cards.innerHTML = `
+        <div class="error">
+          ❌ حدث خطأ غير متوقع
+          <br><br>
+          حاول تحديث الصفحة.
+        </div>
+      `;
+
+    }
+
+  }
+
+
+  /* تشغيل */
+
+  loadBroadcasters();
+
+</script>
 
 </body>
 </html>
