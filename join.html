@@ -240,4 +240,498 @@ font-weight:bold;
 
 <a
 class="videoLink"
-href="
+href="https://l.likee.video/v/5WHaLU"
+target="_blank">
+
+▶️ مشاهدة فيديو الأوديشن
+
+</a>
+
+</div>
+
+<!-- خطوات الأوديشن -->
+
+<div class="card">
+
+<h2>📋 كيفية عمل الأوديشن</h2>
+
+<div class="step">
+
+<div class="number">1</div>
+
+<div>
+<strong>شاهد الفيديو</strong>
+
+<br>
+
+<span class="note">
+شاهد مثال الأوديشن قبل التسجيل.
+</span>
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="number">2</div>
+
+<div>
+<strong>جهز مكانًا مناسبًا</strong>
+
+<br>
+
+<span class="note">
+اختر مكانًا هادئًا وإضاءة جيدة وتأكد من وضوح الصوت والصورة.
+</span>
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="number">3</div>
+
+<div>
+<strong>سجل الأوديشن</strong>
+
+<br>
+
+<span class="note">
+عرّف بنفسك وقدم محتوى قصيرًا وواضحًا.
+</span>
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="number">4</div>
+
+<div>
+<strong>ارفع الفيديو وأرسل الطلب</strong>
+
+<br>
+
+<span class="note">
+اختر فيديو الأوديشن من هاتفك ثم اضغط على زر إرسال الأوديشن.
+</span>
+</div>
+
+</div>
+
+<div class="info">
+
+💡 <strong>نصيحة:</strong>
+
+اجعل الفيديو واضحًا، وتحدث بثقة وابتسامة، واختر مكانًا هادئًا أثناء التسجيل.
+
+</div>
+
+</div>
+
+<!-- نموذج الأوديشن -->
+
+<div class="card">
+
+<h2>📹 إرسال الأوديشن</h2>
+
+<label>
+الاسم الكامل
+</label>
+
+<input
+id="name"
+type="text"
+placeholder="اكتب اسمك الكامل">
+
+<label>
+رقم الهاتف
+</label>
+
+<input
+id="phone"
+type="tel"
+placeholder="مثال: 0673860283">
+
+<label>
+اسم المستخدم في Likee
+</label>
+
+<input
+id="likeeName"
+type="text"
+placeholder="اسم حسابك في Likee">
+
+<label>
+رابط حساب Likee
+</label>
+
+<input
+id="likeeUrl"
+type="url"
+placeholder="ضع رابط حسابك في Likee">
+
+<label>
+🎥 فيديو الأوديشن
+</label>
+
+<div class="filebox">
+
+<input
+id="auditionFile"
+type="file"
+accept="video/*">
+
+<p class="note">
+اختر فيديو الأوديشن من هاتفك.
+<br>
+الحد الأقصى للحجم: 100 ميغابايت
+</p>
+
+<video
+id="preview"
+class="preview"
+controls>
+</video>
+
+</div>
+
+<!-- زر الإرسال -->
+
+<button
+type="button"
+id="submitBtn"
+class="submit">
+
+📤 إرسال الأوديشن
+
+</button>
+
+<div
+id="status"
+class="status">
+</div>
+
+</div>
+
+<!-- واتساب -->
+
+<div class="card">
+
+<h2>💬 تواصل معنا</h2>
+
+<p class="note">
+
+إذا كان لديك أي سؤال حول الأوديشن أو الانضمام إلى وكالة الشايب، يمكنك التواصل معنا مباشرة.
+
+</p>
+
+<a
+class="whatsapp"
+href="https://wa.me/213673860283"
+target="_blank">
+
+💬 تواصل معنا عبر WhatsApp
+
+</a>
+
+</div>
+
+<a
+class="back"
+href="index.html">
+
+← العودة إلى الموقع الرئيسي
+
+</a>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+'https://hzcnkywuabugjebtwzmv.supabase.co';
+
+const SUPABASE_ANON_KEY =
+'sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP';
+
+const client =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+);
+
+
+/* معاينة الفيديو */
+
+document
+.getElementById('auditionFile')
+.addEventListener('change', function(){
+
+const file = this.files[0];
+
+const preview =
+document.getElementById('preview');
+
+if(!file){
+
+preview.style.display='none';
+
+return;
+
+}
+
+preview.src =
+URL.createObjectURL(file);
+
+preview.style.display='block';
+
+});
+
+
+/* زر الإرسال */
+
+document
+.getElementById('submitBtn')
+.addEventListener('click', submitAudition);
+
+
+/* إرسال الأوديشن */
+
+async function submitAudition(){
+
+const name =
+document.getElementById('name').value.trim();
+
+const phone =
+document.getElementById('phone').value.trim();
+
+const likeeName =
+document.getElementById('likeeName').value.trim();
+
+const likeeUrl =
+document.getElementById('likeeUrl').value.trim();
+
+const file =
+document.getElementById('auditionFile').files[0];
+
+const status =
+document.getElementById('status');
+
+const button =
+document.getElementById('submitBtn');
+
+
+status.className='status';
+
+status.style.display='none';
+
+
+if(!name){
+
+showError('يرجى كتابة الاسم الكامل.');
+
+return;
+
+}
+
+
+if(!phone){
+
+showError('يرجى كتابة رقم الهاتف.');
+
+return;
+
+}
+
+
+if(!likeeName){
+
+showError('يرجى كتابة اسم المستخدم في Likee.');
+
+return;
+
+}
+
+
+if(!file){
+
+showError('يرجى اختيار فيديو الأوديشن.');
+
+return;
+
+}
+
+
+if(file.size > 100 * 1024 * 1024){
+
+showError(
+'حجم الفيديو كبير جدًا. الحد الأقصى 100 ميغابايت.'
+);
+
+return;
+
+}
+
+
+button.disabled=true;
+
+button.textContent=
+'⏳ جاري إرسال الأوديشن...';
+
+
+try{
+
+/* إنشاء اسم الملف */
+
+const extension =
+file.name.split('.').pop();
+
+const fileName =
+'auditions/' +
+Date.now() +
+'-' +
+Math.random()
+.toString(36)
+.substring(2) +
+'.' +
+extension;
+
+
+/* رفع الفيديو */
+
+const upload =
+await client
+.storage
+.from('audition-videos')
+.upload(
+fileName,
+file,
+{
+cacheControl:'3600',
+upsert:false
+}
+);
+
+
+if(upload.error){
+
+throw upload.error;
+
+}
+
+
+/* الحصول على رابط الفيديو */
+
+const publicUrl =
+client
+.storage
+.from('audition-videos')
+.getPublicUrl(fileName)
+.data
+.publicUrl;
+
+
+/* حفظ الطلب */
+
+const result =
+await client
+.from('audition_requests')
+.insert({
+
+name:name,
+
+phone:phone,
+
+likee_name:likeeName,
+
+likee_url:likeeUrl,
+
+audition_url:publicUrl,
+
+status:'pending'
+
+});
+
+
+if(result.error){
+
+throw result.error;
+
+}
+
+
+/* نجاح */
+
+status.className=
+'status success';
+
+status.textContent=
+'🎉 تم إرسال الأوديشن بنجاح! سيتم مراجعة طلبك والتواصل معك.';
+
+status.style.display='block';
+
+
+/* تنظيف البيانات */
+
+document.getElementById('name').value='';
+
+document.getElementById('phone').value='';
+
+document.getElementById('likeeName').value='';
+
+document.getElementById('likeeUrl').value='';
+
+document.getElementById('auditionFile').value='';
+
+document.getElementById('preview').src='';
+
+document.getElementById('preview').style.display='none';
+
+
+}catch(error){
+
+console.error(error);
+
+showError(
+'حدث خطأ أثناء إرسال الطلب: ' +
+error.message
+);
+
+
+}finally{
+
+button.disabled=false;
+
+button.textContent=
+'📤 إرسال الأوديشن';
+
+}
+
+}
+
+
+/* رسالة الخطأ */
+
+function showError(message){
+
+const status =
+document.getElementById('status');
+
+status.className=
+'status error';
+
+status.textContent=
+'❌ ' + message;
+
+status.style.display='block';
+
+}
+
+</script>
+
+</body>
+
+</html>
