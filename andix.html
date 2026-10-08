@@ -1,524 +1,402 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>مذيعو وكالة الشايب | Shayeb Agency</title>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: Arial, Tahoma, sans-serif;
-      background: linear-gradient(135deg, #fff5f8, #fce4ec);
-      color: #333;
+      background: linear-gradient(135deg, #10091f, #24123d, #10091f);
+      color: #fff;
       min-height: 100vh;
     }
 
-    /* الهيدر */
     header {
-      background: linear-gradient(135deg, #d81b60, #880e4f);
-      color: white;
-      padding: 35px 20px;
       text-align: center;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 30px 15px;
+      background: linear-gradient(135deg, #35145b, #160d2b);
+      border-bottom: 2px solid #d9ad53;
     }
 
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
+    header h1 { color: #f5d58a; font-size: 30px; margin-bottom: 10px; }
+    header p { color: #eee1ff; line-height: 1.8; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 15px;
+      background: #170d2a;
     }
 
-    header p {
-      font-size: 16px;
-      opacity: 0.95;
+    nav a, .btn {
+      text-decoration: none;
+      color: #1c102a;
+      background: linear-gradient(135deg, #f5d58a, #c99838);
+      padding: 11px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
     }
 
-    /* الحاوية */
-    .container {
-      width: 92%;
-      max-width: 1100px;
-      margin: 40px auto;
-    }
+    .container { width: 92%; max-width: 1150px; margin: 35px auto; }
 
-    /* العنوان */
-    .page-title {
+    .section-title {
       text-align: center;
-      margin-bottom: 35px;
+      color: #f5d58a;
+      font-size: 27px;
+      margin: 35px 0 12px;
     }
 
-    .page-title h2 {
-      color: #ad1457;
-      font-size: 30px;
-      margin-bottom: 10px;
+    .section-description {
+      text-align: center;
+      color: #d7c9e8;
+      line-height: 1.9;
+      margin-bottom: 25px;
     }
 
-    .page-title p {
-      color: #666;
-      font-size: 16px;
-    }
-
-    /* شبكة المذيعين */
-    #broadcasters {
+    #offers, #broadcasters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
     }
 
-    /* البطاقة */
-    .card {
-      background: white;
-      border-radius: 22px;
+    .offer, .card, .empty {
+      background: linear-gradient(145deg, #291744, #1b102d);
+      border: 1px solid #71552d;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
-      transition: 0.3s;
+      box-shadow: 0 8px 25px #0004;
     }
 
-    .card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+    .offer {
+      padding: 23px 18px;
+      text-align: center;
     }
 
-    /* الصورة */
+    .offer h3 { color: #f5d58a; font-size: 23px; margin-bottom: 14px; }
+    .offer p { color: #f4edf9; line-height: 1.9; }
+    .offer .price { color: #f5d58a; font-size: 25px; font-weight: bold; margin: 10px 0; }
+
+    .card { transition: transform .25s; }
+    .card:hover { transform: translateY(-5px); }
+
     .card-image {
+      display: block;
       width: 100%;
       height: 260px;
       object-fit: cover;
-      display: block;
-      background: #f8bbd0;
+      background: #291744;
     }
 
-    /* محتوى البطاقة */
-    .card-content {
-      padding: 22px;
-      text-align: center;
-    }
-
-    .card-content h3 {
-      color: #ad1457;
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
+    .card-content { padding: 20px; text-align: center; }
+    .card-content h3 { color: #f5d58a; font-size: 22px; margin-bottom: 15px; }
 
     .info {
-      background: #fff5f8;
+      background: #170d2a;
+      color: #eee1ff;
+      padding: 12px;
       border-radius: 12px;
-      padding: 10px;
-      margin: 8px 0;
-      color: #555;
-      font-size: 15px;
+      margin: 10px 0;
+      overflow-wrap: anywhere;
     }
 
-    .info strong {
-      color: #880e4f;
-    }
+    .info strong { color: #f5d58a; }
 
-    /* زر Likee */
     .likee-btn {
       display: block;
+      margin-top: 15px;
       text-decoration: none;
-      background: linear-gradient(135deg, #e91e63, #ad1457);
-      color: white;
+      background: #f5d58a;
+      color: #1c102a;
       padding: 12px;
       border-radius: 25px;
-      margin-top: 18px;
       font-weight: bold;
-      transition: 0.3s;
     }
 
-    .likee-btn:hover {
-      transform: scale(1.03);
-    }
-
-    /* رسالة التحميل */
-    .loading {
-      text-align: center;
-      padding: 50px 20px;
-      color: #ad1457;
-      font-size: 20px;
-    }
-
-    /* في حالة عدم وجود مذيعين */
-    .empty {
-      text-align: center;
-      background: white;
-      padding: 40px 20px;
-      border-radius: 20px;
-      color: #777;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
-    }
-
-    .empty-icon {
-      font-size: 50px;
-      margin-bottom: 15px;
-    }
-
-    /* زر الرجوع */
-    .back-section {
-      text-align: center;
-      margin: 45px 0;
-    }
-
-    .back-btn {
-      display: inline-block;
-      text-decoration: none;
-      background: #4a1230;
+    .password-btn {
+      width: 100%;
+      margin-top: 12px;
+      background: linear-gradient(135deg, #a879df, #7042a8);
       color: white;
-      padding: 13px 28px;
-      border-radius: 30px;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
       font-weight: bold;
-      transition: 0.3s;
+      cursor: pointer;
     }
 
-    .back-btn:hover {
-      transform: translateY(-3px);
-    }
+    .stats { display: none; margin-top: 12px; }
+    .loading, .empty { text-align: center; padding: 25px; color: #f5d58a; }
+    .empty { grid-column: 1 / -1; line-height: 2; }
 
-    /* الفوتر */
+    .back-section { text-align: center; margin: 40px 0; }
+
     footer {
-      background: #4a1230;
-      color: white;
       text-align: center;
       padding: 25px 15px;
-      margin-top: 50px;
+      background: #10091f;
+      border-top: 1px solid #71552d;
+      color: #e7d9f4;
+      line-height: 2;
     }
 
-    footer p {
-      margin: 5px;
-      font-size: 14px;
-    }
-
-    /* الهاتف */
     @media (max-width: 600px) {
-
-      header h1 {
-        font-size: 27px;
-      }
-
-      .page-title h2 {
-        font-size: 25px;
-      }
-
-      #broadcasters {
-        grid-template-columns: 1fr;
-      }
-
-      .card-image {
-        height: 280px;
-      }
+      header h1 { font-size: 25px; }
+      .section-title { font-size: 23px; }
+      .card-image { height: 280px; }
     }
   </style>
 </head>
 
-
 <body>
-
-  <!-- الهيدر -->
   <header>
-
     <h1>🎤 وكالة الشايب</h1>
-
-    <p>
-      مذيعو وكالة الشايب على Likee
-    </p>
-
+    <p>مذيعو وكالة الشايب على Likee</p>
+    <p>التميز والثقة والنجاح ✨</p>
   </header>
 
+  <nav>
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="andix.html">🎤 المذيعون</a>
+    <a href="join.html">🤝 الانضمام للوكالة</a>
+  </nav>
 
-  <main>
+  <main class="container">
 
-    <div class="container">
+    <section>
+      <h2 class="section-title">💎 عروض وكالة الشايب</h2>
+      <p class="section-description">
+        تعرّف على عروض الوكالة والمساعدات حسب كل عرض.
+      </p>
 
-      <!-- عنوان الصفحة -->
-      <div class="page-title">
-
-        <h2>
-          ⭐ مذيعو الوكالة
-        </h2>
-
-        <p>
-          تعرف على مذيعي وكالة الشايب
-        </p>
-
+      <div id="offers">
+        <div class="loading">⏳ جاري عرض العروض...</div>
       </div>
+    </section>
 
+    <section>
+      <h2 class="section-title">⭐ مذيعو الوكالة</h2>
+      <p class="section-description">
+        اكتشف مذيعينا وتابع صفحاتهم على Likee.
+        🔐 الهدف وساعات البث لا تظهر إلا بعد إدخال كلمة المرور الصحيحة.
+      </p>
 
-      <!-- المذيعون -->
       <div id="broadcasters">
-
-        <div class="loading">
-          ⏳ جاري تحميل المذيعين...
-        </div>
-
+        <div class="loading">⏳ جاري تحميل المذيعين...</div>
       </div>
+    </section>
 
-
-      <!-- العودة -->
-      <div class="back-section">
-
-        <a
-          href="index.html"
-          class="back-btn">
-          🏠 العودة إلى الصفحة الرئيسية
-        </a>
-
-      </div>
-
+    <div class="back-section">
+      <a class="btn" href="index.html">🏠 العودة إلى الصفحة الرئيسية</a>
+      <a class="btn" href="join.html">🤝 انضم إلى الوكالة</a>
     </div>
-
   </main>
 
-
-  <!-- الفوتر -->
   <footer>
-
-    <p>
-      🎤 وكالة الشايب | Shayeb Agency
-    </p>
-
-    <p>
-      جميع الحقوق محفوظة © 2026
-    </p>
-
+    <p>🎤 وكالة الشايب | Shayeb Agency</p>
+    <p>جميع الحقوق محفوظة © 2026</p>
   </footer>
 
-
   <script>
-
-    /* بيانات Supabase */
-
     const SUPABASE_URL =
       "https://hzcnkywuabugjebtwzmv.supabase.co";
 
     const SUPABASE_KEY =
       "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
 
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+    // العروض
+    const offers = [
+      { price: "4,500", help: "مساعدة تصل إلى 1,000 ماسة" },
+      { price: "11,000", help: "مساعدة تصل إلى 1,500 ماسة" },
+      { price: "25,500", help: "مساعدة تصل إلى 3,000 ماسة" },
+      { price: "50,000", help: "مساعدة تصل إلى 5,000 ماسة" },
+      { price: "80,000", help: "مساعدة تصل إلى 15,000 ماسة" },
+      { price: "100,000", help: "مساعدة تصل إلى 20,000 ماسة" },
+      { price: "120,000", help: "مساعدة تصل إلى 25,000 ماسة" }
+    ];
 
+    function showOffers() {
+      const container = document.getElementById("offers");
 
-    /* تحميل المذيعين */
+      container.innerHTML = offers.map((offer, index) => `
+        <article class="offer">
+          <h3>🎁 العرض ${index + 1}</h3>
+          <div class="price">${offer.price}</div>
+          <p>${offer.help}</p>
+        </article>
+      `).join("");
+    }
 
+    // حماية النصوص عند عرضها في الصفحة
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, function (char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[char];
+      });
+    }
+
+    // تحميل المذيعين دون جلب الهدف أو الساعات أو كلمات المرور
     async function loadBroadcasters() {
-
-      const container =
-        document.getElementById("broadcasters");
+      const container = document.getElementById("broadcasters");
 
       try {
+        const { data, error } = await db
+          .from("Shayeb agency")
+          .select("id, image_url, likee_url, name")
+          .order("id", { ascending: false });
 
-        const { data, error } =
-          await supabaseClient
-            .from("Shayeb agency")
-            .select("*")
-            .order("id", { ascending: false });
-
-
-        if (error) {
-
-          console.error(error);
-
-          container.innerHTML = `
-            <div class="empty">
-
-              <div class="empty-icon">
-                ⚠️
-              </div>
-
-              <h3>
-                حدث خطأ أثناء تحميل المذيعين
-              </h3>
-
-              <p>
-                يرجى المحاولة مرة أخرى لاحقًا.
-              </p>
-
-            </div>
-          `;
-
-          return;
-        }
-
-
-        /* لا يوجد مذيعون */
+        if (error) throw error;
 
         if (!data || data.length === 0) {
-
           container.innerHTML = `
             <div class="empty">
-
-              <div class="empty-icon">
-                🎤
-              </div>
-
-              <h3>
-                لا يوجد مذيعون حاليًا
-              </h3>
-
-              <p>
-                سيتم عرض المذيعين هنا عند إضافتهم إلى الوكالة.
-              </p>
-
+              🎤 لا يوجد مذيعون حاليًا.
             </div>
           `;
-
           return;
         }
-
-
-        /* إنشاء البطاقات */
 
         container.innerHTML = "";
 
-
-        data.forEach(function (broadcaster) {
-
-          const card =
-            document.createElement("div");
-
+        data.forEach((broadcaster) => {
+          const card = document.createElement("article");
           card.className = "card";
 
+          const name = escapeHTML(broadcaster.name || "مذيع الوكالة");
+          const image = escapeHTML(broadcaster.image_url || "");
+          const likeeUrl = broadcaster.likee_url || "";
 
-          /* البيانات */
-
-          const name =
-            broadcaster.name || "مذيع الوكالة";
-
-
-          const target =
-            broadcaster.target || "غير محدد";
-
-
-          const hours =
-            broadcaster.hours || "غير محدد";
-
-
-          const image =
-            broadcaster.image ||
-            "https://via.placeholder.com/600x500?text=Shayeb+Agency";
-
-
-          const likeeUrl =
-            broadcaster.likee_url || "#";
-
+          const safeLink = /^https?:\/\//i.test(likeeUrl)
+            ? escapeHTML(likeeUrl)
+            : "";
 
           card.innerHTML = `
-
-            <img
-              class="card-image"
-              src="${image}"
-              alt="${name}"
-              onerror="this.src='https://via.placeholder.com/600x500?text=Shayeb+Agency'"
-            >
-
+            <img class="card-image"
+                 src="${image || "https://placehold.co/600x500/291744/f5d58a?text=Shayeb+Agency"}"
+                 alt="${name}"
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x500/291744/f5d58a?text=Shayeb+Agency'">
 
             <div class="card-content">
-
-              <h3>
-                🎤 ${name}
-              </h3>
-
+              <h3>🎤 ${name}</h3>
 
               <div class="info">
-
-                🎯
-                <strong>
-                  الهدف:
-                </strong>
-
-                ${target}
-
+                🔒 الهدف وساعات البث مخفية
               </div>
 
+              <button class="password-btn" type="button">
+                🔐 عرض الهدف وساعات البث
+              </button>
 
-              <div class="info">
+              <div class="stats"></div>
 
-                ⏰
-                <strong>
-                  ساعات البث:
-                </strong>
-
-                ${hours}
-
-              </div>
-
-
-              ${
-                likeeUrl !== "#"
-                ?
-                `
-                <a
-                  class="likee-btn"
-                  href="${likeeUrl}"
-                  target="_blank"
-                  rel="noopener noreferrer">
-
+              ${safeLink ? `
+                <a class="likee-btn"
+                   href="${safeLink}"
+                   target="_blank"
+                   rel="noopener noreferrer">
                   🎬 مشاهدة صفحة Likee
-
                 </a>
-                `
-                :
-                ""
-              }
-
+              ` : ""}
             </div>
-
           `;
 
+          const button = card.querySelector(".password-btn");
+          const stats = card.querySelector(".stats");
+
+          button.addEventListener("click", async () => {
+            const password = prompt("أدخلي كلمة المرور الخاصة بهذا المذيع:");
+
+            if (password === null) return;
+
+            if (!password.trim()) {
+              alert("يرجى إدخال كلمة المرور.");
+              return;
+            }
+
+            button.disabled = true;
+            button.textContent = "⏳ جارٍ التحقق...";
+
+            try {
+              const { data, error } = await db.rpc(
+                "get_broadcaster_stats",
+                {
+                  p_id: broadcaster.id,
+                  p_password: password
+                }
+              );
+
+              if (error) throw error;
+
+              const result = Array.isArray(data) ? data[0] : data;
+
+              if (!result) {
+                stats.style.display = "block";
+                stats.textContent = "❌ كلمة المرور غير صحيحة.";
+                return;
+              }
+
+              stats.innerHTML = `
+                <div class="info">
+                  🎯 <strong>الهدف:</strong>
+                  ${escapeHTML(result.target || "غير محدد")}
+                </div>
+                <div class="info">
+                  ⏰ <strong>ساعات البث:</strong>
+                  ${escapeHTML(result.hours || "غير محدد")}
+                </div>
+              `;
+
+              stats.style.display = "block";
+              button.textContent = "✅ تم التحقق";
+            } catch (error) {
+              console.error(error);
+              stats.style.display = "block";
+              stats.textContent =
+                "⚠️ تعذر التحقق. تأكدي من إعداد دالة التحقق في قاعدة البيانات.";
+            } finally {
+              button.disabled = false;
+
+              if (button.textContent === "⏳ جارٍ التحقق...") {
+                button.textContent = "🔐 إعادة المحاولة";
+              }
+            }
+          });
 
           container.appendChild(card);
-
         });
-
-      }
-
-      catch (error) {
-
+      } catch (error) {
         console.error(error);
-
         container.innerHTML = `
-
           <div class="empty">
-
-            <div class="empty-icon">
-              ⚠️
-            </div>
-
-            <h3>
-              حدث خطأ
-            </h3>
-
-            <p>
-              تعذر تحميل البيانات.
-            </p>
-
+            ⚠️ تعذر تحميل المذيعين.
+            <br>
+            تحققي من اتصال قاعدة البيانات وصلاحيات القراءة.
           </div>
-
         `;
-
       }
-
     }
 
-
-    /* تشغيل الصفحة */
-
+    showOffers();
     loadBroadcasters();
-
   </script>
-
 </body>
-
 </html>
