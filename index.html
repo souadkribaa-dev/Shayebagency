@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
   <title>وكالة الشايب | Shayeb Agency</title>
 
   <meta name="description"
-        content="وكالة الشايب لدعم مذيعي Likee ومساعدتهم على تحقيق التارجت وتطوير أدائهم.">
+        content="وكالة الشايب لدعم مذيعي Likee ومساعدتهم على تحقيق التارجت وتطوير أدائهم">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -37,31 +39,41 @@
       color: inherit;
     }
 
-    /* ===== HEADER ===== */
+
+    /* ================= HEADER ================= */
 
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
+
       background: rgba(8, 6, 18, 0.94);
+
       backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(218, 174, 70, 0.25);
+
+      border-bottom:
+        1px solid rgba(218, 174, 70, 0.25);
     }
 
     .nav {
       max-width: 1150px;
       margin: auto;
+
       padding: 14px 20px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 20px;
     }
 
     .logo {
       font-size: 22px;
       font-weight: bold;
+
       color: #e7bd58;
+
       white-space: nowrap;
     }
 
@@ -71,13 +83,14 @@
 
     nav {
       display: flex;
-      gap: 22px;
       align-items: center;
+      gap: 22px;
     }
 
     nav a {
       color: #eee;
       font-size: 15px;
+
       transition: .3s;
     }
 
@@ -86,23 +99,33 @@
     }
 
     .nav-button {
-      background: linear-gradient(135deg, #e7bd58, #b77b18);
+      background:
+        linear-gradient(135deg, #e7bd58, #b77b18);
+
       color: #140c20;
+
       padding: 9px 17px;
+
       border-radius: 25px;
+
       font-weight: bold;
     }
 
-    /* ===== HERO ===== */
+
+    /* ================= HERO ================= */
 
     .hero {
       max-width: 1150px;
       margin: auto;
+
       min-height: 570px;
+
       padding: 80px 20px 60px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 50px;
     }
 
@@ -112,18 +135,29 @@
 
     .badge {
       display: inline-block;
-      border: 1px solid rgba(231,189,88,.4);
-      background: rgba(231,189,88,.08);
+
+      border:
+        1px solid rgba(231,189,88,.4);
+
+      background:
+        rgba(231,189,88,.08);
+
       color: #e7bd58;
+
       padding: 7px 16px;
+
       border-radius: 30px;
+
       margin-bottom: 20px;
+
       font-size: 14px;
     }
 
     .hero h1 {
       font-size: clamp(40px, 7vw, 72px);
+
       line-height: 1.15;
+
       margin-bottom: 20px;
     }
 
@@ -133,32 +167,47 @@
 
     .hero p {
       color: #cfc9dc;
+
       font-size: 18px;
+
       max-width: 650px;
+
       margin-bottom: 30px;
     }
 
     .hero-buttons {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 14px;
     }
 
     .btn {
       display: inline-flex;
+
       align-items: center;
       justify-content: center;
+
       padding: 13px 24px;
+
       border-radius: 30px;
+
       font-weight: bold;
+
       transition: .3s;
+
       cursor: pointer;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #e7bd58, #b77b18);
+      background:
+        linear-gradient(135deg, #e7bd58, #b77b18);
+
       color: #130b1c;
-      box-shadow: 0 10px 30px rgba(231,189,88,.15);
+
+      box-shadow:
+        0 10px 30px rgba(231,189,88,.15);
     }
 
     .btn-primary:hover {
@@ -166,40 +215,64 @@
     }
 
     .btn-secondary {
-      border: 1px solid rgba(231,189,88,.45);
+      border:
+        1px solid rgba(231,189,88,.45);
+
       color: #e7bd58;
-      background: rgba(255,255,255,.03);
+
+      background:
+        rgba(255,255,255,.03);
     }
 
     .btn-secondary:hover {
-      background: rgba(231,189,88,.1);
+      background:
+        rgba(231,189,88,.1);
     }
+
+
+    /* ================= HERO CARD ================= */
 
     .hero-card {
       width: 340px;
       min-height: 340px;
+
       border-radius: 35px;
-      border: 1px solid rgba(231,189,88,.25);
+
+      border:
+        1px solid rgba(231,189,88,.25);
+
       background:
-        linear-gradient(145deg, rgba(91,42,133,.45), rgba(15,9,30,.8));
+        linear-gradient(
+          145deg,
+          rgba(91,42,133,.45),
+          rgba(15,9,30,.8)
+        );
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       text-align: center;
-      box-shadow: 0 25px 70px rgba(0,0,0,.4);
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.4);
     }
 
     .hero-icon {
       font-size: 100px;
+
       margin-bottom: 10px;
     }
 
     .hero-card h2 {
       color: #e7bd58;
+
       font-size: 28px;
     }
 
-    /* ===== GENERAL ===== */
+
+    /* ================= GENERAL ================= */
 
     section {
       padding: 75px 20px;
@@ -207,16 +280,19 @@
 
     .container {
       max-width: 1150px;
+
       margin: auto;
     }
 
     .section-title {
       text-align: center;
+
       margin-bottom: 45px;
     }
 
     .section-title h2 {
       font-size: 36px;
+
       margin-bottom: 10px;
     }
 
@@ -228,153 +304,283 @@
       color: #aaa3b7;
     }
 
-    /* ===== OFFERS ===== */
+
+    /* ================= OFFERS ================= */
 
     .offers-section {
-      background: rgba(255,255,255,.015);
-      border-top: 1px solid rgba(255,255,255,.04);
-      border-bottom: 1px solid rgba(255,255,255,.04);
+      background:
+        rgba(255,255,255,.015);
+
+      border-top:
+        1px solid rgba(255,255,255,.04);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.04);
     }
 
     .offers {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 20px;
     }
 
     .offer {
       background:
-        linear-gradient(145deg, rgba(62,31,93,.55), rgba(15,10,27,.85));
-      border: 1px solid rgba(231,189,88,.18);
-      border-radius: 22px;
-      padding: 28px 22px;
-      text-align: center;
-      transition: .3s;
-      position: relative;
-      overflow: hidden;
-    }
+        linear-gradient(
+          145deg,
+          rgba(62,31,93,.55),
+          rgba(15,10,27,.85)
+        );
 
-    .offer::before {
-      content: "";
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background: rgba(231,189,88,.08);
-      border-radius: 50%;
-      top: -50px;
-      left: -50px;
+      border:
+        1px solid rgba(231,189,88,.18);
+
+      border-radius: 22px;
+
+      padding: 28px 22px;
+
+      text-align: center;
+
+      transition: .3s;
+
+      position: relative;
+
+      overflow: hidden;
     }
 
     .offer:hover {
       transform: translateY(-6px);
-      border-color: rgba(231,189,88,.5);
+
+      border-color:
+        rgba(231,189,88,.5);
     }
 
     .offer-icon {
       font-size: 32px;
+
       margin-bottom: 10px;
     }
 
     .offer h3 {
       color: #e7bd58;
+
       margin-bottom: 10px;
+
       font-size: 22px;
     }
 
     .offer .target {
       font-size: 25px;
+
       font-weight: bold;
+
       margin: 10px 0;
     }
 
     .offer p {
       color: #bdb6c9;
+
       font-size: 14px;
     }
 
     .special-offer {
       grid-column: span 3;
+
       background:
-        linear-gradient(135deg, rgba(107,53,151,.4), rgba(35,19,59,.8));
+        linear-gradient(
+          135deg,
+          rgba(107,53,151,.4),
+          rgba(35,19,59,.8)
+        );
     }
 
-    /* ===== FEATURES ===== */
+
+    /* ================= FEATURES ================= */
 
     .features {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
       gap: 18px;
     }
 
     .feature {
       text-align: center;
+
       padding: 30px 18px;
+
       border-radius: 20px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.07);
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid rgba(255,255,255,.07);
     }
 
     .feature-icon {
       font-size: 38px;
+
       margin-bottom: 15px;
     }
 
     .feature h3 {
       color: #e7bd58;
+
       margin-bottom: 8px;
     }
 
     .feature p {
       color: #aaa3b7;
+
       font-size: 14px;
     }
 
-    /* ===== BROADCASTERS ===== */
 
-    .broadcasters-box {
-      text-align: center;
+    /* ================= BROADCASTERS ================= */
+
+    .broadcasters-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 22px;
+    }
+
+    .broadcaster-card {
       background:
-        linear-gradient(135deg, rgba(53,25,80,.55), rgba(16,10,28,.9));
-      border: 1px solid rgba(231,189,88,.2);
-      border-radius: 30px;
-      padding: 55px 25px;
+        linear-gradient(
+          145deg,
+          rgba(62,31,93,.65),
+          rgba(15,10,27,.9)
+        );
+
+      border:
+        1px solid rgba(231,189,88,.22);
+
+      border-radius: 25px;
+
+      padding: 20px;
+
+      text-align: center;
+
+      transition: .3s;
+
+      overflow: hidden;
     }
 
-    .likee-symbol {
-      font-size: 65px;
-      margin-bottom: 15px;
+    .broadcaster-card:hover {
+      transform: translateY(-7px);
+
+      border-color:
+        rgba(231,189,88,.65);
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
     }
 
-    .broadcasters-box h2 {
-      font-size: 32px;
-      margin-bottom: 12px;
+    .broadcaster-image {
+      width: 130px;
+      height: 130px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border:
+        3px solid #e7bd58;
+
+      margin: 5px auto 15px;
+
+      display: block;
     }
 
-    .broadcasters-box p {
-      color: #bcb5c8;
-      max-width: 650px;
-      margin: 0 auto 25px;
+    .broadcaster-card h3 {
+      color: #e7bd58;
+
+      font-size: 21px;
+
+      margin-bottom: 8px;
     }
 
-    /* ===== JOIN ===== */
+    .broadcaster-info {
+      color: #aaa3b7;
+
+      font-size: 14px;
+
+      margin: 5px 0;
+    }
+
+    .likee-btn {
+      display: inline-block;
+
+      margin-top: 15px;
+
+      padding: 9px 20px;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #e7bd58,
+          #b77b18
+        );
+
+      color: #130b1c;
+
+      font-weight: bold;
+    }
+
+    .loading {
+      grid-column: 1 / -1;
+
+      text-align: center;
+
+      color: #aaa3b7;
+
+      padding: 30px;
+    }
+
+
+    /* ================= JOIN ================= */
 
     .join-section {
       background:
-        radial-gradient(circle at center, rgba(105,45,145,.25), transparent 60%);
+        radial-gradient(
+          circle at center,
+          rgba(105,45,145,.25),
+          transparent 60%
+        );
     }
 
     .join-card {
       max-width: 850px;
+
       margin: auto;
+
       padding: 50px 30px;
+
       text-align: center;
+
       border-radius: 30px;
-      border: 1px solid rgba(231,189,88,.3);
-      background: rgba(255,255,255,.035);
+
+      border:
+        1px solid rgba(231,189,88,.3);
+
+      background:
+        rgba(255,255,255,.035);
     }
 
     .join-card h2 {
       font-size: 36px;
+
       margin-bottom: 15px;
     }
 
@@ -384,18 +590,28 @@
 
     .join-card p {
       color: #bcb5c8;
+
       margin-bottom: 28px;
     }
 
-    /* ===== WHATSAPP ===== */
+
+    /* ================= WHATSAPP ================= */
 
     .whatsapp {
       max-width: 700px;
+
       margin: 35px auto 0;
+
       padding: 22px;
+
       border-radius: 20px;
-      background: rgba(37,211,102,.06);
-      border: 1px solid rgba(37,211,102,.25);
+
+      background:
+        rgba(37,211,102,.06);
+
+      border:
+        1px solid rgba(37,211,102,.25);
+
       text-align: center;
     }
 
@@ -405,24 +621,37 @@
 
     .whatsapp p {
       margin-bottom: 15px;
+
+      color: #bcb5c8;
     }
 
     .whatsapp a {
       display: inline-block;
+
       padding: 11px 22px;
+
       border-radius: 25px;
+
       background: #25d366;
+
       color: #fff;
+
       font-weight: bold;
     }
 
-    /* ===== FOOTER ===== */
+
+    /* ================= FOOTER ================= */
 
     footer {
       padding: 35px 20px;
+
       text-align: center;
-      border-top: 1px solid rgba(255,255,255,.06);
+
+      border-top:
+        1px solid rgba(255,255,255,.06);
+
       color: #8f8999;
+
       font-size: 14px;
     }
 
@@ -430,7 +659,8 @@
       color: #e7bd58;
     }
 
-    /* ===== MOBILE ===== */
+
+    /* ================= TABLET ================= */
 
     @media (max-width: 900px) {
 
@@ -444,7 +674,9 @@
 
       .hero {
         flex-direction: column;
+
         text-align: center;
+
         padding-top: 60px;
       }
 
@@ -459,11 +691,13 @@
 
       .hero-card {
         width: 100%;
+
         max-width: 340px;
       }
 
       .offers {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
       .special-offer {
@@ -471,9 +705,18 @@
       }
 
       .features {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .broadcasters-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
       }
     }
+
+
+    /* ================= MOBILE ================= */
 
     @media (max-width: 600px) {
 
@@ -487,12 +730,15 @@
 
       .nav-button {
         padding: 8px 12px;
+
         font-size: 13px;
       }
 
       .hero {
         min-height: auto;
-        padding: 55px 15px 45px;
+
+        padding:
+          55px 15px 45px;
       }
 
       .hero h1 {
@@ -523,6 +769,10 @@
         grid-template-columns: 1fr;
       }
 
+      .broadcasters-grid {
+        grid-template-columns: 1fr;
+      }
+
       .join-card {
         padding: 35px 20px;
       }
@@ -539,14 +789,19 @@
         width: 100%;
       }
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- ===== HEADER ===== -->
+
+  <!-- ================= HEADER ================= -->
 
   <header>
+
     <div class="nav">
 
       <a href="index.html" class="logo">
@@ -554,17 +809,35 @@
       </a>
 
       <nav>
-        <a href="#offers">العروض</a>
-        <a href="#features">مميزاتنا</a>
-        <a href="#broadcasters">مذيعي الوكالة</a>
-        <a href="andix.html" class="nav-button">🎤 المذيعين</a>
+
+        <a href="#offers">
+          العروض
+        </a>
+
+        <a href="#features">
+          مميزاتنا
+        </a>
+
+        <a href="#broadcasters">
+          مذيعي الوكالة
+        </a>
+
+        <a
+          href="andix.html"
+          class="nav-button"
+        >
+          🎤 المذيعين
+        </a>
+
       </nav>
 
     </div>
+
   </header>
 
 
-  <!-- ===== HERO ===== -->
+
+  <!-- ================= HERO ================= -->
 
   <section class="hero">
 
@@ -585,11 +858,17 @@
 
       <div class="hero-buttons">
 
-        <a href="join.html" class="btn btn-primary">
+        <a
+          href="join.html"
+          class="btn btn-primary"
+        >
           🎤 انضم إلى الوكالة
         </a>
 
-        <a href="andix.html" class="btn btn-secondary">
+        <a
+          href="andix.html"
+          class="btn btn-secondary"
+        >
           👑 شاهد مذيعي الوكالة
         </a>
 
@@ -602,9 +881,13 @@
 
       <div>
 
-        <div class="hero-icon">🎤</div>
+        <div class="hero-icon">
+          🎤
+        </div>
 
-        <h2>Shayeb Agency</h2>
+        <h2>
+          Shayeb Agency
+        </h2>
 
         <p style="color:#aaa;margin-top:8px;">
           نجاحك هدفنا
@@ -617,16 +900,23 @@
   </section>
 
 
-  <!-- ===== OFFERS ===== -->
 
-  <section id="offers" class="offers-section">
+  <!-- ================= OFFERS ================= -->
+
+  <section
+    id="offers"
+    class="offers-section"
+  >
 
     <div class="container">
 
       <div class="section-title">
 
         <h2>
-          🎁 عروض <span>وكالة الشايب</span>
+          🎁 عروض
+          <span>
+            وكالة الشايب
+          </span>
         </h2>
 
         <p>
@@ -636,306 +926,4 @@
       </div>
 
 
-      <div class="offers">
-
-        <div class="offer special-offer">
-
-          <div class="offer-icon">🤝</div>
-
-          <h3>
-            المساعدة في تقفيل التارجت
-          </h3>
-
-          <p>
-            في حال عدم القدرة على تقفيل التارجت،
-            توفر الوكالة المساعدة حسب العرض المناسب.
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت الأول</h3>
-
-          <div class="target">4,500</div>
-
-          <p>
-            1,000 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت الثاني</h3>
-
-          <div class="target">11,000</div>
-
-          <p>
-            1,500 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت الثالث</h3>
-
-          <div class="target">25,500</div>
-
-          <p>
-            3,000 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت الرابع</h3>
-
-          <div class="target">50,000</div>
-
-          <p>
-            5,000 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت الخامس</h3>
-
-          <div class="target">80,000</div>
-
-          <p>
-            15,000 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت السادس</h3>
-
-          <div class="target">100,000</div>
-
-          <p>
-            20,000 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-
-        <div class="offer">
-
-          <div class="offer-icon">💎</div>
-
-          <h3>التارجت السابع</h3>
-
-          <div class="target">120,000</div>
-
-          <p>
-            25,000 ماسة كحد أقصى
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===== FEATURES ===== -->
-
-  <section id="features">
-
-    <div class="container">
-
-      <div class="section-title">
-
-        <h2>
-          لماذا <span>وكالة الشايب؟</span>
-        </h2>
-
-        <p>
-          لأننا نهتم بنجاح المذيع وليس فقط بالتارجت
-        </p>
-
-      </div>
-
-
-      <div class="features">
-
-        <div class="feature">
-
-          <div class="feature-icon">🤝</div>
-
-          <h3>دعم مستمر</h3>
-
-          <p>
-            نساعد المذيعين عند مواجهة أي صعوبة.
-          </p>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">🎯</div>
-
-          <h3>تحقيق التارجت</h3>
-
-          <p>
-            خطط وعروض تساعدك على الوصول إلى هدفك.
-          </p>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">📈</div>
-
-          <h3>تطوير الأداء</h3>
-
-          <p>
-            نساعدك على تحسين أدائك وزيادة نشاطك.
-          </p>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">👑</div>
-
-          <h3>وكالة احترافية</h3>
-
-          <p>
-            بيئة منظمة تهدف إلى نجاح مذيعيها.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===== BROADCASTERS ===== -->
-
-  <section id="broadcasters">
-
-    <div class="container">
-
-      <div class="broadcasters-box">
-
-        <div class="likee-symbol">🎤</div>
-
-        <h2>
-          مذيعي وكالة الشايب
-        </h2>
-
-        <p>
-          تعرف على مذيعي الوكالة وشاهد صفحاتهم على Likee.
-        </p>
-
-        <a href="andix.html" class="btn btn-primary">
-          👑 مشاهدة المذيعين
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===== JOIN ===== -->
-
-  <section class="join-section">
-
-    <div class="container">
-
-      <div class="join-card">
-
-        <h2>
-          هل تريد <span>الانضمام إلينا؟</span>
-        </h2>
-
-        <p>
-          إذا كنت مذيع Likee وتبحث عن وكالة تدعمك،
-          يمكنك إرسال الأوديشن الخاص بك الآن.
-        </p>
-
-        <a href="join.html" class="btn btn-primary">
-          🎤 إرسال الأوديشن والانضمام
-        </a>
-
-      </div>
-
-
-      <div class="whatsapp">
-
-        <h3>💬 تواصل معنا عبر واتساب</h3>
-
-        <p>
-          للاستفسار عن الوكالة والعروض والانضمام
-        </p>
-
-        <a
-          href="https://wa.me/213673860283"
-          target="_blank"
-          rel="noopener"
-        >
-          💬 تواصل معنا
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===== FOOTER ===== -->
-
-  <footer>
-
-    <p>
-      © 2026
-      <strong>Shayeb Agency</strong>
-      — جميع الحقوق محفوظة
-    </p>
-
-    <p style="margin-top:6px;">
-      وكالة الشايب 🎤
-    </p>
-
-  </footer>
-
-
-</body>
-</html>
+      <div class="
