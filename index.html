@@ -2,1361 +2,1483 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>مذيعي وكالة الشايب | Shayeb Agency</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>انضم إلى وكالة الشايب</title>
 
 <style>
 
-/* =========================
-   الأساس
-========================= */
-
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-
-    font-family:
-    Arial,
-    Tahoma,
-    sans-serif;
-
-    color:white;
-
-    min-height:100vh;
-
-    background:
-    radial-gradient(
-        circle at top right,
-        #4b1680 0%,
-        transparent 32%
-    ),
-
-    radial-gradient(
-        circle at bottom left,
-        #102f63 0%,
-        transparent 32%
-    ),
-
-    #080812;
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:
+radial-gradient(circle at top,#24144a 0,#0b0717 45%,#05030b 100%);
+color:#fff;
+min-height:100vh;
 }
 
-
-/* =========================
-   الهيدر
-========================= */
+/* ================= HEADER ================= */
 
 header{
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
-    text-align:center;
-
-    padding:18px 12px;
-
-    background:
-    rgba(8,8,18,.90);
-
-    backdrop-filter:blur(15px);
-
-    border-bottom:
-    1px solid
-    rgba(255,255,255,.10);
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(8,5,18,.92);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(255,215,0,.15);
 }
 
+.nav{
+max-width:1100px;
+margin:auto;
+padding:15px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+}
 
 .logo{
-
-    font-size:27px;
-
-    font-weight:bold;
-
-    background:
-    linear-gradient(
-        90deg,
-        #ffd700,
-        #ff73e6,
-        #8b7cff
-    );
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
+font-size:20px;
+font-weight:bold;
+color:#ffd84d;
+white-space:nowrap;
 }
 
-
-.subtitle{
-
-    color:#c9c9dc;
-
-    font-size:13px;
-
-    margin-top:7px;
+.logo span{
+color:#fff;
 }
-
-
-/* =========================
-   القائمة
-========================= */
 
 nav{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:8px;
-
-    margin-top:15px;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+justify-content:center;
 }
-
 
 nav a{
-
-    color:white;
-
-    text-decoration:none;
-
-    padding:
-    9px 15px;
-
-    border-radius:30px;
-
-    background:
-    rgba(255,255,255,.07);
-
-    border:
-    1px solid
-    rgba(255,255,255,.10);
-
-    font-size:13px;
-
-    transition:.3s;
+color:#eee;
+text-decoration:none;
+padding:9px 13px;
+border-radius:12px;
+font-size:14px;
+transition:.3s;
 }
-
 
 nav a:hover{
-
-    background:
-    linear-gradient(
-        90deg,
-        #7c3aed,
-        #d946ef
-    );
-
-    transform:
-    translateY(-2px);
+background:rgba(255,215,0,.12);
+color:#ffd84d;
 }
 
-
-/* =========================
-   مقدمة الصفحة
-========================= */
+/* ================= HERO ================= */
 
 .hero{
-
-    text-align:center;
-
-    padding:
-    65px 20px 40px;
-
-    position:relative;
-
-    overflow:hidden;
+max-width:1100px;
+margin:auto;
+padding:55px 20px 35px;
+text-align:center;
 }
-
-
-.hero::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-
-    height:300px;
-
-    border-radius:50%;
-
-    background:#7c3aed;
-
-    filter:blur(120px);
-
-    opacity:.20;
-
-    top:-100px;
-
-    right:-80px;
-}
-
-
-.hero-content{
-
-    position:relative;
-
-    z-index:2;
-}
-
 
 .badge{
-
-    display:inline-block;
-
-    padding:
-    9px 18px;
-
-    border-radius:30px;
-
-    background:
-    rgba(255,215,0,.08);
-
-    border:
-    1px solid
-    rgba(255,215,0,.30);
-
-    color:#ffd75a;
-
-    font-size:14px;
-
-    margin-bottom:18px;
+display:inline-block;
+padding:8px 15px;
+border-radius:30px;
+background:rgba(255,215,0,.1);
+border:1px solid rgba(255,215,0,.3);
+color:#ffd84d;
+font-size:14px;
+margin-bottom:18px;
 }
-
 
 .hero h1{
-
-    font-size:
-    clamp(35px,7vw,55px);
-
-    margin-bottom:15px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #ffffff,
-        #d6aaff,
-        #ffd75a
-    );
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
+font-size:42px;
+margin:5px 0 15px;
+line-height:1.3;
 }
 
+.hero h1 span{
+color:#ffd84d;
+}
 
 .hero p{
-
-    color:#bfc0d1;
-
-    font-size:16px;
-
-    line-height:1.8;
-
-    max-width:650px;
-
-    margin:auto;
+max-width:700px;
+margin:auto;
+color:#cfc8dd;
+line-height:2;
+font-size:17px;
 }
 
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:25px;
+}
 
-/* =========================
-   المحتوى
-========================= */
+.btn{
+display:inline-block;
+padding:14px 24px;
+border-radius:14px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.btn-gold{
+background:linear-gradient(135deg,#ffd84d,#ffb700);
+color:#17100a;
+box-shadow:0 8px 25px rgba(255,193,7,.2);
+}
+
+.btn-dark{
+border:1px solid rgba(255,215,0,.35);
+color:#fff;
+background:rgba(255,255,255,.05);
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+/* ================= CONTAINER ================= */
 
 .container{
-
-    width:94%;
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:
-    20px 0 70px;
+max-width:1100px;
+margin:auto;
+padding:10px 20px 50px;
 }
 
-
-/* =========================
-   التحميل
-========================= */
-
-#loading{
-
-    text-align:center;
-
-    padding:60px 20px;
-
-    color:#c9c9d8;
-
-    font-size:18px;
+.section{
+margin-top:35px;
 }
 
-
-/* =========================
-   شبكة البطاقات
-========================= */
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(270px,1fr)
-    );
-
-    gap:25px;
+.section-title{
+text-align:center;
+margin-bottom:25px;
 }
 
-
-/* =========================
-   بطاقة المذيع
-========================= */
-
-.card{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:25px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.10),
-        rgba(255,255,255,.035)
-    );
-
-    border:
-    1px solid
-    rgba(255,255,255,.12);
-
-    box-shadow:
-    0 18px 45px
-    rgba(0,0,0,.35);
-
-    backdrop-filter:blur(12px);
-
-    transition:
-    transform .35s,
-    box-shadow .35s,
-    border-color .35s;
+.section-title h2{
+font-size:29px;
+margin:0 0 8px;
 }
 
-
-.card:hover{
-
-    transform:
-    translateY(-8px);
-
-    border-color:
-    rgba(255,215,0,.35);
-
-    box-shadow:
-    0 20px 55px
-    rgba(124,58,237,.25);
+.section-title p{
+color:#aaa1b9;
+margin:0;
 }
 
+/* ================= STEPS ================= */
 
-/* =========================
-   منطقة الصورة
-========================= */
-
-.image-box{
-
-    width:100%;
-
-    height:360px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-    linear-gradient(
-        135deg,
-        #17102b,
-        #101827
-    );
+.steps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
 }
 
-
-.image-box::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:0;
-
-    height:100px;
-
-    background:
-    linear-gradient(
-        transparent,
-        rgba(5,5,12,.85)
-    );
-
-    pointer-events:none;
+.step{
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.07),
+rgba(255,255,255,.025)
+);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:22px;
+text-align:center;
 }
 
-
-.card-image{
-
-    width:100%;
-
-    height:100%;
-
-    display:block;
-
-    object-fit:cover;
-
-    transition:
-    transform .5s;
+.step-icon{
+font-size:30px;
+margin-bottom:10px;
 }
 
-
-.card:hover .card-image{
-
-    transform:
-    scale(1.06);
+.step h3{
+margin:8px 0;
+font-size:18px;
 }
 
-
-/* =========================
-   شارة المذيع
-========================= */
-
-.live-badge{
-
-    position:absolute;
-
-    top:15px;
-
-    right:15px;
-
-    z-index:5;
-
-    padding:
-    7px 12px;
-
-    border-radius:20px;
-
-    background:
-    rgba(10,10,20,.75);
-
-    border:
-    1px solid
-    rgba(255,255,255,.15);
-
-    color:#ffd75a;
-
-    font-size:12px;
-
-    backdrop-filter:blur(8px);
+.step p{
+color:#aaa;
+font-size:14px;
+line-height:1.8;
+margin:0;
 }
 
+/* ================= OFFERS ================= */
 
-/* =========================
-   بيانات البطاقة
-========================= */
-
-.card-content{
-
-    padding:
-    20px;
+.offers{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
 }
 
-
-.name{
-
-    font-size:23px;
-
-    font-weight:bold;
-
-    margin-bottom:17px;
-
-    color:white;
+.offer{
+position:relative;
+background:
+linear-gradient(
+145deg,
+rgba(91,48,145,.3),
+rgba(20,10,38,.8)
+);
+border:1px solid rgba(255,215,0,.18);
+border-radius:20px;
+padding:20px;
+overflow:hidden;
 }
 
-
-.info{
-
-    display:grid;
-
-    gap:10px;
-
-    margin-bottom:18px;
+.offer:before{
+content:"";
+position:absolute;
+width:80px;
+height:80px;
+background:#ffd84d;
+filter:blur(60px);
+opacity:.15;
+top:-20px;
+right:-20px;
 }
 
-
-.info-item{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:
-    11px 13px;
-
-    border-radius:13px;
-
-    background:
-    rgba(255,255,255,.055);
-
-    color:#cfcfdd;
-
-    font-size:14px;
+.offer-title{
+font-weight:bold;
+font-size:17px;
+margin-bottom:12px;
+color:#fff;
 }
 
-
-.info-item strong{
-
-    color:#ffd75a;
+.offer-target{
+font-size:23px;
+font-weight:bold;
+color:#ffd84d;
 }
 
-
-/* =========================
-   زر Likee
-========================= */
-
-.likee-btn{
-
-    display:block;
-
-    width:100%;
-
-    text-align:center;
-
-    text-decoration:none;
-
-    color:white;
-
-    font-weight:bold;
-
-    padding:
-    13px;
-
-    border-radius:15px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #7c3aed,
-        #d946ef
-    );
-
-    box-shadow:
-    0 8px 25px
-    rgba(124,58,237,.18);
-
-    transition:.3s;
+.offer-diamond{
+color:#d7cfe1;
+margin-top:5px;
+font-size:14px;
 }
 
+/* ================= FEATURE ================= */
 
-.likee-btn:hover{
-
-    transform:
-    translateY(-2px);
-
-    box-shadow:
-    0 10px 30px
-    rgba(217,70,239,.30);
+.feature{
+background:
+linear-gradient(
+135deg,
+rgba(255,215,0,.08),
+rgba(103,52,157,.15)
+);
+border:1px solid rgba(255,215,0,.18);
+border-radius:25px;
+padding:28px;
+text-align:center;
 }
 
-
-/* =========================
-   عدم وجود مذيعين
-========================= */
-
-.empty{
-
-    grid-column:1/-1;
-
-    text-align:center;
-
-    padding:
-    70px 20px;
-
-    border-radius:25px;
-
-    background:
-    rgba(255,255,255,.05);
-
-    border:
-    1px solid
-    rgba(255,255,255,.08);
-
-    color:#aaaabc;
+.feature h2{
+color:#ffd84d;
+margin-top:0;
 }
 
-
-.empty-icon{
-
-    font-size:55px;
-
-    margin-bottom:15px;
+.feature p{
+color:#d0c9d9;
+line-height:2;
 }
 
+/* ================= AUDITION ================= */
 
-/* =========================
-   الخطأ
-========================= */
-
-.error{
-
-    grid-column:1/-1;
-
-    text-align:center;
-
-    padding:50px 20px;
-
-    border-radius:25px;
-
-    background:
-    rgba(255,0,0,.06);
-
-    border:
-    1px solid
-    rgba(255,80,80,.15);
-
-    color:#ffaaaa;
-
-    line-height:1.8;
+.audition{
+background:
+linear-gradient(
+135deg,
+#241047,
+#10071f
+);
+border:1px solid rgba(255,215,0,.2);
+border-radius:28px;
+padding:35px 25px;
+text-align:center;
 }
 
-
-/* =========================
-   أسفل الصفحة
-========================= */
-
-.bottom-action{
-
-    text-align:center;
-
-    margin-top:45px;
+.audition h2{
+font-size:28px;
+margin-top:0;
 }
 
-
-.back-btn{
-
-    display:inline-block;
-
-    text-decoration:none;
-
-    color:white;
-
-    padding:
-    13px 25px;
-
-    border-radius:15px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #7c3aed,
-        #d946ef
-    );
-
-    font-weight:bold;
-
-    transition:.3s;
+.audition p{
+color:#c8bfd4;
+line-height:2;
 }
 
-
-.back-btn:hover{
-
-    transform:
-    translateY(-3px);
+.audition-btn{
+display:inline-block;
+margin-top:12px;
+background:linear-gradient(135deg,#ffd84d,#ffb700);
+color:#17100a;
+padding:15px 28px;
+border-radius:15px;
+text-decoration:none;
+font-weight:bold;
 }
 
+/* ================= WHATSAPP ================= */
 
-/* =========================
-   الفوتر
-========================= */
+.whatsapp{
+background:
+linear-gradient(
+135deg,
+rgba(37,211,102,.12),
+rgba(20,100,55,.12)
+);
+border:1px solid rgba(37,211,102,.3);
+border-radius:22px;
+padding:25px;
+text-align:center;
+}
+
+.whatsapp h2{
+margin-top:0;
+}
+
+.whatsapp p{
+color:#bbb;
+line-height:1.8;
+}
+
+.whatsapp a{
+display:inline-block;
+background:#25D366;
+color:#fff;
+padding:14px 25px;
+border-radius:14px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* ================= FOOTER ================= */
 
 footer{
-
-    text-align:center;
-
-    padding:35px 15px;
-
-    border-top:
-    1px solid
-    rgba(255,255,255,.08);
-
-    color:#89899e;
-
-    font-size:13px;
+text-align:center;
+padding:30px 20px;
+border-top:1px solid rgba(255,255,255,.08);
+color:#8f879b;
+font-size:13px;
+margin-top:20px;
 }
 
+/* ================= MOBILE ================= */
 
-.footer-logo{
+@media(max-width:800px){
 
-    font-size:20px;
-
-    color:#ffd75a;
-
-    margin-bottom:10px;
+.nav{
+flex-direction:column;
 }
 
+nav{
+width:100%;
+}
 
-/* =========================
-   الهاتف
-========================= */
+.hero{
+padding-top:40px;
+}
 
-@media(max-width:600px){
+.hero h1{
+font-size:32px;
+}
 
-    .logo{
+.steps{
+grid-template-columns:repeat(2,1fr);
+}
 
-        font-size:22px;
-    }
+}
 
+@media(max-width:550px){
 
-    nav a{
+nav a{
+font-size:12px;
+padding:8px 9px;
+}
 
-        font-size:12px;
+.hero h1{
+font-size:29px;
+}
 
-        padding:
-        8px 11px;
-    }
+.hero p{
+font-size:15px;
+}
 
+.container{
+padding-left:14px;
+padding-right:14px;
+}
 
-    .hero{
+.steps{
+grid-template-columns:1fr;
+}
 
-        padding:
-        50px 15px 30px;
-    }
+.offers{
+grid-template-columns:1fr;
+}
 
+.offer-target{
+font-size:21px;
+}
 
-    .hero h1{
+.audition{
+padding:28px 18px;
+}
 
-        font-size:38px;
-    }
+}
 
+/* ================= STATUS ================= */
 
-    .hero p{
+.status{
+margin-top:18px;
+padding:14px;
+border-radius:14px;
+display:none;
+line-height:1.8;
+font-weight:bold;
+}
 
-        font-size:14px;
-    }
+.success{
+display:block;
+background:rgba(39,174,96,.15);
+border:1px solid rgba(39,174,96,.4);
+color:#71e3a2;
+}
 
-
-    .cards{
-
-        grid-template-columns:1fr;
-    }
-
-
-    .image-box{
-
-        height:390px;
-    }
-
-
-    .card-content{
-
-        padding:18px;
-    }
-
+.error{
+display:block;
+background:rgba(231,76,60,.12);
+border:1px solid rgba(231,76,60,.4);
+color:#ff8f86;
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================
-     الهيدر
-========================= -->
+<!-- ================= HEADER ================= -->
 
 <header>
 
-    <div class="logo">
+<div class="nav">
 
-        ✨ Shayeb Agency | وكالة الشايب
+<div class="logo">
+🎤 وكالة <span>الشايب</span>
+</div>
 
-    </div>
+<nav>
 
+<a href="index.html">الرئيسية</a>
 
-    <div class="subtitle">
+<a href="andix.html">مذيعي الوكالة</a>
 
-        وكالة لدعم وتطوير مذيعي Likee
+<a href="join.html">انضم إلينا</a>
 
-    </div>
+<a href="https://wa.me/213673860283" target="_blank">
+واتساب
+</a>
 
+</nav>
 
-    <nav>
-
-        <a href="index.html">
-
-            🏠 الرئيسية
-
-        </a>
-
-
-        <a href="andix.html">
-
-            👤 مذيعي الوكالة
-
-        </a>
-
-
-        <a href="join.html">
-
-            🎤 انضم إلينا
-
-        </a>
-
-
-        <a
-          href="https://wa.me/213673860283"
-          target="_blank">
-
-            💬 تواصل معنا
-
-        </a>
-
-    </nav>
+</div>
 
 </header>
 
 
-
-<!-- =========================
-     مقدمة
-========================= -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
-    <div class="hero-content">
+<div class="badge">
+🎤 وكالة الشايب على Likee
+</div>
 
-        <div class="badge">
+<h1>
+انضم إلى <span>وكالة الشايب</span>
+</h1>
 
-            ⭐ مواهب وكالة الشايب
+<p>
+ابدأ رحلتك كمذيع Likee معنا.
+شاهد مثال الأوديشن، جهز فيديوك، ثم أرسل طلب الانضمام إلى الوكالة.
+</p>
 
-        </div>
+<div class="hero-buttons">
 
+<a
+href="https://l.likee.video/v/5WHaLU"
+target="_blank"
+class="btn btn-gold">
 
-        <h1>
+🎬 مشاهدة مثال الأوديشن
 
-            مذيعي وكالة الشايب
+</a>
 
-        </h1>
+<a
+href="#form"
+class="btn btn-dark">
 
+📹 إرسال الأوديشن
 
-        <p>
+</a>
 
-            اكتشفوا مذيعي وكالتنا
-            وتعرفوا على مواهبهم
-            وحساباتهم على Likee.
-
-        </p>
-
-    </div>
+</div>
 
 </section>
 
 
-
-<!-- =========================
-     المذيعون
-========================= -->
-
-<div class="container">
-
-    <div id="loading">
-
-        ⏳ جارٍ تحميل مذيعي الوكالة...
-
-    </div>
+<main class="container">
 
 
-    <div
-      id="cards"
-      class="cards">
-    </div>
+<!-- ================= STEPS ================= -->
 
+<section class="section">
 
-    <div class="bottom-action">
+<div class="section-title">
 
-        <a
-          href="index.html"
-          class="back-btn">
+<h2>كيف تنضم إلينا؟</h2>
 
-            🏠 العودة إلى الصفحة الرئيسية
-
-        </a>
-
-    </div>
+<p>
+أربع خطوات بسيطة فقط
+</p>
 
 </div>
 
 
+<div class="steps">
 
-<!-- =========================
-     الفوتر
-========================= -->
+
+<div class="step">
+
+<div class="step-icon">🎬</div>
+
+<h3>1. شاهد المثال</h3>
+
+<p>
+شاهد فيديو الأوديشن لمعرفة الطريقة المطلوبة.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-icon">💡</div>
+
+<h3>2. جهز مكانك</h3>
+
+<p>
+اختر مكانًا هادئًا مع إضاءة جيدة وصوت واضح.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-icon">🎤</div>
+
+<h3>3. سجل الفيديو</h3>
+
+<p>
+عرّف بنفسك وقدم محتوى قصيرًا وواضحًا بثقة.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-icon">📤</div>
+
+<h3>4. أرسل الأوديشن</h3>
+
+<p>
+ارفع الفيديو وأرسل طلبك ليتم مراجعته.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= OFFERS ================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>💎 عروض وكالة الشايب</h2>
+
+<p>
+مساعدة خاصة في تقفيل التارجت
+</p>
+
+</div>
+
+
+<div class="offers">
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 المساعدة في تقفيل التارجت
+</div>
+
+<div class="offer-diamond">
+في حال عدم القدرة على التقفيل
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 4,500
+</div>
+
+<div class="offer-target">
+💎 1,000 ماسة كحد أقصى
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 11,000
+</div>
+
+<div class="offer-target">
+💎 1,500 ماسة كحد أقصى
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 25,500
+</div>
+
+<div class="offer-target">
+💎 3,000 ماسة كحد أقصى
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 50,000
+</div>
+
+<div class="offer-target">
+💎 5,000 ماسة كحد أقصى
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 80,000
+</div>
+
+<div class="offer-target">
+💎 15,000 ماسة كحد أقصى
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 100,000
+</div>
+
+<div class="offer-target">
+💎 20,000 ماسة
+</div>
+
+</div>
+
+
+<div class="offer">
+
+<div class="offer-title">
+🎯 تارجت 120,000
+</div>
+
+<div class="offer-target">
+💎 25,000 ماسة كحد أقصى
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= WHY ================= -->
+
+<section class="section">
+
+<div class="feature">
+
+<h2>
+✨ لماذا وكالة الشايب؟
+</h2>
+
+<p>
+نساعد المذيعين على تطوير حضورهم على Likee،
+وتقديم محتوى أفضل، والاستفادة من خدمات الوكالة.
+</p>
+
+<p>
+🎯 دعم في التارجت
+<br>
+🎤 متابعة المذيعين
+<br>
+💎 عروض خاصة
+<br>
+🤝 تواصل مباشر مع الوكالة
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= AUDITION INFO ================= -->
+
+<section class="section">
+
+<div class="audition">
+
+<h2>
+🎬 قبل إرسال الأوديشن
+</h2>
+
+<p>
+شاهد الفيديو النموذجي أولًا،
+ثم سجل فيديو واضحًا وتحدث بثقة وابتسامة.
+</p>
+
+<a
+href="https://l.likee.video/v/5WHaLU"
+target="_blank"
+class="audition-btn">
+
+▶️ مشاهدة فيديو الأوديشن
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ================= FORM ================= -->
+
+<section
+class="section"
+id="form">
+
+<div class="section-title">
+
+<h2>📹 إرسال الأوديشن</h2>
+
+<p>
+املأ البيانات وأرسل فيديو الأوديشن
+</p>
+
+</div>
+
+
+<div
+style="
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,215,0,.15);
+border-radius:25px;
+padding:25px;
+">
+
+
+<label style="display:block;margin-bottom:8px;">
+الاسم الكامل
+</label>
+
+<input
+id="name"
+type="text"
+placeholder="اكتب اسمك الكامل"
+style="
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #ffffff20;
+background:#120b20;
+color:white;
+margin-bottom:15px;
+font-family:inherit;
+">
+
+
+<label style="display:block;margin-bottom:8px;">
+رقم الهاتف
+</label>
+
+<input
+id="phone"
+type="tel"
+placeholder="مثال: 0673860283"
+style="
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #ffffff20;
+background:#120b20;
+color:white;
+margin-bottom:15px;
+font-family:inherit;
+">
+
+
+<label style="display:block;margin-bottom:8px;">
+اسم المستخدم في Likee
+</label>
+
+<input
+id="likeeName"
+type="text"
+placeholder="اسم حسابك في Likee"
+style="
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #ffffff20;
+background:#120b20;
+color:white;
+margin-bottom:15px;
+font-family:inherit;
+">
+
+
+<label style="display:block;margin-bottom:8px;">
+رابط حساب Likee
+</label>
+
+<input
+id="likeeUrl"
+type="url"
+placeholder="ضع رابط حسابك في Likee"
+style="
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #ffffff20;
+background:#120b20;
+color:white;
+margin-bottom:15px;
+font-family:inherit;
+">
+
+
+<label style="display:block;margin-bottom:8px;">
+🎥 فيديو الأوديشن
+</label>
+
+<div
+style="
+border:2px dashed rgba(255,215,0,.25);
+border-radius:15px;
+padding:18px;
+text-align:center;
+background:rgba(0,0,0,.15);
+">
+
+
+<input
+id="auditionFile"
+type="file"
+accept="video/*"
+style="
+width:100%;
+color:#ddd;
+padding:8px;
+">
+
+
+<p style="
+color:#999;
+font-size:13px;
+line-height:1.8;
+">
+
+الحد الأقصى للحجم: 100 ميغابايت
+
+</p>
+
+
+<video
+id="preview"
+controls
+style="
+width:100%;
+max-height:300px;
+display:none;
+border-radius:15px;
+background:#000;
+">
+</video>
+
+</div>
+
+
+<button
+type="button"
+id="submitBtn"
+style="
+width:100%;
+margin-top:20px;
+padding:17px;
+border:0;
+border-radius:15px;
+background:linear-gradient(135deg,#ffd84d,#ffb700);
+color:#17100a;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+">
+
+📤 إرسال الأوديشن
+
+</button>
+
+
+<div
+id="status"
+class="status">
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= WHATSAPP ================= -->
+
+<section class="section">
+
+<div class="whatsapp">
+
+<h2>
+💬 تحتاج إلى مساعدة؟
+</h2>
+
+<p>
+إذا كان لديك أي سؤال حول الأوديشن أو الانضمام إلى الوكالة،
+تواصل معنا مباشرة.
+</p>
+
+<a
+href="https://wa.me/213673860283"
+target="_blank">
+
+💬 تواصل معنا عبر WhatsApp
+
+</a>
+
+</div>
+
+</section>
+
+
+</main>
+
 
 <footer>
 
-    <div class="footer-logo">
-
-        ✨ Shayeb Agency
-
-    </div>
-
-
-    <p>
-
-        وكالة الشايب لدعم مذيعي Likee
-
-    </p>
-
-
-    <br>
-
-
-    <a
-      href="https://wa.me/213673860283"
-      target="_blank"
-      style="
-      color:#ffd75a;
-      text-decoration:none;
-      ">
-
-        💬 تواصل معنا عبر WhatsApp
-
-    </a>
-
-
-    <br><br>
-
-
-    © 2026 Shayeb Agency
+© 2026 وكالة الشايب — جميع الحقوق محفوظة
 
 </footer>
 
 
+<!-- ================= SUPABASE ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =========================
-   Supabase
-========================= */
-
 const SUPABASE_URL =
-"https://hzcnkywuabugjebtwzmv.supabase.co";
+'https://hzcnkywuabugjebtwzmv.supabase.co';
 
+const SUPABASE_ANON_KEY =
+'sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP';
 
-const SUPABASE_KEY =
-"sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
-
-
-const supabaseClient =
+const client =
 window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_ANON_KEY
 );
 
 
-/* =========================
-   صورة احتياطية
-========================= */
+/* ============================
+   معاينة الفيديو
+============================ */
 
-const placeholder =
-"https://via.placeholder.com/700x800/151525/ffffff?text=Shayeb+Agency";
+document
+.getElementById('auditionFile')
+.addEventListener(
+'change',
+function(){
 
+const file =
+this.files[0];
 
-/* =========================
-   تحميل المذيعين
-========================= */
+const preview =
+document.getElementById('preview');
 
-async function loadBroadcasters(){
+if(!file){
 
-    const loading =
-    document.getElementById("loading");
+preview.style.display='none';
 
+preview.src='';
 
-    const cards =
-    document.getElementById("cards");
+return;
 
+}
 
-    try{
+preview.src =
+URL.createObjectURL(file);
 
-        const { data, error } =
-        await supabaseClient
+preview.style.display='block';
 
-        .from("Shayeb agency")
+}
+);
 
-        .select("*")
 
-        .order(
-            "id",
-            {
-                ascending:false
-            }
-        );
+/* ============================
+   الرسائل
+============================ */
 
+function showError(message){
 
-        if(error){
+const status =
+document.getElementById('status');
 
-            console.error(error);
+status.className =
+'status error';
 
-            loading.style.display="none";
+status.textContent =
+'❌ ' + message;
 
-
-            cards.innerHTML=`
-
-                <div class="error">
-
-                    ❌ حدث خطأ أثناء تحميل المذيعين
-
-                    <br><br>
-
-                    ${error.message}
-
-                </div>
-
-            `;
-
-            return;
-        }
-
-
-        loading.style.display="none";
-
-
-        if(!data || data.length===0){
-
-            cards.innerHTML=`
-
-                <div class="empty">
-
-                    <div class="empty-icon">
-                        👤
-                    </div>
-
-                    <h3>
-                        لا يوجد مذيعون حالياً
-                    </h3>
-
-                    <br>
-
-                    <p>
-                        سيتم عرض المذيعين هنا
-                        بعد إضافتهم من لوحة الإدارة.
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-        }
-
-
-        cards.innerHTML="";
-
-
-        data.forEach(
-            broadcaster => {
-
-
-            /* الاسم */
-
-            const name =
-            broadcaster.name ||
-            "مذيع وكالة الشايب";
-
-
-            /* التارجت */
-
-            const target =
-            broadcaster.target ||
-            "غير محدد";
-
-
-            /* الساعات */
-
-            const hours =
-            broadcaster.hours ||
-            "غير محدد";
-
-
-            /*
-              ⭐ مهم جداً ⭐
-
-              اسم عمود الصورة هو:
-              image_url
-            */
-
-            let image =
-            broadcaster.image_url ||
-            "";
-
-
-            /*
-              إذا كانت الصورة
-              مجرد اسم ملف أو مسار
-            */
-
-            if(
-                image &&
-                !image.startsWith("http")
-            ){
-
-                const {
-                    data:publicData
-                } =
-                supabaseClient
-
-                .storage
-
-                .from(
-                    "broadcaster-images"
-                )
-
-                .getPublicUrl(image);
-
-
-                if(
-                    publicData &&
-                    publicData.publicUrl
-                ){
-
-                    image =
-                    publicData.publicUrl;
-
-                }
-
-            }
-
-
-            /*
-              إذا لم توجد صورة
-            */
-
-            if(!image){
-
-                image =
-                placeholder;
-
-            }
-
-
-            /* رابط Likee */
-
-            const likeeUrl =
-            broadcaster.likee_url ||
-            "#";
-
-
-            /* إنشاء البطاقة */
-
-            const card =
-            document.createElement("div");
-
-
-            card.className="card";
-
-
-            card.innerHTML=`
-
-                <div class="image-box">
-
-
-                    <div class="live-badge">
-
-                        ✨ مذيع الوكالة
-
-                    </div>
-
-
-                    <img
-
-                        class="card-image"
-
-                        src="${image}"
-
-                        alt="${name}"
-
-                        loading="lazy"
-
-                        onerror="
-                        this.onerror=null;
-                        this.src='${placeholder}'
-                        "
-
-                    >
-
-                </div>
-
-
-                <div class="card-content">
-
-
-                    <div class="name">
-
-                        ${name}
-
-                    </div>
-
-
-                    <div class="info">
-
-
-                        <div class="info-item">
-
-                            <span>
-                                🎯 التارجت
-                            </span>
-
-                            <strong>
-                                ${target}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="info-item">
-
-                            <span>
-                                ⏰ الساعات
-                            </span>
-
-                            <strong>
-                                ${hours}
-                            </strong>
-
-                        </div>
-
-
-                    </div>
-
-
-                    ${
-                        likeeUrl !== "#"
-
-                        ?
-
-                        `
-
-                        <a
-
-                            class="likee-btn"
-
-                            href="${likeeUrl}"
-
-                            target="_blank"
-
-                            rel="noopener"
-
-                        >
-
-                            🎥 مشاهدة على Likee
-
-                        </a>
-
-                        `
-
-                        :
-
-                        `
-
-                        <div
-
-                            class="likee-btn"
-
-                            style="opacity:.5;"
-
-                        >
-
-                            🎥 رابط Likee غير متوفر
-
-                        </div>
-
-                        `
-                    }
-
-
-                </div>
-
-            `;
-
-
-            cards.appendChild(card);
-
-
-        });
-
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-
-        loading.style.display="none";
-
-
-        cards.innerHTML=`
-
-            <div class="error">
-
-                ❌ حدث خطأ غير متوقع
-
-                <br><br>
-
-                يرجى تحديث الصفحة والمحاولة مرة أخرى.
-
-            </div>
-
-        `;
-
-    }
+status.style.display =
+'block';
 
 }
 
 
-/* =========================
-   تشغيل الصفحة
-========================= */
+function showSuccess(message){
 
-loadBroadcasters();
+const status =
+document.getElementById('status');
+
+status.className =
+'status success';
+
+status.textContent =
+'🎉 ' + message;
+
+status.style.display =
+'block';
+
+}
+
+
+/* ============================
+   إرسال الأوديشن
+============================ */
+
+document
+.getElementById('submitBtn')
+.addEventListener(
+'click',
+submitAudition
+);
+
+
+async function submitAudition(){
+
+const name =
+document
+.getElementById('name')
+.value
+.trim();
+
+const phone =
+document
+.getElementById('phone')
+.value
+.trim();
+
+const likeeName =
+document
+.getElementById('likeeName')
+.value
+.trim();
+
+const likeeUrl =
+document
+.getElementById('likeeUrl')
+.value
+.trim();
+
+const file =
+document
+.getElementById('auditionFile')
+.files[0];
+
+const button =
+document
+.getElementById('submitBtn');
+
+
+document
+.getElementById('status')
+.style.display='none';
+
+
+/* التحقق */
+
+if(!name){
+
+showError(
+'يرجى كتابة الاسم الكامل.'
+);
+
+return;
+
+}
+
+if(!phone){
+
+showError(
+'يرجى كتابة رقم الهاتف.'
+);
+
+return;
+
+}
+
+if(!likeeName){
+
+showError(
+'يرجى كتابة اسم المستخدم في Likee.'
+);
+
+return;
+
+}
+
+if(!file){
+
+showError(
+'يرجى اختيار فيديو الأوديشن.'
+);
+
+return;
+
+}
+
+if(
+file.size >
+100 * 1024 * 1024
+){
+
+showError(
+'حجم الفيديو كبير جدًا. الحد الأقصى 100 ميغابايت.'
+);
+
+return;
+
+}
+
+
+/* بدء الإرسال */
+
+button.disabled=true;
+
+button.textContent=
+'⏳ جاري إرسال الأوديشن...';
+
+
+try{
+
+
+/* ============================
+   رفع الفيديو
+============================ */
+
+const extension =
+file.name
+.split('.')
+.pop()
+.toLowerCase();
+
+
+const fileName =
+'auditions/' +
+Date.now() +
+'-' +
+Math.random()
+.toString(36)
+.substring(2) +
+'.' +
+extension;
+
+
+console.log(
+'بدء رفع الفيديو...'
+);
+
+
+const uploadPromise =
+client
+.storage
+.from('audition-videos')
+.upload(
+fileName,
+file,
+{
+cacheControl:'3600',
+upsert:false,
+contentType:file.type
+}
+);
+
+
+const upload =
+await Promise.race([
+
+uploadPromise,
+
+new Promise(
+(_,reject)=>{
+
+setTimeout(
+()=>reject(
+new Error(
+'رفع الفيديو استغرق وقتًا طويلًا. تحقق من الإنترنت وحاول مرة أخرى.'
+)
+),
+120000
+);
+
+}
+)
+
+]);
+
+
+if(upload.error){
+
+throw new Error(
+'فشل رفع الفيديو: ' +
+upload.error.message
+);
+
+}
+
+
+console.log(
+'تم رفع الفيديو بنجاح'
+);
+
+
+/* ============================
+   رابط الفيديو
+============================ */
+
+const publicResult =
+client
+.storage
+.from('audition-videos')
+.getPublicUrl(
+fileName
+);
+
+
+const publicUrl =
+publicResult
+.data
+.publicUrl;
+
+
+if(!publicUrl){
+
+throw new Error(
+'لم يتم الحصول على رابط الفيديو.'
+);
+
+}
+
+
+/* ============================
+   حفظ الطلب
+============================ */
+
+console.log(
+'جاري حفظ الطلب...'
+);
+
+
+const insertPromise =
+client
+.from('audition_requests')
+.insert({
+
+name:name,
+
+phone:phone,
+
+likee_name:likeeName,
+
+likee_url:likeeUrl,
+
+audition_url:publicUrl,
+
+status:'pending'
+
+});
+
+
+const result =
+await Promise.race([
+
+insertPromise,
+
+new Promise(
+(_,reject)=>{
+
+setTimeout(
+()=>reject(
+new Error(
+'حفظ الطلب استغرق وقتًا طويلًا. تحقق من صلاحيات جدول الطلبات.'
+)
+),
+30000
+);
+
+}
+)
+
+]);
+
+
+if(result.error){
+
+throw new Error(
+'فشل حفظ الطلب: ' +
+result.error.message
+);
+
+}
+
+
+/* ============================
+   نجاح
+============================ */
+
+showSuccess(
+'تم إرسال الأوديشن بنجاح! سيتم مراجعة طلبك والتواصل معك.'
+);
+
+
+/* تنظيف البيانات */
+
+document
+.getElementById('name')
+.value='';
+
+document
+.getElementById('phone')
+.value='';
+
+document
+.getElementById('likeeName')
+.value='';
+
+document
+.getElementById('likeeUrl')
+.value='';
+
+document
+.getElementById('auditionFile')
+.value='';
+
+document
+.getElementById('preview')
+.src='';
+
+document
+.getElementById('preview')
+.style.display='none';
+
+
+}
+catch(error){
+
+console.error(
+'AUDITION ERROR:',
+error
+);
+
+showError(
+error.message ||
+'حدث خطأ أثناء إرسال الأوديشن.'
+);
+
+}
+finally{
+
+button.disabled=false;
+
+button.textContent=
+'📤 إرسال الأوديشن';
+
+}
+
+}
 
 </script>
 
-
 </body>
 
-      </html>
+</html>
