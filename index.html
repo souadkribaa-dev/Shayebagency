@@ -1,558 +1,402 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>وكالة الشايب | Shayeb Agency</title>
-  <meta name="description" content="وكالة الشايب لدعم مذيعي Likee ومساعدتهم على تحقيق التارجت وتطوير أدائهم">
+  <title>مذيعو وكالة الشايب | Shayeb Agency</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+
     body {
       font-family: Arial, Tahoma, sans-serif;
-      background:
-        radial-gradient(circle at top right, #35105c 0%, transparent 35%),
-        radial-gradient(circle at bottom left, #24104d 0%, transparent 35%),
-        #080612;
+      background: linear-gradient(135deg, #10091f, #24123d, #10091f);
       color: #fff;
-      line-height: 1.7;
+      min-height: 100vh;
     }
-    a { text-decoration: none; color: inherit; }
 
     header {
-      position: sticky; top: 0; z-index: 1000;
-      background: rgba(8, 6, 18, .94);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(218, 174, 70, .25);
+      text-align: center;
+      padding: 30px 15px;
+      background: linear-gradient(135deg, #35145b, #160d2b);
+      border-bottom: 2px solid #d9ad53;
     }
-    .nav {
-      max-width: 1150px; margin: auto; padding: 14px 20px;
-      display: flex; align-items: center; justify-content: space-between;
+
+    header h1 { color: #f5d58a; font-size: 30px; margin-bottom: 10px; }
+    header p { color: #eee1ff; line-height: 1.8; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 15px;
+      background: #170d2a;
+    }
+
+    nav a, .btn {
+      text-decoration: none;
+      color: #1c102a;
+      background: linear-gradient(135deg, #f5d58a, #c99838);
+      padding: 11px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .container { width: 92%; max-width: 1150px; margin: 35px auto; }
+
+    .section-title {
+      text-align: center;
+      color: #f5d58a;
+      font-size: 27px;
+      margin: 35px 0 12px;
+    }
+
+    .section-description {
+      text-align: center;
+      color: #d7c9e8;
+      line-height: 1.9;
+      margin-bottom: 25px;
+    }
+
+    #offers, #broadcasters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 20px;
     }
-    .logo { font-size: 22px; font-weight: bold; color: #e7bd58; white-space: nowrap; }
-    .logo span { color: #fff; }
-    nav { display: flex; align-items: center; gap: 22px; }
-    nav a { color: #eee; font-size: 15px; transition: .3s; }
-    nav a:hover { color: #e7bd58; }
-    .nav-button {
-      background: linear-gradient(135deg, #e7bd58, #b77b18);
-      color: #140c20; padding: 9px 17px; border-radius: 25px;
+
+    .offer, .card, .empty {
+      background: linear-gradient(145deg, #291744, #1b102d);
+      border: 1px solid #71552d;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px #0004;
+    }
+
+    .offer {
+      padding: 23px 18px;
+      text-align: center;
+    }
+
+    .offer h3 { color: #f5d58a; font-size: 23px; margin-bottom: 14px; }
+    .offer p { color: #f4edf9; line-height: 1.9; }
+    .offer .price { color: #f5d58a; font-size: 25px; font-weight: bold; margin: 10px 0; }
+
+    .card { transition: transform .25s; }
+    .card:hover { transform: translateY(-5px); }
+
+    .card-image {
+      display: block;
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      background: #291744;
+    }
+
+    .card-content { padding: 20px; text-align: center; }
+    .card-content h3 { color: #f5d58a; font-size: 22px; margin-bottom: 15px; }
+
+    .info {
+      background: #170d2a;
+      color: #eee1ff;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 10px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .info strong { color: #f5d58a; }
+
+    .likee-btn {
+      display: block;
+      margin-top: 15px;
+      text-decoration: none;
+      background: #f5d58a;
+      color: #1c102a;
+      padding: 12px;
+      border-radius: 25px;
       font-weight: bold;
     }
 
-    .hero {
-      max-width: 1150px; margin: auto; min-height: 570px;
-      padding: 80px 20px 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 50px;
-    }
-    .hero-content { flex: 1; }
-    .badge {
-      display: inline-block; border: 1px solid rgba(231,189,88,.4);
-      background: rgba(231,189,88,.08); color: #e7bd58;
-      padding: 7px 16px; border-radius: 30px; margin-bottom: 20px;
-      font-size: 14px;
-    }
-    .hero h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.15; margin-bottom: 20px; }
-    .hero h1 span { color: #e7bd58; }
-    .hero p { color: #cfc9dc; font-size: 18px; max-width: 650px; margin-bottom: 30px; }
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 13px 24px; border-radius: 30px; font-weight: bold;
-      transition: .3s; cursor: pointer; border: 0;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #e7bd58, #b77b18);
-      color: #130b1c; box-shadow: 0 10px 30px rgba(231,189,88,.15);
-    }
-    .btn-primary:hover { transform: translateY(-3px); }
-    .btn-secondary {
-      border: 1px solid rgba(231,189,88,.45);
-      color: #e7bd58; background: rgba(255,255,255,.03);
-    }
-    .btn-secondary:hover { background: rgba(231,189,88,.1); }
-
-    .hero-card {
-      width: 340px; min-height: 340px; border-radius: 35px;
-      border: 1px solid rgba(231,189,88,.25);
-      background: linear-gradient(145deg, rgba(91,42,133,.45), rgba(15,9,30,.8));
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; box-shadow: 0 25px 70px rgba(0,0,0,.4);
-      padding: 25px;
-    }
-    .hero-icon { font-size: 100px; margin-bottom: 10px; }
-    .hero-card h2 { color: #e7bd58; font-size: 28px; }
-
-    section { padding: 75px 20px; }
-    .container { max-width: 1150px; margin: auto; }
-    .section-title { text-align: center; margin-bottom: 45px; }
-    .section-title h2 { font-size: 36px; margin-bottom: 10px; }
-    .section-title h2 span { color: #e7bd58; }
-    .section-title p { color: #aaa3b7; }
-
-    .offers-section {
-      background: rgba(255,255,255,.015);
-      border-top: 1px solid rgba(255,255,255,.04);
-      border-bottom: 1px solid rgba(255,255,255,.04);
-    }
-    .offers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .offer {
-      background: linear-gradient(145deg, rgba(62,31,93,.55), rgba(15,10,27,.85));
-      border: 1px solid rgba(231,189,88,.18);
-      border-radius: 22px; padding: 28px 22px;
-      text-align: center; transition: .3s; position: relative; overflow: hidden;
-    }
-    .offer:hover { transform: translateY(-6px); border-color: rgba(231,189,88,.5); }
-    .offer-icon { font-size: 32px; margin-bottom: 10px; }
-    .offer h3 { color: #e7bd58; margin-bottom: 10px; font-size: 22px; }
-    .offer .target { font-size: 25px; font-weight: bold; margin: 10px 0; }
-    .offer p { color: #bdb6c9; font-size: 14px; }
-    .special-offer {
-      grid-column: span 3;
-      background: linear-gradient(135deg, rgba(107,53,151,.4), rgba(35,19,59,.8));
+    .password-btn {
+      width: 100%;
+      margin-top: 12px;
+      background: linear-gradient(135deg, #a879df, #7042a8);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-    .feature {
-      text-align: center; padding: 30px 18px; border-radius: 20px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.07);
-    }
-    .feature-icon { font-size: 38px; margin-bottom: 15px; }
-    .feature h3 { color: #e7bd58; margin-bottom: 8px; }
-    .feature p { color: #aaa3b7; font-size: 14px; }
+    .stats { display: none; margin-top: 12px; }
+    .loading, .empty { text-align: center; padding: 25px; color: #f5d58a; }
+    .empty { grid-column: 1 / -1; line-height: 2; }
 
-    .broadcasters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .broadcaster-card {
-      background: linear-gradient(145deg, rgba(62,31,93,.65), rgba(15,10,27,.9));
-      border: 1px solid rgba(231,189,88,.22);
-      border-radius: 25px; padding: 20px; text-align: center;
-      transition: .3s; overflow: hidden;
-    }
-    .broadcaster-card:hover {
-      transform: translateY(-7px); border-color: rgba(231,189,88,.65);
-      box-shadow: 0 15px 40px rgba(0,0,0,.35);
-    }
-    .broadcaster-image {
-      width: 130px; height: 130px; object-fit: cover; border-radius: 50%;
-      border: 3px solid #e7bd58; margin: 5px auto 15px; display: block;
-    }
-    .broadcaster-card h3 { color: #e7bd58; font-size: 21px; margin-bottom: 8px; }
-    .broadcaster-info { color: #aaa3b7; font-size: 14px; margin: 5px 0; }
-    .likee-btn {
-      display: inline-block; margin-top: 15px; padding: 9px 20px;
-      border-radius: 22px; background: linear-gradient(135deg, #e7bd58, #b77b18);
-      color: #130b1c; font-weight: bold;
-    }
-    .private-btn {
-      display: block; width: 100%; margin-top: 15px; padding: 11px 14px;
-      border-radius: 22px; border: 1px solid rgba(231,189,88,.55);
-      background: rgba(231,189,88,.08); color: #e7bd58;
-      font-size: 15px; font-weight: bold; cursor: pointer; font-family: inherit;
-    }
-    .private-btn:hover { background: rgba(231,189,88,.18); }
-    .private-result {
-      display: none; margin-top: 13px; padding: 13px;
-      border-radius: 14px; background: rgba(0,0,0,.24);
-      border: 1px solid rgba(231,189,88,.2);
-    }
-    .private-result p { margin: 5px 0; color: #e6deee; overflow-wrap: anywhere; }
-    .private-result strong { color: #e7bd58; }
-    .loading { grid-column: 1 / -1; text-align: center; color: #aaa3b7; padding: 30px; }
+    .back-section { text-align: center; margin: 40px 0; }
 
-    .join-section {
-      background: radial-gradient(circle at center, rgba(105,45,145,.25), transparent 60%);
-    }
-    .join-card {
-      max-width: 850px; margin: auto; padding: 50px 30px;
-      text-align: center; border-radius: 30px;
-      border: 1px solid rgba(231,189,88,.3);
-      background: rgba(255,255,255,.035);
-    }
-    .join-card h2 { font-size: 36px; margin-bottom: 15px; }
-    .join-card h2 span { color: #e7bd58; }
-    .join-card p { color: #bcb5c8; margin-bottom: 28px; }
-
-    .whatsapp {
-      max-width: 700px; margin: 35px auto 0; padding: 22px;
-      border-radius: 20px; background: rgba(37,211,102,.06);
-      border: 1px solid rgba(37,211,102,.25); text-align: center;
-    }
-    .whatsapp h3 { margin-bottom: 8px; }
-    .whatsapp p { margin-bottom: 15px; color: #bcb5c8; }
-    .whatsapp a {
-      display: inline-block; padding: 11px 22px; border-radius: 25px;
-      background: #25d366; color: #fff; font-weight: bold;
-    }
     footer {
-      padding: 35px 20px; text-align: center;
-      border-top: 1px solid rgba(255,255,255,.06);
-      color: #8f8999; font-size: 14px;
+      text-align: center;
+      padding: 25px 15px;
+      background: #10091f;
+      border-top: 1px solid #71552d;
+      color: #e7d9f4;
+      line-height: 2;
     }
-    footer strong { color: #e7bd58; }
 
-    @media (max-width: 900px) {
-      nav { gap: 10px; }
-      nav a:not(.nav-button) { display: none; }
-      .hero { flex-direction: column; text-align: center; padding-top: 60px; }
-      .hero p { margin-left: auto; margin-right: auto; }
-      .hero-buttons { justify-content: center; }
-      .hero-card { width: 100%; max-width: 340px; }
-      .offers { grid-template-columns: repeat(2, 1fr); }
-      .special-offer { grid-column: span 2; }
-      .features { grid-template-columns: repeat(2, 1fr); }
-      .broadcasters-grid { grid-template-columns: repeat(2, 1fr); }
-    }
     @media (max-width: 600px) {
-      .nav { padding: 12px 15px; }
-      .logo { font-size: 18px; }
-      .nav-button { padding: 8px 12px; font-size: 13px; }
-      .hero { min-height: auto; padding: 55px 15px 45px; }
-      .hero h1 { font-size: 42px; }
-      .hero p { font-size: 16px; }
-      section { padding: 55px 15px; }
-      .section-title h2 { font-size: 29px; }
-      .offers, .features, .broadcasters-grid { grid-template-columns: 1fr; }
-      .special-offer { grid-column: span 1; }
-      .join-card { padding: 35px 20px; }
-      .join-card h2 { font-size: 29px; }
-      .btn { width: 100%; }
-      .hero-buttons { width: 100%; }
+      header h1 { font-size: 25px; }
+      .section-title { font-size: 23px; }
+      .card-image { height: 280px; }
     }
   </style>
 </head>
 
 <body>
-<header>
-  <div class="nav">
-    <a href="index.html" class="logo">وكالة <span>الشايب</span> ✦</a>
-    <nav>
-      <a href="#offers">العروض</a>
-      <a href="#features">مميزاتنا</a>
-      <a href="#broadcasters">مذيعي الوكالة</a>
-      <a href="andix.html" class="nav-button">🎤 المذيعين</a>
-    </nav>
-  </div>
-</header>
+  <header>
+    <h1>🎤 وكالة الشايب</h1>
+    <p>مذيعو وكالة الشايب على Likee</p>
+    <p>التميز والثقة والنجاح ✨</p>
+  </header>
 
-<section class="hero">
-  <div class="hero-content">
-    <div class="badge">✦ وكالة Likee احترافية ✦</div>
-    <h1>وكالة <span>الشايب</span></h1>
-    <p>نرافق مذيعي Likee خطوة بخطوة لتحقيق التارجت، تطوير الأداء، والحصول على الدعم المستمر.</p>
-    <div class="hero-buttons">
-      <a href="join.html" class="btn btn-primary">🎤 انضم إلى الوكالة</a>
-      <a href="andix.html" class="btn btn-secondary">👑 شاهد مذيعي الوكالة</a>
-    </div>
-  </div>
-  <div class="hero-card">
-    <div>
-      <div class="hero-icon">🎤</div>
-      <h2>Shayeb Agency</h2>
-      <p style="color:#aaa;margin-top:8px;">نجاحك هدفنا</p>
-    </div>
-  </div>
-</section>
+  <nav>
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="andix.html">🎤 المذيعون</a>
+    <a href="join.html">🤝 الانضمام للوكالة</a>
+  </nav>
 
-<section id="offers" class="offers-section">
-  <div class="container">
-    <div class="section-title">
-      <h2>🎁 عروض <span>وكالة الشايب</span></h2>
-      <p>دعم ومساعدة مذيعي الوكالة في تحقيق التارجت</p>
-    </div>
-    <div class="offers">
-      <article class="offer">
-        <div class="offer-icon">🌟</div>
-        <h3>عرض البداية</h3>
-        <div class="target">4,500</div>
-        <p>تارجت 4,500 — الحد الأقصى للمساعدة 1,000 ألماسة.</p>
-      </article>
-      <article class="offer">
-        <div class="offer-icon">💎</div>
-        <h3>عرض التطور</h3>
-        <div class="target">11,000</div>
-        <p>تارجت 11,000 — الحد الأقصى للمساعدة 1,500 ألماسة.</p>
-      </article>
-      <article class="offer">
-        <div class="offer-icon">👑</div>
-        <h3>عرض التميز</h3>
-        <div class="target">25,500</div>
-        <p>تارجت 25,500 — الحد الأقصى للمساعدة 3,000 ألماسة.</p>
-      </article>
-      <article class="offer">
-        <div class="offer-icon">🔥</div>
-        <h3>عرض الاحتراف</h3>
-        <div class="target">50,000</div>
-        <p>تارجت 50,000 — الحد الأقصى للمساعدة 5,000 ألماسة.</p>
-      </article>
-      <article class="offer">
-        <div class="offer-icon">🚀</div>
-        <h3>عرض الإنجاز</h3>
-        <div class="target">80,000</div>
-        <p>تارجت 80,000 — الحد الأقصى للمساعدة 15,000 ألماسة.</p>
-      </article>
-      <article class="offer">
-        <div class="offer-icon">🏆</div>
-        <h3>عرض النخبة</h3>
-        <div class="target">100,000</div>
-        <p>تارجت 100,000 — مساعدة تصل إلى 20,000 ألماسة.</p>
-      </article>
-      <article class="offer special-offer">
-        <div class="offer-icon">✨</div>
-        <h3>عرض التارجت الكبير</h3>
-        <div class="target">120,000</div>
-        <p>تارجت 120,000 — الحد الأقصى للمساعدة 25,000 ألماسة.</p>
-        <p style="margin-top:10px;">تُطبق المساعدة وفق شروط الوكالة والأنظمة المعتمدة.</p>
-      </article>
-    </div>
-  </div>
-</section>
+  <main class="container">
 
-<section id="features">
-  <div class="container">
-    <div class="section-title">
-      <h2>لماذا <span>وكالة الشايب؟</span></h2>
-      <p>نعمل معًا لتحقيق نتائج أفضل لمذيعينا</p>
-    </div>
-    <div class="features">
-      <article class="feature">
-        <div class="feature-icon">🎯</div>
-        <h3>متابعة التارجت</h3>
-        <p>متابعة الأداء والتقدم نحو الهدف.</p>
-      </article>
-      <article class="feature">
-        <div class="feature-icon">🤝</div>
-        <h3>دعم مستمر</h3>
-        <p>مساعدة المذيعين والإجابة عن استفساراتهم.</p>
-      </article>
-      <article class="feature">
-        <div class="feature-icon">📈</div>
-        <h3>تطوير الأداء</h3>
-        <p>التشجيع على الاستمرار وتحسين البث.</p>
-      </article>
-      <article class="feature">
-        <div class="feature-icon">💜</div>
-        <h3>روح الفريق</h3>
-        <p>بيئة تشجع على التعاون والنجاح.</p>
-      </article>
-    </div>
-  </div>
-</section>
+    <section>
+      <h2 class="section-title">💎 عروض وكالة الشايب</h2>
+      <p class="section-description">
+        تعرّف على عروض الوكالة والمساعدات حسب كل عرض.
+      </p>
 
-<section id="broadcasters">
-  <div class="container">
-    <div class="section-title">
-      <h2>🎤 مذيعو <span>الوكالة</span></h2>
-      <p>اضغط على زر التارجت والوقت وأدخل كلمة المرور الخاصة بك لعرض بياناتك.</p>
-    </div>
-    <div id="broadcastersGrid" class="broadcasters-grid">
-      <div class="loading">⏳ جارٍ تحميل مذيعي الوكالة...</div>
-    </div>
-  </div>
-</section>
-
-<section class="join-section">
-  <div class="container">
-    <div class="join-card">
-      <h2>هل تريد الانضمام إلى <span>وكالة الشايب؟</span></h2>
-      <p>ابدأ رحلتك معنا. أرسل طلب الانضمام وسنتواصل معك.</p>
-      <div class="hero-buttons" style="justify-content:center;">
-        <a href="join.html" class="btn btn-primary">🎤 أرسل طلب الانضمام</a>
-        <a href="andix.html" class="btn btn-secondary">👑 تعرف على المذيعين</a>
+      <div id="offers">
+        <div class="loading">⏳ جاري عرض العروض...</div>
       </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">⭐ مذيعو الوكالة</h2>
+      <p class="section-description">
+        اكتشف مذيعينا وتابع صفحاتهم على Likee.
+        🔐 الهدف وساعات البث لا تظهر إلا بعد إدخال كلمة المرور الصحيحة.
+      </p>
+
+      <div id="broadcasters">
+        <div class="loading">⏳ جاري تحميل المذيعين...</div>
+      </div>
+    </section>
+
+    <div class="back-section">
+      <a class="btn" href="index.html">🏠 العودة إلى الصفحة الرئيسية</a>
+      <a class="btn" href="join.html">🤝 انضم إلى الوكالة</a>
     </div>
+  </main>
 
-    <div class="whatsapp">
-      <h3>💬 تواصل معنا عبر واتساب</h3>
-      <p>للاستفسار عن الوكالة أو المساعدة في الانضمام.</p>
-      <a href="https://wa.me/213673860283" target="_blank" rel="noopener noreferrer">راسلنا على واتساب</a>
-    </div>
-  </div>
-</section>
+  <footer>
+    <p>🎤 وكالة الشايب | Shayeb Agency</p>
+    <p>جميع الحقوق محفوظة © 2026</p>
+  </footer>
 
-<footer>
-  <p>© <span id="year"></span> <strong>وكالة الشايب | Shayeb Agency</strong></p>
-  <p>نجاحك هدفنا 💜</p>
-</footer>
+  <script>
+    const SUPABASE_URL =
+      "https://hzcnkywuabugjebtwzmv.supabase.co";
 
-<script>
-  // الاتصال بقاعدة بيانات Supabase الخاصة بالوكالة
-  const SUPABASE_URL = "https://hzcnkywuabugjebtwzmv.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
-  const TABLE_NAME = "Shayeb agency";
+    const SUPABASE_KEY =
+      "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
 
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  const grid = document.getElementById("broadcastersGrid");
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+    // العروض
+    const offers = [
+      { price: "4,500", help: "مساعدة تصل إلى 1,000 ماسة" },
+      { price: "11,000", help: "مساعدة تصل إلى 1,500 ماسة" },
+      { price: "25,500", help: "مساعدة تصل إلى 3,000 ماسة" },
+      { price: "50,000", help: "مساعدة تصل إلى 5,000 ماسة" },
+      { price: "80,000", help: "مساعدة تصل إلى 15,000 ماسة" },
+      { price: "100,000", help: "مساعدة تصل إلى 20,000 ماسة" },
+      { price: "120,000", help: "مساعدة تصل إلى 25,000 ماسة" }
+    ];
 
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]);
-  }
+    function showOffers() {
+      const container = document.getElementById("offers");
 
-  function safeURL(value) {
-    try {
-      const url = new URL(value);
-      return ["https:", "http:"].includes(url.protocol) ? url.href : "";
-    } catch {
-      return "";
-    }
-  }
-
-  function renderBroadcaster(person) {
-    const id = Number(person.id);
-    const name = escapeHTML(person.name || "مذيع الوكالة");
-    const image = safeURL(person.image_url);
-    const likee = safeURL(person.likee_url);
-
-    const card = document.createElement("article");
-    card.className = "broadcaster-card";
-
-    const img = document.createElement("img");
-    img.className = "broadcaster-image";
-    img.alt = "صورة " + (person.name || "مذيع الوكالة");
-    img.loading = "lazy";
-    img.src = image || "https://placehold.co/130x130/24104d/e7bd58?text=Likee";
-    img.onerror = () => {
-      img.onerror = null;
-      img.src = "https://placehold.co/130x130/24104d/e7bd58?text=Likee";
-    };
-    card.appendChild(img);
-
-    const heading = document.createElement("h3");
-    heading.textContent = person.name || "مذيع الوكالة";
-    card.appendChild(heading);
-
-    const info = document.createElement("p");
-    info.className = "broadcaster-info";
-    info.textContent = "عضو في وكالة الشايب ✦";
-    card.appendChild(info);
-
-    const button = document.createElement("button");
-    button.className = "private-btn";
-    button.type = "button";
-    button.textContent = "🔐 التارجت والوقت";
-    button.addEventListener("click", () => showPrivateStats(id, card));
-    card.appendChild(button);
-
-    const result = document.createElement("div");
-    result.className = "private-result";
-    result.setAttribute("aria-live", "polite");
-    card.appendChild(result);
-
-    if (likee) {
-      const link = document.createElement("a");
-      link.className = "likee-btn";
-      link.href = likee;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "🎬 حساب Likee";
-      card.appendChild(link);
+      container.innerHTML = offers.map((offer, index) => `
+        <article class="offer">
+          <h3>🎁 العرض ${index + 1}</h3>
+          <div class="price">${offer.price}</div>
+          <p>${offer.help}</p>
+        </article>
+      `).join("");
     }
 
-    return card;
-  }
-
-  async function loadBroadcasters() {
-    grid.innerHTML = '<div class="loading">⏳ جارٍ تحميل مذيعي الوكالة...</div>';
-
-    try {
-      // لا نطلب التارجت أو الساعات أو كلمات المرور من الاستعلام العام.
-      const { data, error } = await db
-        .from(TABLE_NAME)
-        .select("id, image_url, likee_url, name")
-        .order("id", { ascending: true });
-
-      if (error) throw error;
-
-      grid.replaceChildren();
-
-      if (!data || data.length === 0) {
-        grid.innerHTML = '<div class="loading">لا يوجد مذيعون لعرضهم حاليًا.</div>';
-        return;
-      }
-
-      data.forEach(person => grid.appendChild(renderBroadcaster(person)));
-    } catch (error) {
-      console.error("تعذر تحميل المذيعين:", error);
-      grid.innerHTML =
-        '<div class="loading">تعذر تحميل المذيعين. تحققي من إعدادات Supabase وسياسات الوصول.</div>';
-    }
-  }
-
-  async function showPrivateStats(id, card) {
-    const result = card.querySelector(".private-result");
-    const password = window.prompt("أدخلي كلمة المرور الخاصة بك لعرض التارجت والوقت:");
-
-    if (password === null) return;
-
-    if (!password.trim()) {
-      alert("يرجى إدخال كلمة المرور.");
-      return;
-    }
-
-    result.style.display = "block";
-    result.textContent = "⏳ جارٍ التحقق من كلمة المرور...";
-
-    try {
-      // يجب إنشاء هذه الدالة في Supabase باستخدام كود SQL المرفق أسفل الصفحة.
-      const { data, error } = await db.rpc("get_broadcaster_stats", {
-        p_id: id,
-        p_password: password
+    // حماية النصوص عند عرضها في الصفحة
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, function (char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[char];
       });
-
-      if (error) throw error;
-
-      if (!data || data.length === 0) {
-        result.textContent = "❌ كلمة المرور غير صحيحة، أو لم يتم تسجيل البيانات لهذا الحساب.";
-        return;
-      }
-
-      const stats = data[0];
-      result.replaceChildren();
-
-      const targetLine = document.createElement("p");
-      const targetLabel = document.createElement("strong");
-      targetLabel.textContent = "🎯 التارجت: ";
-      targetLine.appendChild(targetLabel);
-      targetLine.appendChild(document.createTextNode(stats.target || "لم يُحدد بعد"));
-      result.appendChild(targetLine);
-
-      const hoursLine = document.createElement("p");
-      const hoursLabel = document.createElement("strong");
-      hoursLabel.textContent = "⏰ الوقت: ";
-      hoursLine.appendChild(hoursLabel);
-      hoursLine.appendChild(document.createTextNode(stats.hours || "لم يُحدد بعد"));
-      result.appendChild(hoursLine);
-
-      const closeButton = document.createElement("button");
-      closeButton.type = "button";
-      closeButton.className = "private-btn";
-      closeButton.textContent = "إخفاء البيانات";
-      closeButton.addEventListener("click", () => {
-        result.replaceChildren();
-        result.style.display = "none";
-      });
-      result.appendChild(closeButton);
-    } catch (error) {
-      console.error("خطأ في التحقق:", error);
-      result.textContent =
-        "تعذر التحقق حاليًا. تأكدي من إنشاء دالة التحقق في Supabase ومن صلاحياتها.";
     }
-  }
 
-  loadBroadcasters();
-</script>
+    // تحميل المذيعين دون جلب الهدف أو الساعات أو كلمات المرور
+    async function loadBroadcasters() {
+      const container = document.getElementById("broadcasters");
+
+      try {
+        const { data, error } = await db
+          .from("Shayeb agency")
+          .select("id, image_url, likee_url, name")
+          .order("id", { ascending: false });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          container.innerHTML = `
+            <div class="empty">
+              🎤 لا يوجد مذيعون حاليًا.
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = "";
+
+        data.forEach((broadcaster) => {
+          const card = document.createElement("article");
+          card.className = "card";
+
+          const name = escapeHTML(broadcaster.name || "مذيع الوكالة");
+          const image = escapeHTML(broadcaster.image_url || "");
+          const likeeUrl = broadcaster.likee_url || "";
+
+          const safeLink = /^https?:\/\//i.test(likeeUrl)
+            ? escapeHTML(likeeUrl)
+            : "";
+
+          card.innerHTML = `
+            <img class="card-image"
+                 src="${image || "https://placehold.co/600x500/291744/f5d58a?text=Shayeb+Agency"}"
+                 alt="${name}"
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x500/291744/f5d58a?text=Shayeb+Agency'">
+
+            <div class="card-content">
+              <h3>🎤 ${name}</h3>
+
+              <div class="info">
+                🔒 الهدف وساعات البث مخفية
+              </div>
+
+              <button class="password-btn" type="button">
+                🔐 عرض الهدف وساعات البث
+              </button>
+
+              <div class="stats"></div>
+
+              ${safeLink ? `
+                <a class="likee-btn"
+                   href="${safeLink}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  🎬 مشاهدة صفحة Likee
+                </a>
+              ` : ""}
+            </div>
+          `;
+
+          const button = card.querySelector(".password-btn");
+          const stats = card.querySelector(".stats");
+
+          button.addEventListener("click", async () => {
+            const password = prompt("أدخلي كلمة المرور الخاصة بهذا المذيع:");
+
+            if (password === null) return;
+
+            if (!password.trim()) {
+              alert("يرجى إدخال كلمة المرور.");
+              return;
+            }
+
+            button.disabled = true;
+            button.textContent = "⏳ جارٍ التحقق...";
+
+            try {
+              const { data, error } = await db.rpc(
+                "get_broadcaster_stats",
+                {
+                  p_id: broadcaster.id,
+                  p_password: password
+                }
+              );
+
+              if (error) throw error;
+
+              const result = Array.isArray(data) ? data[0] : data;
+
+              if (!result) {
+                stats.style.display = "block";
+                stats.textContent = "❌ كلمة المرور غير صحيحة.";
+                return;
+              }
+
+              stats.innerHTML = `
+                <div class="info">
+                  🎯 <strong>الهدف:</strong>
+                  ${escapeHTML(result.target || "غير محدد")}
+                </div>
+                <div class="info">
+                  ⏰ <strong>ساعات البث:</strong>
+                  ${escapeHTML(result.hours || "غير محدد")}
+                </div>
+              `;
+
+              stats.style.display = "block";
+              button.textContent = "✅ تم التحقق";
+            } catch (error) {
+              console.error(error);
+              stats.style.display = "block";
+              stats.textContent =
+                "⚠️ تعذر التحقق. تأكدي من إعداد دالة التحقق في قاعدة البيانات.";
+            } finally {
+              button.disabled = false;
+
+              if (button.textContent === "⏳ جارٍ التحقق...") {
+                button.textContent = "🔐 إعادة المحاولة";
+              }
+            }
+          });
+
+          container.appendChild(card);
+        });
+      } catch (error) {
+        console.error(error);
+        container.innerHTML = `
+          <div class="empty">
+            ⚠️ تعذر تحميل المذيعين.
+            <br>
+            تحققي من اتصال قاعدة البيانات وصلاحيات القراءة.
+          </div>
+        `;
+      }
+    }
+
+    showOffers();
+    loadBroadcasters();
+  </script>
 </body>
 </html>
