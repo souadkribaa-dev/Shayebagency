@@ -2,273 +2,1746 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8">
+<meta charset="utf-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
-  <title>لوحة إدارة وكالة الشايب</title>
+<title>إدارة وكالة الشايب</title>
 
-  <style>
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+*{
+  box-sizing:border-box
+}
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: #f5f5f7;
-      color: #222;
-      font-family: Arial, Tahoma, sans-serif;
-    }
+body{
+  margin:0;
+  background:#f6f6f8;
+  font-family:Arial,Tahoma,sans-serif;
+  color:#222
+}
 
-    .header {
-      background: linear-gradient(
-        135deg,
-        #ff3b81,
-        #ff5a5f
-      );
+.header{
+  background:linear-gradient(135deg,#ff3b81,#ff5a5f);
+  color:#fff;
+  padding:22px 16px 28px;
+  border-radius:0 0 26px 26px
+}
 
-      color: white;
-      padding: 30px 20px;
-      border-radius: 0 0 30px 30px;
-    }
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:16px
+}
 
-    .container {
-      width: 100%;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+.header h1{
+  margin:0 0 7px;
+  font-size:27px
+}
 
-    h1 {
-      margin: 0 0 10px;
-      font-size: 28px;
-    }
+.header p{
+  margin:0;
+  opacity:.92
+}
 
-    .subtitle {
-      margin: 0;
-      font-size: 16px;
-      opacity: 0.9;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-top: 20px;
-    }
+.card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 3px 15px #0001
+}
 
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.photo{
+  display:block;
+  position:relative;
+  aspect-ratio:1/1;
+  background:#ddd
+}
 
-    .card-title {
-      font-size: 17px;
-      color: #555;
-      margin-bottom: 12px;
-    }
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block
+}
 
-    .number {
-      font-size: 36px;
-      font-weight: bold;
-      color: #ff3b81;
-    }
+.like{
+  position:absolute;
+  bottom:9px;
+  left:9px;
+  background:#ff3b81;
+  color:#fff;
+  border-radius:20px;
+  padding:6px 10px;
+  font-size:12px
+}
 
-    .panel {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.info{
+  padding:11px 12px 13px
+}
 
-    .panel h2 {
-      margin-top: 0;
-      font-size: 21px;
-    }
+.name{
+  font-size:17px;
+  font-weight:800;
+  margin-bottom:8px
+}
 
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 14px;
-      padding: 15px;
-      margin-top: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      background: #ff3b81;
-      color: white;
-    }
+.stats{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+.stat{
+  background:#f4f4f6;
+  border-radius:10px;
+  padding:6px 8px;
+  font-size:12px
+}
 
-    .back {
-      background: #333;
-    }
+.stat b{
+  color:#ff3b81
+}
 
-    .message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 12px;
-      background: #f0fff4;
-      color: #16803c;
-      font-weight: bold;
-    }
+.tools{
+  display:flex;
+  gap:8px;
+  margin:16px 0;
+  flex-wrap:wrap
+}
 
-    .footer {
-      text-align: center;
-      color: #777;
-      padding: 30px 10px;
-      font-size: 14px;
-    }
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:11px 14px;
+  font-weight:bold;
+  cursor:pointer
+}
 
-    @media (max-width: 600px) {
+.primary{
+  background:#222;
+  color:#fff
+}
 
-      .cards {
-        grid-template-columns: 1fr;
-      }
+.pink{
+  background:#ff3b81;
+  color:#fff
+}
 
-      h1 {
-        font-size: 24px;
-      }
+.danger{
+  background:#ffe8ee;
+  color:#c21e55
+}
 
-      .container {
-        padding: 15px;
-      }
+.muted{
+  background:#fff;
+  border:1px solid #ddd
+}
 
-    }
+.status{
+  margin:12px 0;
+  padding:11px 13px;
+  border-radius:12px;
+  background:#fff;
+  font-size:13px
+}
 
-  </style>
+.ok{
+  border-right:4px solid #2ca66f
+}
+
+.err{
+  border-right:4px solid #e53935
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:10;
+  align-items:center;
+  justify-content:center;
+  padding:18px
+}
+
+.modal.show{
+  display:flex
+}
+
+.box{
+  background:#fff;
+  width:100%;
+  max-width:520px;
+  border-radius:20px;
+  padding:18px;
+  max-height:92vh;
+  overflow:auto
+}
+
+.box h2{
+  margin-top:0
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin:10px 0 5px
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  font-size:15px
+}
+
+.row{
+  display:flex;
+  gap:8px;
+  margin-top:15px
+}
+
+.row .btn{
+  flex:1
+}
+
+.note{
+  font-size:12px;
+  color:#777;
+  line-height:1.6
+}
+
+.hidden{
+  display:none!important
+}
+
+.login{
+  max-width:520px;
+  margin:28px auto;
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 3px 15px #0001
+}
+
+.small{
+  font-size:12px;
+  color:#777
+}
+
+.preview{
+  width:110px;
+  height:110px;
+  border-radius:14px;
+  object-fit:cover;
+  margin-top:8px;
+  display:block
+}
+
+.empty{
+  text-align:center;
+  background:#fff;
+  border-radius:18px;
+  padding:35px;
+  color:#777;
+  grid-column:1/-1
+}
+
+.fileBox{
+  border:2px dashed #ddd;
+  border-radius:14px;
+  padding:12px;
+  background:#fafafa
+}
+
+@media(max-width:430px){
+
+  .grid{
+    gap:10px
+  }
+
+  .info{
+    padding:9px
+  }
+
+  .name{
+    font-size:15px
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <header class="header">
+<header class="header">
 
-    <div class="container">
+  <div class="wrap">
 
-      <h1>
-        لوحة إدارة وكالة الشايب
-      </h1>
+    <h1>
+      إدارة وكالة الشايب ⚙️
+    </h1>
 
-      <p class="subtitle">
-        مرحبًا بك في لوحة التحكم
-      </p>
+    <p>
+      صفحة خاصة لإضافة وتعديل بيانات المذيعين
+    </p>
+
+  </div>
+
+</header>
+
+
+<main class="wrap">
+
+
+<!-- LOGIN -->
+
+<div id="login" class="login">
+
+  <h2>
+    دخول الإدارة
+  </h2>
+
+  <p class="small">
+    استخدمي بريدك وكلمة المرور في حساب Supabase.
+  </p>
+
+
+  <label>
+    البريد الإلكتروني
+  </label>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="you@example.com"
+  >
+
+
+  <label>
+    كلمة المرور
+  </label>
+
+  <input
+    id="password"
+    type="password"
+    placeholder="••••••••"
+  >
+
+
+  <div class="row">
+
+    <button
+      class="btn pink"
+      onclick="signIn()"
+    >
+      دخول
+    </button>
+
+    <button
+      class="btn muted"
+      onclick="signUp()"
+    >
+      إنشاء حساب
+    </button>
+
+  </div>
+
+
+  <div
+    id="loginStatus"
+    class="status hidden"
+  ></div>
+
+</div>
+
+
+<!-- APP -->
+
+<div
+  id="app"
+  class="hidden"
+>
+
+  <div class="tools">
+
+    <button
+      class="btn primary"
+      onclick="addCard()"
+    >
+      ＋ إضافة مذيع
+    </button>
+
+
+    <button
+      class="btn muted"
+      onclick="loadData()"
+    >
+      ↻ تحديث
+    </button>
+
+
+    <button
+      class="btn danger"
+      onclick="signOut()"
+    >
+      خروج
+    </button>
+
+  </div>
+
+
+  <div
+    id="status"
+    class="status"
+  >
+    جاري التحميل...
+  </div>
+
+
+  <div
+    id="grid"
+    class="grid"
+  ></div>
+
+</div>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div
+  id="modal"
+  class="modal"
+>
+
+  <div class="box">
+
+    <h2 id="modalTitle">
+      إضافة مذيع
+    </h2>
+
+
+    <label>
+      الاسم
+    </label>
+
+    <input
+      id="fName"
+      placeholder="مثال: أحمد"
+    >
+
+
+    <label>
+      رابط Likee
+    </label>
+
+    <input
+      id="fLink"
+      placeholder="https://l.likee.video/..."
+    >
+
+
+    <label>
+      الصورة
+    </label>
+
+
+    <div class="fileBox">
+
+      <input
+        id="fImageFile"
+        type="file"
+        accept="image/*"
+      >
+
+
+      <img
+        id="preview"
+        class="preview hidden"
+        alt="معاينة الصورة"
+      >
 
     </div>
 
-  </header>
+
+    <label>
+      Target
+    </label>
+
+    <input
+      id="fTarget"
+      placeholder="مثال: 784963"
+    >
 
 
-  <main class="container">
+    <label>
+      الساعات
+    </label>
 
-    <div class="cards">
-
-      <div class="card">
-
-        <div class="card-title">
-          عدد المذيعين
-        </div>
-
-        <div
-          class="number"
-          id="presenters"
-        >
-          0
-        </div>
-
-      </div>
+    <input
+      id="fHours"
+      placeholder="مثال: 35"
+    >
 
 
-      <div class="card">
-
-        <div class="card-title">
-          عدد الطلبات
-        </div>
-
-        <div
-          class="number"
-          id="requests"
-        >
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="panel">
-
-      <h2>
-        إدارة الوكالة
-      </h2>
+    <div class="row">
 
       <button
-        onclick="testPage()"
+        id="saveBtn"
+        class="btn pink"
+        onclick="saveCard()"
       >
-        اختبار لوحة الإدارة
+        حفظ
       </button>
 
 
       <button
-        class="back"
-        onclick="goHome()"
+        class="btn muted"
+        onclick="closeModal()"
       >
-        العودة إلى الموقع
+        إلغاء
       </button>
-
-
-      <div
-        id="message"
-        class="message"
-      >
-        لوحة الإدارة جاهزة للعمل ✅
-      </div>
 
     </div>
 
-  </main>
+
+    <p class="note">
+      اختاري الصورة مباشرة من هاتفك.
+      سيتم رفعها تلقائيًا إلى Supabase Storage.
+    </p>
+
+  </div>
+
+</div>
 
 
-  <footer class="footer">
+<!-- SUPABASE -->
 
-    Shayeb Agency © 2026
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
 
-  </footer>
+
+<script>
+
+"use strict";
 
 
-  <script>
+/* =====================================================
+   فحص تحميل Supabase
+   ===================================================== */
 
-    function testPage() {
+if(
+  typeof window.supabase === "undefined"
+){
 
-      document.getElementById("message").textContent =
-        "تم تشغيل لوحة الإدارة بنجاح ✅";
+  document.getElementById("loginStatus").textContent =
+    "تعذر تحميل Supabase. تأكدي من اتصال الإنترنت ثم أعيدي تحميل الصفحة.";
+
+  document.getElementById("loginStatus").classList.remove(
+    "hidden"
+  );
+
+  document.getElementById("loginStatus").classList.add(
+    "err"
+  );
+
+  throw new Error(
+    "Supabase library was not loaded."
+  );
+
+}
+
+
+/* =====================================================
+   إعداد Supabase
+   ===================================================== */
+
+const SUPABASE_URL =
+  "https://hzcnkywuabugjebtwzmv.supabase.co";
+
+
+const SUPABASE_ANON_KEY =
+  "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+
+
+const client =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+/* =====================================================
+   إعدادات المشروع
+   ===================================================== */
+
+const TABLE_NAME =
+  "Shayeb agency";
+
+const BUCKET_NAME =
+  "broadcaster-images";
+
+
+let editingId = null;
+
+let oldImageUrl = "";
+
+
+/* =====================================================
+   عناصر الصفحة
+   ===================================================== */
+
+const loginBox =
+  document.getElementById("login");
+
+const appBox =
+  document.getElementById("app");
+
+const loginStatus =
+  document.getElementById("loginStatus");
+
+const statusBox =
+  document.getElementById("status");
+
+const grid =
+  document.getElementById("grid");
+
+const modal =
+  document.getElementById("modal");
+
+const preview =
+  document.getElementById("preview");
+
+const imageFile =
+  document.getElementById("fImageFile");
+
+
+/* =====================================================
+   رسائل
+   ===================================================== */
+
+function showLoginStatus(
+  message,
+  error = false
+){
+
+  loginStatus.textContent =
+    message;
+
+  loginStatus.classList.remove(
+    "hidden",
+    "ok",
+    "err"
+  );
+
+  loginStatus.classList.add(
+    error ? "err" : "ok"
+  );
+
+}
+
+
+function showStatus(
+  message,
+  error = false
+){
+
+  statusBox.textContent =
+    message;
+
+  statusBox.classList.remove(
+    "ok",
+    "err"
+  );
+
+  statusBox.classList.add(
+    error ? "err" : "ok"
+  );
+
+}
+
+
+/* =====================================================
+   تسجيل الدخول
+   ===================================================== */
+
+async function signIn(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+
+  if(
+    !email ||
+    !password
+  ){
+
+    showLoginStatus(
+      "اكتبي البريد الإلكتروني وكلمة المرور.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  showLoginStatus(
+    "جاري تسجيل الدخول..."
+  );
+
+
+  try{
+
+    const result =
+      await client.auth.signInWithPassword({
+
+        email: email,
+
+        password: password
+
+      });
+
+
+    if(result.error){
+
+      throw result.error;
 
     }
 
 
-    function goHome() {
+    loginBox.classList.add(
+      "hidden"
+    );
 
-      window.location.href = "index.html";
+    appBox.classList.remove(
+      "hidden"
+    );
+
+
+    showStatus(
+      "تم تسجيل الدخول بنجاح."
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showLoginStatus(
+      "خطأ في تسجيل الدخول: " +
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   إنشاء حساب
+   ===================================================== */
+
+async function signUp(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+
+  if(
+    !email ||
+    !password
+  ){
+
+    showLoginStatus(
+      "اكتبي البريد الإلكتروني وكلمة المرور أولاً.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(password.length < 6){
+
+    showLoginStatus(
+      "كلمة المرور يجب أن تكون 6 أحرف على الأقل.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  showLoginStatus(
+    "جاري إنشاء الحساب..."
+  );
+
+
+  try{
+
+    const result =
+      await client.auth.signUp({
+
+        email: email,
+
+        password: password
+
+      });
+
+
+    if(result.error){
+
+      throw result.error;
 
     }
 
 
-    document.getElementById("presenters").textContent = "0";
+    showLoginStatus(
+      "تم إنشاء الحساب. يمكنك تسجيل الدخول الآن."
+    );
 
-    document.getElementById("requests").textContent = "0";
 
-  </script>
+  }catch(error){
+
+    console.error(error);
+
+    showLoginStatus(
+      "خطأ: " +
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   تسجيل الخروج
+   ===================================================== */
+
+async function signOut(){
+
+  await client.auth.signOut();
+
+
+  appBox.classList.add(
+    "hidden"
+  );
+
+  loginBox.classList.remove(
+    "hidden"
+  );
+
+  grid.innerHTML = "";
+
+
+  document.getElementById(
+    "password"
+  ).value = "";
+
+}
+
+
+/* =====================================================
+   تحميل البيانات
+   ===================================================== */
+
+async function loadData(){
+
+  showStatus(
+    "جاري تحميل المذيعين..."
+  );
+
+
+  try{
+
+    const result =
+      await client
+        .from(TABLE_NAME)
+        .select("*")
+        .order(
+          "id",
+          {
+            ascending:false
+          }
+        );
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    renderCards(
+      result.data || []
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showStatus(
+      "خطأ في تحميل البيانات: " +
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   عرض المذيعين
+   ===================================================== */
+
+function renderCards(rows){
+
+  grid.innerHTML = "";
+
+
+  if(!rows.length){
+
+    grid.innerHTML = `
+
+      <div class="empty">
+
+        لا يوجد مذيعون حتى الآن.
+
+      </div>
+
+    `;
+
+    showStatus(
+      "لا توجد بيانات."
+    );
+
+    return;
+
+  }
+
+
+  rows.forEach(
+    function(row){
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "card";
+
+
+      const image =
+        row.image_url ||
+        "https://placehold.co/500x500?text=No+Image";
+
+
+      card.innerHTML = `
+
+        <div class="photo">
+
+          <img
+            src="${escapeHtml(image)}"
+            alt="${escapeHtml(row.name || "")}"
+          >
+
+          <div class="like">
+            Likee
+          </div>
+
+        </div>
+
+
+        <div class="info">
+
+          <div class="name">
+            ${escapeHtml(
+              row.name || "بدون اسم"
+            )}
+          </div>
+
+
+          <div class="stats">
+
+            <div class="stat">
+
+              Target:
+
+              <b>
+                ${escapeHtml(
+                  row.target || "-"
+                )}
+              </b>
+
+            </div>
+
+
+            <div class="stat">
+
+              الساعات:
+
+              <b>
+                ${escapeHtml(
+                  row.hours || "-"
+                )}
+              </b>
+
+            </div>
+
+          </div>
+
+
+          <div class="tools">
+
+            <button
+              class="btn muted"
+              onclick="editCard(${row.id})"
+            >
+              تعديل
+            </button>
+
+
+            <button
+              class="btn danger"
+              onclick="deleteCard(${row.id})"
+            >
+              حذف
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
+
+
+  showStatus(
+    "تم تحميل " +
+    rows.length +
+    " مذيع."
+  );
+
+}
+
+
+/* =====================================================
+   إضافة مذيع
+   ===================================================== */
+
+function addCard(){
+
+  editingId =
+    null;
+
+  oldImageUrl =
+    "";
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "إضافة مذيع";
+
+
+  document.getElementById(
+    "fName"
+  ).value = "";
+
+
+  document.getElementById(
+    "fLink"
+  ).value = "";
+
+
+  document.getElementById(
+    "fTarget"
+  ).value = "";
+
+
+  document.getElementById(
+    "fHours"
+  ).value = "";
+
+
+  imageFile.value =
+    "";
+
+
+  preview.src =
+    "";
+
+  preview.classList.add(
+    "hidden"
+  );
+
+
+  modal.classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   معاينة الصورة
+   ===================================================== */
+
+imageFile.addEventListener(
+  "change",
+  function(){
+
+    const file =
+      this.files[0];
+
+
+    if(!file){
+
+      preview.src =
+        "";
+
+      preview.classList.add(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      !file.type.startsWith(
+        "image/"
+      )
+    ){
+
+      alert(
+        "الرجاء اختيار صورة فقط."
+      );
+
+      this.value =
+        "";
+
+      return;
+
+    }
+
+
+    const url =
+      URL.createObjectURL(
+        file
+      );
+
+
+    preview.src =
+      url;
+
+
+    preview.classList.remove(
+      "hidden"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   تعديل مذيع
+   ===================================================== */
+
+async function editCard(id){
+
+  showStatus(
+    "جاري فتح بيانات المذيع..."
+  );
+
+
+  try{
+
+    const result =
+      await client
+        .from(TABLE_NAME)
+        .select("*")
+        .eq(
+          "id",
+          id
+        )
+        .single();
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    const data =
+      result.data;
+
+
+    editingId =
+      id;
+
+
+    oldImageUrl =
+      data.image_url || "";
+
+
+    document.getElementById(
+      "modalTitle"
+    ).textContent =
+      "تعديل مذيع";
+
+
+    document.getElementById(
+      "fName"
+    ).value =
+      data.name || "";
+
+
+    document.getElementById(
+      "fLink"
+    ).value =
+      data.likee_url || "";
+
+
+    document.getElementById(
+      "fTarget"
+    ).value =
+      data.target || "";
+
+
+    document.getElementById(
+      "fHours"
+    ).value =
+      data.hours || "";
+
+
+    imageFile.value =
+      "";
+
+
+    if(data.image_url){
+
+      preview.src =
+        data.image_url;
+
+      preview.classList.remove(
+        "hidden"
+      );
+
+    }else{
+
+      preview.src =
+        "";
+
+      preview.classList.add(
+        "hidden"
+      );
+
+    }
+
+
+    modal.classList.add(
+      "show"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showStatus(
+      "تعذر فتح البيانات: " +
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   إغلاق النافذة
+   ===================================================== */
+
+function closeModal(){
+
+  modal.classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   رفع الصورة
+   ===================================================== */
+
+async function uploadImage(file){
+
+  if(!file){
+
+    return oldImageUrl || "";
+
+  }
+
+
+  const extension =
+    file.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  const fileName =
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2,10) +
+    "." +
+    extension;
+
+
+  const filePath =
+    "broadcasters/" +
+    fileName;
+
+
+  const result =
+    await client.storage
+      .from(BUCKET_NAME)
+      .upload(
+        filePath,
+        file,
+        {
+          upsert:false,
+          contentType:file.type
+        }
+      );
+
+
+  if(result.error){
+
+    throw new Error(
+      "فشل رفع الصورة: " +
+      result.error.message
+    );
+
+  }
+
+
+  const publicResult =
+    client.storage
+      .from(BUCKET_NAME)
+      .getPublicUrl(
+        filePath
+      );
+
+
+  if(
+    !publicResult.data ||
+    !publicResult.data.publicUrl
+  ){
+
+    throw new Error(
+      "تعذر الحصول على رابط الصورة."
+    );
+
+  }
+
+
+  return publicResult.data.publicUrl;
+
+}
+
+
+/* =====================================================
+   حفظ المذيع
+   ===================================================== */
+
+async function saveCard(){
+
+  const saveBtn =
+    document.getElementById(
+      "saveBtn"
+    );
+
+
+  const name =
+    document.getElementById(
+      "fName"
+    ).value.trim();
+
+
+  const likee_url =
+    document.getElementById(
+      "fLink"
+    ).value.trim();
+
+
+  const target =
+    document.getElementById(
+      "fTarget"
+    ).value.trim();
+
+
+  const hours =
+    document.getElementById(
+      "fHours"
+    ).value.trim();
+
+
+  const file =
+    imageFile.files[0];
+
+
+  if(!name){
+
+    alert(
+      "اكتبي اسم المذيع."
+    );
+
+    return;
+
+  }
+
+
+  saveBtn.disabled =
+    true;
+
+
+  saveBtn.textContent =
+    "جاري الحفظ...";
+
+
+  try{
+
+    let image_url =
+      oldImageUrl || "";
+
+
+    if(file){
+
+      image_url =
+        await uploadImage(
+          file
+        );
+
+    }
+
+
+    const row = {
+
+      name:name,
+
+      image_url:image_url,
+
+      likee_url:likee_url,
+
+      target:target,
+
+      hours:hours
+
+    };
+
+
+    let result;
+
+
+    if(editingId){
+
+      result =
+        await client
+          .from(TABLE_NAME)
+          .update(row)
+          .eq(
+            "id",
+            editingId
+          );
+
+    }else{
+
+      result =
+        await client
+          .from(TABLE_NAME)
+          .insert(row);
+
+    }
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    closeModal();
+
+
+    showStatus(
+      editingId
+        ? "تم تعديل المذيع بنجاح ✅"
+        : "تمت إضافة المذيع بنجاح ✅"
+    );
+
+
+    editingId =
+      null;
+
+    oldImageUrl =
+      "";
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "حدث خطأ:\n\n" +
+      error.message
+    );
+
+
+    showStatus(
+      error.message,
+      true
+    );
+
+
+  }finally{
+
+    saveBtn.disabled =
+      false;
+
+    saveBtn.textContent =
+      "حفظ";
+
+  }
+
+}
+
+
+/* =====================================================
+   حذف مذيع
+   ===================================================== */
+
+async function deleteCard(id){
+
+  const ok =
+    confirm(
+      "هل أنتِ متأكدة من حذف هذا المذيع؟"
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  try{
+
+    const result =
+      await client
+        .from(TABLE_NAME)
+        .delete()
+        .eq(
+          "id",
+          id
+        );
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    showStatus(
+      "تم حذف المذيع بنجاح."
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "تعذر الحذف:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   حماية النصوص
+   ===================================================== */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+   فحص الجلسة
+   ===================================================== */
+
+async function checkSession(){
+
+  try{
+
+    const result =
+      await client.auth.getSession();
+
+
+    if(
+      result.data &&
+      result.data.session
+    ){
+
+      loginBox.classList.add(
+        "hidden"
+      );
+
+      appBox.classList.remove(
+        "hidden"
+      );
+
+
+      await loadData();
+
+    }else{
+
+      loginBox.classList.remove(
+        "hidden"
+      );
+
+      appBox.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showLoginStatus(
+      "حدث خطأ أثناء الاتصال بـ Supabase: " +
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   تشغيل
+   ===================================================== */
+
+checkSession();
+
+</script>
 
 </body>
-
-</html>
+  </html>
