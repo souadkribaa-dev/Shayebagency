@@ -1,1484 +1,941 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>انضم إلى وكالة الشايب</title>
-
-<style>
-
-*{
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-margin:0;
-font-family:Arial,Tahoma,sans-serif;
-background:
-radial-gradient(circle at top,#24144a 0,#0b0717 45%,#05030b 100%);
-color:#fff;
-min-height:100vh;
-}
-
-/* ================= HEADER ================= */
-
-header{
-position:sticky;
-top:0;
-z-index:1000;
-background:rgba(8,5,18,.92);
-backdrop-filter:blur(12px);
-border-bottom:1px solid rgba(255,215,0,.15);
-}
-
-.nav{
-max-width:1100px;
-margin:auto;
-padding:15px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px;
-}
-
-.logo{
-font-size:20px;
-font-weight:bold;
-color:#ffd84d;
-white-space:nowrap;
-}
-
-.logo span{
-color:#fff;
-}
-
-nav{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-nav a{
-color:#eee;
-text-decoration:none;
-padding:9px 13px;
-border-radius:12px;
-font-size:14px;
-transition:.3s;
-}
-
-nav a:hover{
-background:rgba(255,215,0,.12);
-color:#ffd84d;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-max-width:1100px;
-margin:auto;
-padding:55px 20px 35px;
-text-align:center;
-}
-
-.badge{
-display:inline-block;
-padding:8px 15px;
-border-radius:30px;
-background:rgba(255,215,0,.1);
-border:1px solid rgba(255,215,0,.3);
-color:#ffd84d;
-font-size:14px;
-margin-bottom:18px;
-}
-
-.hero h1{
-font-size:42px;
-margin:5px 0 15px;
-line-height:1.3;
-}
-
-.hero h1 span{
-color:#ffd84d;
-}
-
-.hero p{
-max-width:700px;
-margin:auto;
-color:#cfc8dd;
-line-height:2;
-font-size:17px;
-}
-
-.hero-buttons{
-display:flex;
-justify-content:center;
-gap:12px;
-flex-wrap:wrap;
-margin-top:25px;
-}
-
-.btn{
-display:inline-block;
-padding:14px 24px;
-border-radius:14px;
-text-decoration:none;
-font-weight:bold;
-transition:.3s;
-}
-
-.btn-gold{
-background:linear-gradient(135deg,#ffd84d,#ffb700);
-color:#17100a;
-box-shadow:0 8px 25px rgba(255,193,7,.2);
-}
-
-.btn-dark{
-border:1px solid rgba(255,215,0,.35);
-color:#fff;
-background:rgba(255,255,255,.05);
-}
-
-.btn:hover{
-transform:translateY(-2px);
-}
-
-/* ================= CONTAINER ================= */
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:10px 20px 50px;
-}
-
-.section{
-margin-top:35px;
-}
-
-.section-title{
-text-align:center;
-margin-bottom:25px;
-}
-
-.section-title h2{
-font-size:29px;
-margin:0 0 8px;
-}
-
-.section-title p{
-color:#aaa1b9;
-margin:0;
-}
-
-/* ================= STEPS ================= */
-
-.steps{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-}
-
-.step{
-background:linear-gradient(
-145deg,
-rgba(255,255,255,.07),
-rgba(255,255,255,.025)
-);
-border:1px solid rgba(255,255,255,.08);
-border-radius:20px;
-padding:22px;
-text-align:center;
-}
-
-.step-icon{
-font-size:30px;
-margin-bottom:10px;
-}
-
-.step h3{
-margin:8px 0;
-font-size:18px;
-}
-
-.step p{
-color:#aaa;
-font-size:14px;
-line-height:1.8;
-margin:0;
-}
-
-/* ================= OFFERS ================= */
-
-.offers{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-}
-
-.offer{
-position:relative;
-background:
-linear-gradient(
-145deg,
-rgba(91,48,145,.3),
-rgba(20,10,38,.8)
-);
-border:1px solid rgba(255,215,0,.18);
-border-radius:20px;
-padding:20px;
-overflow:hidden;
-}
-
-.offer:before{
-content:"";
-position:absolute;
-width:80px;
-height:80px;
-background:#ffd84d;
-filter:blur(60px);
-opacity:.15;
-top:-20px;
-right:-20px;
-}
-
-.offer-title{
-font-weight:bold;
-font-size:17px;
-margin-bottom:12px;
-color:#fff;
-}
-
-.offer-target{
-font-size:23px;
-font-weight:bold;
-color:#ffd84d;
-}
-
-.offer-diamond{
-color:#d7cfe1;
-margin-top:5px;
-font-size:14px;
-}
-
-/* ================= FEATURE ================= */
-
-.feature{
-background:
-linear-gradient(
-135deg,
-rgba(255,215,0,.08),
-rgba(103,52,157,.15)
-);
-border:1px solid rgba(255,215,0,.18);
-border-radius:25px;
-padding:28px;
-text-align:center;
-}
-
-.feature h2{
-color:#ffd84d;
-margin-top:0;
-}
-
-.feature p{
-color:#d0c9d9;
-line-height:2;
-}
-
-/* ================= AUDITION ================= */
-
-.audition{
-background:
-linear-gradient(
-135deg,
-#241047,
-#10071f
-);
-border:1px solid rgba(255,215,0,.2);
-border-radius:28px;
-padding:35px 25px;
-text-align:center;
-}
-
-.audition h2{
-font-size:28px;
-margin-top:0;
-}
-
-.audition p{
-color:#c8bfd4;
-line-height:2;
-}
-
-.audition-btn{
-display:inline-block;
-margin-top:12px;
-background:linear-gradient(135deg,#ffd84d,#ffb700);
-color:#17100a;
-padding:15px 28px;
-border-radius:15px;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* ================= WHATSAPP ================= */
-
-.whatsapp{
-background:
-linear-gradient(
-135deg,
-rgba(37,211,102,.12),
-rgba(20,100,55,.12)
-);
-border:1px solid rgba(37,211,102,.3);
-border-radius:22px;
-padding:25px;
-text-align:center;
-}
-
-.whatsapp h2{
-margin-top:0;
-}
-
-.whatsapp p{
-color:#bbb;
-line-height:1.8;
-}
-
-.whatsapp a{
-display:inline-block;
-background:#25D366;
-color:#fff;
-padding:14px 25px;
-border-radius:14px;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-text-align:center;
-padding:30px 20px;
-border-top:1px solid rgba(255,255,255,.08);
-color:#8f879b;
-font-size:13px;
-margin-top:20px;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:800px){
-
-.nav{
-flex-direction:column;
-}
-
-nav{
-width:100%;
-}
-
-.hero{
-padding-top:40px;
-}
-
-.hero h1{
-font-size:32px;
-}
-
-.steps{
-grid-template-columns:repeat(2,1fr);
-}
-
-}
-
-@media(max-width:550px){
-
-nav a{
-font-size:12px;
-padding:8px 9px;
-}
-
-.hero h1{
-font-size:29px;
-}
-
-.hero p{
-font-size:15px;
-}
-
-.container{
-padding-left:14px;
-padding-right:14px;
-}
-
-.steps{
-grid-template-columns:1fr;
-}
-
-.offers{
-grid-template-columns:1fr;
-}
-
-.offer-target{
-font-size:21px;
-}
-
-.audition{
-padding:28px 18px;
-}
-
-}
-
-/* ================= STATUS ================= */
-
-.status{
-margin-top:18px;
-padding:14px;
-border-radius:14px;
-display:none;
-line-height:1.8;
-font-weight:bold;
-}
-
-.success{
-display:block;
-background:rgba(39,174,96,.15);
-border:1px solid rgba(39,174,96,.4);
-color:#71e3a2;
-}
-
-.error{
-display:block;
-background:rgba(231,76,60,.12);
-border:1px solid rgba(231,76,60,.4);
-color:#ff8f86;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>وكالة الشايب | Shayeb Agency</title>
+
+  <meta name="description"
+        content="وكالة الشايب لدعم مذيعي Likee ومساعدتهم على تحقيق التارجت وتطوير أدائهم.">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at top right, #35105c 0%, transparent 35%),
+        radial-gradient(circle at bottom left, #24104d 0%, transparent 35%),
+        #080612;
+      color: #fff;
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== HEADER ===== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 6, 18, 0.94);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(218, 174, 70, 0.25);
+    }
+
+    .nav {
+      max-width: 1150px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #e7bd58;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    nav a {
+      color: #eee;
+      font-size: 15px;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: #e7bd58;
+    }
+
+    .nav-button {
+      background: linear-gradient(135deg, #e7bd58, #b77b18);
+      color: #140c20;
+      padding: 9px 17px;
+      border-radius: 25px;
+      font-weight: bold;
+    }
+
+    /* ===== HERO ===== */
+
+    .hero {
+      max-width: 1150px;
+      margin: auto;
+      min-height: 570px;
+      padding: 80px 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      border: 1px solid rgba(231,189,88,.4);
+      background: rgba(231,189,88,.08);
+      color: #e7bd58;
+      padding: 7px 16px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 72px);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #e7bd58;
+    }
+
+    .hero p {
+      color: #cfc9dc;
+      font-size: 18px;
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: .3s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e7bd58, #b77b18);
+      color: #130b1c;
+      box-shadow: 0 10px 30px rgba(231,189,88,.15);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(231,189,88,.45);
+      color: #e7bd58;
+      background: rgba(255,255,255,.03);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(231,189,88,.1);
+    }
+
+    .hero-card {
+      width: 340px;
+      min-height: 340px;
+      border-radius: 35px;
+      border: 1px solid rgba(231,189,88,.25);
+      background:
+        linear-gradient(145deg, rgba(91,42,133,.45), rgba(15,9,30,.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(0,0,0,.4);
+    }
+
+    .hero-icon {
+      font-size: 100px;
+      margin-bottom: 10px;
+    }
+
+    .hero-card h2 {
+      color: #e7bd58;
+      font-size: 28px;
+    }
+
+    /* ===== GENERAL ===== */
+
+    section {
+      padding: 75px 20px;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 span {
+      color: #e7bd58;
+    }
+
+    .section-title p {
+      color: #aaa3b7;
+    }
+
+    /* ===== OFFERS ===== */
+
+    .offers-section {
+      background: rgba(255,255,255,.015);
+      border-top: 1px solid rgba(255,255,255,.04);
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .offer {
+      background:
+        linear-gradient(145deg, rgba(62,31,93,.55), rgba(15,10,27,.85));
+      border: 1px solid rgba(231,189,88,.18);
+      border-radius: 22px;
+      padding: 28px 22px;
+      text-align: center;
+      transition: .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer::before {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(231,189,88,.08);
+      border-radius: 50%;
+      top: -50px;
+      left: -50px;
+    }
+
+    .offer:hover {
+      transform: translateY(-6px);
+      border-color: rgba(231,189,88,.5);
+    }
+
+    .offer-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .offer h3 {
+      color: #e7bd58;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .offer .target {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .offer p {
+      color: #bdb6c9;
+      font-size: 14px;
+    }
+
+    .special-offer {
+      grid-column: span 3;
+      background:
+        linear-gradient(135deg, rgba(107,53,151,.4), rgba(35,19,59,.8));
+    }
+
+    /* ===== FEATURES ===== */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 30px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    .feature-icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      color: #e7bd58;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #aaa3b7;
+      font-size: 14px;
+    }
+
+    /* ===== BROADCASTERS ===== */
+
+    .broadcasters-box {
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(53,25,80,.55), rgba(16,10,28,.9));
+      border: 1px solid rgba(231,189,88,.2);
+      border-radius: 30px;
+      padding: 55px 25px;
+    }
+
+    .likee-symbol {
+      font-size: 65px;
+      margin-bottom: 15px;
+    }
+
+    .broadcasters-box h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .broadcasters-box p {
+      color: #bcb5c8;
+      max-width: 650px;
+      margin: 0 auto 25px;
+    }
+
+    /* ===== JOIN ===== */
+
+    .join-section {
+      background:
+        radial-gradient(circle at center, rgba(105,45,145,.25), transparent 60%);
+    }
+
+    .join-card {
+      max-width: 850px;
+      margin: auto;
+      padding: 50px 30px;
+      text-align: center;
+      border-radius: 30px;
+      border: 1px solid rgba(231,189,88,.3);
+      background: rgba(255,255,255,.035);
+    }
+
+    .join-card h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .join-card h2 span {
+      color: #e7bd58;
+    }
+
+    .join-card p {
+      color: #bcb5c8;
+      margin-bottom: 28px;
+    }
+
+    /* ===== WHATSAPP ===== */
+
+    .whatsapp {
+      max-width: 700px;
+      margin: 35px auto 0;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(37,211,102,.06);
+      border: 1px solid rgba(37,211,102,.25);
+      text-align: center;
+    }
+
+    .whatsapp h3 {
+      margin-bottom: 8px;
+    }
+
+    .whatsapp p {
+      margin-bottom: 15px;
+    }
+
+    .whatsapp a {
+      display: inline-block;
+      padding: 11px 22px;
+      border-radius: 25px;
+      background: #25d366;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* ===== FOOTER ===== */
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: #8f8999;
+      font-size: 14px;
+    }
+
+    footer strong {
+      color: #e7bd58;
+    }
+
+    /* ===== MOBILE ===== */
+
+    @media (max-width: 900px) {
+
+      nav {
+        gap: 10px;
+      }
+
+      nav a:not(.nav-button) {
+        display: none;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 60px;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-card {
+        width: 100%;
+        max-width: 340px;
+      }
+
+      .offers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .special-offer {
+        grid-column: span 2;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .nav {
+        padding: 12px 15px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .nav-button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 55px 15px 45px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 55px 15px;
+      }
+
+      .section-title h2 {
+        font-size: 29px;
+      }
+
+      .offers {
+        grid-template-columns: 1fr;
+      }
+
+      .special-offer {
+        grid-column: span 1;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .join-card {
+        padding: 35px 20px;
+      }
+
+      .join-card h2 {
+        font-size: 29px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-buttons {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- ===== HEADER ===== -->
 
-<!-- ================= HEADER ================= -->
+  <header>
+    <div class="nav">
 
-<header>
+      <a href="index.html" class="logo">
+        وكالة <span>الشايب</span> ✦
+      </a>
 
-<div class="nav">
+      <nav>
+        <a href="#offers">العروض</a>
+        <a href="#features">مميزاتنا</a>
+        <a href="#broadcasters">مذيعي الوكالة</a>
+        <a href="andix.html" class="nav-button">🎤 المذيعين</a>
+      </nav>
 
-<div class="logo">
-🎤 وكالة <span>الشايب</span>
-</div>
+    </div>
+  </header>
 
-<nav>
 
-<a href="index.html">الرئيسية</a>
+  <!-- ===== HERO ===== -->
 
-<a href="andix.html">مذيعي الوكالة</a>
+  <section class="hero">
 
-<a href="join.html">انضم إلينا</a>
+    <div class="hero-content">
 
-<a href="https://wa.me/213673860283" target="_blank">
-واتساب
-</a>
+      <div class="badge">
+        ✦ وكالة Likee احترافية ✦
+      </div>
 
-</nav>
+      <h1>
+        وكالة <span>الشايب</span>
+      </h1>
 
-</div>
+      <p>
+        نرافق مذيعي Likee خطوة بخطوة لتحقيق التارجت،
+        تطوير الأداء، والحصول على الدعم المستمر.
+      </p>
 
-</header>
+      <div class="hero-buttons">
 
+        <a href="join.html" class="btn btn-primary">
+          🎤 انضم إلى الوكالة
+        </a>
 
-<!-- ================= HERO ================= -->
+        <a href="andix.html" class="btn btn-secondary">
+          👑 شاهد مذيعي الوكالة
+        </a>
 
-<section class="hero">
+      </div>
 
-<div class="badge">
-🎤 وكالة الشايب على Likee
-</div>
+    </div>
 
-<h1>
-انضم إلى <span>وكالة الشايب</span>
-</h1>
 
-<p>
-ابدأ رحلتك كمذيع Likee معنا.
-شاهد مثال الأوديشن، جهز فيديوك، ثم أرسل طلب الانضمام إلى الوكالة.
-</p>
+    <div class="hero-card">
 
-<div class="hero-buttons">
+      <div>
 
-<a
-href="https://l.likee.video/v/5WHaLU"
-target="_blank"
-class="btn btn-gold">
+        <div class="hero-icon">🎤</div>
 
-🎬 مشاهدة مثال الأوديشن
+        <h2>Shayeb Agency</h2>
 
-</a>
+        <p style="color:#aaa;margin-top:8px;">
+          نجاحك هدفنا
+        </p>
 
-<a
-href="#form"
-class="btn btn-dark">
+      </div>
 
-📹 إرسال الأوديشن
+    </div>
 
-</a>
+  </section>
 
-</div>
 
-</section>
+  <!-- ===== OFFERS ===== -->
 
+  <section id="offers" class="offers-section">
 
-<main class="container">
+    <div class="container">
 
+      <div class="section-title">
 
-<!-- ================= STEPS ================= -->
+        <h2>
+          🎁 عروض <span>وكالة الشايب</span>
+        </h2>
 
-<section class="section">
+        <p>
+          دعم ومساعدة مذيعي الوكالة في تحقيق التارجت
+        </p>
 
-<div class="section-title">
+      </div>
 
-<h2>كيف تنضم إلينا؟</h2>
 
-<p>
-أربع خطوات بسيطة فقط
-</p>
+      <div class="offers">
 
-</div>
+        <div class="offer special-offer">
 
+          <div class="offer-icon">🤝</div>
 
-<div class="steps">
+          <h3>
+            المساعدة في تقفيل التارجت
+          </h3>
 
+          <p>
+            في حال عدم القدرة على تقفيل التارجت،
+            توفر الوكالة المساعدة حسب العرض المناسب.
+          </p>
 
-<div class="step">
+        </div>
 
-<div class="step-icon">🎬</div>
 
-<h3>1. شاهد المثال</h3>
+        <div class="offer">
 
-<p>
-شاهد فيديو الأوديشن لمعرفة الطريقة المطلوبة.
-</p>
+          <div class="offer-icon">💎</div>
 
-</div>
+          <h3>التارجت الأول</h3>
 
+          <div class="target">4,500</div>
 
-<div class="step">
+          <p>
+            1,000 ماسة كحد أقصى
+          </p>
 
-<div class="step-icon">💡</div>
+        </div>
 
-<h3>2. جهز مكانك</h3>
 
-<p>
-اختر مكانًا هادئًا مع إضاءة جيدة وصوت واضح.
-</p>
+        <div class="offer">
 
-</div>
+          <div class="offer-icon">💎</div>
 
+          <h3>التارجت الثاني</h3>
 
-<div class="step">
+          <div class="target">11,000</div>
 
-<div class="step-icon">🎤</div>
+          <p>
+            1,500 ماسة كحد أقصى
+          </p>
 
-<h3>3. سجل الفيديو</h3>
+        </div>
 
-<p>
-عرّف بنفسك وقدم محتوى قصيرًا وواضحًا بثقة.
-</p>
 
-</div>
+        <div class="offer">
 
+          <div class="offer-icon">💎</div>
 
-<div class="step">
+          <h3>التارجت الثالث</h3>
 
-<div class="step-icon">📤</div>
+          <div class="target">25,500</div>
 
-<h3>4. أرسل الأوديشن</h3>
+          <p>
+            3,000 ماسة كحد أقصى
+          </p>
 
-<p>
-ارفع الفيديو وأرسل طلبك ليتم مراجعته.
-</p>
+        </div>
 
-</div>
 
+        <div class="offer">
 
-</div>
+          <div class="offer-icon">💎</div>
 
-</section>
+          <h3>التارجت الرابع</h3>
 
+          <div class="target">50,000</div>
 
-<!-- ================= OFFERS ================= -->
+          <p>
+            5,000 ماسة كحد أقصى
+          </p>
 
-<section class="section">
+        </div>
 
-<div class="section-title">
 
-<h2>💎 عروض وكالة الشايب</h2>
+        <div class="offer">
 
-<p>
-مساعدة خاصة في تقفيل التارجت
-</p>
+          <div class="offer-icon">💎</div>
 
-</div>
+          <h3>التارجت الخامس</h3>
 
+          <div class="target">80,000</div>
 
-<div class="offers">
+          <p>
+            15,000 ماسة كحد أقصى
+          </p>
 
+        </div>
 
-<div class="offer">
 
-<div class="offer-title">
-🎯 المساعدة في تقفيل التارجت
-</div>
+        <div class="offer">
 
-<div class="offer-diamond">
-في حال عدم القدرة على التقفيل
-</div>
+          <div class="offer-icon">💎</div>
 
-</div>
+          <h3>التارجت السادس</h3>
 
+          <div class="target">100,000</div>
 
-<div class="offer">
+          <p>
+            20,000 ماسة كحد أقصى
+          </p>
 
-<div class="offer-title">
-🎯 تارجت 4,500
-</div>
+        </div>
 
-<div class="offer-target">
-💎 1,000 ماسة كحد أقصى
-</div>
 
-</div>
+        <div class="offer">
 
+          <div class="offer-icon">💎</div>
 
-<div class="offer">
+          <h3>التارجت السابع</h3>
 
-<div class="offer-title">
-🎯 تارجت 11,000
-</div>
+          <div class="target">120,000</div>
 
-<div class="offer-target">
-💎 1,500 ماسة كحد أقصى
-</div>
+          <p>
+            25,000 ماسة كحد أقصى
+          </p>
 
-</div>
+        </div>
 
+      </div>
 
-<div class="offer">
+    </div>
 
-<div class="offer-title">
-🎯 تارجت 25,500
-</div>
+  </section>
 
-<div class="offer-target">
-💎 3,000 ماسة كحد أقصى
-</div>
 
-</div>
+  <!-- ===== FEATURES ===== -->
 
+  <section id="features">
 
-<div class="offer">
+    <div class="container">
 
-<div class="offer-title">
-🎯 تارجت 50,000
-</div>
+      <div class="section-title">
 
-<div class="offer-target">
-💎 5,000 ماسة كحد أقصى
-</div>
+        <h2>
+          لماذا <span>وكالة الشايب؟</span>
+        </h2>
 
-</div>
+        <p>
+          لأننا نهتم بنجاح المذيع وليس فقط بالتارجت
+        </p>
 
+      </div>
 
-<div class="offer">
 
-<div class="offer-title">
-🎯 تارجت 80,000
-</div>
+      <div class="features">
 
-<div class="offer-target">
-💎 15,000 ماسة كحد أقصى
-</div>
+        <div class="feature">
 
-</div>
+          <div class="feature-icon">🤝</div>
 
+          <h3>دعم مستمر</h3>
 
-<div class="offer">
+          <p>
+            نساعد المذيعين عند مواجهة أي صعوبة.
+          </p>
 
-<div class="offer-title">
-🎯 تارجت 100,000
-</div>
+        </div>
 
-<div class="offer-target">
-💎 20,000 ماسة
-</div>
 
-</div>
+        <div class="feature">
 
+          <div class="feature-icon">🎯</div>
 
-<div class="offer">
+          <h3>تحقيق التارجت</h3>
 
-<div class="offer-title">
-🎯 تارجت 120,000
-</div>
+          <p>
+            خطط وعروض تساعدك على الوصول إلى هدفك.
+          </p>
 
-<div class="offer-target">
-💎 25,000 ماسة كحد أقصى
-</div>
+        </div>
 
-</div>
 
+        <div class="feature">
 
-</div>
+          <div class="feature-icon">📈</div>
 
-</section>
+          <h3>تطوير الأداء</h3>
 
+          <p>
+            نساعدك على تحسين أدائك وزيادة نشاطك.
+          </p>
 
-<!-- ================= WHY ================= -->
+        </div>
 
-<section class="section">
 
-<div class="feature">
+        <div class="feature">
 
-<h2>
-✨ لماذا وكالة الشايب؟
-</h2>
+          <div class="feature-icon">👑</div>
 
-<p>
-نساعد المذيعين على تطوير حضورهم على Likee،
-وتقديم محتوى أفضل، والاستفادة من خدمات الوكالة.
-</p>
+          <h3>وكالة احترافية</h3>
 
-<p>
-🎯 دعم في التارجت
-<br>
-🎤 متابعة المذيعين
-<br>
-💎 عروض خاصة
-<br>
-🤝 تواصل مباشر مع الوكالة
-</p>
+          <p>
+            بيئة منظمة تهدف إلى نجاح مذيعيها.
+          </p>
 
-</div>
+        </div>
 
-</section>
+      </div>
 
+    </div>
 
-<!-- ================= AUDITION INFO ================= -->
+  </section>
 
-<section class="section">
 
-<div class="audition">
+  <!-- ===== BROADCASTERS ===== -->
 
-<h2>
-🎬 قبل إرسال الأوديشن
-</h2>
+  <section id="broadcasters">
 
-<p>
-شاهد الفيديو النموذجي أولًا،
-ثم سجل فيديو واضحًا وتحدث بثقة وابتسامة.
-</p>
+    <div class="container">
 
-<a
-href="https://l.likee.video/v/5WHaLU"
-target="_blank"
-class="audition-btn">
+      <div class="broadcasters-box">
 
-▶️ مشاهدة فيديو الأوديشن
+        <div class="likee-symbol">🎤</div>
 
-</a>
+        <h2>
+          مذيعي وكالة الشايب
+        </h2>
 
-</div>
+        <p>
+          تعرف على مذيعي الوكالة وشاهد صفحاتهم على Likee.
+        </p>
 
-</section>
+        <a href="andix.html" class="btn btn-primary">
+          👑 مشاهدة المذيعين
+        </a>
 
+      </div>
 
-<!-- ================= FORM ================= -->
+    </div>
 
-<section
-class="section"
-id="form">
+  </section>
 
-<div class="section-title">
 
-<h2>📹 إرسال الأوديشن</h2>
+  <!-- ===== JOIN ===== -->
 
-<p>
-املأ البيانات وأرسل فيديو الأوديشن
-</p>
+  <section class="join-section">
 
-</div>
+    <div class="container">
 
+      <div class="join-card">
 
-<div
-style="
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,215,0,.15);
-border-radius:25px;
-padding:25px;
-">
+        <h2>
+          هل تريد <span>الانضمام إلينا؟</span>
+        </h2>
 
+        <p>
+          إذا كنت مذيع Likee وتبحث عن وكالة تدعمك،
+          يمكنك إرسال الأوديشن الخاص بك الآن.
+        </p>
 
-<label style="display:block;margin-bottom:8px;">
-الاسم الكامل
-</label>
+        <a href="join.html" class="btn btn-primary">
+          🎤 إرسال الأوديشن والانضمام
+        </a>
 
-<input
-id="name"
-type="text"
-placeholder="اكتب اسمك الكامل"
-style="
-width:100%;
-padding:14px;
-border-radius:12px;
-border:1px solid #ffffff20;
-background:#120b20;
-color:white;
-margin-bottom:15px;
-font-family:inherit;
-">
+      </div>
 
 
-<label style="display:block;margin-bottom:8px;">
-رقم الهاتف
-</label>
+      <div class="whatsapp">
 
-<input
-id="phone"
-type="tel"
-placeholder="مثال: 0673860283"
-style="
-width:100%;
-padding:14px;
-border-radius:12px;
-border:1px solid #ffffff20;
-background:#120b20;
-color:white;
-margin-bottom:15px;
-font-family:inherit;
-">
+        <h3>💬 تواصل معنا عبر واتساب</h3>
 
+        <p>
+          للاستفسار عن الوكالة والعروض والانضمام
+        </p>
 
-<label style="display:block;margin-bottom:8px;">
-اسم المستخدم في Likee
-</label>
+        <a
+          href="https://wa.me/213673860283"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 تواصل معنا
+        </a>
 
-<input
-id="likeeName"
-type="text"
-placeholder="اسم حسابك في Likee"
-style="
-width:100%;
-padding:14px;
-border-radius:12px;
-border:1px solid #ffffff20;
-background:#120b20;
-color:white;
-margin-bottom:15px;
-font-family:inherit;
-">
+      </div>
 
+    </div>
 
-<label style="display:block;margin-bottom:8px;">
-رابط حساب Likee
-</label>
+  </section>
 
-<input
-id="likeeUrl"
-type="url"
-placeholder="ضع رابط حسابك في Likee"
-style="
-width:100%;
-padding:14px;
-border-radius:12px;
-border:1px solid #ffffff20;
-background:#120b20;
-color:white;
-margin-bottom:15px;
-font-family:inherit;
-">
 
+  <!-- ===== FOOTER ===== -->
 
-<label style="display:block;margin-bottom:8px;">
-🎥 فيديو الأوديشن
-</label>
+  <footer>
 
-<div
-style="
-border:2px dashed rgba(255,215,0,.25);
-border-radius:15px;
-padding:18px;
-text-align:center;
-background:rgba(0,0,0,.15);
-">
+    <p>
+      © 2026
+      <strong>Shayeb Agency</strong>
+      — جميع الحقوق محفوظة
+    </p>
 
+    <p style="margin-top:6px;">
+      وكالة الشايب 🎤
+    </p>
 
-<input
-id="auditionFile"
-type="file"
-accept="video/*"
-style="
-width:100%;
-color:#ddd;
-padding:8px;
-">
+  </footer>
 
-
-<p style="
-color:#999;
-font-size:13px;
-line-height:1.8;
-">
-
-الحد الأقصى للحجم: 100 ميغابايت
-
-</p>
-
-
-<video
-id="preview"
-controls
-style="
-width:100%;
-max-height:300px;
-display:none;
-border-radius:15px;
-background:#000;
-">
-</video>
-
-</div>
-
-
-<button
-type="button"
-id="submitBtn"
-style="
-width:100%;
-margin-top:20px;
-padding:17px;
-border:0;
-border-radius:15px;
-background:linear-gradient(135deg,#ffd84d,#ffb700);
-color:#17100a;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-">
-
-📤 إرسال الأوديشن
-
-</button>
-
-
-<div
-id="status"
-class="status">
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ================= WHATSAPP ================= -->
-
-<section class="section">
-
-<div class="whatsapp">
-
-<h2>
-💬 تحتاج إلى مساعدة؟
-</h2>
-
-<p>
-إذا كان لديك أي سؤال حول الأوديشن أو الانضمام إلى الوكالة،
-تواصل معنا مباشرة.
-</p>
-
-<a
-href="https://wa.me/213673860283"
-target="_blank">
-
-💬 تواصل معنا عبر WhatsApp
-
-</a>
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<footer>
-
-© 2026 وكالة الشايب — جميع الحقوق محفوظة
-
-</footer>
-
-
-<!-- ================= SUPABASE ================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL =
-'https://hzcnkywuabugjebtwzmv.supabase.co';
-
-const SUPABASE_ANON_KEY =
-'sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP';
-
-const client =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_ANON_KEY
-);
-
-
-/* ============================
-   معاينة الفيديو
-============================ */
-
-document
-.getElementById('auditionFile')
-.addEventListener(
-'change',
-function(){
-
-const file =
-this.files[0];
-
-const preview =
-document.getElementById('preview');
-
-if(!file){
-
-preview.style.display='none';
-
-preview.src='';
-
-return;
-
-}
-
-preview.src =
-URL.createObjectURL(file);
-
-preview.style.display='block';
-
-}
-);
-
-
-/* ============================
-   الرسائل
-============================ */
-
-function showError(message){
-
-const status =
-document.getElementById('status');
-
-status.className =
-'status error';
-
-status.textContent =
-'❌ ' + message;
-
-status.style.display =
-'block';
-
-}
-
-
-function showSuccess(message){
-
-const status =
-document.getElementById('status');
-
-status.className =
-'status success';
-
-status.textContent =
-'🎉 ' + message;
-
-status.style.display =
-'block';
-
-}
-
-
-/* ============================
-   إرسال الأوديشن
-============================ */
-
-document
-.getElementById('submitBtn')
-.addEventListener(
-'click',
-submitAudition
-);
-
-
-async function submitAudition(){
-
-const name =
-document
-.getElementById('name')
-.value
-.trim();
-
-const phone =
-document
-.getElementById('phone')
-.value
-.trim();
-
-const likeeName =
-document
-.getElementById('likeeName')
-.value
-.trim();
-
-const likeeUrl =
-document
-.getElementById('likeeUrl')
-.value
-.trim();
-
-const file =
-document
-.getElementById('auditionFile')
-.files[0];
-
-const button =
-document
-.getElementById('submitBtn');
-
-
-document
-.getElementById('status')
-.style.display='none';
-
-
-/* التحقق */
-
-if(!name){
-
-showError(
-'يرجى كتابة الاسم الكامل.'
-);
-
-return;
-
-}
-
-if(!phone){
-
-showError(
-'يرجى كتابة رقم الهاتف.'
-);
-
-return;
-
-}
-
-if(!likeeName){
-
-showError(
-'يرجى كتابة اسم المستخدم في Likee.'
-);
-
-return;
-
-}
-
-if(!file){
-
-showError(
-'يرجى اختيار فيديو الأوديشن.'
-);
-
-return;
-
-}
-
-if(
-file.size >
-100 * 1024 * 1024
-){
-
-showError(
-'حجم الفيديو كبير جدًا. الحد الأقصى 100 ميغابايت.'
-);
-
-return;
-
-}
-
-
-/* بدء الإرسال */
-
-button.disabled=true;
-
-button.textContent=
-'⏳ جاري إرسال الأوديشن...';
-
-
-try{
-
-
-/* ============================
-   رفع الفيديو
-============================ */
-
-const extension =
-file.name
-.split('.')
-.pop()
-.toLowerCase();
-
-
-const fileName =
-'auditions/' +
-Date.now() +
-'-' +
-Math.random()
-.toString(36)
-.substring(2) +
-'.' +
-extension;
-
-
-console.log(
-'بدء رفع الفيديو...'
-);
-
-
-const uploadPromise =
-client
-.storage
-.from('audition-videos')
-.upload(
-fileName,
-file,
-{
-cacheControl:'3600',
-upsert:false,
-contentType:file.type
-}
-);
-
-
-const upload =
-await Promise.race([
-
-uploadPromise,
-
-new Promise(
-(_,reject)=>{
-
-setTimeout(
-()=>reject(
-new Error(
-'رفع الفيديو استغرق وقتًا طويلًا. تحقق من الإنترنت وحاول مرة أخرى.'
-)
-),
-120000
-);
-
-}
-)
-
-]);
-
-
-if(upload.error){
-
-throw new Error(
-'فشل رفع الفيديو: ' +
-upload.error.message
-);
-
-}
-
-
-console.log(
-'تم رفع الفيديو بنجاح'
-);
-
-
-/* ============================
-   رابط الفيديو
-============================ */
-
-const publicResult =
-client
-.storage
-.from('audition-videos')
-.getPublicUrl(
-fileName
-);
-
-
-const publicUrl =
-publicResult
-.data
-.publicUrl;
-
-
-if(!publicUrl){
-
-throw new Error(
-'لم يتم الحصول على رابط الفيديو.'
-);
-
-}
-
-
-/* ============================
-   حفظ الطلب
-============================ */
-
-console.log(
-'جاري حفظ الطلب...'
-);
-
-
-const insertPromise =
-client
-.from('audition_requests')
-.insert({
-
-name:name,
-
-phone:phone,
-
-likee_name:likeeName,
-
-likee_url:likeeUrl,
-
-audition_url:publicUrl,
-
-status:'pending'
-
-});
-
-
-const result =
-await Promise.race([
-
-insertPromise,
-
-new Promise(
-(_,reject)=>{
-
-setTimeout(
-()=>reject(
-new Error(
-'حفظ الطلب استغرق وقتًا طويلًا. تحقق من صلاحيات جدول الطلبات.'
-)
-),
-30000
-);
-
-}
-)
-
-]);
-
-
-if(result.error){
-
-throw new Error(
-'فشل حفظ الطلب: ' +
-result.error.message
-);
-
-}
-
-
-/* ============================
-   نجاح
-============================ */
-
-showSuccess(
-'تم إرسال الأوديشن بنجاح! سيتم مراجعة طلبك والتواصل معك.'
-);
-
-
-/* تنظيف البيانات */
-
-document
-.getElementById('name')
-.value='';
-
-document
-.getElementById('phone')
-.value='';
-
-document
-.getElementById('likeeName')
-.value='';
-
-document
-.getElementById('likeeUrl')
-.value='';
-
-document
-.getElementById('auditionFile')
-.value='';
-
-document
-.getElementById('preview')
-.src='';
-
-document
-.getElementById('preview')
-.style.display='none';
-
-
-}
-catch(error){
-
-console.error(
-'AUDITION ERROR:',
-error
-);
-
-showError(
-error.message ||
-'حدث خطأ أثناء إرسال الأوديشن.'
-);
-
-}
-finally{
-
-button.disabled=false;
-
-button.textContent=
-'📤 إرسال الأوديشن';
-
-}
-
-}
-
-</script>
 
 </body>
-
 </html>
