@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تحديات وكالة الشايب</title>
+  <style>
+    :root {
+      --gold: #e7bd58;
+      --bg: #0b0d12;
+      --panel: #151922;
+      --text: #f7f7fa;
+      --muted: #aab1c0;
+      --border: #2a3040;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(ellipse at top, #202638, var(--bg) 65%);
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 28px 15px;
+      border-bottom: 1px solid var(--border);
+      background: #0b0d12cc;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    h1 { color: var(--gold); margin: 0 0 10px; }
+    header p { color: var(--muted); margin: 0; line-height: 1.8; }
+
+    main {
+      width: min(950px, 94%);
+      margin: 25px auto 45px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 12px 30px #0003;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: var(--gold);
+      margin: 0 0 20px;
+    }
+
+    .opponents {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .opponent {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px;
+      background: #0e121a;
+      min-width: 0;
+    }
+
+    .opponent h3 {
+      text-align: center;
+      margin: 0 0 15px;
+      color: var(--gold);
+    }
+
+    label {
+      display: block;
+      margin: 13px 0 7px;
+      font-size: 14px;
+      color: #e4e7ef;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 9px;
+      border: 1px solid #343c4e;
+      background: #090c12;
+      color: white;
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus { border-color: var(--gold); }
+
+    input[type="file"] { padding: 9px; }
+    input[type="datetime-local"] { direction: ltr; }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--gold);
+      color: #15120a;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { filter: brightness(1.08); }
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-top: 14px;
+    }
+
+    #message {
+      display: none;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 14px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .challenge-card {
+      background: #0e121a;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .versus {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .person { min-width: 0; }
+    .person img {
+      width: 100%;
+      max-width: 130px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--gold);
+      background: #222;
+    }
+
+    .person strong {
+      display: block;
+      margin-top: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .versus b { color: var(--gold); font-size: 20px; }
+
+    .account-link {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--gold);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .challenge-date {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 15px;
+      line-height: 1.8;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 24px 8px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 22px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .opponents { grid-template-columns: 1fr; }
+      .panel { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ش</div>
+    <h1>تحديات وكالة الشايب</h1>
+    <p>إدارة التحديات ومواعيد المواجهات بين المذيعين</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>＋ إضافة تحدٍ جديد</h2>
+
+      <form id="challengeForm">
+        <div class="opponents">
+          <div class="opponent">
+            <h3>الخصم الأول</h3>
+
+            <label for="name1">اسم المذيع</label>
+            <input id="name1" type="text" maxlength="100"
+              placeholder="اكتبي اسم المذيع الأول" required>
+
+            <label for="link1">رابط حسابه على Likee</label>
+            <input id="link1" type="url"
+              placeholder="https://..." required>
+
+            <label for="image1">صورة المذيع</label>
+            <input id="image1" type="file"
+              accept="image/*" required>
+          </div>
+
+          <div class="opponent">
+            <h3>الخصم الثاني</h3>
+
+            <label for="name2">اسم المذيع</label>
+            <input id="name2" type="text" maxlength="100"
+              placeholder="اكتبي اسم المذيع الثاني" required>
+
+            <label for="link2">رابط حسابه على Likee</label>
+            <input id="link2" type="url"
+              placeholder="https://..." required>
+
+            <label for="image2">صورة المذيع</label>
+            <input id="image2" type="file"
+              accept="image/*" required>
+          </div>
+        </div>
+
+        <label for="challengeDate">تاريخ ووقت التحدي</label>
+        <input id="challengeDate" type="datetime-local" required>
+
+        <label for="details">ملاحظات عن التحدي (اختياري)</label>
+        <textarea id="details" rows="3" maxlength="500"
+          placeholder="أي تفاصيل إضافية..."></textarea>
+
+        <button type="submit">عرض التحدي في المعاينة</button>
+
+        <p class="note">
+          هذه معاينة محلية للصفحة فقط في هذه المرحلة.
+          لم يتم بعد حفظ التحديات في قاعدة البيانات أو إرسال رسائل تيليجرام.
+        </p>
+
+        <div id="message" role="status"></div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>⚔️ معاينة التحديات</h2>
+      <div id="challengeList">
+        <div class="empty">
+          لم تتم إضافة تحديات للمعاينة بعد.<br>
+          املئي بيانات الخصمين والموعد ثم اضغطي زر المعاينة.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Shayeb Agency © إدارة التحديات
+  </footer>
+
+  <script>
+    const form = document.getElementById("challengeForm");
+    const list = document.getElementById("challengeList");
+    const message = document.getElementById("message");
+
+    function safeText(value) {
+      return String(value).replace(/[&<>"']/g, function (char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[char];
+      });
+    }
+
+    function validLikeeLink(value) {
+      try {
+        const url = new URL(value);
+        return url.protocol === "https:" || url.protocol === "http:";
+      } catch {
+        return false;
+      }
+    }
+
+    function readImage(file) {
+      return new Promise((resolve, reject) => {
+        if (!file || !file.type.startsWith("image/")) {
+          reject(new Error("اختاري ملف صورة صالحًا."));
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          reject(new Error("حجم الصورة يجب ألا يتجاوز 5 ميغابايت."));
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("تعذرت قراءة الصورة."));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function formatDate(value) {
+      const date = new Date(value);
+      return new Intl.DateTimeFormat("ar-DZ", {
+        dateStyle: "full",
+        timeStyle: "short"
+      }).format(date);
+    }
+
+    function makePerson(name, link, image) {
+      return `
+        <div class="person">
+          <img src="${image}" alt="صورة ${safeText(name)}">
+          <strong>${safeText(name)}</strong>
+          <a class="account-link" href="${safeText(link)}"
+             target="_blank" rel="noopener noreferrer">
+            فتح حساب Likee
+          </a>
+        </div>
+      `;
+    }
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      message.style.display = "none";
+
+      const name1 = document.getElementById("name1").value.trim();
+      const name2 = document.getElementById("name2").value.trim();
+      const link1 = document.getElementById("link1").value.trim();
+      const link2 = document.getElementById("link2").value.trim();
+      const date = document.getElementById("challengeDate").value;
+      const details = document.getElementById("details").value.trim();
+      const file1 = document.getElementById("image1").files[0];
+      const file2 = document.getElementById("image2").files[0];
+
+      if (!validLikeeLink(link1) || !validLikeeLink(link2)) {
+        message.textContent = "تأكدي من إدخال رابط صحيح لكل حساب.";
+        message.style.display = "block";
+        return;
+      }
+
+      if (!date || new Date(date).getTime() <= Date.now()) {
+        message.textContent = "اختاري موعدًا مستقبليًا للتحدي.";
+        message.style.display = "block";
+        return;
+      }
+
+      try {
+        const [image1, image2] = await Promise.all([
+          readImage(file1),
+          readImage(file2)
+        ]);
+
+        const card = document.createElement("article");
+        card.className = "challenge-card";
+        card.innerHTML = `
+          <div class="versus">
+            ${makePerson(name1, link1, image1)}
+            <b>VS</b>
+            ${makePerson(name2, link2, image2)}
+          </div>
+          <div class="challenge-date">
+            <div>📅 ${safeText(formatDate(date))}</div>
+            ${details ? `<p>${safeText(details)}</p>` : ""}
+          </div>
+        `;
+
+        const empty = list.querySelector(".empty");
+        if (empty) empty.remove();
+        list.prepend(card);
+
+        message.textContent =
+          "نجحت المعاينة! لم يُحفظ التحدي بعد، ولن تُرسل رسالة تيليجرام في هذه المرحلة.";
+        message.style.display = "block";
+        message.style.background = "#263326";
+        form.reset();
+      } catch (error) {
+        message.textContent = error.message || "حدث خطأ أثناء تجهيز الصور.";
+        message.style.display = "block";
+        message.style.background = "#402323";
+      }
+    });
+  </script>
+</body>
+</html>
