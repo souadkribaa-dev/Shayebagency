@@ -1,17 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>وكالة الشايب | Shayeb Agency</title>
+  <meta name="theme-color" content="#170d2a">
+  <title>مذيعو وكالة الشايب | Shayeb Agency</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #10091f;
@@ -29,6 +27,7 @@
       background: linear-gradient(135deg, var(--bg), #24123d, var(--bg));
       color: var(--white);
       line-height: 1.8;
+      min-height: 100vh;
     }
 
     header {
@@ -44,10 +43,7 @@
       margin-bottom: 8px;
     }
 
-    header p {
-      color: var(--muted);
-      font-size: 16px;
-    }
+    header p { color: var(--muted); }
 
     nav {
       display: flex;
@@ -84,82 +80,45 @@
       margin: 0 auto;
     }
 
-    .section {
-      padding: 38px 0 10px;
-      scroll-margin-top: 20px;
+    .intro {
+      text-align: center;
+      padding: 38px 10px 15px;
     }
 
-    .section-title {
-      text-align: center;
+    .intro h2 {
       color: var(--gold);
-      font-size: clamp(23px, 4vw, 30px);
+      font-size: clamp(24px, 4vw, 30px);
       margin-bottom: 8px;
     }
 
-    .section-description {
-      text-align: center;
+    .intro p {
       color: var(--muted);
-      margin: 0 auto 25px;
       max-width: 720px;
-      padding: 0 5px;
+      margin: 0 auto;
     }
 
-    .offers-grid, #broadcasters {
+    #broadcasters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 20px;
+      padding: 25px 0 40px;
     }
 
-    .offer-card, .card {
+    .card {
       background: linear-gradient(145deg, var(--panel2), var(--panel));
       border: 1px solid var(--border);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 8px 25px #0004;
-    }
-
-    .offer-card {
-      padding: 23px 17px;
-      text-align: center;
-      transition: .2s;
-    }
-
-    .offer-card:hover, .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .offer-card h3 {
-      color: var(--gold);
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .offer-price {
-      color: var(--gold);
-      font-size: 27px;
-      font-weight: bold;
-      margin: 8px 0;
-    }
-
-    .offer-card p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .offer-note {
-      color: #cbb8e1;
-      font-size: 13px;
-      margin-top: 12px;
-    }
-
-    .card {
       transition: transform .2s;
     }
+
+    .card:hover { transform: translateY(-4px); }
 
     .card-image {
       display: block;
       width: 100%;
-      height: 260px;
+      height: 270px;
       object-fit: cover;
       background: var(--panel2);
     }
@@ -186,9 +145,7 @@
       overflow-wrap: anywhere;
     }
 
-    .info strong {
-      color: var(--gold);
-    }
+    .info strong { color: var(--gold); }
 
     .password-btn {
       display: block;
@@ -210,10 +167,7 @@
       cursor: wait;
     }
 
-    .stats {
-      display: none;
-      margin-top: 12px;
-    }
+    .stats { display: none; margin-top: 12px; }
 
     .likee-btn {
       display: block;
@@ -236,40 +190,12 @@
       border-radius: 18px;
     }
 
-    .join-panel {
-      background: linear-gradient(145deg, #302047, #1b102d);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 25px;
-      max-width: 800px;
-      margin: 0 auto;
+    .back-section {
+      text-align: center;
+      padding: 0 0 40px;
     }
 
-    .join-steps {
-      list-style-position: inside;
-      color: var(--muted);
-      margin: 15px 0 20px;
-    }
-
-    .join-steps li {
-      margin: 7px 0;
-      padding: 8px 12px;
-      background: #170d2a;
-      border-radius: 10px;
-    }
-
-    .join-actions {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .whatsapp-btn {
-      background: linear-gradient(135deg, #39c875, #18894a);
-      color: white;
-    }
+    .back-section .btn { margin: 5px; }
 
     footer {
       text-align: center;
@@ -277,19 +203,14 @@
       background: #10091f;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      margin-top: 45px;
     }
 
-    footer p {
-      margin: 5px;
-    }
+    footer strong { color: var(--gold); }
 
     @media (max-width: 600px) {
       .container { width: 94%; }
-      .section { padding-top: 30px; }
-      .offers-grid, #broadcasters { grid-template-columns: 1fr; }
-      .card-image { height: 280px; }
-      .offer-card { padding: 20px 16px; }
+      #broadcasters { grid-template-columns: 1fr; }
+      .card-image { height: 300px; }
       nav a { padding: 9px 13px; font-size: 14px; }
     }
   </style>
@@ -297,131 +218,38 @@
 
 <body>
   <header>
-    <h1>🎤 وكالة الشايب</h1>
+    <h1>🎤 مذيعو وكالة الشايب</h1>
     <p>Shayeb Agency | التميز والثقة والنجاح على Likee</p>
-    <p>✨ انضم إلينا وابدأ رحلتك معنا ✨</p>
   </header>
 
-  <nav>
+  <nav aria-label="القائمة الرئيسية">
     <a href="index.html">🏠 الرئيسية</a>
-    <a href="#offers">💎 العروض</a>
-    <a href="#broadcasters-section">🎤 المذيعون</a>
-    <a href="#join">🤝 طريقة التسجيل</a>
+    <a href="andix.html">🎤 المذيعون</a>
+    <a href="join.html">🤝 التسجيل في الوكالة</a>
   </nav>
 
   <main class="container">
-
-    <!-- العروض -->
-    <section class="section" id="offers">
-      <h2 class="section-title">💎 عروض وكالة الشايب</h2>
-      <p class="section-description">
-        تعرّفي على العروض والمساعدات المخصصة للمذيعين.
-      </p>
-
-      <div class="offers-grid" id="offers-grid">
-        <article class="offer-card">
-          <h3>🎁 العرض الأول</h3>
-          <div class="offer-price">4,500</div>
-          <p>مساعدة تصل إلى 1,000 ماسة</p>
-        </article>
-
-        <article class="offer-card">
-          <h3>🎁 العرض الثاني</h3>
-          <div class="offer-price">11,000</div>
-          <p>مساعدة تصل إلى 1,500 ماسة</p>
-        </article>
-
-        <article class="offer-card">
-          <h3>🎁 العرض الثالث</h3>
-          <div class="offer-price">25,500</div>
-          <p>مساعدة تصل إلى 3,000 ماسة</p>
-        </article>
-
-        <article class="offer-card">
-          <h3>🎁 العرض الرابع</h3>
-          <div class="offer-price">50,000</div>
-          <p>مساعدة تصل إلى 5,000 ماسة</p>
-        </article>
-
-        <article class="offer-card">
-          <h3>🎁 العرض الخامس</h3>
-          <div class="offer-price">80,000</div>
-          <p>مساعدة تصل إلى 15,000 ماسة</p>
-        </article>
-
-        <article class="offer-card">
-          <h3>🎁 العرض السادس</h3>
-          <div class="offer-price">100,000</div>
-          <p>مساعدة تصل إلى 20,000 ماسة</p>
-        </article>
-
-        <article class="offer-card">
-          <h3>🎁 العرض السابع</h3>
-          <div class="offer-price">120,000</div>
-          <p>مساعدة تصل إلى 25,000 ماسة</p>
-        </article>
-      </div>
-
-      <p class="section-description offer-note">
-        يرجى التأكد من شروط كل عرض مع إدارة الوكالة قبل اعتماده.
+    <section class="intro">
+      <h2>⭐ تعرّف على مذيعينا</h2>
+      <p>
+        شاهدي حسابات مذيعي وكالة الشايب على Likee.
+        يمكنكِ الاطلاع على التارغت والساعات بإدخال كلمة المرور
+        الخاصة بالمذيع.
       </p>
     </section>
 
-    <!-- المذيعون -->
-    <section class="section" id="broadcasters-section">
-      <h2 class="section-title">⭐ مذيعو الوكالة</h2>
-      <p class="section-description">
-        اكتشفي مذيعي وكالة الشايب، شاهدي حساباتهم على Likee،
-        واطّلعي على التارغت والساعات باستخدام كلمة المرور الخاصة بك.
-      </p>
-
-      <div id="broadcasters">
-        <div class="loading">⏳ جارٍ تحميل المذيعين...</div>
-      </div>
+    <section id="broadcasters" aria-live="polite">
+      <div class="loading">⏳ جارٍ تحميل المذيعين...</div>
     </section>
 
-    <!-- التسجيل: جميع المعلومات في مكان واحد -->
-    <section class="section" id="join">
-      <h2 class="section-title">🤝 كيف تسجلين في الوكالة؟</h2>
-      <p class="section-description">
-        كل خطوات التسجيل والتواصل موجودة هنا لتسهيل انضمامك إلينا.
-      </p>
-
-      <div class="join-panel">
-        <h3 style="color: var(--gold); text-align: center;">
-          ✨ خطوات الانضمام إلى وكالة الشايب
-        </h3>
-
-        <ol class="join-steps">
-          <li>جهّزي اسم حسابك على Likee.</li>
-          <li>تواصلي مع إدارة الوكالة عبر واتساب.</li>
-          <li>أرسلي اسم حسابك واطلبي التسجيل في الوكالة.</li>
-          <li>انتظري رد الإدارة والتعليمات اللازمة لإكمال التسجيل.</li>
-        </ol>
-
-        <p style="text-align:center; color:var(--muted);">
-          نحن هنا للإجابة عن استفساراتك ومساعدتك في خطوات التسجيل.
-        </p>
-
-        <div class="join-actions">
-          <a
-            class="btn whatsapp-btn"
-            href="https://wa.me/213673860283"
-            target="_blank"
-            rel="noopener noreferrer">
-            💬 التسجيل والاستفسار عبر واتساب
-          </a>
-
-          <a class="btn" href="index.html">
-            🏠 الصفحة الرئيسية
-          </a>
-        </div>
-      </div>
-    </section>
+    <div class="back-section">
+      <a class="btn" href="index.html">🏠 العودة للرئيسية</a>
+      <a class="btn" href="join.html">🤝 انضمي إلى الوكالة</a>
+    </div>
   </main>
 
   <footer>
-    <p>🎤 وكالة الشايب | Shayeb Agency</p>
+    <p><strong>🎤 وكالة الشايب | Shayeb Agency</strong></p>
     <p>جميع الحقوق محفوظة © 2026</p>
   </footer>
 
@@ -463,7 +291,7 @@
       const container = document.getElementById("broadcasters");
 
       try {
-        // نجلب فقط المعلومات العامة، دون التارغت أو الساعات أو كلمات المرور.
+        // المعلومات العامة فقط؛ لا نجلب كلمات المرور أو التارغت أو الساعات.
         const { data, error } = await db
           .from("Shayeb agency")
           .select("id, image_url, likee_url, name")
@@ -524,7 +352,9 @@
           const stats = card.querySelector(".stats");
 
           button.addEventListener("click", async function () {
-            const password = prompt("أدخلي كلمة المرور الخاصة بهذا المذيع:");
+            const password = prompt(
+              "أدخلي كلمة المرور الخاصة بهذا المذيع:"
+            );
 
             if (password === null) return;
 
@@ -562,7 +392,6 @@
                   🎯 <strong>التارغت:</strong>
                   ${escapeHTML(result.target || "غير محدد")}
                 </div>
-
                 <div class="info">
                   ⏰ <strong>الساعات:</strong>
                   ${escapeHTML(result.hours || "غير محدد")}
