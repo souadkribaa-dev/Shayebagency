@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,1115 +8,552 @@
 
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-background:#f6f6f8;
-font-family:Arial,Tahoma,sans-serif;
-color:#222
+body{margin:0;background:#f6f6f8;font-family:Arial,Tahoma,sans-serif;color:#222}
+.header{background:linear-gradient(135deg,#ff3b81,#ff5a5f);color:#fff;padding:22px 16px 28px;border-radius:0 0 26px 26px}
+.wrap{max-width:900px;margin:auto;padding:16px}
+.header h1{margin:0 0 7px;font-size:27px}
+.header p{margin:0;opacity:.92}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 15px #0001}
+.photo{display:block;position:relative;aspect-ratio:1/1;background:#ddd}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.like{position:absolute;bottom:9px;left:9px;background:#ff3b81;color:#fff;border-radius:20px;padding:6px 10px;font-size:12px}
+.info{padding:11px 12px 13px}
+.name{font-size:17px;font-weight:800;margin-bottom:8px}
+.stats{display:flex;gap:6px;flex-wrap:wrap}
+.stat{background:#f4f4f6;border-radius:10px;padding:6px 8px;font-size:12px}
+.stat b{color:#ff3b81}
+.tools{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:bold;cursor:pointer}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.primary{background:#222;color:#fff}
+.pink{background:#ff3b81;color:#fff}
+.danger{background:#ffe8ee;color:#c21e55}
+.muted{background:#fff;border:1px solid #ddd}
+.status{margin:12px 0;padding:11px 13px;border-radius:12px;background:#fff;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.ok{border-right:4px solid #2ca66f}
+.err{border-right:4px solid #e53935}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.box{background:#fff;width:100%;max-width:520px;border-radius:20px;padding:18px;max-height:92vh;overflow:auto}
+.box h2{margin-top:0}
+label{display:block;font-size:13px;font-weight:bold;margin:10px 0 5px}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:11px;font-size:15px}
+.row{display:flex;gap:8px;margin-top:15px}
+.row .btn{flex:1}
+.note{font-size:12px;color:#777;line-height:1.6}
+.hidden{display:none!important}
+.login{max-width:520px;margin:28px auto;background:#fff;border-radius:20px;padding:20px;box-shadow:0 3px 15px #0001}
+.small{font-size:12px;color:#777}
+.preview{width:110px;height:110px;border-radius:14px;object-fit:cover;margin-top:8px;display:block}
+.empty{text-align:center;background:#fff;border-radius:18px;padding:35px;color:#777;grid-column:1/-1}
+.fileBox{border:2px dashed #ddd;border-radius:14px;padding:12px;background:#fafafa}
+.audition-list{display:grid;gap:14px}
+.audition-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 3px 15px #0001;overflow-wrap:anywhere}
+.audition-card h3{margin-top:0}
+.audition-card p{line-height:1.7}
+.audition-link{display:inline-block;background:#ff3b81;color:white;padding:11px 15px;border-radius:10px;text-decoration:none;font-weight:bold;margin:5px 0}
+.video-frame{width:100%;max-height:420px;border-radius:12px;background:#111;margin-top:12px}
+.section-heading{margin-top:28px}
+@media(max-width:500px){
+.grid{gap:10px}
+.info{padding:9px}
+.name{font-size:15px}
+.wrap{padding:12px}
 }
-
-.header{
-background:linear-gradient(135deg,#ff3b81,#ff5a5f);
-color:#fff;
-padding:22px 16px 28px;
-border-radius:0 0 26px 26px
-}
-
-.wrap{
-max-width:760px;
-margin:auto;
-padding:16px
-}
-
-.header h1{
-margin:0 0 7px;
-font-size:27px
-}
-
-.header p{
-margin:0;
-opacity:.92
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px
-}
-
-.card{
-background:#fff;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 3px 15px #0001
-}
-
-.photo{
-display:block;
-position:relative;
-aspect-ratio:1/1;
-background:#ddd
-}
-
-.photo img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block
-}
-
-.like{
-position:absolute;
-bottom:9px;
-left:9px;
-background:#ff3b81;
-color:#fff;
-border-radius:20px;
-padding:6px 10px;
-font-size:12px
-}
-
-.info{
-padding:11px 12px 13px
-}
-
-.name{
-font-size:17px;
-font-weight:800;
-margin-bottom:8px
-}
-
-.stats{
-display:flex;
-gap:6px;
-flex-wrap:wrap
-}
-
-.stat{
-background:#f4f4f6;
-border-radius:10px;
-padding:6px 8px;
-font-size:12px
-}
-
-.stat b{
-color:#ff3b81
-}
-
-.tools{
-display:flex;
-gap:8px;
-margin:16px 0;
-flex-wrap:wrap
-}
-
-.btn{
-border:0;
-border-radius:12px;
-padding:11px 14px;
-font-weight:bold;
-cursor:pointer
-}
-
-.primary{
-background:#222;
-color:#fff
-}
-
-.pink{
-background:#ff3b81;
-color:#fff
-}
-
-.danger{
-background:#ffe8ee;
-color:#c21e55
-}
-
-.muted{
-background:#fff;
-border:1px solid #ddd
-}
-
-.status{
-margin:12px 0;
-padding:11px 13px;
-border-radius:12px;
-background:#fff;
-font-size:13px
-}
-
-.ok{
-border-right:4px solid #2ca66f
-}
-
-.err{
-border-right:4px solid #e53935
-}
-
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:#0008;
-z-index:10;
-align-items:center;
-justify-content:center;
-padding:18px
-}
-
-.modal.show{
-display:flex
-}
-
-.box{
-background:#fff;
-width:100%;
-max-width:520px;
-border-radius:20px;
-padding:18px;
-max-height:92vh;
-overflow:auto
-}
-
-.box h2{
-margin-top:0
-}
-
-label{
-display:block;
-font-size:13px;
-font-weight:bold;
-margin:10px 0 5px
-}
-
-input{
-width:100%;
-padding:12px;
-border:1px solid #ddd;
-border-radius:11px;
-font-size:15px
-}
-
-.row{
-display:flex;
-gap:8px;
-margin-top:15px
-}
-
-.row .btn{
-flex:1
-}
-
-.note{
-font-size:12px;
-color:#777;
-line-height:1.6
-}
-
-.hidden{
-display:none!important
-}
-
-.login{
-max-width:520px;
-margin:28px auto;
-background:#fff;
-border-radius:20px;
-padding:20px;
-box-shadow:0 3px 15px #0001
-}
-
-.small{
-font-size:12px;
-color:#777
-}
-
-.preview{
-width:110px;
-height:110px;
-border-radius:14px;
-object-fit:cover;
-margin-top:8px;
-display:block
-}
-
-.empty{
-text-align:center;
-background:#fff;
-border-radius:18px;
-padding:35px;
-color:#777;
-grid-column:1/-1
-}
-
-.fileBox{
-border:2px dashed #ddd;
-border-radius:14px;
-padding:12px;
-background:#fafafa
-}
-
-@media(max-width:430px){
-.grid{
-gap:10px
-}
-
-.info{
-padding:9px
-}
-
-.name{
-font-size:15px
-}
-}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 
 <body>
 
 <header class="header">
-<div class="wrap">
-
-<h1>إدارة وكالة الشايب ⚙️</h1>
-
-<p>صفحة خاصة لإضافة وتعديل بيانات المذيعين</p>
-
-</div>
+  <div class="wrap">
+    <h1>إدارة وكالة الشايب ⚙️</h1>
+    <p>إدارة المذيعين ومراجعة طلبات الأوديشن</p>
+  </div>
 </header>
 
 <main class="wrap">
 
 <div id="login" class="login">
+  <h2>دخول الإدارة</h2>
+  <p class="small">استخدمي بريدك وكلمة المرور في حساب Supabase.</p>
 
-<h2>دخول الإدارة</h2>
+  <label for="email">البريد الإلكتروني</label>
+  <input id="email" type="email" autocomplete="username" placeholder="you@example.com">
 
-<p class="small">
-استخدمي بريدك وكلمة المرور في حساب Supabase.
-</p>
+  <label for="password">كلمة المرور</label>
+  <input id="password" type="password" autocomplete="current-password" placeholder="••••••••">
 
-<label>البريد الإلكتروني</label>
-
-<input
-id="email"
-type="email"
-placeholder="you@example.com">
-
-<label>كلمة المرور</label>
-
-<input
-id="password"
-type="password"
-placeholder="••••••••">
-
-<div class="row">
-
-<button
-class="btn pink"
-onclick="signIn()">
-دخول
-</button>
-
-<button
-class="btn muted"
-onclick="signUp()">
-إنشاء حساب
-</button>
-
+  <div class="row">
+    <button class="btn pink" id="loginBtn" onclick="signIn()">دخول</button>
+    <button class="btn muted" id="signupBtn" onclick="signUp()">إنشاء حساب</button>
+  </div>
+  <div id="loginStatus" class="status hidden" role="status"></div>
 </div>
-
-<div
-id="loginStatus"
-class="status hidden">
-</div>
-
-</div>
-
 
 <div id="app" class="hidden">
 
-<div class="tools">
+  <div class="tools">
+    <button class="btn primary" onclick="addCard()">＋ إضافة مذيع</button>
+    <button class="btn pink" onclick="loadAuditions()">🎬 طلبات الأوديشن</button>
+    <button class="btn muted" onclick="loadData()">↻ تحديث المذيعين</button>
+    <button class="btn danger" onclick="signOut()">خروج</button>
+  </div>
 
-<button
-class="btn primary"
-onclick="addCard()">
-＋ إضافة مذيع
-</button>
+  <h2 class="section-heading">🎤 المذيعون</h2>
+  <div id="status" class="status">جاري التحميل...</div>
+  <div id="grid" class="grid"></div>
 
-<button
-class="btn muted"
-onclick="loadData()">
-↻ تحديث
-</button>
-
-<button
-class="btn danger"
-onclick="signOut()">
-خروج
-</button>
+  <section class="section-heading">
+    <h2>🎬 طلبات الأوديشن</h2>
+    <p class="small">تظهر هنا طلبات الانضمام التي أرسلها المتقدمون من صفحة الموقع.</p>
+    <div id="auditionStatus" class="status">اضغطي على «طلبات الأوديشن» لتحميل الطلبات.</div>
+    <div id="auditionList" class="audition-list"></div>
+  </section>
 
 </div>
-
-<div
-id="status"
-class="status">
-جاري التحميل...
-</div>
-
-<div
-id="grid"
-class="grid">
-</div>
-
-</div>
-
 </main>
 
-
 <div id="modal" class="modal">
+  <div class="box">
+    <h2 id="modalTitle">إضافة مذيع</h2>
 
-<div class="box">
+    <label for="fName">الاسم</label>
+    <input id="fName" placeholder="مثال: أحمد">
 
-<h2 id="modalTitle">
-إضافة مذيع
-</h2>
+    <label for="fLink">رابط Likee</label>
+    <input id="fLink" type="url" placeholder="https://l.likee.video/...">
 
-<label>الاسم</label>
+    <label for="fImageFile">الصورة</label>
+    <div class="fileBox">
+      <input id="fImageFile" type="file" accept="image/*">
+      <img id="preview" class="preview hidden" alt="معاينة الصورة">
+    </div>
 
-<input
-id="fName"
-placeholder="مثال: أحمد">
+    <label for="fTarget">Target</label>
+    <input id="fTarget" placeholder="مثال: 784963">
 
+    <label for="fHours">الساعات</label>
+    <input id="fHours" placeholder="مثال: 35">
 
-<label>رابط Likee</label>
+    <div class="row">
+      <button id="saveBtn" class="btn pink" onclick="saveCard()">حفظ</button>
+      <button class="btn muted" onclick="closeModal()">إلغاء</button>
+    </div>
 
-<input
-id="fLink"
-placeholder="https://l.likee.video/...">
-
-
-<label>الصورة</label>
-
-<div class="fileBox">
-
-<input
-id="fImageFile"
-type="file"
-accept="image/*">
-
-<img
-id="preview"
-class="preview hidden"
-alt="معاينة الصورة">
-
+    <p class="note">اختاري الصورة من هاتفك. سيتم رفعها إلى مخزن broadcaster-images في Supabase.</p>
+  </div>
 </div>
-
-
-<label>Target</label>
-
-<input
-id="fTarget"
-placeholder="مثال: 784963">
-
-
-<label>الساعات</label>
-
-<input
-id="fHours"
-placeholder="مثال: 35">
-
-
-<div class="row">
-
-<button
-id="saveBtn"
-class="btn pink"
-onclick="saveCard()">
-حفظ
-</button>
-
-<button
-class="btn muted"
-onclick="closeModal()">
-إلغاء
-</button>
-
-</div>
-
-<p class="note">
-اختاري الصورة مباشرة من هاتفك.
-سيتم رفعها تلقائيًا إلى Supabase Storage.
-</p>
-
-</div>
-</div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
+'use strict';
 
-const SUPABASE_URL =
-'https://hzcnkywuabugjebtwzmv.supabase.co';
-
-const SUPABASE_ANON_KEY =
-'sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP';
-
-const client =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_ANON_KEY
-);
-
+const SUPABASE_URL = 'https://hzcnkywuabugjebtwzmv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP';
 const TABLE_NAME = 'Shayeb agency';
-
 const BUCKET_NAME = 'broadcaster-images';
+const AUDITION_TABLE = 'audition_requests';
+
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 let editingId = null;
-
 let oldImageUrl = '';
+let auditionsLoaded = false;
 
-
-function showLoginStatus(message,error=false){
-
-const box =
-document.getElementById('loginStatus');
-
-box.textContent = message;
-
-box.classList.remove('hidden');
-
-box.classList.remove('ok','err');
-
-box.classList.add(error ? 'err':'ok');
-
+function showLoginStatus(message, error=false) {
+  const box = document.getElementById('loginStatus');
+  box.textContent = message;
+  box.className = 'status ' + (error ? 'err' : 'ok');
 }
 
-
-async function signIn(){
-
-const email =
-document.getElementById('email').value.trim();
-
-const password =
-document.getElementById('password').value;
-
-if(!email || !password){
-
-showLoginStatus(
-'اكتبي البريد الإلكتروني وكلمة المرور.',
-true
-);
-
-return;
+function setStatus(id, message, error=false) {
+  const box = document.getElementById(id);
+  box.textContent = message;
+  box.className = 'status ' + (error ? 'err' : 'ok');
 }
 
-try{
+async function signIn() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  if (!email || !password) {
+    showLoginStatus('اكتبي البريد الإلكتروني وكلمة المرور.', true);
+    return;
+  }
 
-const {error} =
-await client.auth.signInWithPassword({
-email,
-password
+  const button = document.getElementById('loginBtn');
+  button.disabled = true;
+  try {
+    const { error } = await client.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    showLoginStatus('تم تسجيل الدخول بنجاح.');
+    await checkSession();
+  } catch (error) {
+    showLoginStatus(error.message || 'تعذر تسجيل الدخول.', true);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function signUp() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  if (!email || !password) {
+    showLoginStatus('اكتبي البريد الإلكتروني وكلمة المرور.', true);
+    return;
+  }
+  if (password.length < 6) {
+    showLoginStatus('اجعلي كلمة المرور 6 أحرف على الأقل.', true);
+    return;
+  }
+
+  const button = document.getElementById('signupBtn');
+  button.disabled = true;
+  try {
+    const { data, error } = await client.auth.signUp({ email, password });
+    if (error) throw error;
+
+    showLoginStatus(
+      data.session
+        ? 'تم إنشاء الحساب وتسجيل الدخول.'
+        : 'تم إرسال طلب إنشاء الحساب. إذا طُلب تأكيد البريد، افتحي بريدك الإلكتروني.'
+    );
+    await checkSession();
+  } catch (error) {
+    showLoginStatus(error.message || 'تعذر إنشاء الحساب.', true);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function signOut() {
+  const { error } = await client.auth.signOut();
+  if (error) {
+    alert('تعذر تسجيل الخروج: ' + error.message);
+    return;
+  }
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('login').classList.remove('hidden');
+}
+
+async function loadData() {
+  setStatus('status', 'جاري تحميل المذيعين...');
+  try {
+    const { data, error } = await client
+      .from(TABLE_NAME)
+      .select('*')
+      .order('id', { ascending: false });
+
+    if (error) throw error;
+    renderCards(data || []);
+    setStatus('status', 'تم تحميل بيانات المذيعين بنجاح.');
+  } catch (error) {
+    setStatus('status', 'تعذر تحميل المذيعين: ' + error.message, true);
+  }
+}
+
+function renderCards(rows) {
+  const grid = document.getElementById('grid');
+
+  if (!rows.length) {
+    grid.innerHTML = '<div class="empty">لا توجد مذيعات بعد.<br>اضغطي «إضافة مذيع» لإضافة أول مذيع.</div>';
+    return;
+  }
+
+  grid.innerHTML = rows.map(row => {
+    const image = safeHttpsUrl(row.image_url);
+    const likee = safeLikeeUrl(row.likee_url);
+    const photo = image || 'https://placehold.co/500x500?text=No+Image';
+
+    return `
+      <div class="card">
+        <a class="photo" href="${likee || '#'}" ${likee ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+          <img src="${photo}" alt="${escapeHtml(row.name || '')}" loading="lazy">
+          <div class="like">Likee ↗</div>
+        </a>
+        <div class="info">
+          <div class="name">${escapeHtml(row.name || 'بدون اسم')}</div>
+          <div class="stats">
+            <div class="stat">Target: <b>${escapeHtml(String(row.target ?? '0'))}</b></div>
+            <div class="stat">الساعات: <b>${escapeHtml(String(row.hours ?? '0'))}</b></div>
+          </div>
+          <div class="tools">
+            <button class="btn muted" onclick="editCard(${Number(row.id)})">✏️ تعديل</button>
+            <button class="btn danger" onclick="deleteCard(${Number(row.id)})">🗑️ حذف</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function addCard() {
+  editingId = null;
+  oldImageUrl = '';
+
+  document.getElementById('modalTitle').textContent = 'إضافة مذيع';
+  document.getElementById('fName').value = '';
+  document.getElementById('fLink').value = '';
+  document.getElementById('fTarget').value = '';
+  document.getElementById('fHours').value = '';
+  document.getElementById('fImageFile').value = '';
+  document.getElementById('preview').classList.add('hidden');
+  document.getElementById('modal').classList.add('show');
+}
+
+async function editCard(id) {
+  try {
+    const { data, error } = await client
+      .from(TABLE_NAME)
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) throw error;
+
+    editingId = id;
+    oldImageUrl = data.image_url || '';
+
+    document.getElementById('modalTitle').textContent = 'تعديل مذيع';
+    document.getElementById('fName').value = data.name || '';
+    document.getElementById('fLink').value = data.likee_url || '';
+    document.getElementById('fTarget').value = data.target || '';
+    document.getElementById('fHours').value = data.hours || '';
+    document.getElementById('fImageFile').value = '';
+
+    const preview = document.getElementById('preview');
+    if (oldImageUrl) {
+      preview.src = oldImageUrl;
+      preview.classList.remove('hidden');
+    } else {
+      preview.removeAttribute('src');
+      preview.classList.add('hidden');
+    }
+
+    document.getElementById('modal').classList.add('show');
+  } catch (error) {
+    alert('تعذر فتح بيانات المذيع: ' + error.message);
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+
+document.getElementById('fImageFile').addEventListener('change', function() {
+  const file = this.files[0];
+  const preview = document.getElementById('preview');
+
+  if (!file) {
+    preview.removeAttribute('src');
+    preview.classList.add('hidden');
+    return;
+  }
+
+  if (!file.type.startsWith('image/')) {
+    alert('اختاري ملف صورة صالحًا.');
+    this.value = '';
+    return;
+  }
+
+  preview.src = URL.createObjectURL(file);
+  preview.classList.remove('hidden');
 });
 
-if(error){
+async function uploadImage(file) {
+  if (!file) return null;
 
-showLoginStatus(error.message,true);
+  const extension = (file.name.split('.').pop() || 'jpg').replace(/[^a-zA-Z0-9]/g, '');
+  const path = 'broadcasters/' + Date.now() + '-' +
+    Math.random().toString(36).slice(2) + '.' + extension;
 
-return;
+  const { error } = await client.storage
+    .from(BUCKET_NAME)
+    .upload(path, file, { upsert: false, contentType: file.type });
+
+  if (error) throw error;
+
+  const { data } = client.storage.from(BUCKET_NAME).getPublicUrl(path);
+  return data.publicUrl;
 }
 
-showLoginStatus('تم تسجيل الدخول بنجاح.');
+async function saveCard() {
+  const name = document.getElementById('fName').value.trim();
+  const likee_url = document.getElementById('fLink').value.trim();
+  const target = document.getElementById('fTarget').value.trim();
+  const hours = document.getElementById('fHours').value.trim();
+  const file = document.getElementById('fImageFile').files[0];
 
-await checkSession();
+  if (!name) {
+    alert('اكتبي اسم المذيع.');
+    return;
+  }
 
-}catch(error){
+  if (likee_url && !safeLikeeUrl(likee_url)) {
+    alert('رابط Likee غير صالح. تحققي من الرابط.');
+    return;
+  }
 
-showLoginStatus(error.message,true);
+  const saveBtn = document.getElementById('saveBtn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'جاري الحفظ...';
 
+  try {
+    let image_url = oldImageUrl || null;
+    if (file) image_url = await uploadImage(file);
+
+    const payload = { name, likee_url, target, hours, image_url };
+    let result;
+
+    if (editingId !== null) {
+      result = await client.from(TABLE_NAME).update(payload).eq('id', editingId);
+    } else {
+      result = await client.from(TABLE_NAME).insert(payload);
+    }
+
+    if (result.error) throw result.error;
+
+    closeModal();
+    await loadData();
+  } catch (error) {
+    alert('حدث خطأ أثناء الحفظ:\n' + error.message);
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'حفظ';
+  }
 }
 
+async function deleteCard(id) {
+  if (!confirm('هل أنت متأكدة من حذف هذا المذيع؟')) return;
+
+  try {
+    const { error } = await client.from(TABLE_NAME).delete().eq('id', id);
+    if (error) throw error;
+    await loadData();
+  } catch (error) {
+    alert('تعذر حذف المذيع: ' + error.message);
+  }
 }
 
+/* ===== قسم طلبات الأوديشن ===== */
 
-async function signUp(){
+async function loadAuditions() {
+  const status = document.getElementById('auditionStatus');
+  const list = document.getElementById('auditionList');
 
-const email =
-document.getElementById('email').value.trim();
+  status.className = 'status';
+  status.textContent = '⏳ جاري تحميل طلبات الأوديشن...';
+  list.innerHTML = '';
 
-const password =
-document.getElementById('password').value;
+  try {
+    const { data, error } = await client
+      .from(AUDITION_TABLE)
+      .select('*')
+      .order('id', { ascending: false });
 
-if(!email || !password){
+    if (error) throw error;
 
-showLoginStatus(
-'اكتبي البريد الإلكتروني وكلمة المرور.',
-true
-);
+    auditionsLoaded = true;
 
-return;
+    if (!data || data.length === 0) {
+      status.className = 'status ok';
+      status.textContent = 'لا توجد طلبات أوديشن حتى الآن.';
+      return;
+    }
+
+    status.className = 'status ok';
+    status.textContent = 'عدد طلبات الأوديشن: ' + data.length;
+
+    list.innerHTML = data.map(item => {
+      const videoUrl = safeHttpsUrl(item.audition_url);
+      const likeeUrl = safeLikeeUrl(item.likee_url);
+      const requestStatus = String(item.status || 'pending');
+
+      return `
+        <article class="audition-card">
+          <h3>👤 ${escapeHtml(item.name || 'بدون اسم')}</h3>
+          <p>📞 الهاتف: ${escapeHtml(item.phone || 'غير متوفر')}</p>
+          <p>🎤 اسم المستخدم في Likee: ${escapeHtml(item.likee_name || 'غير متوفر')}</p>
+          <p>📋 حالة الطلب: <b>${escapeHtml(requestStatus)}</b></p>
+          ${likeeUrl ? `<p><a href="${likeeUrl}" target="_blank" rel="noopener noreferrer">فتح حساب Likee ↗</a></p>` : ''}
+          ${videoUrl
+            ? `<a class="audition-link" href="${videoUrl}" target="_blank" rel="noopener noreferrer">▶ مشاهدة فيديو الأوديشن</a>
+               <video class="video-frame" controls preload="metadata">
+                 <source src="${videoUrl}">
+                 متصفحك لا يدعم تشغيل الفيديو.
+               </video>`
+            : '<p>لم يُعثر على رابط فيديو صالح لهذا الطلب.</p>'}
+        </article>`;
+    }).join('');
+  } catch (error) {
+    auditionsLoaded = false;
+    status.className = 'status err';
+    status.textContent = 'تعذر تحميل طلبات الأوديشن: ' + error.message +
+      ' — تحققي من وجود الجدول وصلاحيات حساب الإدارة.';
+  }
 }
 
-try{
+function safeHttpsUrl(value) {
+  try {
+    const url = new URL(String(value || ''));
+    return url.protocol === 'https:' ? url.href : '';
+  } catch {
+    return '';
+  }
+}
 
-const {error} =
-await client.auth.signUp({
-email,
-password
+function safeLikeeUrl(value) {
+  try {
+    const url = new URL(String(value || ''));
+    return url.protocol === 'https:' &&
+      (url.hostname === 'likee.video' || url.hostname.endsWith('.likee.video'))
+      ? url.href
+      : '';
+  } catch {
+    return '';
+  }
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+async function checkSession() {
+  const { data, error } = await client.auth.getSession();
+
+  if (error) {
+    showLoginStatus('تعذر التحقق من الجلسة: ' + error.message, true);
+    return;
+  }
+
+  if (data.session) {
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    await loadData();
+  } else {
+    document.getElementById('login').classList.remove('hidden');
+    document.getElementById('app').classList.add('hidden');
+  }
+}
+
+client.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    loadData();
+  } else {
+    document.getElementById('login').classList.remove('hidden');
+    document.getElementById('app').classList.add('hidden');
+  }
 });
-
-if(error){
-
-showLoginStatus(error.message,true);
-
-return;
-}
-
-showLoginStatus(
-'تم إنشاء الحساب. إذا طلب Supabase تأكيد البريد، افتحي بريدك الإلكتروني وأكدي الحساب.'
-);
-
-}catch(error){
-
-showLoginStatus(error.message,true);
-
-}
-
-}
-
-
-async function signOut(){
-
-await client.auth.signOut();
-
-document.getElementById('app')
-.classList.add('hidden');
-
-document.getElementById('login')
-.classList.remove('hidden');
-
-}
-
-
-async function loadData(){
-
-const status =
-document.getElementById('status');
-
-status.textContent =
-'جاري تحميل المذيعين...';
-
-try{
-
-const {data,error} =
-await client
-.from(TABLE_NAME)
-.select('*')
-.order('id',{ascending:false});
-
-if(error){
-
-status.textContent =
-'خطأ: ' + error.message;
-
-status.className =
-'status err';
-
-return;
-}
-
-renderCards(data || []);
-
-status.textContent =
-'تم تحميل البيانات بنجاح.';
-
-status.className =
-'status ok';
-
-}catch(error){
-
-status.textContent =
-'خطأ: ' + error.message;
-
-status.className =
-'status err';
-
-}
-
-}
-
-
-function renderCards(rows){
-
-const grid =
-document.getElementById('grid');
-
-if(!rows.length){
-
-grid.innerHTML =
-'<div class="empty">لا توجد مذيعات بعد.<br>اضغطي «＋ إضافة مذيع» لإضافة أول مذيع.</div>';
-
-return;
-}
-
-grid.innerHTML =
-rows.map(row => {
-
-const image =
-row.image_url ||
-'https://via.placeholder.com/500?text=No+Image';
-
-return `
-
-<div class="card">
-
-<a
-class="photo"
-href="${escapeHtml(row.likee_url || '#')}"
-target="_blank">
-
-<img
-src="${escapeHtml(image)}"
-alt="${escapeHtml(row.name || '')}">
-
-<div class="like">
-Likee ↗
-</div>
-
-</a>
-
-<div class="info">
-
-<div class="name">
-${escapeHtml(row.name || 'بدون اسم')}
-</div>
-
-<div class="stats">
-
-<div class="stat">
-Target:
-<b>${escapeHtml(String(row.target || '0'))}</b>
-</div>
-
-<div class="stat">
-الساعات:
-<b>${escapeHtml(String(row.hours || '0'))}</b>
-</div>
-
-</div>
-
-<div class="tools">
-
-<button
-class="btn muted"
-onclick="editCard(${row.id})">
-✏️ تعديل
-</button>
-
-<button
-class="btn danger"
-onclick="deleteCard(${row.id})">
-🗑️ حذف
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}).join('');
-
-}
-
-
-function addCard(){
-
-editingId = null;
-
-oldImageUrl = '';
-
-document.getElementById('modalTitle')
-.textContent =
-'إضافة مذيع';
-
-document.getElementById('fName')
-.value = '';
-
-document.getElementById('fLink')
-.value = '';
-
-document.getElementById('fTarget')
-.value = '';
-
-document.getElementById('fHours')
-.value = '';
-
-document.getElementById('fImageFile')
-.value = '';
-
-document.getElementById('preview')
-.classList.add('hidden');
-
-document.getElementById('modal')
-.classList.add('show');
-
-}
-
-
-async function editCard(id){
-
-try{
-
-const {data,error} =
-await client
-.from(TABLE_NAME)
-.select('*')
-.eq('id',id)
-.single();
-
-if(error){
-
-alert(error.message);
-
-return;
-}
-
-editingId = id;
-
-oldImageUrl =
-data.image_url || '';
-
-document.getElementById('modalTitle')
-.textContent =
-'تعديل مذيع';
-
-document.getElementById('fName')
-.value =
-data.name || '';
-
-document.getElementById('fLink')
-.value =
-data.likee_url || '';
-
-document.getElementById('fTarget')
-.value =
-data.target || '';
-
-document.getElementById('fHours')
-.value =
-data.hours || '';
-
-document.getElementById('fImageFile')
-.value = '';
-
-const preview =
-document.getElementById('preview');
-
-if(data.image_url){
-
-preview.src =
-data.image_url;
-
-preview.classList.remove('hidden');
-
-}else{
-
-preview.classList.add('hidden');
-
-}
-
-document.getElementById('modal')
-.classList.add('show');
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-}
-
-
-function closeModal(){
-
-document.getElementById('modal')
-.classList.remove('show');
-
-}
-
-
-document.getElementById('fImageFile')
-.addEventListener('change',function(){
-
-const file = this.files[0];
-
-if(!file)return;
-
-const preview =
-document.getElementById('preview');
-
-preview.src =
-URL.createObjectURL(file);
-
-preview.classList.remove('hidden');
-
-});
-
-
-async function uploadImage(file){
-
-if(!file)return null;
-
-const extension =
-file.name.split('.').pop();
-
-const path =
-'broadcasters/' +
-Date.now() +
-'-' +
-Math.random().toString(36).slice(2) +
-'.' +
-extension;
-
-const {error} =
-await client.storage
-.from(BUCKET_NAME)
-.upload(path,file,{
-upsert:false
-});
-
-if(error){
-
-throw error;
-
-}
-
-const {data} =
-client.storage
-.from(BUCKET_NAME)
-.getPublicUrl(path);
-
-return data.publicUrl;
-
-}
-
-
-async function saveCard(){
-
-const name =
-document.getElementById('fName')
-.value.trim();
-
-const likee_url =
-document.getElementById('fLink')
-.value.trim();
-
-const target =
-document.getElementById('fTarget')
-.value.trim();
-
-const hours =
-document.getElementById('fHours')
-.value.trim();
-
-const file =
-document.getElementById('fImageFile')
-.files[0];
-
-if(!name){
-
-alert('اكتبي اسم المذيع.');
-
-return;
-}
-
-const saveBtn =
-document.getElementById('saveBtn');
-
-saveBtn.disabled = true;
-
-saveBtn.textContent =
-'جاري الحفظ...';
-
-try{
-
-let image_url =
-oldImageUrl || null;
-
-if(file){
-
-image_url =
-await uploadImage(file);
-
-}
-
-const payload = {
-
-name,
-likee_url,
-target,
-hours,
-image_url
-
-};
-
-let result;
-
-if(editingId){
-
-result =
-await client
-.from(TABLE_NAME)
-.update(payload)
-.eq('id',editingId);
-
-}else{
-
-result =
-await client
-.from(TABLE_NAME)
-.insert(payload);
-
-}
-
-if(result.error){
-
-throw result.error;
-
-}
-
-closeModal();
-
-await loadData();
-
-}catch(error){
-
-alert(
-'حدث خطأ أثناء الحفظ:\n' +
-error.message
-);
-
-}finally{
-
-saveBtn.disabled = false;
-
-saveBtn.textContent =
-'حفظ';
-
-}
-
-}
-
-
-async function deleteCard(id){
-
-if(!confirm(
-'هل أنت متأكدة من حذف هذا المذيع؟'
-)){
-
-return;
-
-}
-
-try{
-
-const {error} =
-await client
-.from(TABLE_NAME)
-.delete()
-.eq('id',id);
-
-if(error){
-
-alert(error.message);
-
-return;
-}
-
-await loadData();
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-}
-
-
-function escapeHtml(value){
-
-return String(value)
-.replace(/&/g,'&amp;')
-.replace(/</g,'&lt;')
-.replace(/>/g,'&gt;')
-.replace(/"/g,'&quot;')
-.replace(/'/g,'&#039;');
-
-}
-
-
-async function checkSession(){
-
-const {data} =
-await client.auth.getSession();
-
-if(data.session){
-
-document.getElementById('login')
-.classList.add('hidden');
-
-document.getElementById('app')
-.classList.remove('hidden');
-
-await loadData();
-
-}else{
-
-document.getElementById('login')
-.classList.remove('hidden');
-
-document.getElementById('app')
-.classList.add('hidden');
-
-}
-
-}
-
-
-client.auth.onAuthStateChange(
-(event,session)=>{
-
-if(session){
-
-document.getElementById('login')
-.classList.add('hidden');
-
-document.getElementById('app')
-.classList.remove('hidden');
-
-loadData();
-
-}else{
-
-document.getElementById('login')
-.classList.remove('hidden');
-
-document.getElementById('app')
-.classList.add('hidden');
-
-}
-
-});
-
 
 checkSession();
-
 </script>
-
 </body>
-  </html>
+</html>
