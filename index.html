@@ -1,402 +1,493 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مذيعو وكالة الشايب | Shayeb Agency</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta name="theme-color" content="#170d2a">
+  <meta name="description" content="وكالة الشايب على Likee - عروض الوكالة والتسجيل ومتابعة المذيعين.">
+  <title>وكالة الشايب | Shayeb Agency</title>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #10091f;
+      --panel: #211333;
+      --panel-light: #301b49;
+      --gold: #f5d58a;
+      --gold-dark: #c99838;
+      --text: #fff;
+      --muted: #e0d4ee;
+      --border: #71552d;
+    }
 
     body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: linear-gradient(135deg, #10091f, #24123d, #10091f);
-      color: #fff;
+      font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg), #24123d, var(--bg));
+      color: var(--text);
       min-height: 100vh;
+      line-height: 1.8;
+    }
+
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
 
     header {
-      text-align: center;
-      padding: 30px 15px;
-      background: linear-gradient(135deg, #35145b, #160d2b);
-      border-bottom: 2px solid #d9ad53;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: #170d2a;
+      border-bottom: 1px solid var(--border);
     }
 
-    header h1 { color: #f5d58a; font-size: 30px; margin-bottom: 10px; }
-    header p { color: #eee1ff; line-height: 1.8; }
+    .brand {
+      color: var(--gold);
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
     nav {
       display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 13px;
+      border-radius: 20px;
+      transition: .2s;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+      background: #ffffff0d;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 65px 18px 55px;
+      background:
+        radial-gradient(ellipse at top, #57327c66, transparent 70%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      background: #241537;
+      border-radius: 30px;
+      padding: 5px 16px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      color: var(--gold);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 25px;
+      font-size: 17px;
+    }
+
+    .actions {
+      display: flex;
       justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      padding: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: .93;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #1c102a;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold);
+      color: var(--gold);
       background: #170d2a;
     }
 
-    nav a, .btn {
-      text-decoration: none;
-      color: #1c102a;
-      background: linear-gradient(135deg, #f5d58a, #c99838);
-      padding: 11px 18px;
-      border-radius: 25px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      display: inline-block;
+    .container {
+      width: 92%;
+      max-width: 1150px;
+      margin: 0 auto;
     }
 
-    .container { width: 92%; max-width: 1150px; margin: 35px auto; }
-
-    .section-title {
-      text-align: center;
-      color: #f5d58a;
-      font-size: 27px;
-      margin: 35px 0 12px;
+    section {
+      padding: 38px 0;
     }
 
-    .section-description {
+    .section-heading {
       text-align: center;
-      color: #d7c9e8;
-      line-height: 1.9;
       margin-bottom: 25px;
     }
 
-    #offers, #broadcasters {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
+    .section-heading h2 {
+      color: var(--gold);
+      font-size: clamp(24px, 4vw, 31px);
+      margin-bottom: 8px;
     }
 
-    .offer, .card, .empty {
-      background: linear-gradient(145deg, #291744, #1b102d);
-      border: 1px solid #71552d;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px #0004;
+    .section-heading p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 17px;
     }
 
     .offer {
+      position: relative;
+      text-align: center;
+      padding: 24px 17px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, var(--panel-light), var(--panel));
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px #0003;
+      transition: transform .25s, border-color .25s;
+    }
+
+    .offer:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .offer-number {
+      color: var(--gold);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .offer-price {
+      color: var(--gold);
+      font-size: 27px;
+      font-weight: bold;
+      margin: 7px 0;
+    }
+
+    .offer p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .diamond {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--gold);
+      background: #f5d58a12;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 13px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: #211333cc;
+      border: 1px solid #ffffff12;
+      border-radius: 16px;
       padding: 23px 18px;
       text-align: center;
     }
 
-    .offer h3 { color: #f5d58a; font-size: 23px; margin-bottom: 14px; }
-    .offer p { color: #f4edf9; line-height: 1.9; }
-    .offer .price { color: #f5d58a; font-size: 25px; font-weight: bold; margin: 10px 0; }
-
-    .card { transition: transform .25s; }
-    .card:hover { transform: translateY(-5px); }
-
-    .card-image {
-      display: block;
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      background: #291744;
+    .feature .icon {
+      font-size: 30px;
+      margin-bottom: 8px;
     }
 
-    .card-content { padding: 20px; text-align: center; }
-    .card-content h3 { color: #f5d58a; font-size: 22px; margin-bottom: 15px; }
-
-    .info {
-      background: #170d2a;
-      color: #eee1ff;
-      padding: 12px;
-      border-radius: 12px;
-      margin: 10px 0;
-      overflow-wrap: anywhere;
+    .feature h3 {
+      color: var(--gold);
+      margin-bottom: 7px;
+      font-size: 19px;
     }
 
-    .info strong { color: #f5d58a; }
-
-    .likee-btn {
-      display: block;
-      margin-top: 15px;
-      text-decoration: none;
-      background: #f5d58a;
-      color: #1c102a;
-      padding: 12px;
-      border-radius: 25px;
-      font-weight: bold;
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .password-btn {
-      width: 100%;
-      margin-top: 12px;
-      background: linear-gradient(135deg, #a879df, #7042a8);
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
+    .join-panel {
+      text-align: center;
+      background: linear-gradient(135deg, #35204e, #1b102d);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 35px 20px;
+      margin: 25px 0 45px;
     }
 
-    .stats { display: none; margin-top: 12px; }
-    .loading, .empty { text-align: center; padding: 25px; color: #f5d58a; }
-    .empty { grid-column: 1 / -1; line-height: 2; }
+    .join-panel h2 {
+      color: var(--gold);
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
 
-    .back-section { text-align: center; margin: 40px 0; }
+    .join-panel p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto 22px;
+    }
 
     footer {
+      background: #0c0717;
+      border-top: 1px solid var(--border);
       text-align: center;
-      padding: 25px 15px;
-      background: #10091f;
-      border-top: 1px solid #71552d;
-      color: #e7d9f4;
-      line-height: 2;
+      padding: 24px 15px;
+      color: var(--muted);
+    }
+
+    footer strong {
+      color: var(--gold);
+    }
+
+    footer p + p {
+      margin-top: 5px;
+      font-size: 13px;
     }
 
     @media (max-width: 600px) {
-      header h1 { font-size: 25px; }
-      .section-title { font-size: 23px; }
-      .card-image { height: 280px; }
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 330px;
+      }
+
+      .offers {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .offer {
+        padding: 18px 9px;
+      }
+
+      .offer-price {
+        font-size: 22px;
+      }
+
+      .offer p {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .offers {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
+
   <header>
-    <h1>🎤 وكالة الشايب</h1>
-    <p>مذيعو وكالة الشايب على Likee</p>
-    <p>التميز والثقة والنجاح ✨</p>
+    <a class="brand" href="index.html">🎤 وكالة الشايب</a>
+
+    <nav aria-label="القائمة الرئيسية">
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="andix.html">🎤 المذيعون</a>
+      <a href="join.html">🤝 التسجيل</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="andix.html">🎤 المذيعون</a>
-    <a href="join.html">🤝 الانضمام للوكالة</a>
-  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-badge">✨ Shayeb Agency | Likee</div>
 
-  <main class="container">
+      <h1>مرحبًا بكم في وكالة الشايب</h1>
 
-    <section>
-      <h2 class="section-title">💎 عروض وكالة الشايب</h2>
-      <p class="section-description">
-        تعرّف على عروض الوكالة والمساعدات حسب كل عرض.
+      <p>
+        نسعى إلى مرافقة المذيعين ومساعدتهم على تطوير نشاطهم
+        على Likee من خلال عروض الوكالة والمعلومات الواضحة
+        والتواصل المنظم.
       </p>
 
-      <div id="offers">
-        <div class="loading">⏳ جاري عرض العروض...</div>
+      <div class="actions">
+        <a class="btn btn-gold" href="join.html">
+          🤝 سجّل الآن في الوكالة
+        </a>
+
+        <a class="btn btn-outline" href="andix.html">
+          🎤 اكتشف مذيعي الوكالة
+        </a>
       </div>
     </section>
 
-    <section>
-      <h2 class="section-title">⭐ مذيعو الوكالة</h2>
-      <p class="section-description">
-        اكتشف مذيعينا وتابع صفحاتهم على Likee.
-        🔐 الهدف وساعات البث لا تظهر إلا بعد إدخال كلمة المرور الصحيحة.
-      </p>
+    <div class="container">
 
-      <div id="broadcasters">
-        <div class="loading">⏳ جاري تحميل المذيعين...</div>
-      </div>
-    </section>
+      <section id="offers">
+        <div class="section-heading">
+          <h2>💎 عروض وكالة الشايب</h2>
+          <p>
+            تعرّف على العروض ومبالغ المساعدة الموضحة لكل عرض.
+          </p>
+        </div>
 
-    <div class="back-section">
-      <a class="btn" href="index.html">🏠 العودة إلى الصفحة الرئيسية</a>
-      <a class="btn" href="join.html">🤝 انضم إلى الوكالة</a>
+        <div class="offers">
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 01</div>
+            <div class="offer-price">4,500</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 1,000 ماسة</div>
+          </article>
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 02</div>
+            <div class="offer-price">11,000</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 1,500 ماسة</div>
+          </article>
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 03</div>
+            <div class="offer-price">25,500</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 3,000 ماسة</div>
+          </article>
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 04</div>
+            <div class="offer-price">50,000</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 5,000 ماسة</div>
+          </article>
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 05</div>
+            <div class="offer-price">80,000</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 15,000 ماسة</div>
+          </article>
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 06</div>
+            <div class="offer-price">100,000</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 20,000 ماسة</div>
+          </article>
+
+          <article class="offer">
+            <div class="offer-number">🎁 العرض 07</div>
+            <div class="offer-price">120,000</div>
+            <p>مساعدة تصل إلى</p>
+            <div class="diamond">💎 25,000 ماسة</div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="section-heading">
+          <h2>⭐ لماذا تنضم إلى وكالة الشايب؟</h2>
+          <p>تعرّف على الوكالة وخطوات الانضمام قبل التسجيل.</p>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="icon">🤝</div>
+            <h3>التواصل والمتابعة</h3>
+            <p>قناة واضحة للتواصل مع الوكالة والاستفسار عن الانضمام.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">💎</div>
+            <h3>عروض واضحة</h3>
+            <p>اطّلع على العروض ومبالغ المساعدة الموضحة في الصفحة.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">🎤</div>
+            <h3>التعرّف على المذيعين</h3>
+            <p>اكتشف صفحات مذيعي الوكالة وتابعهم على Likee.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="join-panel">
+          <h2>🚀 هل تريد الانضمام إلى الوكالة؟</h2>
+          <p>
+            انتقل إلى صفحة التسجيل للاطلاع على خطوات الانضمام
+            والتواصل معنا لإكمال الإجراءات.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-gold" href="join.html">
+              🤝 الانتقال إلى التسجيل
+            </a>
+
+            <a class="btn btn-outline" href="andix.html">
+              🎬 مشاهدة المذيعين
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
   <footer>
-    <p>🎤 وكالة الشايب | Shayeb Agency</p>
+    <p><strong>🎤 وكالة الشايب | Shayeb Agency</strong></p>
     <p>جميع الحقوق محفوظة © 2026</p>
   </footer>
 
-  <script>
-    const SUPABASE_URL =
-      "https://hzcnkywuabugjebtwzmv.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
-
-    const db = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-    // العروض
-    const offers = [
-      { price: "4,500", help: "مساعدة تصل إلى 1,000 ماسة" },
-      { price: "11,000", help: "مساعدة تصل إلى 1,500 ماسة" },
-      { price: "25,500", help: "مساعدة تصل إلى 3,000 ماسة" },
-      { price: "50,000", help: "مساعدة تصل إلى 5,000 ماسة" },
-      { price: "80,000", help: "مساعدة تصل إلى 15,000 ماسة" },
-      { price: "100,000", help: "مساعدة تصل إلى 20,000 ماسة" },
-      { price: "120,000", help: "مساعدة تصل إلى 25,000 ماسة" }
-    ];
-
-    function showOffers() {
-      const container = document.getElementById("offers");
-
-      container.innerHTML = offers.map((offer, index) => `
-        <article class="offer">
-          <h3>🎁 العرض ${index + 1}</h3>
-          <div class="price">${offer.price}</div>
-          <p>${offer.help}</p>
-        </article>
-      `).join("");
-    }
-
-    // حماية النصوص عند عرضها في الصفحة
-    function escapeHTML(value) {
-      return String(value ?? "").replace(/[&<>"']/g, function (char) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        }[char];
-      });
-    }
-
-    // تحميل المذيعين دون جلب الهدف أو الساعات أو كلمات المرور
-    async function loadBroadcasters() {
-      const container = document.getElementById("broadcasters");
-
-      try {
-        const { data, error } = await db
-          .from("Shayeb agency")
-          .select("id, image_url, likee_url, name")
-          .order("id", { ascending: false });
-
-        if (error) throw error;
-
-        if (!data || data.length === 0) {
-          container.innerHTML = `
-            <div class="empty">
-              🎤 لا يوجد مذيعون حاليًا.
-            </div>
-          `;
-          return;
-        }
-
-        container.innerHTML = "";
-
-        data.forEach((broadcaster) => {
-          const card = document.createElement("article");
-          card.className = "card";
-
-          const name = escapeHTML(broadcaster.name || "مذيع الوكالة");
-          const image = escapeHTML(broadcaster.image_url || "");
-          const likeeUrl = broadcaster.likee_url || "";
-
-          const safeLink = /^https?:\/\//i.test(likeeUrl)
-            ? escapeHTML(likeeUrl)
-            : "";
-
-          card.innerHTML = `
-            <img class="card-image"
-                 src="${image || "https://placehold.co/600x500/291744/f5d58a?text=Shayeb+Agency"}"
-                 alt="${name}"
-                 onerror="this.onerror=null;this.src='https://placehold.co/600x500/291744/f5d58a?text=Shayeb+Agency'">
-
-            <div class="card-content">
-              <h3>🎤 ${name}</h3>
-
-              <div class="info">
-                🔒 الهدف وساعات البث مخفية
-              </div>
-
-              <button class="password-btn" type="button">
-                🔐 عرض الهدف وساعات البث
-              </button>
-
-              <div class="stats"></div>
-
-              ${safeLink ? `
-                <a class="likee-btn"
-                   href="${safeLink}"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                  🎬 مشاهدة صفحة Likee
-                </a>
-              ` : ""}
-            </div>
-          `;
-
-          const button = card.querySelector(".password-btn");
-          const stats = card.querySelector(".stats");
-
-          button.addEventListener("click", async () => {
-            const password = prompt("أدخلي كلمة المرور الخاصة بهذا المذيع:");
-
-            if (password === null) return;
-
-            if (!password.trim()) {
-              alert("يرجى إدخال كلمة المرور.");
-              return;
-            }
-
-            button.disabled = true;
-            button.textContent = "⏳ جارٍ التحقق...";
-
-            try {
-              const { data, error } = await db.rpc(
-                "get_broadcaster_stats",
-                {
-                  p_id: broadcaster.id,
-                  p_password: password
-                }
-              );
-
-              if (error) throw error;
-
-              const result = Array.isArray(data) ? data[0] : data;
-
-              if (!result) {
-                stats.style.display = "block";
-                stats.textContent = "❌ كلمة المرور غير صحيحة.";
-                return;
-              }
-
-              stats.innerHTML = `
-                <div class="info">
-                  🎯 <strong>الهدف:</strong>
-                  ${escapeHTML(result.target || "غير محدد")}
-                </div>
-                <div class="info">
-                  ⏰ <strong>ساعات البث:</strong>
-                  ${escapeHTML(result.hours || "غير محدد")}
-                </div>
-              `;
-
-              stats.style.display = "block";
-              button.textContent = "✅ تم التحقق";
-            } catch (error) {
-              console.error(error);
-              stats.style.display = "block";
-              stats.textContent =
-                "⚠️ تعذر التحقق. تأكدي من إعداد دالة التحقق في قاعدة البيانات.";
-            } finally {
-              button.disabled = false;
-
-              if (button.textContent === "⏳ جارٍ التحقق...") {
-                button.textContent = "🔐 إعادة المحاولة";
-              }
-            }
-          });
-
-          container.appendChild(card);
-        });
-      } catch (error) {
-        console.error(error);
-        container.innerHTML = `
-          <div class="empty">
-            ⚠️ تعذر تحميل المذيعين.
-            <br>
-            تحققي من اتصال قاعدة البيانات وصلاحيات القراءة.
-          </div>
-        `;
-      }
-    }
-
-    showOffers();
-    loadBroadcasters();
-  </script>
 </body>
 </html>
