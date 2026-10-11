@@ -1,10 +1,11 @@
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تحديات وكالة الشايب</title>
+
   <style>
     :root {
       --gold: #e7bd58;
@@ -108,7 +109,6 @@
     }
 
     input:focus, textarea:focus { border-color: var(--gold); }
-
     input[type="file"] { padding: 9px; }
     input[type="datetime-local"] { direction: ltr; }
 
@@ -126,6 +126,12 @@
     }
 
     button:hover { filter: brightness(1.08); }
+    button:disabled { opacity: .6; cursor: wait; }
+
+    .secondary {
+      background: #303747;
+      color: white;
+    }
 
     .note {
       color: var(--muted);
@@ -134,13 +140,14 @@
       margin-top: 14px;
     }
 
-    #message {
+    .status {
       display: none;
       padding: 12px;
       border-radius: 10px;
       margin-top: 14px;
       line-height: 1.8;
       overflow-wrap: anywhere;
+      font-size: 14px;
     }
 
     .challenge-card {
@@ -160,6 +167,7 @@
     }
 
     .person { min-width: 0; }
+
     .person img {
       width: 100%;
       max-width: 130px;
@@ -200,6 +208,21 @@
       line-height: 1.9;
     }
 
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .top-actions button {
+      width: auto;
+      margin: 0;
+      padding: 10px 16px;
+    }
+
     footer {
       text-align: center;
       color: var(--muted);
@@ -214,6 +237,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">ش</div>
@@ -222,8 +246,39 @@
   </header>
 
   <main>
-    <section class="panel">
-      <h2>＋ إضافة تحدٍ جديد</h2>
+    <!-- تسجيل دخول المشرف -->
+    <section class="panel" id="loginPanel">
+      <h2>🔐 دخول المشرف</h2>
+
+      <form id="loginForm">
+        <label for="adminEmail">البريد الإلكتروني</label>
+        <input id="adminEmail" type="email"
+          autocomplete="username" required>
+
+        <label for="adminPassword">كلمة المرور</label>
+        <input id="adminPassword" type="password"
+          autocomplete="current-password" required>
+
+        <button id="loginButton" type="submit">تسجيل الدخول</button>
+        <div id="loginMessage" class="status" role="status"></div>
+      </form>
+
+      <p class="note">
+        يمكن للزوار مشاهدة التحديات دون تسجيل الدخول.
+        تسجيل الدخول مطلوب لإظهار نموذج الإضافة للمشرف.
+      </p>
+    </section>
+
+    <!-- إضافة التحدي: يظهر لحساب المشرف فقط -->
+    <section class="panel" id="adminPanel" hidden>
+      <div class="top-actions">
+        <h2 style="margin:0">＋ إضافة تحدٍ جديد</h2>
+        <button id="logoutButton" class="secondary" type="button">
+          تسجيل الخروج
+        </button>
+      </div>
+
+      <p id="adminStatus" class="note"></p>
 
       <form id="challengeForm">
         <div class="opponents">
@@ -232,7 +287,7 @@
 
             <label for="name1">اسم المذيع</label>
             <input id="name1" type="text" maxlength="100"
-              placeholder="اكتبي اسم المذيع الأول" required>
+              placeholder="اسم المذيع الأول" required>
 
             <label for="link1">رابط حسابه على Likee</label>
             <input id="link1" type="url"
@@ -240,7 +295,8 @@
 
             <label for="image1">صورة المذيع</label>
             <input id="image1" type="file"
-              accept="image/*" required>
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              required>
           </div>
 
           <div class="opponent">
@@ -248,7 +304,7 @@
 
             <label for="name2">اسم المذيع</label>
             <input id="name2" type="text" maxlength="100"
-              placeholder="اكتبي اسم المذيع الثاني" required>
+              placeholder="اسم المذيع الثاني" required>
 
             <label for="link2">رابط حسابه على Likee</label>
             <input id="link2" type="url"
@@ -256,7 +312,8 @@
 
             <label for="image2">صورة المذيع</label>
             <input id="image2" type="file"
-              accept="image/*" required>
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              required>
           </div>
         </div>
 
@@ -265,81 +322,134 @@
 
         <label for="details">ملاحظات عن التحدي (اختياري)</label>
         <textarea id="details" rows="3" maxlength="500"
-          placeholder="أي تفاصيل إضافية..."></textarea>
+          placeholder="ملاحظات للمعاينة فقط؛ لن تُحفظ في قاعدة البيانات"></textarea>
 
-        <button type="submit">عرض التحدي في المعاينة</button>
+        <button id="saveButton" type="submit">حفظ التحدي ونشره</button>
 
         <p class="note">
-          هذه معاينة محلية للصفحة فقط في هذه المرحلة.
-          لم يتم بعد حفظ التحديات في قاعدة البيانات أو إرسال رسائل تيليجرام.
+          يجب ألا يتجاوز حجم كل صورة 5 ميغابايت.
+          تُحفظ الصور والبيانات في Supabase. لا يتم إرسال رسائل تيليجرام.
         </p>
 
-        <div id="message" role="status"></div>
+        <div id="saveMessage" class="status" role="status"></div>
       </form>
     </section>
 
+    <!-- قائمة عامة للزوار -->
     <section class="panel">
-      <h2>⚔️ معاينة التحديات</h2>
+      <h2>⚔️ التحديات المعلنة</h2>
       <div id="challengeList">
-        <div class="empty">
-          لم تتم إضافة تحديات للمعاينة بعد.<br>
-          املئي بيانات الخصمين والموعد ثم اضغطي زر المعاينة.
-        </div>
+        <div class="empty">جارٍ تحميل التحديات...</div>
       </div>
     </section>
   </main>
 
-  <footer>
-    Shayeb Agency © إدارة التحديات
-  </footer>
+  <footer>Shayeb Agency © إدارة التحديات</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
-    const form = document.getElementById("challengeForm");
-    const list = document.getElementById("challengeList");
-    const message = document.getElementById("message");
+    const SUPABASE_URL =
+      "https://hzcnkywuabugjebtwzmv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+
+    const ADMIN_UID =
+      "732fae9a-00f5-4e8c-89c6-b836c1ed9581";
+
+    const BUCKET_NAME = "broadcaster-images";
+
+    const client = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const loginPanel = document.getElementById("loginPanel");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginForm = document.getElementById("loginForm");
+    const challengeForm = document.getElementById("challengeForm");
+    const challengeList = document.getElementById("challengeList");
+
+    const loginMessage = document.getElementById("loginMessage");
+    const saveMessage = document.getElementById("saveMessage");
+    const loginButton = document.getElementById("loginButton");
+    const saveButton = document.getElementById("saveButton");
+    const adminStatus = document.getElementById("adminStatus");
+
+    let currentAdmin = false;
+
+    function showMessage(element, text, success = false) {
+      element.textContent = text;
+      element.style.display = "block";
+      element.style.background = success ? "#263326" : "#402323";
+      element.style.color = "#fff";
+    }
+
+    function hideMessage(element) {
+      element.style.display = "none";
+      element.textContent = "";
+    }
 
     function safeText(value) {
-      return String(value).replace(/[&<>"']/g, function (char) {
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        }[char];
-      });
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
     }
 
     function validLikeeLink(value) {
       try {
         const url = new URL(value);
-        return url.protocol === "https:" || url.protocol === "http:";
+        return (
+          (url.protocol === "https:" || url.protocol === "http:") &&
+          (url.hostname === "likee.video" ||
+           url.hostname.endsWith(".likee.video") ||
+           url.hostname === "likee.com" ||
+           url.hostname.endsWith(".likee.com"))
+        );
       } catch {
         return false;
       }
     }
 
-    function readImage(file) {
-      return new Promise((resolve, reject) => {
-        if (!file || !file.type.startsWith("image/")) {
-          reject(new Error("اختاري ملف صورة صالحًا."));
-          return;
-        }
+    function validImage(file) {
+      const allowed = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/gif"
+      ];
 
-        if (file.size > 5 * 1024 * 1024) {
-          reject(new Error("حجم الصورة يجب ألا يتجاوز 5 ميغابايت."));
-          return;
-        }
+      return Boolean(
+        file &&
+        allowed.includes(file.type) &&
+        file.size > 0 &&
+        file.size <= 5 * 1024 * 1024
+      );
+    }
 
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(new Error("تعذرت قراءة الصورة."));
-        reader.readAsDataURL(file);
-      });
+    function extensionFor(file) {
+      const extensions = {
+        "image/jpeg": "jpg",
+        "image/png": "png",
+        "image/webp": "webp",
+        "image/gif": "gif"
+      };
+
+      return extensions[file.type];
     }
 
     function formatDate(value) {
       const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) {
+        return "موعد غير معروف";
+      }
+
       return new Intl.DateTimeFormat("ar-DZ", {
         dateStyle: "full",
         timeStyle: "short"
@@ -349,76 +459,307 @@
     function makePerson(name, link, image) {
       return `
         <div class="person">
-          <img src="${image}" alt="صورة ${safeText(name)}">
+          <img src="${safeText(image)}"
+               alt="صورة ${safeText(name)}"
+               loading="lazy">
           <strong>${safeText(name)}</strong>
-          <a class="account-link" href="${safeText(link)}"
-             target="_blank" rel="noopener noreferrer">
+          <a class="account-link"
+             href="${safeText(link)}"
+             target="_blank"
+             rel="noopener noreferrer">
             فتح حساب Likee
           </a>
         </div>
       `;
     }
 
-    form.addEventListener("submit", async function (event) {
+    function renderChallenge(challenge) {
+      const card = document.createElement("article");
+      card.className = "challenge-card";
+
+      const details = document.getElementById("details").value.trim();
+
+      card.innerHTML = `
+        <div class="versus">
+          ${makePerson(
+            challenge.opponent1_name,
+            challenge.opponent1_url,
+            challenge.opponent1_image
+          )}
+          <b>VS</b>
+          ${makePerson(
+            challenge.opponent2_name,
+            challenge.opponent2_url,
+            challenge.opponent2_image
+          )}
+        </div>
+
+        <div class="challenge-date">
+          <div>📅 ${safeText(formatDate(challenge.scheduled_at))}</div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    async function loadChallenges() {
+      challengeList.innerHTML =
+        '<div class="empty">جارٍ تحميل التحديات...</div>';
+
+      const { data, error } = await client
+        .from("challenges")
+        .select(
+          "id, opponent1_name, opponent1_image, opponent1_url, " +
+          "opponent2_name, opponent2_image, opponent2_url, scheduled_at"
+        )
+        .order("scheduled_at", { ascending: true });
+
+      if (error) {
+        console.error("Load challenges error:", error);
+        challengeList.innerHTML = "";
+
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent =
+          "تعذر تحميل التحديات. تحققي من اتصال الإنترنت وسياسة القراءة في Supabase.";
+        challengeList.appendChild(empty);
+        return;
+      }
+
+      challengeList.innerHTML = "";
+
+      if (!data || data.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "لا توجد تحديات معلنة حاليًا.";
+        challengeList.appendChild(empty);
+        return;
+      }
+
+      data.forEach(challenge => {
+        challengeList.appendChild(renderChallenge(challenge));
+      });
+    }
+
+    async function updateLoginState(session) {
+      const user = session?.user;
+      currentAdmin = Boolean(user && user.id === ADMIN_UID);
+
+      loginPanel.hidden = currentAdmin;
+      adminPanel.hidden = !currentAdmin;
+
+      if (currentAdmin) {
+        adminStatus.textContent =
+          "تم تسجيل الدخول بحساب المشرف. يمكنك إضافة التحديات.";
+        hideMessage(loginMessage);
+      } else if (user) {
+        showMessage(
+          loginMessage,
+          "هذا الحساب ليس حساب المشرف المصرّح له."
+        );
+        await client.auth.signOut();
+      }
+    }
+
+    loginForm.addEventListener("submit", async event => {
       event.preventDefault();
-      message.style.display = "none";
+      hideMessage(loginMessage);
+      loginButton.disabled = true;
+      loginButton.textContent = "جارٍ تسجيل الدخول...";
+
+      try {
+        const email = document.getElementById("adminEmail").value.trim();
+        const password = document.getElementById("adminPassword").value;
+
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        if (!data.user || data.user.id !== ADMIN_UID) {
+          await client.auth.signOut();
+          throw new Error("الحساب الذي دخلتِ به ليس حساب المشرف المعتمد.");
+        }
+
+        await updateLoginState(data.session);
+        showMessage(loginMessage, "تم تسجيل الدخول بنجاح.", true);
+      } catch (error) {
+        showMessage(
+          loginMessage,
+          error.message || "تعذر تسجيل الدخول. تحققي من البريد وكلمة المرور."
+        );
+      } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = "تسجيل الدخول";
+      }
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", async () => {
+      const { error } = await client.auth.signOut();
+
+      if (error) {
+        showMessage(saveMessage, "تعذر تسجيل الخروج: " + error.message);
+        return;
+      }
+
+      currentAdmin = false;
+      adminPanel.hidden = true;
+      loginPanel.hidden = false;
+      challengeForm.reset();
+      hideMessage(saveMessage);
+    });
+
+    async function uploadImage(file) {
+      if (!validImage(file)) {
+        throw new Error(
+          "اختاري صورة بصيغة JPG أو PNG أو WEBP أو GIF، وبحجم لا يتجاوز 5 ميغابايت."
+        );
+      }
+
+      const extension = extensionFor(file);
+      const path = "challenges/" + crypto.randomUUID() + "." + extension;
+
+      const { error: uploadError } = await client.storage
+        .from(BUCKET_NAME)
+        .upload(path, file, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: file.type
+        });
+
+      if (uploadError) {
+        throw new Error("تعذر رفع الصورة: " + uploadError.message);
+      }
+
+      const { data } = client.storage
+        .from(BUCKET_NAME)
+        .getPublicUrl(path);
+
+      return data.publicUrl;
+    }
+
+    challengeForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      hideMessage(saveMessage);
+
+      if (!currentAdmin) {
+        showMessage(saveMessage, "سجّلي الدخول بحساب المشرف أولًا.");
+        return;
+      }
 
       const name1 = document.getElementById("name1").value.trim();
       const name2 = document.getElementById("name2").value.trim();
       const link1 = document.getElementById("link1").value.trim();
       const link2 = document.getElementById("link2").value.trim();
-      const date = document.getElementById("challengeDate").value;
-      const details = document.getElementById("details").value.trim();
+      const dateValue = document.getElementById("challengeDate").value;
+
       const file1 = document.getElementById("image1").files[0];
       const file2 = document.getElementById("image2").files[0];
 
-      if (!validLikeeLink(link1) || !validLikeeLink(link2)) {
-        message.textContent = "تأكدي من إدخال رابط صحيح لكل حساب.";
-        message.style.display = "block";
+      if (!name1 || !name2) {
+        showMessage(saveMessage, "أدخلي اسمَي المذيعين.");
         return;
       }
 
-      if (!date || new Date(date).getTime() <= Date.now()) {
-        message.textContent = "اختاري موعدًا مستقبليًا للتحدي.";
-        message.style.display = "block";
+      if (!validLikeeLink(link1) || !validLikeeLink(link2)) {
+        showMessage(
+          saveMessage,
+          "أدخلي رابط حساب Likee صحيحًا لكل مذيع."
+        );
         return;
       }
+
+      if (!validImage(file1) || !validImage(file2)) {
+        showMessage(
+          saveMessage,
+          "تأكدي من اختيار صورتين صالحَتين، كل واحدة بحجم 5 ميغابايت أو أقل."
+        );
+        return;
+      }
+
+      const scheduledDate = new Date(dateValue);
+
+      if (!dateValue || Number.isNaN(scheduledDate.getTime()) ||
+          scheduledDate.getTime() <= Date.now()) {
+        showMessage(saveMessage, "اختاري موعدًا مستقبليًا للتحدي.");
+        return;
+      }
+
+      saveButton.disabled = true;
+      saveButton.textContent = "جارٍ رفع الصور وحفظ التحدي...";
 
       try {
-        const [image1, image2] = await Promise.all([
-          readImage(file1),
-          readImage(file2)
+        const { data: sessionData } = await client.auth.getSession();
+        const user = sessionData?.session?.user;
+
+        if (!user || user.id !== ADMIN_UID) {
+          currentAdmin = false;
+          adminPanel.hidden = true;
+          loginPanel.hidden = false;
+          throw new Error("انتهت جلسة المشرف. سجّلي الدخول مجددًا.");
+        }
+
+        const [imageUrl1, imageUrl2] = await Promise.all([
+          uploadImage(file1),
+          uploadImage(file2)
         ]);
 
-        const card = document.createElement("article");
-        card.className = "challenge-card";
-        card.innerHTML = `
-          <div class="versus">
-            ${makePerson(name1, link1, image1)}
-            <b>VS</b>
-            ${makePerson(name2, link2, image2)}
-          </div>
-          <div class="challenge-date">
-            <div>📅 ${safeText(formatDate(date))}</div>
-            ${details ? `<p>${safeText(details)}</p>` : ""}
-          </div>
-        `;
+        const challenge = {
+          opponent1_name: name1,
+          opponent1_image: imageUrl1,
+          opponent1_url: link1,
+          opponent2_name: name2,
+          opponent2_image: imageUrl2,
+          opponent2_url: link2,
+          scheduled_at: scheduledDate.toISOString()
+        };
 
-        const empty = list.querySelector(".empty");
-        if (empty) empty.remove();
-        list.prepend(card);
+        const { error: insertError } = await client
+          .from("challenges")
+          .insert(challenge);
 
-        message.textContent =
-          "نجحت المعاينة! لم يُحفظ التحدي بعد، ولن تُرسل رسالة تيليجرام في هذه المرحلة.";
-        message.style.display = "block";
-        message.style.background = "#263326";
-        form.reset();
+        if (insertError) {
+          throw new Error("تعذر حفظ بيانات التحدي: " + insertError.message);
+        }
+
+        showMessage(
+          saveMessage,
+          "تم حفظ التحدي بنجاح! أصبح بإمكان الزوار مشاهدته.",
+          true
+        );
+
+        challengeForm.reset();
+        await loadChallenges();
       } catch (error) {
-        message.textContent = error.message || "حدث خطأ أثناء تجهيز الصور.";
-        message.style.display = "block";
-        message.style.background = "#402323";
+        console.error("Save challenge error:", error);
+        showMessage(
+          saveMessage,
+          error.message || "حدث خطأ أثناء حفظ التحدي."
+        );
+      } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = "حفظ التحدي ونشره";
       }
     });
+
+    async function initializePage() {
+      const { data, error } = await client.auth.getSession();
+
+      if (error) {
+        console.error("Session error:", error);
+      }
+
+      await updateLoginState(data?.session || null);
+      await loadChallenges();
+    }
+
+    client.auth.onAuthStateChange((_event, session) => {
+      updateLoginState(session);
+    });
+
+    initializePage();
   </script>
 </body>
 </html>
