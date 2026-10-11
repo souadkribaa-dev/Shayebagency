@@ -3,60 +3,43 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10091f">
   <title>التحديات | وكالة الشايب</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #10091f;
       --panel: #211333;
-      --panel-light: #301b49;
       --gold: #f5d58a;
       --gold-dark: #c99838;
-      --text: #ffffff;
+      --text: #fff;
       --muted: #e0d4ee;
       --border: #71552d;
-      --danger: #ff8585;
       --success: #8ee0ad;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    [hidden] { display: none !important; }
 
     body {
       margin: 0;
       min-height: 100vh;
       color: var(--text);
-      background:
-        radial-gradient(ellipse at top, #35204e 0%, transparent 48%),
-        var(--bg);
+      background: radial-gradient(ellipse at top, #35204e 0%, transparent 48%), var(--bg);
       font-family: "Cairo", sans-serif;
     }
 
-    a {
-      color: inherit;
-    }
-
-    .container {
-      width: min(1100px, 92%);
-      margin: auto;
-    }
+    .container { width: min(1100px, 92%); margin: auto; }
 
     header {
       padding: 25px 0 18px;
       text-align: center;
-      border-bottom: 1px solid rgba(245, 213, 138, .22);
-      background: rgba(16, 9, 31, .7);
+      border-bottom: 1px solid #ffffff22;
     }
 
     .brand {
@@ -64,14 +47,9 @@
       font-size: clamp(27px, 5vw, 43px);
       font-weight: 900;
       margin: 0;
-      text-shadow: 0 0 24px rgba(245, 213, 138, .16);
     }
 
-    .subtitle {
-      margin: 5px 0 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+    .subtitle { color: var(--muted); margin: 5px 0 18px; }
 
     nav {
       display: flex;
@@ -82,74 +60,37 @@
 
     nav a {
       padding: 8px 15px;
-      border: 1px solid rgba(245, 213, 138, .3);
+      border: 1px solid #f5d58a55;
       border-radius: 30px;
-      background: rgba(48, 27, 73, .7);
+      background: #301b49b3;
       text-decoration: none;
       font-size: 13px;
-      transition: .2s;
+      color: white;
     }
 
-    nav a:hover,
-    nav a.active {
+    nav a:hover, nav a.active {
       color: var(--bg);
       background: var(--gold);
-      border-color: var(--gold);
     }
 
-    .hero {
-      padding: 35px 0 20px;
-      text-align: center;
-    }
-
-    .hero-icon {
-      font-size: 45px;
-      margin-bottom: 5px;
-    }
-
-    h1 {
-      margin: 0;
-      color: var(--gold);
-      font-size: clamp(25px, 5vw, 37px);
-      font-weight: 900;
-    }
-
-    .hero p {
-      color: var(--muted);
-      line-height: 1.9;
-      margin: 10px auto 0;
-      max-width: 650px;
-      font-size: 14px;
-    }
+    .hero { padding: 35px 0 20px; text-align: center; }
+    .hero-icon { font-size: 45px; }
+    h1 { color: var(--gold); font-size: clamp(25px, 5vw, 37px); margin: 0; }
+    .hero p, .description { color: var(--muted); line-height: 1.9; font-size: 14px; }
 
     .section {
       margin: 22px auto;
       padding: clamp(17px, 4vw, 28px);
       border: 1px solid var(--border);
       border-radius: 22px;
-      background: linear-gradient(145deg, rgba(48, 27, 73, .94), rgba(25, 14, 40, .97));
-      box-shadow: 0 15px 45px rgba(0, 0, 0, .2);
+      background: linear-gradient(145deg, #301b49f0, #190e28f7);
+      box-shadow: 0 15px 45px #0003;
     }
 
-    .section-title {
-      color: var(--gold);
-      margin: 0 0 18px;
-      font-size: 21px;
-      font-weight: 800;
-    }
+    .section-title { color: var(--gold); margin: 0 0 15px; font-size: 21px; }
+    .description { margin-top: 0; }
 
-    .section-description {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
-
-    .field {
-      margin-bottom: 16px;
-      min-width: 0;
-    }
+    .field { margin-bottom: 16px; min-width: 0; }
 
     label {
       display: block;
@@ -162,41 +103,87 @@
     input {
       width: 100%;
       min-width: 0;
-      padding: 12px 13px;
+      padding: 12px;
       color: white;
-      background: rgba(16, 9, 31, .8);
-      border: 1px solid rgba(245, 213, 138, .28);
+      background: #10091fcc;
+      border: 1px solid #f5d58a47;
       border-radius: 12px;
-      outline: none;
       font: inherit;
       font-size: 14px;
     }
 
-    input:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(245, 213, 138, .1);
-    }
+    input[type="datetime-local"] { color-scheme: dark; }
+    input[type="file"] { font-size: 12px; }
 
-    input[type="file"] {
-      padding: 9px;
-      font-size: 12px;
-    }
-
-    input[type="file"]::file-selector-button {
-      padding: 7px 10px;
-      margin-left: 8px;
-      color: var(--bg);
-      background: var(--gold);
-      border: none;
-      border-radius: 8px;
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 45px;
+      padding: 11px 16px;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #20132b;
       font-family: inherit;
-      font-weight: 700;
+      font-weight: 900;
+      font-size: 14px;
       cursor: pointer;
+      text-decoration: none;
     }
 
-    input[type="datetime-local"] {
-      color-scheme: dark;
+    .button.secondary {
+      background: transparent;
+      color: var(--gold);
     }
+
+    .button.small { width: auto; min-height: 36px; padding: 7px 13px; }
+    .button:disabled { opacity: .55; cursor: not-allowed; }
+
+    .login-box { max-width: 470px; margin: auto; }
+
+    .notice {
+      display: none;
+      margin: 14px 0;
+      padding: 12px;
+      border-radius: 12px;
+      line-height: 1.8;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .notice.error {
+      display: block;
+      color: #ffd1d1;
+      background: #82192d3d;
+      border: 1px solid #ff85855a;
+    }
+
+    .notice.success {
+      display: block;
+      color: #c8ffda;
+      background: #196e3c33;
+      border: 1px solid #8ee0ad55;
+    }
+
+    .admin-tools {
+      margin-bottom: 20px;
+      padding: 13px;
+      border: 1px solid #f5d58a38;
+      border-radius: 14px;
+      background: #10091f59;
+    }
+
+    .admin-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .admin-label { color: var(--success); font-weight: 800; }
 
     .opponents {
       display: grid;
@@ -207,130 +194,21 @@
     .opponent {
       padding: 17px;
       border-radius: 17px;
-      border: 1px solid rgba(245, 213, 138, .2);
-      background: rgba(16, 9, 31, .42);
+      border: 1px solid #f5d58a33;
+      background: #10091f6b;
       min-width: 0;
     }
 
-    .opponent h3 {
-      margin: 0 0 16px;
-      color: var(--gold);
-      font-size: 17px;
-    }
+    .opponent h3 { color: var(--gold); margin-top: 0; }
 
     .preview {
       display: none;
-      width: 105px;
-      height: 105px;
-      margin: 12px auto 4px;
+      width: 100px;
+      height: 100px;
+      margin: 12px auto;
       border: 2px solid var(--gold);
       border-radius: 50%;
       object-fit: cover;
-      background: var(--panel);
-    }
-
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      min-height: 46px;
-      padding: 11px 16px;
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: #20132b;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 900;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform .2s, opacity .2s;
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
-    }
-
-    .button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .button.secondary {
-      background: transparent;
-      color: var(--gold);
-    }
-
-    .button.small {
-      width: auto;
-      min-height: 37px;
-      padding: 7px 13px;
-      font-size: 12px;
-    }
-
-    .notice {
-      display: none;
-      margin: 14px 0;
-      padding: 12px 14px;
-      border-radius: 12px;
-      line-height: 1.8;
-      font-size: 13px;
-      overflow-wrap: anywhere;
-    }
-
-    .notice.error {
-      display: block;
-      color: #ffd1d1;
-      background: rgba(130, 25, 45, .24);
-      border: 1px solid rgba(255, 133, 133, .35);
-    }
-
-    .notice.success {
-      display: block;
-      color: #c8ffda;
-      background: rgba(25, 110, 60, .2);
-      border: 1px solid rgba(142, 224, 173, .3);
-    }
-
-    .admin-tools {
-      display: none;
-      margin-bottom: 20px;
-      padding: 13px;
-      border: 1px solid rgba(245, 213, 138, .22);
-      border-radius: 14px;
-      background: rgba(16, 9, 31, .35);
-    }
-
-    .admin-tools.visible {
-      display: block;
-    }
-
-    .admin-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .admin-label {
-      color: var(--success);
-      font-weight: 800;
-      font-size: 14px;
-    }
-
-    .login-box {
-      max-width: 470px;
-      margin: auto;
-    }
-
-    .login-box[hidden],
-    #adminPanel[hidden] {
-      display: none !important;
     }
 
     .challenge-grid {
@@ -342,9 +220,9 @@
     .challenge-card {
       min-width: 0;
       padding: 17px;
-      border: 1px solid rgba(245, 213, 138, .28);
+      border: 1px solid #f5d58a47;
       border-radius: 18px;
-      background: linear-gradient(160deg, rgba(48, 27, 73, .95), rgba(24, 13, 39, .96));
+      background: linear-gradient(160deg, #301b49f2, #180d27f5);
       overflow: hidden;
     }
 
@@ -363,10 +241,7 @@
       gap: 9px;
     }
 
-    .player {
-      min-width: 0;
-      text-align: center;
-    }
+    .player { min-width: 0; text-align: center; }
 
     .player img {
       display: block;
@@ -377,11 +252,10 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--gold);
-      background: var(--panel-light);
+      background: var(--panel);
     }
 
     .player-name {
-      color: white;
       font-size: 14px;
       font-weight: 800;
       overflow-wrap: anywhere;
@@ -392,72 +266,42 @@
       display: inline-block;
       padding: 6px 11px;
       border-radius: 20px;
-      background: rgba(245, 213, 138, .12);
-      border: 1px solid rgba(245, 213, 138, .35);
+      background: #f5d58a1f;
+      border: 1px solid #f5d58a55;
       color: var(--gold);
       font-size: 12px;
       text-decoration: none;
     }
 
-    .vs {
-      align-self: center;
-      color: var(--gold);
-      font-size: 22px;
-      font-weight: 900;
-      text-shadow: 0 0 15px rgba(245, 213, 138, .2);
-    }
+    .vs { align-self: center; color: var(--gold); font-size: 22px; font-weight: 900; }
 
-    .empty-state {
-      padding: 28px 12px;
+    .empty-state, .loading {
+      padding: 24px 12px;
       text-align: center;
       color: var(--muted);
-      border: 1px dashed rgba(245, 213, 138, .25);
-      border-radius: 14px;
       line-height: 2;
     }
 
-    .loading {
-      text-align: center;
-      color: var(--muted);
-      padding: 22px 10px;
+    .empty-state {
+      border: 1px dashed #f5d58a40;
+      border-radius: 14px;
     }
 
     footer {
       margin-top: 35px;
       padding: 23px 10px;
       text-align: center;
-      border-top: 1px solid rgba(245, 213, 138, .17);
+      border-top: 1px solid #f5d58a2b;
       color: var(--muted);
       font-size: 12px;
       line-height: 2;
     }
 
     @media (max-width: 650px) {
-      .opponents,
-      .challenge-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        border-radius: 17px;
-      }
-
-      .opponent {
-        padding: 14px;
-      }
-
-      nav {
-        gap: 7px;
-      }
-
-      nav a {
-        padding: 7px 10px;
-        font-size: 12px;
-      }
-
-      .player-name {
-        font-size: 12px;
-      }
+      .opponents, .challenge-grid { grid-template-columns: 1fr; }
+      nav { gap: 7px; }
+      nav a { padding: 7px 10px; font-size: 12px; }
+      .player-name { font-size: 12px; }
     }
   </style>
 </head>
@@ -467,7 +311,6 @@
     <div class="container">
       <p class="brand">وكالة الشايب</p>
       <p class="subtitle">الإبداع · التحدي · التميز</p>
-
       <nav aria-label="القائمة الرئيسية">
         <a href="index.html">🏠 الرئيسية</a>
         <a href="andix.html">🎤 المذيعون</a>
@@ -483,106 +326,88 @@
       <h1>ساحة التحديات</h1>
       <p>
         تابعوا أقوى المواجهات بين نجوم وكالة الشايب.
-        اكتشفوا المنافسين ومواعيد التحديات من مكان واحد.
+        اكتشفوا المتنافسين ومواعيد التحديات من مكان واحد.
       </p>
+      <button id="showAdminLogin" class="button secondary"
+              type="button" style="max-width:220px;margin-top:18px">
+        🔐 دخول المشرفة
+      </button>
     </section>
 
-    <!-- تسجيل دخول المشرفة -->
-    <section class="section">
+    <!-- قسم الإدارة مخفي حتى تطلب المشرفة فتحه -->
+    <section id="adminSection" class="section" hidden>
       <h2 class="section-title">🔐 إدارة التحديات</h2>
-      <p class="section-description">
-        تسجيل الدخول مخصص لحساب المشرفة المصرح له بإدارة التحديات.
-      </p>
+      <p class="description">تسجيل الدخول مخصص لحساب المشرفة المصرح له.</p>
 
       <div id="loginBox" class="login-box">
         <form id="loginForm">
           <div class="field">
             <label for="email">البريد الإلكتروني للمشرفة</label>
-            <input
-              id="email"
-              type="email"
-              autocomplete="username"
-              placeholder="أدخلي البريد الإلكتروني"
-              required
-            >
+            <input id="email" type="email" autocomplete="username"
+                   placeholder="أدخلي البريد الإلكتروني" required>
           </div>
 
           <div class="field">
             <label for="password">كلمة المرور</label>
-            <input
-              id="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="أدخلي كلمة المرور"
-              required
-            >
+            <input id="password" type="password"
+                   autocomplete="current-password"
+                   placeholder="أدخلي كلمة المرور" required>
           </div>
 
           <button id="loginButton" class="button" type="submit">
             🔑 تسجيل الدخول
           </button>
         </form>
-
         <div id="loginMessage" class="notice" role="status" aria-live="polite"></div>
       </div>
 
       <div id="adminPanel" hidden>
-        <div class="admin-tools visible">
+        <div class="admin-tools">
           <div class="admin-top">
             <span class="admin-label">✓ تم تسجيل الدخول كمشرفة</span>
             <button id="logoutButton" class="button secondary small" type="button">
               تسجيل الخروج
             </button>
           </div>
-          <p class="section-description" style="margin:0">
-            يمكنكِ الآن إضافة تحدٍّ جديد. ستظهر التحديات المنشورة للزوار.
-          </p>
+          <p class="description">يمكنكِ إضافة تحدٍّ جديد. ستظهر التحديات المنشورة للزوار.</p>
         </div>
 
         <form id="challengeForm">
           <div class="opponents">
             <div class="opponent">
               <h3>🥇 المتنافس الأول</h3>
-
               <div class="field">
                 <label for="opponent1Name">اسم المتنافس</label>
                 <input id="opponent1Name" type="text" maxlength="100"
-                  placeholder="اسم المتنافس الأول" required>
+                       placeholder="اسم المتنافس الأول" required>
               </div>
-
               <div class="field">
                 <label for="opponent1Url">رابط حساب Likee</label>
-                <input id="opponent1Url" type="url" inputmode="url"
-                  placeholder="https://..." required>
+                <input id="opponent1Url" type="url" placeholder="https://..." required>
               </div>
-
               <div class="field">
                 <label for="opponent1Image">صورة المتنافس</label>
                 <input id="opponent1Image" type="file"
-                  accept="image/jpeg,image/png,image/webp" required>
+                       accept="image/jpeg,image/png,image/webp" required>
                 <img id="preview1" class="preview" alt="معاينة صورة المتنافس الأول">
               </div>
             </div>
 
             <div class="opponent">
               <h3>🥈 المتنافس الثاني</h3>
-
               <div class="field">
                 <label for="opponent2Name">اسم المتنافس</label>
                 <input id="opponent2Name" type="text" maxlength="100"
-                  placeholder="اسم المتنافس الثاني" required>
+                       placeholder="اسم المتنافس الثاني" required>
               </div>
-
               <div class="field">
                 <label for="opponent2Url">رابط حساب Likee</label>
-                <input id="opponent2Url" type="url" inputmode="url"
-                  placeholder="https://..." required>
+                <input id="opponent2Url" type="url" placeholder="https://..." required>
               </div>
-
               <div class="field">
                 <label for="opponent2Image">صورة المتنافس</label>
                 <input id="opponent2Image" type="file"
-                  accept="image/jpeg,image/png,image/webp" required>
+                       accept="image/jpeg,image/png,image/webp" required>
                 <img id="preview2" class="preview" alt="معاينة صورة المتنافس الثاني">
               </div>
             </div>
@@ -596,23 +421,18 @@
           <button id="publishButton" class="button" type="submit">
             ✨ نشر التحدي
           </button>
-
           <div id="formMessage" class="notice" role="status" aria-live="polite"></div>
         </form>
       </div>
     </section>
 
-    <!-- التحديات المنشورة -->
+    <!-- هذا القسم متاح لجميع الزوار -->
     <section class="section">
       <h2 class="section-title">🏆 التحديات المنشورة</h2>
-      <p class="section-description">
-        تظهر هنا التحديات المحفوظة في قاعدة البيانات.
-      </p>
-
+      <p class="description">التحديات ومواعيدها وصور المتنافسين المنشورة.</p>
       <div id="challengesStatus" class="loading" role="status" aria-live="polite">
         جارٍ تحميل التحديات...
       </div>
-
       <div id="challengesList" class="challenge-grid"></div>
     </section>
   </main>
@@ -627,20 +447,15 @@
   <script>
     "use strict";
 
-    // إعداد الاتصال بمشروع Supabase
     const SUPABASE_URL = "https://hzcnkywuabugjebtwzmv.supabase.co";
     const SUPABASE_KEY = "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
-
-    // معرّف حساب المشرفة المسموح له بإدارة التحديات
     const ADMIN_UID = "732fae9a-00f5-4e8c-89c6-b836c1ed9581";
 
-    const client = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const $ = id => document.getElementById(id);
 
-    const $ = (id) => document.getElementById(id);
-
+    const adminSection = $("adminSection");
+    const showAdminLoginButton = $("showAdminLogin");
     const loginBox = $("loginBox");
     const adminPanel = $("adminPanel");
     const loginForm = $("loginForm");
@@ -653,6 +468,7 @@
     const challengesList = $("challengesList");
 
     let currentAdmin = false;
+    let loginRequested = false;
 
     function showMessage(element, message, type) {
       element.textContent = message;
@@ -666,16 +482,27 @@
 
     function setAdminMode(isAdmin) {
       currentAdmin = isAdmin;
+      adminSection.hidden = !isAdmin && !loginRequested;
+      showAdminLoginButton.hidden = isAdmin;
       loginBox.hidden = isAdmin;
       adminPanel.hidden = !isAdmin;
 
       if (!isAdmin) {
         challengeForm.reset();
+        $("preview1").removeAttribute("src");
+        $("preview2").removeAttribute("src");
         $("preview1").style.display = "none";
         $("preview2").style.display = "none";
         clearMessage(formMessage);
       }
     }
+
+    showAdminLoginButton.addEventListener("click", () => {
+      loginRequested = true;
+      adminSection.hidden = false;
+      loginBox.hidden = false;
+      adminSection.scrollIntoView({ behavior: "smooth" });
+    });
 
     function isValidWebUrl(value) {
       try {
@@ -699,21 +526,17 @@
           return;
         }
 
-        const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-
-        if (!allowedTypes.includes(file.type)) {
+        if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
           input.value = "";
-          preview.removeAttribute("src");
           preview.style.display = "none";
-          showMessage(formMessage, "اختاري صورة بصيغة JPG أو PNG أو WebP.", "error");
+          showMessage(formMessage, "اختاري صورة JPG أو PNG أو WebP.", "error");
           return;
         }
 
         if (file.size > 5 * 1024 * 1024) {
           input.value = "";
-          preview.removeAttribute("src");
           preview.style.display = "none";
-          showMessage(formMessage, "حجم الصورة كبير. الحد الأقصى هو 5 ميغابايت.", "error");
+          showMessage(formMessage, "حجم الصورة يجب ألا يتجاوز 5 ميغابايت.", "error");
           return;
         }
 
@@ -729,40 +552,33 @@
     async function checkAdminSession() {
       try {
         const { data, error } = await client.auth.getSession();
-
         if (error) throw error;
 
         const user = data.session && data.session.user;
 
         if (user && user.id === ADMIN_UID) {
+          loginRequested = true;
           setAdminMode(true);
         } else {
           setAdminMode(false);
-
-          // إذا كان الحساب المسجل ليس حساب المشرفة، نُنهي جلسته.
-          if (user) {
-            await client.auth.signOut();
-          }
+          if (user) await client.auth.signOut();
         }
       } catch (error) {
-        setAdminMode(false);
         console.error("Session check error:", error);
+        setAdminMode(false);
       }
     }
 
-    loginForm.addEventListener("submit", async (event) => {
+    loginForm.addEventListener("submit", async event => {
       event.preventDefault();
       clearMessage(loginMessage);
       loginButton.disabled = true;
       loginButton.textContent = "جارٍ التحقق...";
 
       try {
-        const email = $("email").value.trim();
-        const password = $("password").value;
-
         const { data, error } = await client.auth.signInWithPassword({
-          email,
-          password
+          email: $("email").value.trim(),
+          password: $("password").value
         });
 
         if (error) throw error;
@@ -772,14 +588,11 @@
           throw new Error("هذا الحساب ليس حساب المشرفة المصرح له.");
         }
 
+        loginRequested = true;
         setAdminMode(true);
         showMessage(loginMessage, "تم تسجيل الدخول بنجاح.", "success");
       } catch (error) {
-        showMessage(
-          loginMessage,
-          "تعذر تسجيل الدخول: " + (error.message || "حدث خطأ غير متوقع."),
-          "error"
-        );
+        showMessage(loginMessage, "تعذر تسجيل الدخول: " + (error.message || "حدث خطأ."), "error");
       } finally {
         loginButton.disabled = false;
         loginButton.textContent = "🔑 تسجيل الدخول";
@@ -794,14 +607,13 @@
         return;
       }
 
+      loginRequested = false;
       setAdminMode(false);
       clearMessage(loginMessage);
     });
 
     async function uploadOpponentImage(file, label) {
-      const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-
-      if (!file || !allowedTypes.includes(file.type)) {
+      if (!file || !["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
         throw new Error("اختاري صورة صحيحة للمتنافس " + label + ".");
       }
 
@@ -809,22 +621,19 @@
         throw new Error("صورة المتنافس " + label + " أكبر من 5 ميغابايت.");
       }
 
-      const extensionByType = {
+      const extension = {
         "image/jpeg": "jpg",
         "image/png": "png",
         "image/webp": "webp"
-      };
+      }[file.type];
 
-      const extension = extensionByType[file.type];
-      const randomPart = (
-        window.crypto && typeof window.crypto.randomUUID === "function"
-      )
-        ? window.crypto.randomUUID()
+      const randomPart = crypto.randomUUID
+        ? crypto.randomUUID()
         : Date.now() + "-" + Math.random().toString(36).slice(2);
 
       const path = "challenges/" + randomPart + "." + extension;
 
-      const { error: uploadError } = await client.storage
+      const { error } = await client.storage
         .from("broadcaster-images")
         .upload(path, file, {
           contentType: file.type,
@@ -832,24 +641,15 @@
           upsert: false
         });
 
-      if (uploadError) {
-        throw new Error(
-          "تعذر رفع صورة المتنافس " + label + ": " + uploadError.message
-        );
-      }
+      if (error) throw new Error("تعذر رفع صورة المتنافس " + label + ": " + error.message);
 
-      const { data } = client.storage
-        .from("broadcaster-images")
-        .getPublicUrl(path);
-
-      if (!data || !data.publicUrl) {
-        throw new Error("تعذر الحصول على رابط صورة المتنافس " + label + ".");
-      }
+      const { data } = client.storage.from("broadcaster-images").getPublicUrl(path);
+      if (!data || !data.publicUrl) throw new Error("تعذر الحصول على رابط الصورة.");
 
       return data.publicUrl;
     }
 
-    challengeForm.addEventListener("submit", async (event) => {
+    challengeForm.addEventListener("submit", async event => {
       event.preventDefault();
       clearMessage(formMessage);
 
@@ -858,61 +658,48 @@
         return;
       }
 
-      const { data: sessionData, error: sessionError } =
-        await client.auth.getSession();
-
-      if (sessionError || !sessionData.session ||
-          sessionData.session.user.id !== ADMIN_UID) {
-        setAdminMode(false);
-        showMessage(formMessage, "انتهت الجلسة. سجلي الدخول من جديد.", "error");
-        return;
-      }
-
-      const name1 = $("opponent1Name").value.trim();
-      const url1 = $("opponent1Url").value.trim();
-      const file1 = $("opponent1Image").files[0];
-
-      const name2 = $("opponent2Name").value.trim();
-      const url2 = $("opponent2Url").value.trim();
-      const file2 = $("opponent2Image").files[0];
-
-      const scheduledValue = $("scheduledAt").value;
-
-      if (!name1 || !name2) {
-        showMessage(formMessage, "أدخلي اسمَي المتنافسين.", "error");
-        return;
-      }
-
-      if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) {
-        showMessage(formMessage, "تأكدي من صحة رابطَي المتنافسين.", "error");
-        return;
-      }
-
-      if (!file1 || !file2 || !scheduledValue) {
-        showMessage(formMessage, "أكملي الصور وموعد التحدي.", "error");
-        return;
-      }
-
-      const scheduledDate = new Date(scheduledValue);
-
-      if (Number.isNaN(scheduledDate.getTime())) {
-        showMessage(formMessage, "موعد التحدي غير صحيح.", "error");
-        return;
-      }
-
-      publishButton.disabled = true;
-      publishButton.textContent = "جارٍ رفع الصور وحفظ التحدي...";
-
       try {
-        showMessage(formMessage, "الخطوة 1 من 3: جارٍ رفع صورة المتنافس الأول...", "success");
+        const { data: sessionData, error: sessionError } = await client.auth.getSession();
+
+        if (sessionError || !sessionData.session ||
+            sessionData.session.user.id !== ADMIN_UID) {
+          loginRequested = false;
+          setAdminMode(false);
+          throw new Error("انتهت الجلسة. سجلي الدخول من جديد.");
+        }
+
+        const name1 = $("opponent1Name").value.trim();
+        const url1 = $("opponent1Url").value.trim();
+        const file1 = $("opponent1Image").files[0];
+        const name2 = $("opponent2Name").value.trim();
+        const url2 = $("opponent2Url").value.trim();
+        const file2 = $("opponent2Image").files[0];
+        const scheduledValue = $("scheduledAt").value;
+
+        if (!name1 || !name2) throw new Error("أدخلي اسمَي المتنافسين.");
+        if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) {
+          throw new Error("تأكدي من صحة رابطَي المتنافسين.");
+        }
+        if (!file1 || !file2 || !scheduledValue) {
+          throw new Error("أكملي الصور وموعد التحدي.");
+        }
+
+        const scheduledDate = new Date(scheduledValue);
+        if (Number.isNaN(scheduledDate.getTime())) {
+          throw new Error("موعد التحدي غير صحيح.");
+        }
+
+        publishButton.disabled = true;
+        publishButton.textContent = "جارٍ رفع الصور وحفظ التحدي...";
+
+        showMessage(formMessage, "جارٍ رفع صورة المتنافس الأول...", "success");
         const image1 = await uploadOpponentImage(file1, "الأول");
 
-        showMessage(formMessage, "الخطوة 2 من 3: جارٍ رفع صورة المتنافس الثاني...", "success");
+        showMessage(formMessage, "جارٍ رفع صورة المتنافس الثاني...", "success");
         const image2 = await uploadOpponentImage(file2, "الثاني");
 
-        showMessage(formMessage, "الخطوة 3 من 3: جارٍ حفظ بيانات التحدي...", "success");
+        showMessage(formMessage, "جارٍ حفظ بيانات التحدي...", "success");
 
-        // أسماء الحقول مطابقة لجدول public.challenges
         const challenge = {
           opponent1_name: name1,
           opponent1_image: image1,
@@ -936,15 +723,10 @@
         $("preview2").style.display = "none";
 
         showMessage(formMessage, "تم نشر التحدي وحفظه بنجاح! ✨", "success");
-
         await loadChallenges();
       } catch (error) {
         console.error("Publish challenge error:", error);
-        showMessage(
-          formMessage,
-          "تعذر حفظ التحدي: " + (error.message || "حدث خطأ غير متوقع."),
-          "error"
-        );
+        showMessage(formMessage, "تعذر حفظ التحدي: " + (error.message || "حدث خطأ."), "error");
       } finally {
         publishButton.disabled = false;
         publishButton.textContent = "✨ نشر التحدي";
@@ -953,10 +735,7 @@
 
     function formatDate(value) {
       const date = new Date(value);
-
-      if (Number.isNaN(date.getTime())) {
-        return "موعد التحدي غير محدد";
-      }
+      if (Number.isNaN(date.getTime())) return "موعد التحدي غير محدد";
 
       return new Intl.DateTimeFormat("ar-DZ", {
         dateStyle: "full",
@@ -973,10 +752,6 @@
       image.loading = "lazy";
       image.referrerPolicy = "no-referrer";
       image.src = imageUrl;
-
-      image.addEventListener("error", () => {
-        image.alt = "تعذر تحميل صورة " + name;
-      });
 
       const playerName = document.createElement("div");
       playerName.className = "player-name";
@@ -1022,55 +797,50 @@
 
       versus.append(first, vs, second);
       card.append(date, versus);
-
       return card;
     }
 
     async function loadChallenges() {
       challengesStatus.style.display = "block";
+      challengesStatus.className = "loading";
       challengesStatus.textContent = "جارٍ تحميل التحديات...";
       challengesList.replaceChildren();
 
       try {
         const { data, error } = await client
           .from("challenges")
-          .select(
-            "id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at"
-          )
+          .select("id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at")
           .order("scheduled_at", { ascending: true });
 
         if (error) throw error;
 
-        challengesStatus.style.display = "none";
-
         if (!data || data.length === 0) {
-          challengesStatus.style.display = "block";
           challengesStatus.className = "empty-state";
           challengesStatus.textContent = "لا توجد تحديات منشورة حاليًا. ترقبوا التحديات القادمة! ✨";
           return;
         }
 
-        challengesStatus.className = "loading";
+        challengesStatus.style.display = "none";
 
         for (const challenge of data) {
           challengesList.appendChild(createChallengeCard(challenge));
         }
       } catch (error) {
         console.error("Load challenges error:", error);
-        challengesStatus.style.display = "block";
         challengesStatus.className = "empty-state";
         challengesStatus.textContent =
-          "تعذر تحميل التحديات. تحققي من اتصال الموقع بقاعدة البيانات وصلاحيات القراءة في Supabase.";
+          "تعذر تحميل التحديات. تحققي من الاتصال وقواعد القراءة في Supabase.";
       }
     }
 
-    // عند تغيّر حالة تسجيل الدخول، نتحقق من هوية المشرفة.
     client.auth.onAuthStateChange((_event, session) => {
       const user = session && session.user;
 
       if (user && user.id === ADMIN_UID) {
+        loginRequested = true;
         setAdminMode(true);
       } else {
+        loginRequested = false;
         setAdminMode(false);
       }
     });
