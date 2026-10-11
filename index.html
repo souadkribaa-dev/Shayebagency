@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#170d2a">
-  <meta name="description" content="وكالة الشايب على Likee - عروض الوكالة والتسجيل ومتابعة المذيعين.">
+  <meta name="description" content="وكالة الشايب على Likee - عروض الوكالة والتسجيل ومتابعة المذيعين والتحديات.">
   <title>وكالة الشايب | Shayeb Agency</title>
 
   <style>
@@ -68,18 +68,32 @@
       padding: 7px 13px;
       border-radius: 20px;
       transition: .2s;
+      border: 1px solid transparent;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a:focus-visible {
       color: var(--gold);
       background: #ffffff0d;
+      border-color: var(--border);
+    }
+
+    nav a.challenges-link {
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      font-weight: bold;
+    }
+
+    nav a.challenges-link:hover,
+    nav a.challenges-link:focus-visible {
+      color: var(--bg);
+      opacity: .9;
     }
 
     .hero {
       text-align: center;
       padding: 65px 18px 55px;
-      background:
-        radial-gradient(ellipse at top, #57327c66, transparent 70%);
+      background: radial-gradient(ellipse at top, #57327c66, transparent 70%);
     }
 
     .hero-badge {
@@ -269,6 +283,34 @@
       margin: 0 auto 22px;
     }
 
+    .challenge-panel {
+      text-align: center;
+      padding: 28px 20px;
+      margin: 15px 0 25px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background:
+        radial-gradient(ellipse at top, #57327c55, transparent 75%),
+        linear-gradient(135deg, #35204e, #1b102d);
+    }
+
+    .challenge-panel .challenge-icon {
+      font-size: 38px;
+      margin-bottom: 7px;
+    }
+
+    .challenge-panel h2 {
+      color: var(--gold);
+      font-size: clamp(22px, 4vw, 29px);
+      margin-bottom: 8px;
+    }
+
+    .challenge-panel p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto 18px;
+    }
+
     footer {
       background: #0c0717;
       border-top: 1px solid var(--border);
@@ -294,6 +336,12 @@
 
       nav {
         justify-content: center;
+        gap: 6px;
+      }
+
+      nav a {
+        padding: 7px 10px;
+        font-size: 13px;
       }
 
       .hero {
@@ -344,6 +392,7 @@
       <a href="index.html">🏠 الرئيسية</a>
       <a href="andix.html">🎤 المذيعون</a>
       <a href="join.html">🤝 التسجيل</a>
+      <a href="challenges.html" class="challenges-link">⚔️ التحديات</a>
     </nav>
   </header>
 
@@ -375,13 +424,10 @@
       <section id="offers">
         <div class="section-heading">
           <h2>💎 عروض وكالة الشايب</h2>
-          <p>
-            تعرّف على العروض ومبالغ المساعدة الموضحة لكل عرض.
-          </p>
+          <p>تعرّف على العروض ومبالغ المساعدة الموضحة لكل عرض.</p>
         </div>
 
         <div class="offers">
-
           <article class="offer">
             <div class="offer-number">🎁 العرض 01</div>
             <div class="offer-price">4,500</div>
@@ -430,7 +476,6 @@
             <p>مساعدة تصل إلى</p>
             <div class="diamond">💎 25,000 ماسة</div>
           </article>
-
         </div>
       </section>
 
@@ -461,6 +506,23 @@
         </div>
       </section>
 
+      <!-- قسم جديد للوصول إلى صفحة التحديات -->
+      <section id="challenges">
+        <div class="challenge-panel">
+          <div class="challenge-icon">⚔️</div>
+          <h2>ساحة التحديات</h2>
+          <p>
+            تابع التحديات بين نجوم وكالة الشايب، وتعرّف على المتنافسين
+            ومواعيد المواجهات القادمة.
+          </p>
+          <div class="actions">
+            <a class="btn btn-gold" href="challenges.html">
+              🏆 اكتشف التحديات
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section>
         <div class="join-panel">
           <h2>🚀 هل تريد الانضمام إلى الوكالة؟</h2>
@@ -476,6 +538,10 @@
 
             <a class="btn btn-outline" href="andix.html">
               🎬 مشاهدة المذيعين
+            </a>
+
+            <a class="btn btn-outline" href="challenges.html">
+              ⚔️ مشاهدة التحديات
             </a>
           </div>
         </div>
