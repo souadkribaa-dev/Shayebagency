@@ -6,851 +6,690 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10091f">
   <title>التحديات | وكالة الشايب</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --bg: #10091f;
-      --panel: #211333;
-      --gold: #f5d58a;
-      --gold-dark: #c99838;
-      --text: #fff;
-      --muted: #e0d4ee;
-      --border: #71552d;
-      --success: #8ee0ad;
+      --bg:#10091f; --panel:#211333; --gold:#f5d58a;
+      --gold-dark:#c99838; --text:#fff; --muted:#e0d4ee;
+      --border:#71552d; --success:#8ee0ad;
     }
-
-    * { box-sizing: border-box; }
-
-    [hidden] { display: none !important; }
-
+    * { box-sizing:border-box; }
+    [hidden] { display:none!important; }
     body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      background: radial-gradient(ellipse at top, #35204e 0%, transparent 48%), var(--bg);
-      font-family: "Cairo", sans-serif;
+      margin:0; min-height:100vh; color:var(--text);
+      background:radial-gradient(ellipse at top,#35204e 0%,transparent 48%),var(--bg);
+      font-family:"Cairo",sans-serif;
     }
-
-    .container { width: min(1100px, 92%); margin: auto; }
-
-    header {
-      padding: 25px 0 18px;
-      text-align: center;
-      border-bottom: 1px solid #ffffff22;
-    }
-
-    .brand {
-      color: var(--gold);
-      font-size: clamp(27px, 5vw, 43px);
-      font-weight: 900;
-      margin: 0;
-    }
-
-    .subtitle { color: var(--muted); margin: 5px 0 18px; }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 9px;
-    }
-
+    .container { width:min(1100px,92%); margin:auto; }
+    header { padding:25px 0 18px; text-align:center; border-bottom:1px solid #ffffff22; }
+    .brand { color:var(--gold); font-size:clamp(27px,5vw,43px); font-weight:900; margin:0; }
+    .subtitle { color:var(--muted); margin:5px 0 18px; }
+    nav { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; }
     nav a {
-      padding: 8px 15px;
-      border: 1px solid #f5d58a55;
-      border-radius: 30px;
-      background: #301b49b3;
-      text-decoration: none;
-      font-size: 13px;
-      color: white;
+      padding:8px 15px; border:1px solid #f5d58a55; border-radius:30px;
+      background:#301b49b3; text-decoration:none; font-size:13px; color:white;
     }
-
-    nav a:hover, nav a.active {
-      color: var(--bg);
-      background: var(--gold);
-    }
-
-    .hero { padding: 35px 0 20px; text-align: center; }
-    .hero-icon { font-size: 45px; }
-    h1 { color: var(--gold); font-size: clamp(25px, 5vw, 37px); margin: 0; }
-    .hero p, .description { color: var(--muted); line-height: 1.9; font-size: 14px; }
-
+    nav a:hover,nav a.active { color:var(--bg); background:var(--gold); }
+    .hero { padding:35px 0 20px; text-align:center; }
+    .hero-icon { font-size:45px; }
+    h1 { color:var(--gold); font-size:clamp(25px,5vw,37px); margin:0; }
+    .hero p,.description { color:var(--muted); line-height:1.9; font-size:14px; }
     .section {
-      margin: 22px auto;
-      padding: clamp(17px, 4vw, 28px);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: linear-gradient(145deg, #301b49f0, #190e28f7);
-      box-shadow: 0 15px 45px #0003;
+      margin:22px auto; padding:clamp(17px,4vw,28px);
+      border:1px solid var(--border); border-radius:22px;
+      background:linear-gradient(145deg,#301b49f0,#190e28f7);
+      box-shadow:0 15px 45px #0003;
     }
-
-    .section-title { color: var(--gold); margin: 0 0 15px; font-size: 21px; }
-    .description { margin-top: 0; }
-
-    .field { margin-bottom: 16px; min-width: 0; }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
+    .section-title { color:var(--gold); margin:0 0 15px; font-size:21px; }
+    .description { margin-top:0; }
+    .field { margin-bottom:16px; min-width:0; }
+    label { display:block; margin-bottom:7px; font-weight:700; font-size:14px; color:var(--muted); }
     input {
-      width: 100%;
-      min-width: 0;
-      padding: 12px;
-      color: white;
-      background: #10091fcc;
-      border: 1px solid #f5d58a47;
-      border-radius: 12px;
-      font: inherit;
-      font-size: 14px;
+      width:100%; min-width:0; padding:12px; color:white;
+      background:#10091fcc; border:1px solid #f5d58a47;
+      border-radius:12px; font:inherit; font-size:14px;
     }
-
-    input[type="datetime-local"] { color-scheme: dark; }
-    input[type="file"] { font-size: 12px; }
-
+    input[type="datetime-local"] { color-scheme:dark; }
+    input[type="file"] { font-size:12px; }
     .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      min-height: 45px;
-      padding: 11px 16px;
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: #20132b;
-      font-family: inherit;
-      font-weight: 900;
-      font-size: 14px;
-      cursor: pointer;
-      text-decoration: none;
+      display:inline-flex; justify-content:center; align-items:center;
+      width:100%; min-height:45px; padding:11px 16px;
+      border:1px solid var(--gold); border-radius:12px;
+      background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+      color:#20132b; font-family:inherit; font-weight:900;
+      font-size:14px; cursor:pointer; text-decoration:none;
     }
-
-    .button.secondary {
-      background: transparent;
-      color: var(--gold);
-    }
-
-    .button.small { width: auto; min-height: 36px; padding: 7px 13px; }
-    .button:disabled { opacity: .55; cursor: not-allowed; }
-
-    .login-box { max-width: 470px; margin: auto; }
-
+    .button.secondary { background:transparent; color:var(--gold); }
+    .button.small { width:auto; min-height:36px; padding:7px 13px; }
+    .button.danger { background:#8c2437; border-color:#ff8b9a; color:white; }
+    .button:disabled { opacity:.55; cursor:not-allowed; }
+    .login-box { max-width:470px; margin:auto; }
     .notice {
-      display: none;
-      margin: 14px 0;
-      padding: 12px;
-      border-radius: 12px;
-      line-height: 1.8;
-      font-size: 13px;
-      overflow-wrap: anywhere;
+      display:none; margin:14px 0; padding:12px; border-radius:12px;
+      line-height:1.8; font-size:13px; overflow-wrap:anywhere;
     }
-
-    .notice.error {
-      display: block;
-      color: #ffd1d1;
-      background: #82192d3d;
-      border: 1px solid #ff85855a;
-    }
-
-    .notice.success {
-      display: block;
-      color: #c8ffda;
-      background: #196e3c33;
-      border: 1px solid #8ee0ad55;
-    }
-
+    .notice.error { display:block; color:#ffd1d1; background:#82192d3d; border:1px solid #ff85855a; }
+    .notice.success { display:block; color:#c8ffda; background:#196e3c33; border:1px solid #8ee0ad55; }
     .admin-tools {
-      margin-bottom: 20px;
-      padding: 13px;
-      border: 1px solid #f5d58a38;
-      border-radius: 14px;
-      background: #10091f59;
+      margin-bottom:20px; padding:13px; border:1px solid #f5d58a38;
+      border-radius:14px; background:#10091f59;
     }
-
-    .admin-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .admin-label { color: var(--success); font-weight: 800; }
-
-    .opponents {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 17px;
-    }
-
-    .opponent {
-      padding: 17px;
-      border-radius: 17px;
-      border: 1px solid #f5d58a33;
-      background: #10091f6b;
-      min-width: 0;
-    }
-
-    .opponent h3 { color: var(--gold); margin-top: 0; }
-
+    .admin-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+    .admin-label { color:var(--success); font-weight:800; }
+    .opponents { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:17px; }
+    .opponent { padding:17px; border-radius:17px; border:1px solid #f5d58a33; background:#10091f6b; min-width:0; }
+    .opponent h3 { color:var(--gold); margin-top:0; }
     .preview {
-      display: none;
-      width: 100px;
-      height: 100px;
-      margin: 12px auto;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      object-fit: cover;
+      display:none; width:100px; height:100px; margin:12px auto;
+      border:2px solid var(--gold); border-radius:50%; object-fit:cover;
     }
-
-    .challenge-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
+    .challenge-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
     .challenge-card {
-      min-width: 0;
-      padding: 17px;
-      border: 1px solid #f5d58a47;
-      border-radius: 18px;
-      background: linear-gradient(160deg, #301b49f2, #180d27f5);
-      overflow: hidden;
+      min-width:0; padding:17px; border:1px solid #f5d58a47;
+      border-radius:18px; background:linear-gradient(160deg,#301b49f2,#180d27f5);
+      overflow:hidden;
     }
-
-    .challenge-date {
-      margin-bottom: 15px;
-      text-align: center;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .versus {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-      align-items: start;
-      gap: 9px;
-    }
-
-    .player { min-width: 0; text-align: center; }
-
+    .challenge-date { margin-bottom:15px; text-align:center; color:var(--gold); font-size:12px; font-weight:700; }
+    .versus { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:start; gap:9px; }
+    .player { min-width:0; text-align:center; }
     .player img {
-      display: block;
-      width: clamp(70px, 12vw, 110px);
-      height: clamp(70px, 12vw, 110px);
-      max-width: 100%;
-      margin: 0 auto 9px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold);
-      background: var(--panel);
+      display:block; width:clamp(70px,12vw,110px); height:clamp(70px,12vw,110px);
+      max-width:100%; margin:0 auto 9px; border-radius:50%;
+      object-fit:cover; border:2px solid var(--gold); background:var(--panel);
     }
-
-    .player-name {
-      font-size: 14px;
-      font-weight: 800;
-      overflow-wrap: anywhere;
-      margin-bottom: 10px;
-    }
-
+    .player-name { font-size:14px; font-weight:800; overflow-wrap:anywhere; margin-bottom:10px; }
     .player-link {
-      display: inline-block;
-      padding: 6px 11px;
-      border-radius: 20px;
-      background: #f5d58a1f;
-      border: 1px solid #f5d58a55;
-      color: var(--gold);
-      font-size: 12px;
-      text-decoration: none;
+      display:inline-block; padding:6px 11px; border-radius:20px;
+      background:#f5d58a1f; border:1px solid #f5d58a55;
+      color:var(--gold); font-size:12px; text-decoration:none;
     }
-
-    .vs { align-self: center; color: var(--gold); font-size: 22px; font-weight: 900; }
-
-    .empty-state, .loading {
-      padding: 24px 12px;
-      text-align: center;
-      color: var(--muted);
-      line-height: 2;
-    }
-
-    .empty-state {
-      border: 1px dashed #f5d58a40;
-      border-radius: 14px;
-    }
-
-    footer {
-      margin-top: 35px;
-      padding: 23px 10px;
-      text-align: center;
-      border-top: 1px solid #f5d58a2b;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 2;
-    }
-
-    @media (max-width: 650px) {
-      .opponents, .challenge-grid { grid-template-columns: 1fr; }
-      nav { gap: 7px; }
-      nav a { padding: 7px 10px; font-size: 12px; }
-      .player-name { font-size: 12px; }
+    .vs { align-self:center; color:var(--gold); font-size:22px; font-weight:900; }
+    .empty-state,.loading { padding:24px 12px; text-align:center; color:var(--muted); line-height:2; }
+    .empty-state { border:1px dashed #f5d58a40; border-radius:14px; }
+    .table-wrap { width:100%; overflow-x:auto; }
+    table { width:100%; min-width:570px; border-collapse:collapse; margin-top:12px; }
+    th,td { padding:11px 9px; text-align:center; border-bottom:1px solid #f5d58a30; font-size:13px; }
+    th { color:var(--gold); background:#10091f80; }
+    td { color:var(--muted); }
+    .table-photo { width:38px; height:38px; object-fit:cover; border-radius:50%; border:1px solid var(--gold); vertical-align:middle; }
+    footer { margin-top:35px; padding:23px 10px; text-align:center; border-top:1px solid #f5d58a2b; color:var(--muted); font-size:12px; line-height:2; }
+    @media(max-width:650px) {
+      .opponents,.challenge-grid { grid-template-columns:1fr; }
+      nav { gap:7px; } nav a { padding:7px 10px; font-size:12px; }
+      .player-name { font-size:12px; }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <div class="container">
-      <p class="brand">وكالة الشايب</p>
-      <p class="subtitle">الإبداع · التحدي · التميز</p>
-      <nav aria-label="القائمة الرئيسية">
-        <a href="index.html">🏠 الرئيسية</a>
-        <a href="andix.html">🎤 المذيعون</a>
-        <a href="join.html">🤝 التسجيل</a>
-        <a href="challenges.html" class="active">⚔️ التحديات</a>
-      </nav>
-    </div>
-  </header>
+<header>
+  <div class="container">
+    <p class="brand">وكالة الشايب</p>
+    <p class="subtitle">الإبداع · التحدي · التميز</p>
+    <nav aria-label="القائمة الرئيسية">
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="andix.html">🎤 المذيعون</a>
+      <a href="join.html">🤝 التسجيل</a>
+      <a href="challenges.html" class="active">⚔️ التحديات</a>
+    </nav>
+  </div>
+</header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-icon">⚔️</div>
-      <h1>ساحة التحديات</h1>
-      <p>
-        تابعوا أقوى المواجهات بين نجوم وكالة الشايب.
-        اكتشفوا المتنافسين ومواعيد التحديات من مكان واحد.
-      </p>
-      <button id="showAdminLogin" class="button secondary"
-              type="button" style="max-width:220px;margin-top:18px">
-        🔐 دخول المشرفة
-      </button>
-    </section>
+<main class="container">
+  <section class="hero">
+    <div class="hero-icon">⚔️</div>
+    <h1>ساحة التحديات</h1>
+    <p>تابعوا أقوى المواجهات بين نجوم وكالة الشايب.</p>
+    <button id="showAdminLogin" class="button secondary" type="button" style="max-width:220px;margin-top:18px">
+      🔐 دخول المشرفة
+    </button>
+  </section>
 
-    <!-- قسم الإدارة مخفي حتى تطلب المشرفة فتحه -->
-    <section id="adminSection" class="section" hidden>
-      <h2 class="section-title">🔐 إدارة التحديات</h2>
-      <p class="description">تسجيل الدخول مخصص لحساب المشرفة المصرح له.</p>
+  <section id="adminSection" class="section" hidden>
+    <h2 class="section-title">🔐 إدارة التحديات</h2>
+    <p class="description">هذه الأدوات مخصصة لحساب المشرفة المصرح له فقط.</p>
 
-      <div id="loginBox" class="login-box">
-        <form id="loginForm">
-          <div class="field">
-            <label for="email">البريد الإلكتروني للمشرفة</label>
-            <input id="email" type="email" autocomplete="username"
-                   placeholder="أدخلي البريد الإلكتروني" required>
-          </div>
-
-          <div class="field">
-            <label for="password">كلمة المرور</label>
-            <input id="password" type="password"
-                   autocomplete="current-password"
-                   placeholder="أدخلي كلمة المرور" required>
-          </div>
-
-          <button id="loginButton" class="button" type="submit">
-            🔑 تسجيل الدخول
-          </button>
-        </form>
-        <div id="loginMessage" class="notice" role="status" aria-live="polite"></div>
-      </div>
-
-      <div id="adminPanel" hidden>
-        <div class="admin-tools">
-          <div class="admin-top">
-            <span class="admin-label">✓ تم تسجيل الدخول كمشرفة</span>
-            <button id="logoutButton" class="button secondary small" type="button">
-              تسجيل الخروج
-            </button>
-          </div>
-          <p class="description">يمكنكِ إضافة تحدٍّ جديد. ستظهر التحديات المنشورة للزوار.</p>
+    <div id="loginBox" class="login-box">
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">البريد الإلكتروني للمشرفة</label>
+          <input id="email" type="email" autocomplete="username" required>
         </div>
+        <div class="field">
+          <label for="password">كلمة المرور</label>
+          <input id="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button id="loginButton" class="button" type="submit">🔑 تسجيل الدخول</button>
+      </form>
+      <div id="loginMessage" class="notice" role="status" aria-live="polite"></div>
+    </div>
 
-        <form id="challengeForm">
-          <div class="opponents">
-            <div class="opponent">
-              <h3>🥇 المتنافس الأول</h3>
-              <div class="field">
-                <label for="opponent1Name">اسم المتنافس</label>
-                <input id="opponent1Name" type="text" maxlength="100"
-                       placeholder="اسم المتنافس الأول" required>
-              </div>
-              <div class="field">
-                <label for="opponent1Url">رابط حساب Likee</label>
-                <input id="opponent1Url" type="url" placeholder="https://..." required>
-              </div>
-              <div class="field">
-                <label for="opponent1Image">صورة المتنافس</label>
-                <input id="opponent1Image" type="file"
-                       accept="image/jpeg,image/png,image/webp" required>
-                <img id="preview1" class="preview" alt="معاينة صورة المتنافس الأول">
-              </div>
+    <div id="adminPanel" hidden>
+      <div class="admin-tools">
+        <div class="admin-top">
+          <span class="admin-label">✓ تم تسجيل الدخول كمشرفة</span>
+          <button id="logoutButton" class="button secondary small" type="button">تسجيل الخروج</button>
+        </div>
+        <p class="description">يمكنكِ إدارة التحديات المنشورة أو إضافة تحدٍّ جديد.</p>
+      </div>
+
+      <h3 class="section-title">🗑️ جدول التحديات المنشورة</h3>
+      <p class="description">زر الحذف يظهر هنا للمشرفة فقط.</p>
+      <div id="adminChallengesStatus" class="loading">جارٍ تحميل جدول الإدارة...</div>
+      <div class="table-wrap">
+        <table id="adminChallengesTable" hidden>
+          <thead>
+            <tr>
+              <th>الأول</th>
+              <th>الثاني</th>
+              <th>موعد التحدي</th>
+              <th>الإجراء</th>
+            </tr>
+          </thead>
+          <tbody id="adminChallengesBody"></tbody>
+        </table>
+      </div>
+      <div id="deleteMessage" class="notice" role="status" aria-live="polite"></div>
+
+      <hr style="border-color:#f5d58a30;margin:28px 0">
+      <h3 class="section-title">➕ نشر تحدٍّ جديد</h3>
+
+      <form id="challengeForm">
+        <div class="opponents">
+          <div class="opponent">
+            <h3>🥇 المتنافس الأول</h3>
+            <div class="field">
+              <label for="opponent1Name">اسم المتنافس</label>
+              <input id="opponent1Name" type="text" maxlength="100" required>
             </div>
-
-            <div class="opponent">
-              <h3>🥈 المتنافس الثاني</h3>
-              <div class="field">
-                <label for="opponent2Name">اسم المتنافس</label>
-                <input id="opponent2Name" type="text" maxlength="100"
-                       placeholder="اسم المتنافس الثاني" required>
-              </div>
-              <div class="field">
-                <label for="opponent2Url">رابط حساب Likee</label>
-                <input id="opponent2Url" type="url" placeholder="https://..." required>
-              </div>
-              <div class="field">
-                <label for="opponent2Image">صورة المتنافس</label>
-                <input id="opponent2Image" type="file"
-                       accept="image/jpeg,image/png,image/webp" required>
-                <img id="preview2" class="preview" alt="معاينة صورة المتنافس الثاني">
-              </div>
+            <div class="field">
+              <label for="opponent1Url">رابط حساب Likee</label>
+              <input id="opponent1Url" type="url" placeholder="https://..." required>
+            </div>
+            <div class="field">
+              <label for="opponent1Image">صورة المتنافس</label>
+              <input id="opponent1Image" type="file" accept="image/jpeg,image/png,image/webp" required>
+              <img id="preview1" class="preview" alt="معاينة صورة المتنافس الأول">
             </div>
           </div>
-
-          <div class="field" style="margin-top:20px">
-            <label for="scheduledAt">📅 موعد التحدي</label>
-            <input id="scheduledAt" type="datetime-local" required>
+          <div class="opponent">
+            <h3>🥈 المتنافس الثاني</h3>
+            <div class="field">
+              <label for="opponent2Name">اسم المتنافس</label>
+              <input id="opponent2Name" type="text" maxlength="100" required>
+            </div>
+            <div class="field">
+              <label for="opponent2Url">رابط حساب Likee</label>
+              <input id="opponent2Url" type="url" placeholder="https://..." required>
+            </div>
+            <div class="field">
+              <label for="opponent2Image">صورة المتنافس</label>
+              <input id="opponent2Image" type="file" accept="image/jpeg,image/png,image/webp" required>
+              <img id="preview2" class="preview" alt="معاينة صورة المتنافس الثاني">
+            </div>
           </div>
+        </div>
+        <div class="field" style="margin-top:20px">
+          <label for="scheduledAt">📅 موعد التحدي</label>
+          <input id="scheduledAt" type="datetime-local" required>
+        </div>
+        <button id="publishButton" class="button" type="submit">✨ نشر التحدي</button>
+        <div id="formMessage" class="notice" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
 
-          <button id="publishButton" class="button" type="submit">
-            ✨ نشر التحدي
-          </button>
-          <div id="formMessage" class="notice" role="status" aria-live="polite"></div>
-        </form>
-      </div>
-    </section>
+  <section class="section">
+    <h2 class="section-title">🏆 التحديات المنشورة</h2>
+    <p class="description">التحديات ومواعيدها وصور المتنافسين المنشورة.</p>
+    <div id="challengesStatus" class="loading" role="status" aria-live="polite">جارٍ تحميل التحديات...</div>
+    <div id="challengesList" class="challenge-grid"></div>
+  </section>
+</main>
 
-    <!-- هذا القسم متاح لجميع الزوار -->
-    <section class="section">
-      <h2 class="section-title">🏆 التحديات المنشورة</h2>
-      <p class="description">التحديات ومواعيدها وصور المتنافسين المنشورة.</p>
-      <div id="challengesStatus" class="loading" role="status" aria-live="polite">
-        جارٍ تحميل التحديات...
-      </div>
-      <div id="challengesList" class="challenge-grid"></div>
-    </section>
-  </main>
+<footer>
+  <div>وكالة الشايب © جميع الحقوق محفوظة</div>
+  <div>التحديات تجمع النجوم في أجواء من المنافسة والتميز ✨</div>
+</footer>
 
-  <footer>
-    <div>وكالة الشايب © جميع الحقوق محفوظة</div>
-    <div>التحديات تجمع النجوم في أجواء من المنافسة والتميز ✨</div>
-  </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+"use strict";
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+const SUPABASE_URL = "https://hzcnkywuabugjebtwzmv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+const ADMIN_UID = "732fae9a-00f5-4e8c-89c6-b836c1ed9581";
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = id => document.getElementById(id);
 
-  <script>
-    "use strict";
+let currentAdmin = false;
+let loginRequested = false;
+let cachedChallenges = [];
 
-    const SUPABASE_URL = "https://hzcnkywuabugjebtwzmv.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
-    const ADMIN_UID = "732fae9a-00f5-4e8c-89c6-b836c1ed9581";
+const adminSection = $("adminSection");
+const showAdminLoginButton = $("showAdminLogin");
+const loginBox = $("loginBox");
+const adminPanel = $("adminPanel");
+const loginForm = $("loginForm");
+const challengeForm = $("challengeForm");
+const loginButton = $("loginButton");
+const publishButton = $("publishButton");
+const loginMessage = $("loginMessage");
+const formMessage = $("formMessage");
+const challengesStatus = $("challengesStatus");
+const challengesList = $("challengesList");
+const adminChallengesStatus = $("adminChallengesStatus");
+const adminChallengesTable = $("adminChallengesTable");
+const adminChallengesBody = $("adminChallengesBody");
+const deleteMessage = $("deleteMessage");
 
-    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    const $ = id => document.getElementById(id);
+function showMessage(element, message, type) {
+  element.textContent = message;
+  element.className = "notice " + type;
+}
+function clearMessage(element) {
+  element.textContent = "";
+  element.className = "notice";
+}
+function setAdminMode(isAdmin) {
+  currentAdmin = isAdmin;
+  adminSection.hidden = !isAdmin && !loginRequested;
+  showAdminLoginButton.hidden = isAdmin;
+  loginBox.hidden = isAdmin;
+  adminPanel.hidden = !isAdmin;
+  if (!isAdmin) {
+    challengeForm.reset();
+    $("preview1").removeAttribute("src");
+    $("preview2").removeAttribute("src");
+    $("preview1").style.display = "none";
+    $("preview2").style.display = "none";
+    clearMessage(formMessage);
+    adminChallengesTable.hidden = true;
+    adminChallengesBody.replaceChildren();
+  } else {
+    renderAdminChallenges(cachedChallenges);
+  }
+}
 
-    const adminSection = $("adminSection");
-    const showAdminLoginButton = $("showAdminLogin");
-    const loginBox = $("loginBox");
-    const adminPanel = $("adminPanel");
-    const loginForm = $("loginForm");
-    const challengeForm = $("challengeForm");
-    const loginButton = $("loginButton");
-    const publishButton = $("publishButton");
-    const loginMessage = $("loginMessage");
-    const formMessage = $("formMessage");
-    const challengesStatus = $("challengesStatus");
-    const challengesList = $("challengesList");
+showAdminLoginButton.addEventListener("click", () => {
+  loginRequested = true;
+  adminSection.hidden = false;
+  loginBox.hidden = false;
+  adminSection.scrollIntoView({behavior:"smooth"});
+});
 
-    let currentAdmin = false;
-    let loginRequested = false;
+function isValidWebUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
 
-    function showMessage(element, message, type) {
-      element.textContent = message;
-      element.className = "notice " + type;
+function previewImage(inputId, previewId) {
+  const input = $(inputId);
+  const preview = $(previewId);
+  input.addEventListener("change", () => {
+    const file = input.files && input.files[0];
+    if (!file) {
+      preview.removeAttribute("src");
+      preview.style.display = "none";
+      return;
     }
-
-    function clearMessage(element) {
-      element.textContent = "";
-      element.className = "notice";
+    if (!["image/jpeg","image/png","image/webp"].includes(file.type)) {
+      input.value = "";
+      preview.style.display = "none";
+      showMessage(formMessage,"اختاري صورة JPG أو PNG أو WebP.","error");
+      return;
     }
-
-    function setAdminMode(isAdmin) {
-      currentAdmin = isAdmin;
-      adminSection.hidden = !isAdmin && !loginRequested;
-      showAdminLoginButton.hidden = isAdmin;
-      loginBox.hidden = isAdmin;
-      adminPanel.hidden = !isAdmin;
-
-      if (!isAdmin) {
-        challengeForm.reset();
-        $("preview1").removeAttribute("src");
-        $("preview2").removeAttribute("src");
-        $("preview1").style.display = "none";
-        $("preview2").style.display = "none";
-        clearMessage(formMessage);
-      }
+    if (file.size > 5 * 1024 * 1024) {
+      input.value = "";
+      preview.style.display = "none";
+      showMessage(formMessage,"حجم الصورة يجب ألا يتجاوز 5 ميغابايت.","error");
+      return;
     }
+    clearMessage(formMessage);
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+  });
+}
+previewImage("opponent1Image","preview1");
+previewImage("opponent2Image","preview2");
 
-    showAdminLoginButton.addEventListener("click", () => {
+async function checkAdminSession() {
+  try {
+    const {data,error} = await client.auth.getSession();
+    if (error) throw error;
+    const user = data.session && data.session.user;
+    if (user && user.id === ADMIN_UID) {
       loginRequested = true;
-      adminSection.hidden = false;
-      loginBox.hidden = false;
-      adminSection.scrollIntoView({ behavior: "smooth" });
-    });
-
-    function isValidWebUrl(value) {
-      try {
-        const url = new URL(value);
-        return url.protocol === "https:" || url.protocol === "http:";
-      } catch {
-        return false;
-      }
-    }
-
-    function previewImage(inputId, previewId) {
-      const input = $(inputId);
-      const preview = $(previewId);
-
-      input.addEventListener("change", () => {
-        const file = input.files && input.files[0];
-
-        if (!file) {
-          preview.removeAttribute("src");
-          preview.style.display = "none";
-          return;
-        }
-
-        if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-          input.value = "";
-          preview.style.display = "none";
-          showMessage(formMessage, "اختاري صورة JPG أو PNG أو WebP.", "error");
-          return;
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-          input.value = "";
-          preview.style.display = "none";
-          showMessage(formMessage, "حجم الصورة يجب ألا يتجاوز 5 ميغابايت.", "error");
-          return;
-        }
-
-        clearMessage(formMessage);
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = "block";
-      });
-    }
-
-    previewImage("opponent1Image", "preview1");
-    previewImage("opponent2Image", "preview2");
-
-    async function checkAdminSession() {
-      try {
-        const { data, error } = await client.auth.getSession();
-        if (error) throw error;
-
-        const user = data.session && data.session.user;
-
-        if (user && user.id === ADMIN_UID) {
-          loginRequested = true;
-          setAdminMode(true);
-        } else {
-          setAdminMode(false);
-          if (user) await client.auth.signOut();
-        }
-      } catch (error) {
-        console.error("Session check error:", error);
-        setAdminMode(false);
-      }
-    }
-
-    loginForm.addEventListener("submit", async event => {
-      event.preventDefault();
-      clearMessage(loginMessage);
-      loginButton.disabled = true;
-      loginButton.textContent = "جارٍ التحقق...";
-
-      try {
-        const { data, error } = await client.auth.signInWithPassword({
-          email: $("email").value.trim(),
-          password: $("password").value
-        });
-
-        if (error) throw error;
-
-        if (!data.user || data.user.id !== ADMIN_UID) {
-          await client.auth.signOut();
-          throw new Error("هذا الحساب ليس حساب المشرفة المصرح له.");
-        }
-
-        loginRequested = true;
-        setAdminMode(true);
-        showMessage(loginMessage, "تم تسجيل الدخول بنجاح.", "success");
-      } catch (error) {
-        showMessage(loginMessage, "تعذر تسجيل الدخول: " + (error.message || "حدث خطأ."), "error");
-      } finally {
-        loginButton.disabled = false;
-        loginButton.textContent = "🔑 تسجيل الدخول";
-      }
-    });
-
-    $("logoutButton").addEventListener("click", async () => {
-      const { error } = await client.auth.signOut();
-
-      if (error) {
-        showMessage(formMessage, "تعذر تسجيل الخروج: " + error.message, "error");
-        return;
-      }
-
-      loginRequested = false;
+      setAdminMode(true);
+    } else {
       setAdminMode(false);
-      clearMessage(loginMessage);
+      if (user) await client.auth.signOut();
+    }
+  } catch (error) {
+    console.error("Session check error:",error);
+    setAdminMode(false);
+  }
+}
+
+loginForm.addEventListener("submit",async event => {
+  event.preventDefault();
+  clearMessage(loginMessage);
+  loginButton.disabled = true;
+  loginButton.textContent = "جارٍ التحقق...";
+  try {
+    const {data,error} = await client.auth.signInWithPassword({
+      email:$("email").value.trim(),
+      password:$("password").value
     });
+    if (error) throw error;
+    if (!data.user || data.user.id !== ADMIN_UID) {
+      await client.auth.signOut();
+      throw new Error("هذا الحساب ليس حساب المشرفة المصرح له.");
+    }
+    loginRequested = true;
+    setAdminMode(true);
+    showMessage(loginMessage,"تم تسجيل الدخول بنجاح.","success");
+    await loadChallenges();
+  } catch (error) {
+    showMessage(loginMessage,"تعذر تسجيل الدخول: " + (error.message || "حدث خطأ."),"error");
+  } finally {
+    loginButton.disabled = false;
+    loginButton.textContent = "🔑 تسجيل الدخول";
+  }
+});
 
-    async function uploadOpponentImage(file, label) {
-      if (!file || !["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-        throw new Error("اختاري صورة صحيحة للمتنافس " + label + ".");
-      }
+$("logoutButton").addEventListener("click",async () => {
+  const {error} = await client.auth.signOut();
+  if (error) {
+    showMessage(formMessage,"تعذر تسجيل الخروج: " + error.message,"error");
+    return;
+  }
+  loginRequested = false;
+  setAdminMode(false);
+  clearMessage(loginMessage);
+});
 
-      if (file.size > 5 * 1024 * 1024) {
-        throw new Error("صورة المتنافس " + label + " أكبر من 5 ميغابايت.");
-      }
+async function verifyAdminSession() {
+  const {data,error} = await client.auth.getSession();
+  if (error) throw error;
+  const user = data.session && data.session.user;
+  if (!user || user.id !== ADMIN_UID) {
+    throw new Error("انتهت جلسة المشرفة. سجلي الدخول من جديد.");
+  }
+}
 
-      const extension = {
-        "image/jpeg": "jpg",
-        "image/png": "png",
-        "image/webp": "webp"
-      }[file.type];
+async function uploadOpponentImage(file,label) {
+  if (!file || !["image/jpeg","image/png","image/webp"].includes(file.type)) {
+    throw new Error("اختاري صورة صحيحة للمتنافس " + label + ".");
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error("صورة المتنافس " + label + " أكبر من 5 ميغابايت.");
+  }
+  const extension = {"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[file.type];
+  const randomPart = crypto.randomUUID ? crypto.randomUUID() :
+    Date.now() + "-" + Math.random().toString(36).slice(2);
+  const path = "challenges/" + randomPart + "." + extension;
+  const {error} = await client.storage.from("broadcaster-images").upload(path,file,{
+    contentType:file.type,cacheControl:"3600",upsert:false
+  });
+  if (error) throw new Error("تعذر رفع صورة المتنافس " + label + ": " + error.message);
+  const {data} = client.storage.from("broadcaster-images").getPublicUrl(path);
+  if (!data || !data.publicUrl) throw new Error("تعذر الحصول على رابط الصورة.");
+  return data.publicUrl;
+}
 
-      const randomPart = crypto.randomUUID
-        ? crypto.randomUUID()
-        : Date.now() + "-" + Math.random().toString(36).slice(2);
+challengeForm.addEventListener("submit",async event => {
+  event.preventDefault();
+  clearMessage(formMessage);
+  if (!currentAdmin) {
+    showMessage(formMessage,"سجلي الدخول بحساب المشرفة أولًا.","error");
+    return;
+  }
+  try {
+    await verifyAdminSession();
+    const name1 = $("opponent1Name").value.trim();
+    const url1 = $("opponent1Url").value.trim();
+    const file1 = $("opponent1Image").files[0];
+    const name2 = $("opponent2Name").value.trim();
+    const url2 = $("opponent2Url").value.trim();
+    const file2 = $("opponent2Image").files[0];
+    const scheduledValue = $("scheduledAt").value;
 
-      const path = "challenges/" + randomPart + "." + extension;
+    if (!name1 || !name2) throw new Error("أدخلي اسمَي المتنافسين.");
+    if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) throw new Error("تأكدي من صحة رابطَي المتنافسين.");
+    if (!file1 || !file2 || !scheduledValue) throw new Error("أكملي الصور وموعد التحدي.");
+    const scheduledDate = new Date(scheduledValue);
+    if (Number.isNaN(scheduledDate.getTime())) throw new Error("موعد التحدي غير صحيح.");
 
-      const { error } = await client.storage
-        .from("broadcaster-images")
-        .upload(path, file, {
-          contentType: file.type,
-          cacheControl: "3600",
-          upsert: false
-        });
+    publishButton.disabled = true;
+    publishButton.textContent = "جارٍ رفع الصور وحفظ التحدي...";
+    showMessage(formMessage,"جارٍ رفع صورة المتنافس الأول...","success");
+    const image1 = await uploadOpponentImage(file1,"الأول");
+    showMessage(formMessage,"جارٍ رفع صورة المتنافس الثاني...","success");
+    const image2 = await uploadOpponentImage(file2,"الثاني");
 
-      if (error) throw new Error("تعذر رفع صورة المتنافس " + label + ": " + error.message);
+    const challenge = {
+      opponent1_name:name1,
+      opponent1_image:image1,
+      opponent1_url:url1,
+      opponent2_name:name2,
+      opponent2_image:image2,
+      opponent2_url:url2,
+      scheduled_at:scheduledDate.toISOString()
+    };
+    const {error} = await client.from("challenges").insert(challenge);
+    if (error) throw error;
 
-      const { data } = client.storage.from("broadcaster-images").getPublicUrl(path);
-      if (!data || !data.publicUrl) throw new Error("تعذر الحصول على رابط الصورة.");
+    challengeForm.reset();
+    $("preview1").removeAttribute("src");
+    $("preview2").removeAttribute("src");
+    $("preview1").style.display = "none";
+    $("preview2").style.display = "none";
+    showMessage(formMessage,"تم نشر التحدي وحفظه بنجاح! ✨","success");
+    await loadChallenges();
+  } catch (error) {
+    console.error("Publish challenge error:",error);
+    showMessage(formMessage,"تعذر حفظ التحدي: " + (error.message || "حدث خطأ."),"error");
+  } finally {
+    publishButton.disabled = false;
+    publishButton.textContent = "✨ نشر التحدي";
+  }
+});
 
-      return data.publicUrl;
+function formatDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "موعد التحدي غير محدد";
+  return new Intl.DateTimeFormat("ar-DZ",{dateStyle:"medium",timeStyle:"short"}).format(date);
+}
+
+function createPlayer(name,imageUrl,profileUrl) {
+  const player = document.createElement("div");
+  player.className = "player";
+  const image = document.createElement("img");
+  image.alt = "صورة " + (name || "المتنافس");
+  image.loading = "lazy";
+  image.referrerPolicy = "no-referrer";
+  image.src = imageUrl || "";
+  const playerName = document.createElement("div");
+  playerName.className = "player-name";
+  playerName.textContent = name || "غير محدد";
+  const link = document.createElement("a");
+  link.className = "player-link";
+  link.textContent = "حساب Likee";
+  link.href = profileUrl || "#";
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  player.append(image,playerName,link);
+  return player;
+}
+
+function createChallengeCard(challenge) {
+  const card = document.createElement("article");
+  card.className = "challenge-card";
+  const date = document.createElement("div");
+  date.className = "challenge-date";
+  date.textContent = "📅 " + formatDate(challenge.scheduled_at);
+  const versus = document.createElement("div");
+  versus.className = "versus";
+  const first = createPlayer(challenge.opponent1_name,challenge.opponent1_image,challenge.opponent1_url);
+  const vs = document.createElement("div");
+  vs.className = "vs";
+  vs.textContent = "VS";
+  const second = createPlayer(challenge.opponent2_name,challenge.opponent2_image,challenge.opponent2_url);
+  versus.append(first,vs,second);
+  card.append(date,versus);
+  return card;
+}
+
+function renderAdminChallenges(challenges) {
+  if (!currentAdmin) return;
+  adminChallengesBody.replaceChildren();
+
+  if (!challenges || challenges.length === 0) {
+    adminChallengesTable.hidden = true;
+    adminChallengesStatus.style.display = "block";
+    adminChallengesStatus.className = "empty-state";
+    adminChallengesStatus.textContent = "لا توجد تحديات محفوظة حاليًا.";
+    return;
+  }
+
+  adminChallengesStatus.style.display = "none";
+  adminChallengesTable.hidden = false;
+
+  for (const challenge of challenges) {
+    const row = document.createElement("tr");
+
+    const firstCell = document.createElement("td");
+    firstCell.textContent = challenge.opponent1_name || "—";
+
+    const secondCell = document.createElement("td");
+    secondCell.textContent = challenge.opponent2_name || "—";
+
+    const dateCell = document.createElement("td");
+    dateCell.textContent = formatDate(challenge.scheduled_at);
+
+    const actionCell = document.createElement("td");
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "button danger small";
+    deleteButton.textContent = "🗑️ حذف";
+    deleteButton.addEventListener("click",() => deleteChallenge(challenge,deleteButton));
+
+    actionCell.appendChild(deleteButton);
+    row.append(firstCell,secondCell,dateCell,actionCell);
+    adminChallengesBody.appendChild(row);
+  }
+}
+
+async function deleteChallenge(challenge,button) {
+  if (!currentAdmin) {
+    showMessage(deleteMessage,"هذا الإجراء مخصص للمشرفة فقط.","error");
+    return;
+  }
+
+  const confirmed = window.confirm(
+    "هل أنتِ متأكدة من حذف التحدي بين " +
+    challenge.opponent1_name + " و" + challenge.opponent2_name + "؟"
+  );
+  if (!confirmed) return;
+
+  button.disabled = true;
+  button.textContent = "جارٍ الحذف...";
+  clearMessage(deleteMessage);
+
+  try {
+    await verifyAdminSession();
+
+    const {data,error} = await client
+      .from("challenges")
+      .delete()
+      .eq("id",challenge.id)
+      .select("id");
+
+    if (error) throw error;
+    if (!data || data.length === 0) {
+      throw new Error("لم يُحذف التحدي. تحققي من سياسة الحذف في Supabase وصلاحيات المشرفة.");
     }
 
-    challengeForm.addEventListener("submit", async event => {
-      event.preventDefault();
-      clearMessage(formMessage);
+    showMessage(deleteMessage,"تم حذف التحدي بنجاح.","success");
+    await loadChallenges();
+  } catch (error) {
+    console.error("Delete challenge error:",error);
+    showMessage(
+      deleteMessage,
+      "تعذر حذف التحدي: " + (error.message || "حدث خطأ.") +
+      " إذا كان السبب متعلقًا بالصلاحيات، فسنراجع سياسة الحذف في Supabase.",
+      "error"
+    );
+    button.disabled = false;
+    button.textContent = "🗑️ حذف";
+  }
+}
 
-      if (!currentAdmin) {
-        showMessage(formMessage, "سجلي الدخول بحساب المشرفة أولًا.", "error");
-        return;
-      }
+async function loadChallenges() {
+  challengesStatus.style.display = "block";
+  challengesStatus.className = "loading";
+  challengesStatus.textContent = "جارٍ تحميل التحديات...";
+  challengesList.replaceChildren();
 
-      try {
-        const { data: sessionData, error: sessionError } = await client.auth.getSession();
+  if (currentAdmin) {
+    adminChallengesStatus.style.display = "block";
+    adminChallengesStatus.className = "loading";
+    adminChallengesStatus.textContent = "جارٍ تحميل جدول الإدارة...";
+  }
 
-        if (sessionError || !sessionData.session ||
-            sessionData.session.user.id !== ADMIN_UID) {
-          loginRequested = false;
-          setAdminMode(false);
-          throw new Error("انتهت الجلسة. سجلي الدخول من جديد.");
-        }
+  try {
+    const {data,error} = await client
+      .from("challenges")
+      .select("id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at")
+      .order("scheduled_at",{ascending:true});
 
-        const name1 = $("opponent1Name").value.trim();
-        const url1 = $("opponent1Url").value.trim();
-        const file1 = $("opponent1Image").files[0];
-        const name2 = $("opponent2Name").value.trim();
-        const url2 = $("opponent2Url").value.trim();
-        const file2 = $("opponent2Image").files[0];
-        const scheduledValue = $("scheduledAt").value;
+    if (error) throw error;
+    cachedChallenges = data || [];
 
-        if (!name1 || !name2) throw new Error("أدخلي اسمَي المتنافسين.");
-        if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) {
-          throw new Error("تأكدي من صحة رابطَي المتنافسين.");
-        }
-        if (!file1 || !file2 || !scheduledValue) {
-          throw new Error("أكملي الصور وموعد التحدي.");
-        }
-
-        const scheduledDate = new Date(scheduledValue);
-        if (Number.isNaN(scheduledDate.getTime())) {
-          throw new Error("موعد التحدي غير صحيح.");
-        }
-
-        publishButton.disabled = true;
-        publishButton.textContent = "جارٍ رفع الصور وحفظ التحدي...";
-
-        showMessage(formMessage, "جارٍ رفع صورة المتنافس الأول...", "success");
-        const image1 = await uploadOpponentImage(file1, "الأول");
-
-        showMessage(formMessage, "جارٍ رفع صورة المتنافس الثاني...", "success");
-        const image2 = await uploadOpponentImage(file2, "الثاني");
-
-        showMessage(formMessage, "جارٍ حفظ بيانات التحدي...", "success");
-
-        const challenge = {
-          opponent1_name: name1,
-          opponent1_image: image1,
-          opponent1_url: url1,
-          opponent2_name: name2,
-          opponent2_image: image2,
-          opponent2_url: url2,
-          scheduled_at: scheduledDate.toISOString()
-        };
-
-        const { error: insertError } = await client
-          .from("challenges")
-          .insert(challenge);
-
-        if (insertError) throw insertError;
-
-        challengeForm.reset();
-        $("preview1").removeAttribute("src");
-        $("preview2").removeAttribute("src");
-        $("preview1").style.display = "none";
-        $("preview2").style.display = "none";
-
-        showMessage(formMessage, "تم نشر التحدي وحفظه بنجاح! ✨", "success");
-        await loadChallenges();
-      } catch (error) {
-        console.error("Publish challenge error:", error);
-        showMessage(formMessage, "تعذر حفظ التحدي: " + (error.message || "حدث خطأ."), "error");
-      } finally {
-        publishButton.disabled = false;
-        publishButton.textContent = "✨ نشر التحدي";
-      }
-    });
-
-    function formatDate(value) {
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return "موعد التحدي غير محدد";
-
-      return new Intl.DateTimeFormat("ar-DZ", {
-        dateStyle: "full",
-        timeStyle: "short"
-      }).format(date);
-    }
-
-    function createPlayer(name, imageUrl, profileUrl) {
-      const player = document.createElement("div");
-      player.className = "player";
-
-      const image = document.createElement("img");
-      image.alt = "صورة " + name;
-      image.loading = "lazy";
-      image.referrerPolicy = "no-referrer";
-      image.src = imageUrl;
-
-      const playerName = document.createElement("div");
-      playerName.className = "player-name";
-      playerName.textContent = name;
-
-      const link = document.createElement("a");
-      link.className = "player-link";
-      link.textContent = "حساب Likee";
-      link.href = profileUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-
-      player.append(image, playerName, link);
-      return player;
-    }
-
-    function createChallengeCard(challenge) {
-      const card = document.createElement("article");
-      card.className = "challenge-card";
-
-      const date = document.createElement("div");
-      date.className = "challenge-date";
-      date.textContent = "📅 " + formatDate(challenge.scheduled_at);
-
-      const versus = document.createElement("div");
-      versus.className = "versus";
-
-      const first = createPlayer(
-        challenge.opponent1_name,
-        challenge.opponent1_image,
-        challenge.opponent1_url
-      );
-
-      const vs = document.createElement("div");
-      vs.className = "vs";
-      vs.textContent = "VS";
-
-      const second = createPlayer(
-        challenge.opponent2_name,
-        challenge.opponent2_image,
-        challenge.opponent2_url
-      );
-
-      versus.append(first, vs, second);
-      card.append(date, versus);
-      return card;
-    }
-
-    async function loadChallenges() {
-      challengesStatus.style.display = "block";
-      challengesStatus.className = "loading";
-      challengesStatus.textContent = "جارٍ تحميل التحديات...";
-      challengesList.replaceChildren();
-
-      try {
-        const { data, error } = await client
-          .from("challenges")
-          .select("id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at")
-          .order("scheduled_at", { ascending: true });
-
-        if (error) throw error;
-
-        if (!data || data.length === 0) {
-          challengesStatus.className = "empty-state";
-          challengesStatus.textContent = "لا توجد تحديات منشورة حاليًا. ترقبوا التحديات القادمة! ✨";
-          return;
-        }
-
-        challengesStatus.style.display = "none";
-
-        for (const challenge of data) {
-          challengesList.appendChild(createChallengeCard(challenge));
-        }
-      } catch (error) {
-        console.error("Load challenges error:", error);
-        challengesStatus.className = "empty-state";
-        challengesStatus.textContent =
-          "تعذر تحميل التحديات. تحققي من الاتصال وقواعد القراءة في Supabase.";
+    if (cachedChallenges.length === 0) {
+      challengesStatus.className = "empty-state";
+      challengesStatus.textContent = "لا توجد تحديات منشورة حاليًا. ترقبوا التحديات القادمة! ✨";
+    } else {
+      challengesStatus.style.display = "none";
+      for (const challenge of cachedChallenges) {
+        challengesList.appendChild(createChallengeCard(challenge));
       }
     }
 
-    client.auth.onAuthStateChange((_event, session) => {
-      const user = session && session.user;
-
-      if (user && user.id === ADMIN_UID) {
-        loginRequested = true;
-        setAdminMode(true);
-      } else {
-        loginRequested = false;
-        setAdminMode(false);
-      }
-    });
-
-    async function initializePage() {
-      await checkAdminSession();
-      await loadChallenges();
+    renderAdminChallenges(cachedChallenges);
+  } catch (error) {
+    console.error("Load challenges error:",error);
+    challengesStatus.className = "empty-state";
+    challengesStatus.textContent = "تعذر تحميل التحديات. تحققي من الاتصال وقواعد القراءة في Supabase.";
+    if (currentAdmin) {
+      adminChallengesTable.hidden = true;
+      adminChallengesStatus.style.display = "block";
+      adminChallengesStatus.className = "empty-state";
+      adminChallengesStatus.textContent = "تعذر تحميل جدول الإدارة. تحققي من صلاحيات القراءة في Supabase.";
     }
+  }
+}
 
-    initializePage();
-  </script>
+client.auth.onAuthStateChange((_event,session) => {
+  const user = session && session.user;
+  if (user && user.id === ADMIN_UID) {
+    loginRequested = true;
+    setAdminMode(true);
+  } else {
+    loginRequested = false;
+    setAdminMode(false);
+  }
+});
+
+async function initializePage() {
+  await checkAdminSession();
+  await loadChallenges();
+}
+initializePage();
+</script>
 </body>
 </html>
