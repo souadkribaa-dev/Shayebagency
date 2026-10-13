@@ -280,7 +280,15 @@
       font-size:14px;
       font-weight:800;
       overflow-wrap:anywhere;
+      margin-bottom:7px;
+    }
+
+    .player-id {
+      color:var(--gold);
+      font-size:12px;
+      overflow-wrap:anywhere;
       margin-bottom:10px;
+      direction:ltr;
     }
 
     .player-link {
@@ -420,8 +428,10 @@
         <table id="adminChallengesTable" hidden>
           <thead>
             <tr>
-              <th>الأول</th>
-              <th>الثاني</th>
+              <th>المذيع</th>
+              <th>ID المذيع</th>
+              <th>الخصم</th>
+              <th>ID الخصم</th>
               <th>موعد التحدي</th>
               <th>الإجراء</th>
             </tr>
@@ -439,11 +449,17 @@
       <form id="challengeForm">
         <div class="opponents">
           <div class="opponent">
-            <h3>🥇 المتنافس الأول</h3>
+            <h3>🥇 المذيع</h3>
 
             <div class="field">
-              <label for="opponent1Name">اسم المتنافس</label>
+              <label for="opponent1Name">اسم المذيع</label>
               <input id="opponent1Name" type="text" maxlength="100" required>
+            </div>
+
+            <div class="field">
+              <label for="opponent1Id">🆔 ID المذيع على Likee</label>
+              <input id="opponent1Id" type="text" maxlength="50"
+                placeholder="أدخلي ID المذيع" required>
             </div>
 
             <div class="field">
@@ -452,19 +468,25 @@
             </div>
 
             <div class="field">
-              <label for="opponent1Image">صورة المتنافس</label>
+              <label for="opponent1Image">صورة المذيع</label>
               <input id="opponent1Image" type="file"
                 accept="image/jpeg,image/png,image/webp" required>
-              <img id="preview1" class="preview" alt="معاينة صورة المتنافس الأول">
+              <img id="preview1" class="preview" alt="معاينة صورة المذيع">
             </div>
           </div>
 
           <div class="opponent">
-            <h3>🥈 المتنافس الثاني</h3>
+            <h3>🥈 الخصم</h3>
 
             <div class="field">
-              <label for="opponent2Name">اسم المتنافس</label>
+              <label for="opponent2Name">اسم الخصم</label>
               <input id="opponent2Name" type="text" maxlength="100" required>
+            </div>
+
+            <div class="field">
+              <label for="opponent2Id">🆔 ID الخصم على Likee</label>
+              <input id="opponent2Id" type="text" maxlength="50"
+                placeholder="أدخلي ID الخصم" required>
             </div>
 
             <div class="field">
@@ -473,10 +495,10 @@
             </div>
 
             <div class="field">
-              <label for="opponent2Image">صورة المتنافس</label>
+              <label for="opponent2Image">صورة الخصم</label>
               <input id="opponent2Image" type="file"
                 accept="image/jpeg,image/png,image/webp" required>
-              <img id="preview2" class="preview" alt="معاينة صورة المتنافس الثاني">
+              <img id="preview2" class="preview" alt="معاينة صورة الخصم">
             </div>
           </div>
         </div>
@@ -494,7 +516,7 @@
 
   <section class="section">
     <h2 class="section-title">🏆 التحديات المنشورة</h2>
-    <p class="description">التحديات ومواعيدها وصور المتنافسين المنشورة.</p>
+    <p class="description">التحديات ومواعيدها وصور المتنافسين وأرقام حساباتهم.</p>
     <div id="challengesStatus" class="loading" role="status" aria-live="polite">
       جارٍ تحميل التحديات...
     </div>
@@ -515,6 +537,7 @@
 const SUPABASE_URL = "https://hzcnkywuabugjebtwzmv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
 const ADMIN_UID = "732fae9a-00f5-4e8c-89c6-b836c1ed9581";
+
 const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
@@ -801,19 +824,23 @@ function drawCirclePhoto(ctx, image, x, y, diameter) {
   ctx.stroke();
 }
 
-function fitText(ctx, text, maxWidth, startingSize, minimumSize = 24) {
+function fitText(ctx, text, maxWidth, startingSize, minimumSize = 18) {
   let size = startingSize;
 
   while (size > minimumSize) {
     ctx.font = `800 ${size}px Cairo, sans-serif`;
-    if (ctx.measureText(text).width <= maxWidth) break;
+    if (ctx.measureText(String(text)).width <= maxWidth) break;
     size -= 2;
   }
 
   return size;
 }
 
-async function createChallengePoster(name1, file1, name2, file2, dateText) {
+async function createChallengePoster(
+  name1, id1, file1,
+  name2, id2, file2,
+  dateText
+) {
   await document.fonts.ready;
 
   const [image1, image2] = await Promise.all([
@@ -828,81 +855,91 @@ async function createChallengePoster(name1, file1, name2, file2, dateText) {
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("تعذر إنشاء صورة الملصق.");
 
-  const background = ctx.createLinearGradient(0, 0, 1080, 1350);
-  background.addColorStop(0, "#08070a");
-  background.addColorStop(0.5, "#211707");
-  background.addColorStop(1, "#08070a");
+  const bg = ctx.createLinearGradient(0, 0, 1080, 1080);
+  bg.addColorStop(0, "#08070a");
+  bg.addColorStop(0.5, "#211707");
+  bg.addColorStop(1, "#08070a");
 
-  ctx.fillStyle = background;
-  ctx.fillRect(0, 0, 1080, 1350);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, 1080, 1080);
 
   ctx.strokeStyle = "#c99838";
   ctx.lineWidth = 5;
-  ctx.strokeRect(24, 24, 1032, 1302);
+  ctx.strokeRect(22, 22, 1036, 1036);
 
   ctx.strokeStyle = "#f5d58a";
   ctx.lineWidth = 2;
-  ctx.strokeRect(39, 39, 1002, 1272);
+  ctx.strokeRect(38, 38, 1004, 1004);
 
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.direction = "rtl";
 
   ctx.fillStyle = "#f5d58a";
-  ctx.font = "900 65px Cairo, sans-serif";
-  ctx.fillText("وكالة الشايب", 540, 125);
+  ctx.font = "900 58px Cairo, sans-serif";
+  ctx.fillText("وكالة الشايب", 540, 95);
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "700 34px Cairo, sans-serif";
-  ctx.fillText("ساحة التحديات", 540, 195);
+  ctx.font = "700 30px Cairo, sans-serif";
+  ctx.fillText("ساحة التحديات", 540, 145);
 
   ctx.strokeStyle = "#c99838";
   ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.moveTo(180, 250);
-  ctx.lineTo(900, 250);
+  ctx.moveTo(180, 185);
+  ctx.lineTo(900, 185);
   ctx.stroke();
 
-  drawCirclePhoto(ctx, image1, 120, 325, 330);
-  drawCirclePhoto(ctx, image2, 630, 325, 330);
+  drawCirclePhoto(ctx, image1, 130, 220, 270);
+  drawCirclePhoto(ctx, image2, 680, 220, 270);
 
   ctx.fillStyle = "#f5d58a";
-  ctx.font = `800 ${fitText(ctx, name1, 440, 43)}px Cairo, sans-serif`;
-  ctx.fillText(name1, 285, 710, 440);
+  ctx.font = `800 ${fitText(ctx, name1, 430, 37)}px Cairo, sans-serif`;
+  ctx.fillText(name1, 265, 525, 430);
 
-  ctx.font = `800 ${fitText(ctx, name2, 440, 43)}px Cairo, sans-serif`;
-  ctx.fillText(name2, 795, 710, 440);
+  ctx.font = `800 ${fitText(ctx, name2, 430, 37)}px Cairo, sans-serif`;
+  ctx.fillText(name2, 815, 525, 430);
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "900 55px Cairo, sans-serif";
-  ctx.fillText("VS", 540, 490);
+  ctx.font = "700 23px Cairo, sans-serif";
+  ctx.fillText("ID المذيع", 265, 566);
+  ctx.fillText("ID الخصم", 815, 566);
+
+  ctx.fillStyle = "#f5d58a";
+  ctx.direction = "ltr";
+  ctx.font = `700 ${fitText(ctx, String(id1), 430, 26, 16)}px Cairo, sans-serif`;
+  ctx.fillText(String(id1), 265, 605, 430);
+
+  ctx.font = `700 ${fitText(ctx, String(id2), 430, 26, 16)}px Cairo, sans-serif`;
+  ctx.fillText(String(id2), 815, 605, 430);
+
+  ctx.direction = "rtl";
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 42px Cairo, sans-serif";
+  ctx.fillText("VS", 540, 350);
 
   ctx.strokeStyle = "#c99838";
   ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.moveTo(150, 790);
-  ctx.lineTo(930, 790);
+  ctx.moveTo(150, 665);
+  ctx.lineTo(930, 665);
   ctx.stroke();
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "700 35px Cairo, sans-serif";
-  ctx.fillText("موعد التحدي", 540, 870);
+  ctx.font = "700 30px Cairo, sans-serif";
+  ctx.fillText("موعد التحدي", 540, 720);
 
   ctx.fillStyle = "#f5d58a";
-  ctx.font = `800 ${fitText(ctx, dateText, 900, 38, 23)}px Cairo, sans-serif`;
-  ctx.fillText(dateText, 540, 940, 900);
+  ctx.font = `800 ${fitText(ctx, dateText, 880, 31, 20)}px Cairo, sans-serif`;
+  ctx.fillText(dateText, 540, 770, 880);
 
   ctx.fillStyle = "#ffffff";
-  ctx.font = "700 29px Cairo, sans-serif";
-  ctx.fillText("كونوا في الموعد!", 540, 1050);
+  ctx.font = "700 28px Cairo, sans-serif";
+  ctx.fillText("كونوا في الموعد!", 540, 865);
 
   ctx.fillStyle = "#f5d58a";
-  ctx.font = "800 27px Cairo, sans-serif";
-  ctx.fillText("الإبداع • التحدي • التميز", 540, 1130);
-
-  ctx.fillStyle = "#c99838";
-  ctx.font = "600 22px Cairo, sans-serif";
-  ctx.fillText("وكالة الشايب", 540, 1210);
+  ctx.font = "800 25px Cairo, sans-serif";
+  ctx.fillText("الإبداع • التحدي • التميز", 540, 925);
 
   const blob = await new Promise((resolve, reject) => {
     canvas.toBlob(
@@ -913,7 +950,9 @@ async function createChallengePoster(name1, file1, name2, file2, dateText) {
     );
   });
 
-  return new File([blob], "challenge-poster.png", { type: "image/png" });
+  return new File([blob], "challenge-poster.png", {
+    type: "image/png"
+  });
 }
 
 function formatDate(value) {
@@ -945,17 +984,19 @@ challengeForm.addEventListener("submit", async event => {
     await verifyAdminSession();
 
     const name1 = $("opponent1Name").value.trim();
+    const id1 = $("opponent1Id").value.trim();
     const url1 = $("opponent1Url").value.trim();
     const file1 = $("opponent1Image").files[0];
 
     const name2 = $("opponent2Name").value.trim();
+    const id2 = $("opponent2Id").value.trim();
     const url2 = $("opponent2Url").value.trim();
     const file2 = $("opponent2Image").files[0];
 
     const scheduledValue = $("scheduledAt").value;
 
-    if (!name1 || !name2) {
-      throw new Error("أدخلي اسمَي المتنافسين.");
+    if (!name1 || !id1 || !name2 || !id2) {
+      throw new Error("أدخلي اسم وID كل من المذيع والخصم.");
     }
 
     if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) {
@@ -984,13 +1025,17 @@ challengeForm.addEventListener("submit", async event => {
     }
 
     publishButton.textContent = "جارٍ إنشاء الملصق...";
-    showMessage(formMessage, "جارٍ إنشاء الملصق الأسود والذهبي...", "success");
+    showMessage(formMessage, "جارٍ إنشاء الملصق المربع الأسود والذهبي...", "success");
 
     const dateText = formatDate(scheduledDate.toISOString());
 
     const posterFile = await createChallengePoster(
-      name1, file1, name2, file2, dateText
+      name1, id1, file1,
+      name2, id2, file2,
+      dateText
     );
+
+    await verifyAdminSession();
 
     publishButton.textContent = "جارٍ رفع الصور...";
 
@@ -1003,15 +1048,21 @@ challengeForm.addEventListener("submit", async event => {
       "image/png"
     );
 
+    await verifyAdminSession();
+
     publishButton.textContent = "جارٍ حفظ التحدي...";
 
     const challenge = {
       opponent1_name: name1,
+      opponent1_id: id1,
       opponent1_image: image1,
       opponent1_url: url1,
+
       opponent2_name: name2,
+      opponent2_id: id2,
       opponent2_image: image2,
       opponent2_url: url2,
+
       scheduled_at: scheduledDate.toISOString(),
       poster_image: posterUrl,
       poster_ready: true,
@@ -1030,7 +1081,7 @@ challengeForm.addEventListener("submit", async event => {
 
     showMessage(
       formMessage,
-      "تم نشر التحدي وحفظ الملصق بنجاح! تحققي من تيليغرام.",
+      "تم نشر التحدي وحفظ الملصق المربع بنجاح! تحققي من تيليغرام.",
       "success"
     );
 
@@ -1049,7 +1100,7 @@ challengeForm.addEventListener("submit", async event => {
   }
 });
 
-function createPlayer(name, imageUrl, profileUrl) {
+function createPlayer(name, imageUrl, profileUrl, playerId, role) {
   const player = document.createElement("div");
   player.className = "player";
 
@@ -1063,14 +1114,24 @@ function createPlayer(name, imageUrl, profileUrl) {
   playerName.className = "player-name";
   playerName.textContent = name || "غير محدد";
 
+  const idElement = document.createElement("div");
+  idElement.className = "player-id";
+  idElement.textContent = (role || "ID") + ": " + (playerId || "غير متوفر");
+
   const link = document.createElement("a");
   link.className = "player-link";
   link.textContent = "حساب Likee";
-  link.href = profileUrl || "#";
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
 
-  player.append(image, playerName, link);
+  if (isValidWebUrl(profileUrl || "")) {
+    link.href = profileUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  } else {
+    link.href = "#";
+    link.addEventListener("click", event => event.preventDefault());
+  }
+
+  player.append(image, playerName, idElement, link);
   return player;
 }
 
@@ -1088,7 +1149,9 @@ function createChallengeCard(challenge) {
   const first = createPlayer(
     challenge.opponent1_name,
     challenge.opponent1_image,
-    challenge.opponent1_url
+    challenge.opponent1_url,
+    challenge.opponent1_id,
+    "ID المذيع"
   );
 
   const vs = document.createElement("div");
@@ -1098,7 +1161,9 @@ function createChallengeCard(challenge) {
   const second = createPlayer(
     challenge.opponent2_name,
     challenge.opponent2_image,
-    challenge.opponent2_url
+    challenge.opponent2_url,
+    challenge.opponent2_id,
+    "ID الخصم"
   );
 
   versus.append(first, vs, second);
@@ -1129,8 +1194,14 @@ function renderAdminChallenges(challenges) {
     const firstCell = document.createElement("td");
     firstCell.textContent = challenge.opponent1_name || "—";
 
+    const firstIdCell = document.createElement("td");
+    firstIdCell.textContent = challenge.opponent1_id || "—";
+
     const secondCell = document.createElement("td");
     secondCell.textContent = challenge.opponent2_name || "—";
+
+    const secondIdCell = document.createElement("td");
+    secondIdCell.textContent = challenge.opponent2_id || "—";
 
     const dateCell = document.createElement("td");
     dateCell.textContent = formatDate(challenge.scheduled_at);
@@ -1146,7 +1217,14 @@ function renderAdminChallenges(challenges) {
     });
 
     actionCell.appendChild(deleteButton);
-    row.append(firstCell, secondCell, dateCell, actionCell);
+    row.append(
+      firstCell,
+      firstIdCell,
+      secondCell,
+      secondIdCell,
+      dateCell,
+      actionCell
+    );
     adminChallengesBody.appendChild(row);
   }
 }
@@ -1215,7 +1293,7 @@ async function loadChallenges() {
     const { data, error } = await client
       .from("challenges")
       .select(
-        "id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at"
+        "id, opponent1_name, opponent1_id, opponent1_image, opponent1_url, opponent2_name, opponent2_id, opponent2_image, opponent2_url, scheduled_at"
       )
       .order("scheduled_at", { ascending: true });
 
