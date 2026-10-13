@@ -7,124 +7,356 @@
   <meta name="theme-color" content="#10091f">
   <title>التحديات | وكالة الشايب</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg:#10091f; --panel:#211333; --gold:#f5d58a;
-      --gold-dark:#c99838; --text:#fff; --muted:#e0d4ee;
-      --border:#71552d; --success:#8ee0ad;
+      --bg:#10091f;
+      --panel:#211333;
+      --gold:#f5d58a;
+      --gold-dark:#c99838;
+      --text:#fff;
+      --muted:#e0d4ee;
+      --border:#71552d;
+      --success:#8ee0ad;
     }
+
     * { box-sizing:border-box; }
     [hidden] { display:none!important; }
+
     body {
-      margin:0; min-height:100vh; color:var(--text);
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
       background:radial-gradient(ellipse at top,#35204e 0%,transparent 48%),var(--bg);
       font-family:"Cairo",sans-serif;
     }
+
     .container { width:min(1100px,92%); margin:auto; }
-    header { padding:25px 0 18px; text-align:center; border-bottom:1px solid #ffffff22; }
-    .brand { color:var(--gold); font-size:clamp(27px,5vw,43px); font-weight:900; margin:0; }
-    .subtitle { color:var(--muted); margin:5px 0 18px; }
-    nav { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; }
-    nav a {
-      padding:8px 15px; border:1px solid #f5d58a55; border-radius:30px;
-      background:#301b49b3; text-decoration:none; font-size:13px; color:white;
+
+    header {
+      padding:25px 0 18px;
+      text-align:center;
+      border-bottom:1px solid #ffffff22;
     }
-    nav a:hover,nav a.active { color:var(--bg); background:var(--gold); }
+
+    .brand {
+      color:var(--gold);
+      font-size:clamp(27px,5vw,43px);
+      font-weight:900;
+      margin:0;
+    }
+
+    .subtitle { color:var(--muted); margin:5px 0 18px; }
+
+    nav {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:9px;
+    }
+
+    nav a {
+      padding:8px 15px;
+      border:1px solid #f5d58a55;
+      border-radius:30px;
+      background:#301b49b3;
+      text-decoration:none;
+      font-size:13px;
+      color:white;
+    }
+
+    nav a:hover, nav a.active {
+      color:var(--bg);
+      background:var(--gold);
+    }
+
     .hero { padding:35px 0 20px; text-align:center; }
     .hero-icon { font-size:45px; }
-    h1 { color:var(--gold); font-size:clamp(25px,5vw,37px); margin:0; }
-    .hero p,.description { color:var(--muted); line-height:1.9; font-size:14px; }
+
+    h1 {
+      color:var(--gold);
+      font-size:clamp(25px,5vw,37px);
+      margin:0;
+    }
+
+    .hero p, .description {
+      color:var(--muted);
+      line-height:1.9;
+      font-size:14px;
+    }
+
     .section {
-      margin:22px auto; padding:clamp(17px,4vw,28px);
-      border:1px solid var(--border); border-radius:22px;
+      margin:22px auto;
+      padding:clamp(17px,4vw,28px);
+      border:1px solid var(--border);
+      border-radius:22px;
       background:linear-gradient(145deg,#301b49f0,#190e28f7);
       box-shadow:0 15px 45px #0003;
     }
-    .section-title { color:var(--gold); margin:0 0 15px; font-size:21px; }
+
+    .section-title {
+      color:var(--gold);
+      margin:0 0 15px;
+      font-size:21px;
+    }
+
     .description { margin-top:0; }
     .field { margin-bottom:16px; min-width:0; }
-    label { display:block; margin-bottom:7px; font-weight:700; font-size:14px; color:var(--muted); }
-    input {
-      width:100%; min-width:0; padding:12px; color:white;
-      background:#10091fcc; border:1px solid #f5d58a47;
-      border-radius:12px; font:inherit; font-size:14px;
+
+    label {
+      display:block;
+      margin-bottom:7px;
+      font-weight:700;
+      font-size:14px;
+      color:var(--muted);
     }
+
+    input {
+      width:100%;
+      min-width:0;
+      padding:12px;
+      color:white;
+      background:#10091fcc;
+      border:1px solid #f5d58a47;
+      border-radius:12px;
+      font:inherit;
+      font-size:14px;
+    }
+
     input[type="datetime-local"] { color-scheme:dark; }
     input[type="file"] { font-size:12px; }
+
     .button {
-      display:inline-flex; justify-content:center; align-items:center;
-      width:100%; min-height:45px; padding:11px 16px;
-      border:1px solid var(--gold); border-radius:12px;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      min-height:45px;
+      padding:11px 16px;
+      border:1px solid var(--gold);
+      border-radius:12px;
       background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-      color:#20132b; font-family:inherit; font-weight:900;
-      font-size:14px; cursor:pointer; text-decoration:none;
+      color:#20132b;
+      font-family:inherit;
+      font-weight:900;
+      font-size:14px;
+      cursor:pointer;
+      text-decoration:none;
     }
-    .button.secondary { background:transparent; color:var(--gold); }
-    .button.small { width:auto; min-height:36px; padding:7px 13px; }
-    .button.danger { background:#8c2437; border-color:#ff8b9a; color:white; }
+
+    .button.secondary {
+      background:transparent;
+      color:var(--gold);
+    }
+
+    .button.small {
+      width:auto;
+      min-height:36px;
+      padding:7px 13px;
+    }
+
+    .button.danger {
+      background:#8c2437;
+      border-color:#ff8b9a;
+      color:white;
+    }
+
     .button:disabled { opacity:.55; cursor:not-allowed; }
     .login-box { max-width:470px; margin:auto; }
+
     .notice {
-      display:none; margin:14px 0; padding:12px; border-radius:12px;
-      line-height:1.8; font-size:13px; overflow-wrap:anywhere;
+      display:none;
+      margin:14px 0;
+      padding:12px;
+      border-radius:12px;
+      line-height:1.8;
+      font-size:13px;
+      overflow-wrap:anywhere;
     }
-    .notice.error { display:block; color:#ffd1d1; background:#82192d3d; border:1px solid #ff85855a; }
-    .notice.success { display:block; color:#c8ffda; background:#196e3c33; border:1px solid #8ee0ad55; }
+
+    .notice.error {
+      display:block;
+      color:#ffd1d1;
+      background:#82192d3d;
+      border:1px solid #ff85855a;
+    }
+
+    .notice.success {
+      display:block;
+      color:#c8ffda;
+      background:#196e3c33;
+      border:1px solid #8ee0ad55;
+    }
+
     .admin-tools {
-      margin-bottom:20px; padding:13px; border:1px solid #f5d58a38;
-      border-radius:14px; background:#10091f59;
+      margin-bottom:20px;
+      padding:13px;
+      border:1px solid #f5d58a38;
+      border-radius:14px;
+      background:#10091f59;
     }
-    .admin-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+
+    .admin-top {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
     .admin-label { color:var(--success); font-weight:800; }
-    .opponents { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:17px; }
-    .opponent { padding:17px; border-radius:17px; border:1px solid #f5d58a33; background:#10091f6b; min-width:0; }
-    .opponent h3 { color:var(--gold); margin-top:0; }
-    .preview {
-      display:none; width:100px; height:100px; margin:12px auto;
-      border:2px solid var(--gold); border-radius:50%; object-fit:cover;
+
+    .opponents {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:17px;
     }
-    .challenge-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+
+    .opponent {
+      padding:17px;
+      border-radius:17px;
+      border:1px solid #f5d58a33;
+      background:#10091f6b;
+      min-width:0;
+    }
+
+    .opponent h3 { color:var(--gold); margin-top:0; }
+
+    .preview {
+      display:none;
+      width:100px;
+      height:100px;
+      margin:12px auto;
+      border:2px solid var(--gold);
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .challenge-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
     .challenge-card {
-      min-width:0; padding:17px; border:1px solid #f5d58a47;
-      border-radius:18px; background:linear-gradient(160deg,#301b49f2,#180d27f5);
+      min-width:0;
+      padding:17px;
+      border:1px solid #f5d58a47;
+      border-radius:18px;
+      background:linear-gradient(160deg,#301b49f2,#180d27f5);
       overflow:hidden;
     }
-    .challenge-date { margin-bottom:15px; text-align:center; color:var(--gold); font-size:12px; font-weight:700; }
-    .versus { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:start; gap:9px; }
+
+    .challenge-date {
+      margin-bottom:15px;
+      text-align:center;
+      color:var(--gold);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .versus {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+      align-items:start;
+      gap:9px;
+    }
+
     .player { min-width:0; text-align:center; }
+
     .player img {
-      display:block; width:clamp(70px,12vw,110px); height:clamp(70px,12vw,110px);
-      max-width:100%; margin:0 auto 9px; border-radius:50%;
-      object-fit:cover; border:2px solid var(--gold); background:var(--panel);
+      display:block;
+      width:clamp(70px,12vw,110px);
+      height:clamp(70px,12vw,110px);
+      max-width:100%;
+      margin:0 auto 9px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid var(--gold);
+      background:var(--panel);
     }
-    .player-name { font-size:14px; font-weight:800; overflow-wrap:anywhere; margin-bottom:10px; }
+
+    .player-name {
+      font-size:14px;
+      font-weight:800;
+      overflow-wrap:anywhere;
+      margin-bottom:10px;
+    }
+
     .player-link {
-      display:inline-block; padding:6px 11px; border-radius:20px;
-      background:#f5d58a1f; border:1px solid #f5d58a55;
-      color:var(--gold); font-size:12px; text-decoration:none;
+      display:inline-block;
+      padding:6px 11px;
+      border-radius:20px;
+      background:#f5d58a1f;
+      border:1px solid #f5d58a55;
+      color:var(--gold);
+      font-size:12px;
+      text-decoration:none;
     }
-    .vs { align-self:center; color:var(--gold); font-size:22px; font-weight:900; }
-    .empty-state,.loading { padding:24px 12px; text-align:center; color:var(--muted); line-height:2; }
-    .empty-state { border:1px dashed #f5d58a40; border-radius:14px; }
+
+    .vs {
+      align-self:center;
+      color:var(--gold);
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .empty-state, .loading {
+      padding:24px 12px;
+      text-align:center;
+      color:var(--muted);
+      line-height:2;
+    }
+
+    .empty-state {
+      border:1px dashed #f5d58a40;
+      border-radius:14px;
+    }
+
     .table-wrap { width:100%; overflow-x:auto; }
-    table { width:100%; min-width:570px; border-collapse:collapse; margin-top:12px; }
-    th,td { padding:11px 9px; text-align:center; border-bottom:1px solid #f5d58a30; font-size:13px; }
+
+    table {
+      width:100%;
+      min-width:570px;
+      border-collapse:collapse;
+      margin-top:12px;
+    }
+
+    th, td {
+      padding:11px 9px;
+      text-align:center;
+      border-bottom:1px solid #f5d58a30;
+      font-size:13px;
+    }
+
     th { color:var(--gold); background:#10091f80; }
     td { color:var(--muted); }
-    .table-photo { width:38px; height:38px; object-fit:cover; border-radius:50%; border:1px solid var(--gold); vertical-align:middle; }
-    footer { margin-top:35px; padding:23px 10px; text-align:center; border-top:1px solid #f5d58a2b; color:var(--muted); font-size:12px; line-height:2; }
+
+    footer {
+      margin-top:35px;
+      padding:23px 10px;
+      text-align:center;
+      border-top:1px solid #f5d58a2b;
+      color:var(--muted);
+      font-size:12px;
+      line-height:2;
+    }
+
     @media(max-width:650px) {
-      .opponents,.challenge-grid { grid-template-columns:1fr; }
-      nav { gap:7px; } nav a { padding:7px 10px; font-size:12px; }
+      .opponents, .challenge-grid { grid-template-columns:1fr; }
+      nav { gap:7px; }
+      nav a { padding:7px 10px; font-size:12px; }
       .player-name { font-size:12px; }
     }
   </style>
 </head>
+
 <body>
 <header>
   <div class="container">
     <p class="brand">وكالة الشايب</p>
     <p class="subtitle">الإبداع · التحدي · التميز</p>
+
     <nav aria-label="القائمة الرئيسية">
       <a href="index.html">🏠 الرئيسية</a>
       <a href="andix.html">🎤 المذيعون</a>
@@ -139,7 +371,9 @@
     <div class="hero-icon">⚔️</div>
     <h1>ساحة التحديات</h1>
     <p>تابعوا أقوى المواجهات بين نجوم وكالة الشايب.</p>
-    <button id="showAdminLogin" class="button secondary" type="button" style="max-width:220px;margin-top:18px">
+
+    <button id="showAdminLogin" class="button secondary" type="button"
+      style="max-width:220px;margin-top:18px">
       🔐 دخول المشرفة
     </button>
   </section>
@@ -154,12 +388,15 @@
           <label for="email">البريد الإلكتروني للمشرفة</label>
           <input id="email" type="email" autocomplete="username" required>
         </div>
+
         <div class="field">
           <label for="password">كلمة المرور</label>
           <input id="password" type="password" autocomplete="current-password" required>
         </div>
+
         <button id="loginButton" class="button" type="submit">🔑 تسجيل الدخول</button>
       </form>
+
       <div id="loginMessage" class="notice" role="status" aria-live="polite"></div>
     </div>
 
@@ -167,14 +404,18 @@
       <div class="admin-tools">
         <div class="admin-top">
           <span class="admin-label">✓ تم تسجيل الدخول كمشرفة</span>
-          <button id="logoutButton" class="button secondary small" type="button">تسجيل الخروج</button>
+          <button id="logoutButton" class="button secondary small" type="button">
+            تسجيل الخروج
+          </button>
         </div>
         <p class="description">يمكنكِ إدارة التحديات المنشورة أو إضافة تحدٍّ جديد.</p>
       </div>
 
       <h3 class="section-title">🗑️ جدول التحديات المنشورة</h3>
       <p class="description">زر الحذف يظهر هنا للمشرفة فقط.</p>
+
       <div id="adminChallengesStatus" class="loading">جارٍ تحميل جدول الإدارة...</div>
+
       <div class="table-wrap">
         <table id="adminChallengesTable" hidden>
           <thead>
@@ -188,50 +429,63 @@
           <tbody id="adminChallengesBody"></tbody>
         </table>
       </div>
+
       <div id="deleteMessage" class="notice" role="status" aria-live="polite"></div>
 
       <hr style="border-color:#f5d58a30;margin:28px 0">
+
       <h3 class="section-title">➕ نشر تحدٍّ جديد</h3>
 
       <form id="challengeForm">
         <div class="opponents">
           <div class="opponent">
             <h3>🥇 المتنافس الأول</h3>
+
             <div class="field">
               <label for="opponent1Name">اسم المتنافس</label>
               <input id="opponent1Name" type="text" maxlength="100" required>
             </div>
+
             <div class="field">
               <label for="opponent1Url">رابط حساب Likee</label>
               <input id="opponent1Url" type="url" placeholder="https://..." required>
             </div>
+
             <div class="field">
               <label for="opponent1Image">صورة المتنافس</label>
-              <input id="opponent1Image" type="file" accept="image/jpeg,image/png,image/webp" required>
+              <input id="opponent1Image" type="file"
+                accept="image/jpeg,image/png,image/webp" required>
               <img id="preview1" class="preview" alt="معاينة صورة المتنافس الأول">
             </div>
           </div>
+
           <div class="opponent">
             <h3>🥈 المتنافس الثاني</h3>
+
             <div class="field">
               <label for="opponent2Name">اسم المتنافس</label>
               <input id="opponent2Name" type="text" maxlength="100" required>
             </div>
+
             <div class="field">
               <label for="opponent2Url">رابط حساب Likee</label>
               <input id="opponent2Url" type="url" placeholder="https://..." required>
             </div>
+
             <div class="field">
               <label for="opponent2Image">صورة المتنافس</label>
-              <input id="opponent2Image" type="file" accept="image/jpeg,image/png,image/webp" required>
+              <input id="opponent2Image" type="file"
+                accept="image/jpeg,image/png,image/webp" required>
               <img id="preview2" class="preview" alt="معاينة صورة المتنافس الثاني">
             </div>
           </div>
         </div>
+
         <div class="field" style="margin-top:20px">
           <label for="scheduledAt">📅 موعد التحدي</label>
           <input id="scheduledAt" type="datetime-local" required>
         </div>
+
         <button id="publishButton" class="button" type="submit">✨ نشر التحدي</button>
         <div id="formMessage" class="notice" role="status" aria-live="polite"></div>
       </form>
@@ -241,7 +495,9 @@
   <section class="section">
     <h2 class="section-title">🏆 التحديات المنشورة</h2>
     <p class="description">التحديات ومواعيدها وصور المتنافسين المنشورة.</p>
-    <div id="challengesStatus" class="loading" role="status" aria-live="polite">جارٍ تحميل التحديات...</div>
+    <div id="challengesStatus" class="loading" role="status" aria-live="polite">
+      جارٍ تحميل التحديات...
+    </div>
     <div id="challengesList" class="challenge-grid"></div>
   </section>
 </main>
@@ -252,6 +508,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 "use strict";
 
@@ -286,22 +543,27 @@ function showMessage(element, message, type) {
   element.textContent = message;
   element.className = "notice " + type;
 }
+
 function clearMessage(element) {
   element.textContent = "";
   element.className = "notice";
 }
+
 function setAdminMode(isAdmin) {
   currentAdmin = isAdmin;
   adminSection.hidden = !isAdmin && !loginRequested;
   showAdminLoginButton.hidden = isAdmin;
   loginBox.hidden = isAdmin;
   adminPanel.hidden = !isAdmin;
+
   if (!isAdmin) {
     challengeForm.reset();
-    $("preview1").removeAttribute("src");
-    $("preview2").removeAttribute("src");
-    $("preview1").style.display = "none";
-    $("preview2").style.display = "none";
+
+    ["preview1", "preview2"].forEach(id => {
+      $(id).removeAttribute("src");
+      $(id).style.display = "none";
+    });
+
     clearMessage(formMessage);
     adminChallengesTable.hidden = true;
     adminChallengesBody.replaceChildren();
@@ -314,7 +576,7 @@ showAdminLoginButton.addEventListener("click", () => {
   loginRequested = true;
   adminSection.hidden = false;
   loginBox.hidden = false;
-  adminSection.scrollIntoView({behavior:"smooth"});
+  adminSection.scrollIntoView({ behavior: "smooth" });
 });
 
 function isValidWebUrl(value) {
@@ -329,38 +591,46 @@ function isValidWebUrl(value) {
 function previewImage(inputId, previewId) {
   const input = $(inputId);
   const preview = $(previewId);
+
   input.addEventListener("change", () => {
     const file = input.files && input.files[0];
+
     if (!file) {
       preview.removeAttribute("src");
       preview.style.display = "none";
       return;
     }
-    if (!["image/jpeg","image/png","image/webp"].includes(file.type)) {
+
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
       input.value = "";
       preview.style.display = "none";
-      showMessage(formMessage,"اختاري صورة JPG أو PNG أو WebP.","error");
+      showMessage(formMessage, "اختاري صورة JPG أو PNG أو WebP.", "error");
       return;
     }
+
     if (file.size > 5 * 1024 * 1024) {
       input.value = "";
       preview.style.display = "none";
-      showMessage(formMessage,"حجم الصورة يجب ألا يتجاوز 5 ميغابايت.","error");
+      showMessage(formMessage, "حجم الصورة يجب ألا يتجاوز 5 ميغابايت.", "error");
       return;
     }
+
     clearMessage(formMessage);
     preview.src = URL.createObjectURL(file);
     preview.style.display = "block";
   });
 }
-previewImage("opponent1Image","preview1");
-previewImage("opponent2Image","preview2");
+
+previewImage("opponent1Image", "preview1");
+previewImage("opponent2Image", "preview2");
 
 async function checkAdminSession() {
   try {
-    const {data,error} = await client.auth.getSession();
+    const { data, error } = await client.auth.getSession();
     if (error) throw error;
+
     const user = data.session && data.session.user;
+
     if (user && user.id === ADMIN_UID) {
       loginRequested = true;
       setAdminMode(true);
@@ -369,183 +639,477 @@ async function checkAdminSession() {
       if (user) await client.auth.signOut();
     }
   } catch (error) {
-    console.error("Session check error:",error);
+    console.error("Session check error:", error);
     setAdminMode(false);
   }
 }
 
-loginForm.addEventListener("submit",async event => {
+loginForm.addEventListener("submit", async event => {
   event.preventDefault();
   clearMessage(loginMessage);
   loginButton.disabled = true;
   loginButton.textContent = "جارٍ التحقق...";
+
   try {
-    const {data,error} = await client.auth.signInWithPassword({
-      email:$("email").value.trim(),
-      password:$("password").value
+    const { data, error } = await client.auth.signInWithPassword({
+      email: $("email").value.trim(),
+      password: $("password").value
     });
+
     if (error) throw error;
+
     if (!data.user || data.user.id !== ADMIN_UID) {
       await client.auth.signOut();
       throw new Error("هذا الحساب ليس حساب المشرفة المصرح له.");
     }
+
     loginRequested = true;
     setAdminMode(true);
-    showMessage(loginMessage,"تم تسجيل الدخول بنجاح.","success");
+    showMessage(loginMessage, "تم تسجيل الدخول بنجاح.", "success");
     await loadChallenges();
   } catch (error) {
-    showMessage(loginMessage,"تعذر تسجيل الدخول: " + (error.message || "حدث خطأ."),"error");
+    showMessage(
+      loginMessage,
+      "تعذر تسجيل الدخول: " + (error.message || "حدث خطأ."),
+      "error"
+    );
   } finally {
     loginButton.disabled = false;
     loginButton.textContent = "🔑 تسجيل الدخول";
   }
 });
 
-$("logoutButton").addEventListener("click",async () => {
-  const {error} = await client.auth.signOut();
+$("logoutButton").addEventListener("click", async () => {
+  const { error } = await client.auth.signOut();
+
   if (error) {
-    showMessage(formMessage,"تعذر تسجيل الخروج: " + error.message,"error");
+    showMessage(formMessage, "تعذر تسجيل الخروج: " + error.message, "error");
     return;
   }
+
   loginRequested = false;
   setAdminMode(false);
   clearMessage(loginMessage);
 });
 
 async function verifyAdminSession() {
-  const {data,error} = await client.auth.getSession();
+  const { data, error } = await client.auth.getSession();
   if (error) throw error;
+
   const user = data.session && data.session.user;
+
   if (!user || user.id !== ADMIN_UID) {
     throw new Error("انتهت جلسة المشرفة. سجلي الدخول من جديد.");
   }
 }
 
-async function uploadOpponentImage(file,label) {
-  if (!file || !["image/jpeg","image/png","image/webp"].includes(file.type)) {
-    throw new Error("اختاري صورة صحيحة للمتنافس " + label + ".");
+function randomId() {
+  return crypto.randomUUID
+    ? crypto.randomUUID()
+    : Date.now() + "-" + Math.random().toString(36).slice(2);
+}
+
+async function uploadFile(file, path, contentType) {
+  const { error } = await client.storage
+    .from("broadcaster-images")
+    .upload(path, file, {
+      contentType,
+      cacheControl: "3600",
+      upsert: false
+    });
+
+  if (error) throw new Error("تعذر رفع الملف: " + error.message);
+
+  const { data } = client.storage
+    .from("broadcaster-images")
+    .getPublicUrl(path);
+
+  if (!data || !data.publicUrl) {
+    throw new Error("تعذر الحصول على رابط الملف.");
   }
-  if (file.size > 5 * 1024 * 1024) {
-    throw new Error("صورة المتنافس " + label + " أكبر من 5 ميغابايت.");
-  }
-  const extension = {"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[file.type];
-  const randomPart = crypto.randomUUID ? crypto.randomUUID() :
-    Date.now() + "-" + Math.random().toString(36).slice(2);
-  const path = "challenges/" + randomPart + "." + extension;
-  const {error} = await client.storage.from("broadcaster-images").upload(path,file,{
-    contentType:file.type,cacheControl:"3600",upsert:false
-  });
-  if (error) throw new Error("تعذر رفع صورة المتنافس " + label + ": " + error.message);
-  const {data} = client.storage.from("broadcaster-images").getPublicUrl(path);
-  if (!data || !data.publicUrl) throw new Error("تعذر الحصول على رابط الصورة.");
+
   return data.publicUrl;
 }
 
-challengeForm.addEventListener("submit",async event => {
+async function uploadOpponentImage(file, label) {
+  if (!file || !["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    throw new Error("اختاري صورة صحيحة للمتنافس " + label + ".");
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error("صورة المتنافس " + label + " أكبر من 5 ميغابايت.");
+  }
+
+  const extension = {
+    "image/jpeg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp"
+  }[file.type];
+
+  return await uploadFile(
+    file,
+    "challenges/" + randomId() + "." + extension,
+    file.type
+  );
+}
+
+function loadImageFile(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(image);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("تعذر فتح إحدى صور المتنافسين."));
+    };
+
+    image.src = objectUrl;
+  });
+}
+
+function drawCover(ctx, image, x, y, width, height) {
+  const scale = Math.max(width / image.width, height / image.height);
+  const sourceWidth = width / scale;
+  const sourceHeight = height / scale;
+  const sourceX = (image.width - sourceWidth) / 2;
+  const sourceY = (image.height - sourceHeight) / 2;
+
+  ctx.drawImage(
+    image,
+    sourceX, sourceY, sourceWidth, sourceHeight,
+    x, y, width, height
+  );
+}
+
+function drawCirclePhoto(ctx, image, x, y, diameter) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x + diameter / 2, y + diameter / 2, diameter / 2, 0, Math.PI * 2);
+  ctx.clip();
+  drawCover(ctx, image, x, y, diameter, diameter);
+  ctx.restore();
+
+  ctx.strokeStyle = "#f5d58a";
+  ctx.lineWidth = 7;
+  ctx.beginPath();
+  ctx.arc(x + diameter / 2, y + diameter / 2, diameter / 2, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+function fitText(ctx, text, maxWidth, startingSize, minimumSize = 24) {
+  let size = startingSize;
+
+  while (size > minimumSize) {
+    ctx.font = `800 ${size}px Cairo, sans-serif`;
+    if (ctx.measureText(text).width <= maxWidth) break;
+    size -= 2;
+  }
+
+  return size;
+}
+
+async function createChallengePoster(name1, file1, name2, file2, dateText) {
+  await document.fonts.ready;
+
+  const [image1, image2] = await Promise.all([
+    loadImageFile(file1),
+    loadImageFile(file2)
+  ]);
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 1080;
+  canvas.height = 1350;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("تعذر إنشاء صورة الملصق.");
+
+  const background = ctx.createLinearGradient(0, 0, 1080, 1350);
+  background.addColorStop(0, "#08070a");
+  background.addColorStop(0.5, "#211707");
+  background.addColorStop(1, "#08070a");
+
+  ctx.fillStyle = background;
+  ctx.fillRect(0, 0, 1080, 1350);
+
+  ctx.strokeStyle = "#c99838";
+  ctx.lineWidth = 5;
+  ctx.strokeRect(24, 24, 1032, 1302);
+
+  ctx.strokeStyle = "#f5d58a";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(39, 39, 1002, 1272);
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.direction = "rtl";
+
+  ctx.fillStyle = "#f5d58a";
+  ctx.font = "900 65px Cairo, sans-serif";
+  ctx.fillText("وكالة الشايب", 540, 125);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "700 34px Cairo, sans-serif";
+  ctx.fillText("ساحة التحديات", 540, 195);
+
+  ctx.strokeStyle = "#c99838";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(180, 250);
+  ctx.lineTo(900, 250);
+  ctx.stroke();
+
+  drawCirclePhoto(ctx, image1, 120, 325, 330);
+  drawCirclePhoto(ctx, image2, 630, 325, 330);
+
+  ctx.fillStyle = "#f5d58a";
+  ctx.font = `800 ${fitText(ctx, name1, 440, 43)}px Cairo, sans-serif`;
+  ctx.fillText(name1, 285, 710, 440);
+
+  ctx.font = `800 ${fitText(ctx, name2, 440, 43)}px Cairo, sans-serif`;
+  ctx.fillText(name2, 795, 710, 440);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 55px Cairo, sans-serif";
+  ctx.fillText("VS", 540, 490);
+
+  ctx.strokeStyle = "#c99838";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(150, 790);
+  ctx.lineTo(930, 790);
+  ctx.stroke();
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "700 35px Cairo, sans-serif";
+  ctx.fillText("موعد التحدي", 540, 870);
+
+  ctx.fillStyle = "#f5d58a";
+  ctx.font = `800 ${fitText(ctx, dateText, 900, 38, 23)}px Cairo, sans-serif`;
+  ctx.fillText(dateText, 540, 940, 900);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "700 29px Cairo, sans-serif";
+  ctx.fillText("كونوا في الموعد!", 540, 1050);
+
+  ctx.fillStyle = "#f5d58a";
+  ctx.font = "800 27px Cairo, sans-serif";
+  ctx.fillText("الإبداع • التحدي • التميز", 540, 1130);
+
+  ctx.fillStyle = "#c99838";
+  ctx.font = "600 22px Cairo, sans-serif";
+  ctx.fillText("وكالة الشايب", 540, 1210);
+
+  const blob = await new Promise((resolve, reject) => {
+    canvas.toBlob(
+      result => result
+        ? resolve(result)
+        : reject(new Error("تعذر حفظ صورة الملصق.")),
+      "image/png"
+    );
+  });
+
+  return new File([blob], "challenge-poster.png", { type: "image/png" });
+}
+
+function formatDate(value) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "موعد التحدي غير محدد";
+  }
+
+  return new Intl.DateTimeFormat("ar-DZ", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Africa/Algiers"
+  }).format(date);
+}
+
+challengeForm.addEventListener("submit", async event => {
   event.preventDefault();
   clearMessage(formMessage);
+
   if (!currentAdmin) {
-    showMessage(formMessage,"سجلي الدخول بحساب المشرفة أولًا.","error");
+    showMessage(formMessage, "سجلي الدخول بحساب المشرفة أولًا.", "error");
     return;
   }
+
+  publishButton.disabled = true;
+
   try {
     await verifyAdminSession();
+
     const name1 = $("opponent1Name").value.trim();
     const url1 = $("opponent1Url").value.trim();
     const file1 = $("opponent1Image").files[0];
+
     const name2 = $("opponent2Name").value.trim();
     const url2 = $("opponent2Url").value.trim();
     const file2 = $("opponent2Image").files[0];
+
     const scheduledValue = $("scheduledAt").value;
 
-    if (!name1 || !name2) throw new Error("أدخلي اسمَي المتنافسين.");
-    if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) throw new Error("تأكدي من صحة رابطَي المتنافسين.");
-    if (!file1 || !file2 || !scheduledValue) throw new Error("أكملي الصور وموعد التحدي.");
-    const scheduledDate = new Date(scheduledValue);
-    if (Number.isNaN(scheduledDate.getTime())) throw new Error("موعد التحدي غير صحيح.");
+    if (!name1 || !name2) {
+      throw new Error("أدخلي اسمَي المتنافسين.");
+    }
 
-    publishButton.disabled = true;
-    publishButton.textContent = "جارٍ رفع الصور وحفظ التحدي...";
-    showMessage(formMessage,"جارٍ رفع صورة المتنافس الأول...","success");
-    const image1 = await uploadOpponentImage(file1,"الأول");
-    showMessage(formMessage,"جارٍ رفع صورة المتنافس الثاني...","success");
-    const image2 = await uploadOpponentImage(file2,"الثاني");
+    if (!isValidWebUrl(url1) || !isValidWebUrl(url2)) {
+      throw new Error("تأكدي من صحة رابطَي المتنافسين.");
+    }
+
+    if (!file1 || !file2 || !scheduledValue) {
+      throw new Error("أكملي الصور وموعد التحدي.");
+    }
+
+    if (
+      !["image/jpeg", "image/png", "image/webp"].includes(file1.type) ||
+      !["image/jpeg", "image/png", "image/webp"].includes(file2.type)
+    ) {
+      throw new Error("اختاري صور JPG أو PNG أو WebP فقط.");
+    }
+
+    if (file1.size > 5 * 1024 * 1024 || file2.size > 5 * 1024 * 1024) {
+      throw new Error("يجب ألا يتجاوز حجم كل صورة 5 ميغابايت.");
+    }
+
+    const scheduledDate = new Date(scheduledValue);
+
+    if (Number.isNaN(scheduledDate.getTime())) {
+      throw new Error("موعد التحدي غير صحيح.");
+    }
+
+    publishButton.textContent = "جارٍ إنشاء الملصق...";
+    showMessage(formMessage, "جارٍ إنشاء الملصق الأسود والذهبي...", "success");
+
+    const dateText = formatDate(scheduledDate.toISOString());
+
+    const posterFile = await createChallengePoster(
+      name1, file1, name2, file2, dateText
+    );
+
+    publishButton.textContent = "جارٍ رفع الصور...";
+
+    const image1 = await uploadOpponentImage(file1, "الأول");
+    const image2 = await uploadOpponentImage(file2, "الثاني");
+
+    const posterUrl = await uploadFile(
+      posterFile,
+      "posters/" + randomId() + ".png",
+      "image/png"
+    );
+
+    publishButton.textContent = "جارٍ حفظ التحدي...";
 
     const challenge = {
-      opponent1_name:name1,
-      opponent1_image:image1,
-      opponent1_url:url1,
-      opponent2_name:name2,
-      opponent2_image:image2,
-      opponent2_url:url2,
-      scheduled_at:scheduledDate.toISOString()
+      opponent1_name: name1,
+      opponent1_image: image1,
+      opponent1_url: url1,
+      opponent2_name: name2,
+      opponent2_image: image2,
+      opponent2_url: url2,
+      scheduled_at: scheduledDate.toISOString(),
+      poster_image: posterUrl,
+      poster_ready: true,
+      telegram_sent: false
     };
-    const {error} = await client.from("challenges").insert(challenge);
+
+    const { error } = await client.from("challenges").insert(challenge);
     if (error) throw error;
 
     challengeForm.reset();
-    $("preview1").removeAttribute("src");
-    $("preview2").removeAttribute("src");
-    $("preview1").style.display = "none";
-    $("preview2").style.display = "none";
-    showMessage(formMessage,"تم نشر التحدي وحفظه بنجاح! ✨","success");
+
+    ["preview1", "preview2"].forEach(id => {
+      $(id).removeAttribute("src");
+      $(id).style.display = "none";
+    });
+
+    showMessage(
+      formMessage,
+      "تم نشر التحدي وحفظ الملصق بنجاح! تحققي من تيليغرام.",
+      "success"
+    );
+
     await loadChallenges();
   } catch (error) {
-    console.error("Publish challenge error:",error);
-    showMessage(formMessage,"تعذر حفظ التحدي: " + (error.message || "حدث خطأ."),"error");
+    console.error("Publish challenge error:", error);
+
+    showMessage(
+      formMessage,
+      "تعذر نشر التحدي: " + (error.message || "حدث خطأ."),
+      "error"
+    );
   } finally {
     publishButton.disabled = false;
     publishButton.textContent = "✨ نشر التحدي";
   }
 });
 
-function formatDate(value) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "موعد التحدي غير محدد";
-  return new Intl.DateTimeFormat("ar-DZ",{dateStyle:"medium",timeStyle:"short"}).format(date);
-}
-
-function createPlayer(name,imageUrl,profileUrl) {
+function createPlayer(name, imageUrl, profileUrl) {
   const player = document.createElement("div");
   player.className = "player";
+
   const image = document.createElement("img");
   image.alt = "صورة " + (name || "المتنافس");
   image.loading = "lazy";
   image.referrerPolicy = "no-referrer";
   image.src = imageUrl || "";
+
   const playerName = document.createElement("div");
   playerName.className = "player-name";
   playerName.textContent = name || "غير محدد";
+
   const link = document.createElement("a");
   link.className = "player-link";
   link.textContent = "حساب Likee";
   link.href = profileUrl || "#";
   link.target = "_blank";
   link.rel = "noopener noreferrer";
-  player.append(image,playerName,link);
+
+  player.append(image, playerName, link);
   return player;
 }
 
 function createChallengeCard(challenge) {
   const card = document.createElement("article");
   card.className = "challenge-card";
+
   const date = document.createElement("div");
   date.className = "challenge-date";
   date.textContent = "📅 " + formatDate(challenge.scheduled_at);
+
   const versus = document.createElement("div");
   versus.className = "versus";
-  const first = createPlayer(challenge.opponent1_name,challenge.opponent1_image,challenge.opponent1_url);
+
+  const first = createPlayer(
+    challenge.opponent1_name,
+    challenge.opponent1_image,
+    challenge.opponent1_url
+  );
+
   const vs = document.createElement("div");
   vs.className = "vs";
   vs.textContent = "VS";
-  const second = createPlayer(challenge.opponent2_name,challenge.opponent2_image,challenge.opponent2_url);
-  versus.append(first,vs,second);
-  card.append(date,versus);
+
+  const second = createPlayer(
+    challenge.opponent2_name,
+    challenge.opponent2_image,
+    challenge.opponent2_url
+  );
+
+  versus.append(first, vs, second);
+  card.append(date, versus);
+
   return card;
 }
 
 function renderAdminChallenges(challenges) {
   if (!currentAdmin) return;
+
   adminChallengesBody.replaceChildren();
 
   if (!challenges || challenges.length === 0) {
@@ -573,20 +1137,23 @@ function renderAdminChallenges(challenges) {
 
     const actionCell = document.createElement("td");
     const deleteButton = document.createElement("button");
+
     deleteButton.type = "button";
     deleteButton.className = "button danger small";
     deleteButton.textContent = "🗑️ حذف";
-    deleteButton.addEventListener("click",() => deleteChallenge(challenge,deleteButton));
+    deleteButton.addEventListener("click", () => {
+      deleteChallenge(challenge, deleteButton);
+    });
 
     actionCell.appendChild(deleteButton);
-    row.append(firstCell,secondCell,dateCell,actionCell);
+    row.append(firstCell, secondCell, dateCell, actionCell);
     adminChallengesBody.appendChild(row);
   }
 }
 
-async function deleteChallenge(challenge,button) {
+async function deleteChallenge(challenge, button) {
   if (!currentAdmin) {
-    showMessage(deleteMessage,"هذا الإجراء مخصص للمشرفة فقط.","error");
+    showMessage(deleteMessage, "هذا الإجراء مخصص للمشرفة فقط.", "error");
     return;
   }
 
@@ -594,6 +1161,7 @@ async function deleteChallenge(challenge,button) {
     "هل أنتِ متأكدة من حذف التحدي بين " +
     challenge.opponent1_name + " و" + challenge.opponent2_name + "؟"
   );
+
   if (!confirmed) return;
 
   button.disabled = true;
@@ -603,27 +1171,29 @@ async function deleteChallenge(challenge,button) {
   try {
     await verifyAdminSession();
 
-    const {data,error} = await client
+    const { data, error } = await client
       .from("challenges")
       .delete()
-      .eq("id",challenge.id)
+      .eq("id", challenge.id)
       .select("id");
 
     if (error) throw error;
+
     if (!data || data.length === 0) {
-      throw new Error("لم يُحذف التحدي. تحققي من سياسة الحذف في Supabase وصلاحيات المشرفة.");
+      throw new Error("لم يُحذف التحدي. تحققي من سياسة الحذف في Supabase.");
     }
 
-    showMessage(deleteMessage,"تم حذف التحدي بنجاح.","success");
+    showMessage(deleteMessage, "تم حذف التحدي بنجاح.", "success");
     await loadChallenges();
   } catch (error) {
-    console.error("Delete challenge error:",error);
+    console.error("Delete challenge error:", error);
+
     showMessage(
       deleteMessage,
-      "تعذر حذف التحدي: " + (error.message || "حدث خطأ.") +
-      " إذا كان السبب متعلقًا بالصلاحيات، فسنراجع سياسة الحذف في Supabase.",
+      "تعذر حذف التحدي: " + (error.message || "حدث خطأ."),
       "error"
     );
+
     button.disabled = false;
     button.textContent = "🗑️ حذف";
   }
@@ -642,19 +1212,24 @@ async function loadChallenges() {
   }
 
   try {
-    const {data,error} = await client
+    const { data, error } = await client
       .from("challenges")
-      .select("id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at")
-      .order("scheduled_at",{ascending:true});
+      .select(
+        "id, opponent1_name, opponent1_image, opponent1_url, opponent2_name, opponent2_image, opponent2_url, scheduled_at"
+      )
+      .order("scheduled_at", { ascending: true });
 
     if (error) throw error;
+
     cachedChallenges = data || [];
 
     if (cachedChallenges.length === 0) {
       challengesStatus.className = "empty-state";
-      challengesStatus.textContent = "لا توجد تحديات منشورة حاليًا. ترقبوا التحديات القادمة! ✨";
+      challengesStatus.textContent =
+        "لا توجد تحديات منشورة حاليًا. ترقبوا التحديات القادمة! ✨";
     } else {
       challengesStatus.style.display = "none";
+
       for (const challenge of cachedChallenges) {
         challengesList.appendChild(createChallengeCard(challenge));
       }
@@ -662,20 +1237,25 @@ async function loadChallenges() {
 
     renderAdminChallenges(cachedChallenges);
   } catch (error) {
-    console.error("Load challenges error:",error);
+    console.error("Load challenges error:", error);
+
     challengesStatus.className = "empty-state";
-    challengesStatus.textContent = "تعذر تحميل التحديات. تحققي من الاتصال وقواعد القراءة في Supabase.";
+    challengesStatus.textContent =
+      "تعذر تحميل التحديات. تحققي من الاتصال وقواعد القراءة في Supabase.";
+
     if (currentAdmin) {
       adminChallengesTable.hidden = true;
       adminChallengesStatus.style.display = "block";
       adminChallengesStatus.className = "empty-state";
-      adminChallengesStatus.textContent = "تعذر تحميل جدول الإدارة. تحققي من صلاحيات القراءة في Supabase.";
+      adminChallengesStatus.textContent =
+        "تعذر تحميل جدول الإدارة. تحققي من صلاحيات القراءة في Supabase.";
     }
   }
 }
 
-client.auth.onAuthStateChange((_event,session) => {
+client.auth.onAuthStateChange((_event, session) => {
   const user = session && session.user;
+
   if (user && user.id === ADMIN_UID) {
     loginRequested = true;
     setAdminMode(true);
@@ -689,6 +1269,7 @@ async function initializePage() {
   await checkAdminSession();
   await loadChallenges();
 }
+
 initializePage();
 </script>
 </body>
