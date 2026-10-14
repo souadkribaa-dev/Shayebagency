@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
   <title>طلب تحدٍّ | وكالة الشايب</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       font-family: Arial, sans-serif;
       background: #101010;
       color: #fff4d6;
@@ -18,8 +21,8 @@
 
     .card {
       max-width: 560px;
-      margin: 25px auto;
-      padding: 25px;
+      margin: 20px auto;
+      padding: 22px;
       background: #1b1b1b;
       border: 1px solid #c8a653;
       border-radius: 18px;
@@ -29,13 +32,14 @@
     h1 {
       color: #e5c36a;
       text-align: center;
+      font-size: 25px;
       margin-top: 0;
     }
 
     .description {
       text-align: center;
       color: #ccc;
-      line-height: 1.8;
+      line-height: 1.9;
     }
 
     label {
@@ -45,7 +49,8 @@
       font-weight: bold;
     }
 
-    input, textarea {
+    input,
+    textarea {
       display: block;
       width: 100%;
       padding: 13px;
@@ -54,9 +59,11 @@
       background: #292929;
       color: white;
       font-size: 16px;
+      font-family: inherit;
     }
 
-    input:focus, textarea:focus {
+    input:focus,
+    textarea:focus {
       outline: 1px solid #e5c36a;
       border-color: #e5c36a;
     }
@@ -65,22 +72,36 @@
       padding: 10px;
     }
 
+    .hint {
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-top: 5px;
+    }
+
     button {
       width: 100%;
-      padding: 15px;
-      margin-top: 23px;
+      padding: 14px;
+      margin-top: 20px;
       border: 0;
       border-radius: 9px;
       background: #d4af57;
       color: #17120a;
       font-weight: bold;
-      font-size: 17px;
+      font-size: 16px;
       cursor: pointer;
+      font-family: inherit;
     }
 
     button:disabled {
       opacity: .6;
       cursor: wait;
+    }
+
+    .secondary {
+      background: #292929;
+      color: #f4d57f;
+      border: 1px solid #c8a653;
     }
 
     #result {
@@ -90,127 +111,634 @@
       border-radius: 9px;
       line-height: 1.9;
       overflow-wrap: anywhere;
+      white-space: pre-wrap;
     }
 
     #result a {
-      color: #f4d57f;
+      color: #ffe08a;
       overflow-wrap: anywhere;
     }
 
-    .success { display: block !important; background: #173d27; }
-    .error { display: block !important; background: #512323; }
+    #result.success {
+      display: block;
+      background: #173d27;
+      border: 1px solid #368b51;
+    }
+
+    #result.error {
+      display: block;
+      background: #512323;
+      border: 1px solid #a64c4c;
+    }
+
+    #result.info {
+      display: block;
+      background: #302a17;
+      border: 1px solid #c8a653;
+    }
 
     .footer {
       text-align: center;
       color: #d4af57;
       margin-top: 25px;
     }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .result-link {
+      direction: ltr;
+      text-align: left;
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #777;
+      border-radius: 7px;
+      background: #101010;
+      color: #ffe08a;
+      word-break: break-all;
+      user-select: all;
+    }
   </style>
 </head>
 
 <body>
-  <main class="card">
-    <h1>⚔️ طلب تحدٍّ جديد</h1>
 
-    <p class="description">
-      وكالة الشايب الرسمية<br>
-      أدخل بياناتك لإنشاء طلب تحدٍّ ومشاركته مع المذيعين.
+<main class="card">
+
+  <h1>⚔️ طلب تحدٍّ جديد</h1>
+
+  <p class="description">
+    وكالة الشايب الرسمية<br>
+    أدخل بياناتك لإنشاء طلب تحدٍّ ومشاركته مع المذيعين.
+  </p>
+
+  <form id="requestForm">
+
+    <label for="requesterName">اسم المذيع</label>
+    <input
+      id="requesterName"
+      type="text"
+      maxlength="100"
+      autocomplete="name"
+      required
+    >
+
+    <label for="requesterId">ID المذيع</label>
+    <input
+      id="requesterId"
+      type="text"
+      maxlength="50"
+      required
+    >
+
+    <label for="requesterImage">صورة المذيع</label>
+    <input
+      id="requesterImage"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      required
+    >
+
+    <p class="hint">
+      الصور المسموحة: JPG وPNG وWEBP، بحجم أقصى 5 ميغابايت.
     </p>
 
-    <form id="requestForm">
-      <label for="requesterName">اسم المذيع</label>
-      <input id="requesterName" type="text"
-        maxlength="100" required>
+    <label for="challengeLevel">مستوى التحدي</label>
+    <input
+      id="challengeLevel"
+      type="text"
+      maxlength="100"
+      placeholder="مثال: مستوى 50"
+      required
+    >
 
-      <label for="requesterId">ID المذيع</label>
-      <input id="requesterId" type="text"
-        maxlength="50" required>
+    <label for="challengeDay">اليوم المطلوب للتحدي</label>
+    <input
+      id="challengeDay"
+      type="date"
+      required
+    >
 
-      <label for="requesterImage">صورة المذيع</label>
-      <input id="requesterImage" type="file"
-        accept="image/jpeg,image/png,image/webp"
-        required>
+    <label for="proposedAt">ساعة التحدي المقترحة</label>
+    <input
+      id="proposedAt"
+      type="time"
+      required
+    >
 
-      <label for="challengeLevel">مستوى التحدي</label>
-      <input id="challengeLevel" type="text"
-        maxlength="100"
-        placeholder="مثال: مستوى 50" required>
+    <label for="notes">ملاحظات إضافية (اختياري)</label>
+    <textarea
+      id="notes"
+      rows="3"
+      maxlength="1000"
+      placeholder="أي معلومات إضافية"
+    ></textarea>
 
-      <label for="challengeDay">اليوم المطلوب للتحدي</label>
-      <input id="challengeDay" type="date" required>
+    <button id="submitButton" type="submit">
+      إرسال طلب التحدي
+    </button>
 
-      <label for="proposedAt">ساعة التحدي المقترحة</label>
-      <input id="proposedAt" type="time" required>
+    <div id="result" role="status" aria-live="polite"></div>
 
-      <label for="notes">ملاحظات إضافية (اختياري)</label>
-      <textarea id="notes" rows="3" maxlength="1000"
-        placeholder="أي معلومات إضافية"></textarea>
+  </form>
 
-      <button id="submitButton" type="submit">
-        إرسال طلب التحدي
-      </button>
+  <section id="shareSection" class="hidden">
 
-      <div id="result" role="status" aria-live="polite"></div>
-    </form>
+    <button id="copyButton" type="button" class="secondary">
+      نسخ رابط قبول التحدي
+    </button>
 
-    <div class="footer">⚜️ وكالة الشايب ⚜️</div>
-  </main>
+    <button id="whatsappButton" type="button">
+      مشاركة الطلب عبر واتساب
+    </button>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <button id="newRequestButton" type="button" class="secondary">
+      إنشاء طلب جديد
+    </button>
 
-  <script>
-    const SUPABASE_URL =
-      "https://hzcnkywuabugjebtwzmv.supabase.co";
+  </section>
 
-    const SUPABASE_KEY =
-      "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+  <div class="footer">⚜️ وكالة الشايب ⚜️</div>
 
-    const BUCKET = "broadcaster-images";
+</main>
 
-    const client = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+"use strict";
+
+const SUPABASE_URL =
+  "https://hzcnkywuabugjebtwzmv.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_X5WT8XgjYkrrB4iSFmWexw_aTJepYkP";
+
+const BUCKET = "broadcaster-images";
+
+const client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const form = document.getElementById("requestForm");
+const button = document.getElementById("submitButton");
+const result = document.getElementById("result");
+const shareSection = document.getElementById("shareSection");
+
+let savedAcceptUrl = "";
+let savedRequestId = "";
+
+function showResult(message, type) {
+  result.className = type;
+  result.textContent = message;
+  result.style.display = "block";
+}
+
+function errorMessage(error) {
+  if (!error) {
+    return "حدث خطأ غير معروف.";
+  }
+
+  const message = error.message || String(error);
+
+  if (
+    message.includes("row-level security") ||
+    message.includes("violates row-level security")
+  ) {
+    return "رفضت صلاحيات Supabase حفظ الطلب. نحتاج إلى مراجعة سياسات الجدول.";
+  }
+
+  if (
+    message.includes("permission denied") ||
+    message.includes("42501")
+  ) {
+    return "ليس لدى الصفحة إذن كافٍ لحفظ الطلب. يجب مراجعة صلاحيات Supabase.";
+  }
+
+  if (
+    message.includes("Failed to fetch") ||
+    message.includes("NetworkError")
+  ) {
+    return "تعذر الاتصال بـ Supabase. تحققي من الإنترنت ثم حاولي مجددًا.";
+  }
+
+  if (
+    message.includes("duplicate key") ||
+    message.includes("unique constraint")
+  ) {
+    return "حدث تعارض في رمز الطلب. حاولي إرسال الطلب مرة أخرى.";
+  }
+
+  return message;
+}
+
+function createAcceptUrl(token) {
+  const url = new URL(
+    "accept-challenge.html",
+    window.location.href
+  );
+
+  url.searchParams.set("token", token);
+
+  return url.href;
+}
+
+function getFileExtension(file) {
+  if (file.type === "image/png") return "png";
+  if (file.type === "image/webp") return "webp";
+  return "jpg";
+}
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  if (!form.reportValidity()) {
+    return;
+  }
+
+  if (!window.supabase) {
+    showResult(
+      "تعذر تحميل مكتبة Supabase. أعيدي تحميل الصفحة.",
+      "error"
     );
+    return;
+  }
 
-    const form = document.getElementById("requestForm");
-    const button = document.getElementById("submitButton");
-    const result = document.getElementById("result");
+  const name = document
+    .getElementById("requesterName")
+    .value.trim();
 
-    function showResult(text, type) {
-      result.textContent = text;
-      result.className = type;
+  const broadcasterId = document
+    .getElementById("requesterId")
+    .value.trim();
+
+  const level = document
+    .getElementById("challengeLevel")
+    .value.trim();
+
+  const day = document
+    .getElementById("challengeDay")
+    .value;
+
+  const time = document
+    .getElementById("proposedAt")
+    .value;
+
+  const notes = document
+    .getElementById("notes")
+    .value.trim();
+
+  const file = document
+    .getElementById("requesterImage")
+    .files[0];
+
+  if (!name || !broadcasterId || !level || !day || !time) {
+    showResult(
+      "يرجى ملء جميع الحقول المطلوبة.",
+      "error"
+    );
+    return;
+  }
+
+  if (!file) {
+    showResult(
+      "اختاري صورة المذيع أولًا.",
+      "error"
+    );
+    return;
+  }
+
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
+
+  if (!allowedTypes.includes(file.type)) {
+    showResult(
+      "نوع الصورة غير مدعوم. اختاري JPG أو PNG أو WEBP.",
+      "error"
+    );
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    showResult(
+      "حجم الصورة أكبر من 5 ميغابايت. اختاري صورة أصغر.",
+      "error"
+    );
+    return;
+  }
+
+  /*
+    لا نمسح النموذج عند بداية العملية.
+    نبقي المعلومات حتى نتأكد من نجاح الحفظ.
+  */
+
+  button.disabled = true;
+  button.textContent = "جارٍ تجهيز الطلب...";
+  shareSection.classList.add("hidden");
+
+  let uploadedPath = null;
+
+  try {
+    /*
+      1. إنشاء رمز فريد للقبول.
+      لا نحتاج إلى قراءة جدول الطلبات.
+    */
+
+    if (!window.crypto || !window.crypto.randomUUID) {
+      throw new Error(
+        "المتصفح لا يدعم إنشاء رمز آمن. افتحي الصفحة في متصفح حديث."
+      );
     }
 
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault();
+    const acceptToken = crypto.randomUUID();
+    const requestId = crypto.randomUUID();
 
-      if (!form.reportValidity()) return;
+    /*
+      2. تجهيز التاريخ والوقت بالتوقيت المحلي للجهاز.
+    */
 
-      const name = document.getElementById("requesterName")
-        .value.trim();
+    const proposedDate = new Date(day + "T" + time);
 
-      const broadcasterId = document.getElementById("requesterId")
-        .value.trim();
+    if (Number.isNaN(proposedDate.getTime())) {
+      throw new Error("التاريخ أو الوقت غير صالح.");
+    }
 
-      const level = document.getElementById("challengeLevel")
-        .value.trim();
+    /*
+      3. رفع الصورة إلى Storage.
+    */
 
-      const day = document.getElementById("challengeDay").value;
-      const time = document.getElementById("proposedAt").value;
+    button.textContent = "جارٍ رفع الصورة...";
+    showResult(
+      "الخطوة 1 من 2: جارٍ رفع صورة المذيع...",
+      "info"
+    );
 
-      const notes = document.getElementById("notes")
-        .value.trim();
+    const extension = getFileExtension(file);
 
-      const file = document.getElementById("requesterImage")
-        .files[0];
+    uploadedPath =
+      "challenge-requests/" +
+      requestId +
+      "." +
+      extension;
 
-      if (!file) {
-        showResult("اختاري صورة المذيع أولًا.", "error");
-        return;
-      }
+    const uploadResult = await client.storage
+      .from(BUCKET)
+      .upload(uploadedPath, file, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: file.type
+      });
 
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ];
+    if (uploadResult.error) {
+      throw new Error(
+        "فشل رفع الصورة: " +
+        uploadResult.error.message
+      );
+    }
+
+    const publicResult = client.storage
+      .from(BUCKET)
+      .getPublicUrl(uploadedPath);
+
+    const imageUrl =
+      publicResult &&
+      publicResult.data &&
+      publicResult.data.publicUrl;
+
+    if (!imageUrl) {
+      throw new Error(
+        "تم رفع الصورة، لكن تعذر إنشاء رابطها."
+      );
+    }
+
+    /*
+      4. حفظ الطلب.
+      نرسل accept_token من المتصفح حتى لا نحتاج
+      إلى SELECT على جدول الطلبات.
+    */
+
+    button.textContent = "جارٍ حفظ بيانات الطلب...";
+
+    showResult(
+      "الخطوة 2 من 2: تم رفع الصورة، جارٍ حفظ بيانات التحدي...",
+      "info"
+    );
+
+    const payload = {
+      requester_name: name,
+      requester_id: broadcasterId,
+      requester_image: imageUrl,
+      challenge_level: level,
+      challenge_day: day,
+      proposed_at: proposedDate.toISOString(),
+      notes: notes || null,
+      accept_token: acceptToken
+    };
+
+    const insertResult = await client
+      .from("challenge_requests")
+      .insert(payload);
+
+    if (insertResult.error) {
+      throw new Error(
+        "تم رفع الصورة، لكن تعذر حفظ بيانات الطلب: " +
+        insertResult.error.message
+      );
+    }
+
+    /*
+      لا نعلن النجاح إلا بعد نجاح عملية INSERT.
+    */
+
+    savedRequestId = requestId;
+    savedAcceptUrl = createAcceptUrl(acceptToken);
+
+    showResult(
+      "✅ تم حفظ طلب التحدي بنجاح!\n\n" +
+      "اسم المذيع: " + name + "\n" +
+      "ID: " + broadcasterId + "\n" +
+      "مستوى التحدي: " + level + "\n" +
+      "التاريخ: " + day + "\n" +
+      "الوقت: " + time + "\n\n" +
+      "رابط قبول التحدي:\n" +
+      savedAcceptUrl +
+      "\n\nاحتفظي بالرابط وشاركيه مع المذيع المنافس.",
+      "success"
+    );
+
+    /*
+      إضافة الرابط كرابط قابل للفتح.
+    */
+
+    const link = document.createElement("a");
+    link.href = savedAcceptUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "فتح رابط قبول التحدي";
+    link.style.display = "block";
+    link.style.marginTop = "12px";
+
+    result.appendChild(document.createElement("br"));
+    result.appendChild(link);
+
+    shareSection.classList.remove("hidden");
+
+    /*
+      منع إرسال النموذج مرة أخرى بالخطأ.
+      تبقى البيانات ظاهرة حتى يقرر المستخدم إنشاء طلب جديد.
+    */
+
+    button.textContent = "تم حفظ الطلب";
+    button.disabled = true;
+
+  } catch (error) {
+    console.error("Challenge request error:", error);
+
+    showResult(
+      "❌ لم تكتمل العملية.\n\n" +
+      errorMessage(error) +
+      "\n\nلم نعرض رسالة نجاح لأننا لم نتأكد من حفظ الطلب.",
+      "error"
+    );
+
+    button.disabled = false;
+    button.textContent = "إعادة المحاولة";
+
+    /*
+      لا نمسح النموذج عند الفشل.
+      إذا رُفعت الصورة قبل فشل الحفظ، تبقى في Storage.
+      لا نحذفها تلقائيًا حتى لا نفقد بيانات قد نحتاجها للتشخيص.
+    */
+  }
+});
+
+document
+  .getElementById("copyButton")
+  .addEventListener("click", async function() {
+    if (!savedAcceptUrl) {
+      showResult(
+        "لا يوجد رابط قبول لنسخه.",
+        "error"
+      );
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(savedAcceptUrl);
+
+      showResult(
+        "✅ تم نسخ رابط قبول التحدي.",
+        "success"
+      );
+    } catch (error) {
+      showResult(
+        "انسخي الرابط يدويًا من رسالة النجاح بالضغط المطوّل عليه.",
+        "info"
+      );
+    }
+  });
+
+document
+  .getElementById("whatsappButton")
+  .addEventListener("click", function() {
+    if (!savedAcceptUrl) {
+      showResult(
+        "لا يوجد رابط قبول للمشاركة.",
+        "error"
+      );
+      return;
+    }
+
+    const name = document
+      .getElementById("requesterName")
+      .value.trim();
+
+    const broadcasterId = document
+      .getElementById("requesterId")
+      .value.trim();
+
+    const level = document
+      .getElementById("challengeLevel")
+      .value.trim();
+
+    const day = document
+      .getElementById("challengeDay")
+      .value;
+
+    const time = document
+      .getElementById("proposedAt")
+      .value;
+
+    const message =
+      "⚔️ طلب تحدٍّ جديد | وكالة الشايب\n\n" +
+      "المتحدي: " + name + "\n" +
+      "ID: " + broadcasterId + "\n" +
+      "مستوى التحدي: " + level + "\n" +
+      "التاريخ: " + day + "\n" +
+      "الوقت: " + time + "\n\n" +
+      "لقبول التحدي وإدخال بياناتك:\n" +
+      savedAcceptUrl;
+
+    const whatsappUrl =
+      "https://wa.me/?text=" +
+      encodeURIComponent(message);
+
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  });
+
+document
+  .getElementById("newRequestButton")
+  .addEventListener("click", function() {
+    const confirmed = confirm(
+      "هل تريدين إنشاء طلب جديد؟ تأكدي من الاحتفاظ برابط الطلب السابق."
+    );
+
+    if (!confirmed) return;
+
+    form.reset();
+
+    savedAcceptUrl = "";
+    savedRequestId = "";
+
+    shareSection.classList.add("hidden");
+
+    result.textContent = "";
+    result.className = "";
+    result.style.display = "none";
+
+    button.disabled = false;
+    button.textContent = "إرسال طلب التحدي";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+/*
+  وضع التاريخ الأدنى في اليوم الحالي.
+*/
+
+(function setMinimumDate() {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  document.getElementById("challengeDay").min =
+    year + "-" + month + "-" + day;
+})();
+</script>
+
+</body>
+</html>
